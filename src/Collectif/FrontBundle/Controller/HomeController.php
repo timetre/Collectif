@@ -207,8 +207,11 @@ class HomeController extends Controller
         return $this->render('CollectifFrontBundle:Commons:header.html.twig');
     }
     
-    public function footerAction() {       
+	public function footerAction() {       
         return $this->render('CollectifFrontBundle:Commons:footer.html.twig');
     }
+
+    
+    
     
 }

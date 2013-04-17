@@ -37,15 +37,12 @@
 				
 				<div class="grid_4">
                 	<div class="toolbox-horizontal right">
-                	
-                		{% render "CollectifFrontBundle:Home:search" %}
-                		
+                		{% render url('front_search') %}
 					</div><!--//toolbox-->
                 </div><!--//grid_4-->
                 
 				<div class="grid_12" style="margin-bottom: -15px;">
-				
-					{% render "CollectifFrontBundle:Home:menuTop" %}
+					{% render url('front_menuTop') %}				
 					
 				</div><!-- // grid_12-->
 			</div><!--//header-->

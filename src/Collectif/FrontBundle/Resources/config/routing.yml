@@ -29,3 +29,23 @@ collectif_front_article:
 collectif_front_search:
     pattern:  /recherche
     defaults: { _controller: CollectifFrontBundle:Home:research }
+
+front_header:
+    pattern:  /front/header/
+    defaults: { _controller: CollectifFrontBundle:Home:header }
+    
+front_search:
+    pattern:  /front/search/
+    defaults: { _controller: CollectifFrontBundle:Home:search }
+    
+front_footer:
+    pattern:  /front/footer/
+    defaults: { _controller: CollectifFrontBundle:Home:footer }
+    
+front_menuBottom:
+    pattern:  /front/menuBottom/
+    defaults: { _controller: CollectifFrontBundle:Home:menuBottom }
+
+front_menuTop:
+    pattern:  /front/menuTop/
+    defaults: { _controller: CollectifFrontBundle:Home:menuTop }
