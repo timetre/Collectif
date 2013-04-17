@@ -1,0 +1,7 @@
+parameters:
+#    collectif_membre.example.class: Collectif\MembreBundle\Example
+
+services:
+#    collectif_membre.example:
+#        class: %collectif_membre.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

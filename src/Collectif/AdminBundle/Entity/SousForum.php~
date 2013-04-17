@@ -1,0 +1,140 @@
+<?php
+
+namespace Collectif\AdminBundle\Entity;
+
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Collectif\AdminBundle\Entity\SousForum
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Collectif\AdminBundle\Entity\SousForumRepository")
+ */
+class SousForum
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+
+    /**
+     * @var string $titre
+     * @ORM\Column(name="titre", type="string", length=255)
+     */
+    private $titre;
+
+    /**
+     * @var \DateTime $dateCreation
+     * @ORM\Column(name="dateCreation", type="datetime")
+     */
+    private $dateCreation;
+
+    /**
+     * @var boolean $isRss
+     * @ORM\Column(name="isRss", type="boolean")
+     */
+    private $isRss;
+
+    /**
+     * @var string $urlFlux
+     * @ORM\Column(name="urlFlux", type="string", length=255)
+     */
+    private $urlFlux;
+
+    /**
+     * @var string $description
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Forum", cascade={"persist"}, inversedBy="sousForums")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank()
+     */
+    private $forum;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Post", cascade={"persist"}, mappedBy="membre")
+     */
+    private $posts;
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set forum
+     *
+     * @param Collectif\AdminBundle\Entity\Forum $forum
+     * @return SousForum
+     */
+    public function setForum(\Collectif\AdminBundle\Entity\Forum $forum)
+    {
+        $this->forum = $forum;
+    
+        return $this;
+    }
+
+    /**
+     * Get forum
+     *
+     * @return Collectif\AdminBundle\Entity\Forum 
+     */
+    public function getForum()
+    {
+        return $this->forum;
+    }
+
+    /**
+     * Add posts
+     *
+     * @param Collectif\AdminBundle\Entity\Post $posts
+     * @return SousForum
+     */
+    public function addPost(\Collectif\AdminBundle\Entity\Post $posts)
+    {
+        $this->posts[] = $posts;
+    
+        return $this;
+    }
+
+    /**
+     * Remove posts
+     *
+     * @param Collectif\AdminBundle\Entity\Post $posts
+     */
+    public function removePost(\Collectif\AdminBundle\Entity\Post $posts)
+    {
+        $this->posts->removeElement($posts);
+    }
+
+    /**
+     * Get posts
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+}

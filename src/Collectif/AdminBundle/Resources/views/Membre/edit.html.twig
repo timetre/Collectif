@@ -1,0 +1,26 @@
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+
+<h1>{{ titre }}</h1>
+
+{% if message %}
+<p>{{ message }}</p>
+{% endif %}
+{% form_theme form 'CollectifAdminBundle:Form:fields.html.twig' %}
+<form action="" method="post" {{ form_enctype(form) }} class="form-horizontal">
+    {{ form_widget(form) }}
+	
+	<input type="button" class="btn btn-warning" onclick="window.open('{{ path('collectif_membre_homepage') }}', '_parent');" value="Retour" />
+	
+    <input type="submit" class="btn btn-success" />
+</form>
+
+{% if membre.path != null %}
+	<img src="{{ asset('upload/Membres/' ~ membre.path)}}" class="img-polaroid" />
+{% endif %}
+
+{% endblock %}
+

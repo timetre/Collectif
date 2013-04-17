@@ -1,0 +1,56 @@
+{% render "CollectifFrontBundle:Home:header" %}
+
+<div class="clearfix">
+	<div class="grid_12 promo-container">
+		<div id="promos">
+			{% for domaine in domaines %}
+			<div class='promo'>
+				<a href=''>
+					<img width="940" height="300" src="{{ asset('upload/Domaines/' ~ domaine.path)}}" class="attachment-home-slider-image wp-post-image" alt="promo02" title="promo02" />
+				</a>
+			</div>
+			{% endfor %}
+		</div>
+		{% render "CollectifFrontBundle:Home:menuBottom" %}               
+	</div><!--//grid12-->
+</div><!--// clearfix-->
+				
+<div class="clearfix widget-area">
+	<div class="grid_4 widget" style="width:65%;text-align:justify;">
+		<div id="text-3" class="widget widget_text">
+			{% block content %}
+         	{% endblock %}
+		</div>
+	</div><!--//grid4-->
+                             
+    <div id="glob" style="float: right;width: 30%;">                       
+		<div class="grid_4 widget">
+			<div id="custom_posts-widget-3" class="widget custom_posts">
+				<h2>Actualit&eacute;s</h2>
+				<ul class='clean latest-posts'>
+					{% for a in articles %}
+						<li>
+							<p><a href="{{ path('collectif_front_article', { 'id': a.id }) }}"><span>{{ a.dateModification|date('d/m/Y') }}</span> {{ a.titre }}</a>{{ a.resume }}</p>
+						</li>
+					{% endfor %}
+					<hr>
+					[<a href="{{ path('collectif_front_articles') }}">Archives</a>]<br><br>
+				</ul>
+			</div>
+		</div><!--//grid4-->
+		
+		<div class="grid_4 widget" style="width: 360px;">
+			<div id="text-4" class="widget widget_text">
+				<h2 style="text-align: justify;">Partenaires</h2>
+				{% for p in partenaires %}
+					<p style="float: left;margin-right: 15px;"><a target="_blank" href="{{ p.lien }}"><img height="80" src="{{ asset('upload/Partenaires/' ~ p.path)}}"></a></p>
+				{% endfor %}
+			</div>
+		</div><!--//grid4-->      
+	</div>      
+             
+</div><!--//clearfix-->
+			
+{% render "CollectifFrontBundle:Home:footer" %}
+
+	

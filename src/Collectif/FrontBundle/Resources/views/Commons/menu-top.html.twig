@@ -1,0 +1,60 @@
+<div class="menu-horizontal clearfix" style="border-bottom: 0px;margin-bottom: 0px;">
+	<ul class="sf-menu">
+		{% for p in pages %}
+			{% if p.defaut %}
+				<li class="page_item"><a href="{{ path('collectif_front_homepage') }}">{{ p.texteMenu }}</a></li>
+			{% else %}
+				<li class="page_item">
+					{% if p.clickable %}
+						<a href="{{ path('collectif_front_inner', { 'alias': p.alias }) }}">{{ p.texteMenu }}</a>
+					{% else %}
+						<a>{{ p.texteMenu }}</a>
+					{% endif %}
+					<ul class="sub">
+					{% for e in p.getEnfants %}
+						<li class="page_item page-item-49">
+							{% if e.clickable %}
+								<a href="{{ path('collectif_front_inner', { 'alias': e.alias }) }}">{{ e.texteMenu }}</a>
+							{% else %}
+								<a>{{ e.texteMenu }}</a>
+							{% endif %}
+							<ul class="sub">
+							{% for e2 in e.getEnfants %}
+								<li class="page_item page-item-49">
+									{% if e2.clickable %}
+										<a href="{{ path('collectif_front_inner', { 'alias': e2.alias }) }}">{{ e2.texteMenu }}</a>
+									{% else %}
+										<a>{{ e2.texteMenu }}</a>
+									{% endif %}
+								</li>
+							{% endfor %}
+							</ul>
+						</li>
+					{% endfor %}
+					</ul>
+				</li>
+			{% endif %}
+		{% endfor %}
+		<li class="page_item"><a href="{{ path('collectif_back_homepage') }}">Acc&egrave;s Membres</a></li>
+	</ul>	
+	
+	<ul class="sf-menu sf-js-enabled sf-shadow" style="float: right;">
+		<li class="page_item page-item-9" style="width:40px;text-align:center;">
+			<a href="{{ param.lienTwitter }}" style="margin-top: 4px;float: right;padding: 0 0 0 0;" target="_blank">
+				<img src="{{ asset('bundles/collectiffront/images/social_icons/Twitter-logo.png') }}" alt="twitter" height="30px" style="margin-right: 5px;">
+			</a>
+		</li>
+		<li class="page_item page-item-9" style="width:40px;">
+			<a href="{{ param.lienFacebook }}" style="margin-top: 4px;float: right;padding: 0 0 0 0;" target="_blank">
+				<img src="{{ asset('bundles/collectiffront/images/social_icons/Facebook-logo.png') }}" alt="facebook" height="30px" style="margin-right: 5px;">
+			</a>
+		</li>
+		<li class="page_item page-item-9" style="width:40px;">
+			<a href="" style="margin-top: 4px;float: right;padding: 0 0 0 0;" target="_blank">
+				<img src="{{ asset('bundles/collectiffront/images/social_icons/Rss-logo.png') }}" alt="rss" height="30px" style="margin-right: 5px;">
+			</a>
+		</li>
+
+	</ul>
+
+</div><!--// menu-horizontal-->

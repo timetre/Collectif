@@ -1,0 +1,16 @@
+{% extends "CollectifAdminBundle::layout.html.twig" %}
+{% block content %}
+<h1>Mes infos perso</h1>
+
+	<p>{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }} : {{ user.username }}</p>
+	<p>{{ 'profile.show.name'|trans({}, 'FOSUserBundle') }} : {{ user.nom }}</p>
+	<p>{{ 'profile.show.firstname'|trans({}, 'FOSUserBundle') }} : {{ user.prenom }}</p>
+	<p>{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }} : {{ user.email }}</p>
+	<p>{{ 'profile.show.ddn'|trans({}, 'FOSUserBundle') }} : {{ user.dateNaissance|date("d/m/Y") }}</p>
+	<p>
+		<input type="button" class="btn btn-info" onclick="window.open('{{ path('fos_user_profile_edit') }}', '_parent');" value="Editer" />
+	</p>
+
+
+
+{% endblock content %}

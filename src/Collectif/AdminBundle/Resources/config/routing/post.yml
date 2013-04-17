@@ -1,0 +1,29 @@
+reseau_post:
+    pattern:  /
+    defaults: { _controller: "CollectifAdminBundle:Post:index" }
+
+reseau_post_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CollectifAdminBundle:Post:show" }
+
+reseau_post_new:
+    pattern:  /new
+    defaults: { _controller: "CollectifAdminBundle:Post:new" }
+
+reseau_post_create:
+    pattern:  /create
+    defaults: { _controller: "CollectifAdminBundle:Post:create" }
+    requirements: { _method: post }
+
+reseau_post_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CollectifAdminBundle:Post:edit" }
+
+reseau_post_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CollectifAdminBundle:Post:update" }
+    requirements: { _method: post }
+
+reseau_post_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CollectifAdminBundle:Post:delete" }

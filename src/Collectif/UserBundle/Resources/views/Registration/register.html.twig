@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="fr-FR">
+<head profile="http://gmpg.org/xfn/11">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>{% block title %}Collectif CONFLUENCE{% endblock %}</title>
+	
+	<link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/bootstrap.css') }}" />
+	<link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/custom.css') }}" />
+	<link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/login.css') }}" />
+	<link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/datepicker.css') }}" />
+	
+	<style type="text/css">
+		.container {
+		  width: 600px;
+		}
+		.maModale {
+			margin-left: 24%;
+		}
+	</style>
+	
+	
+  </head>
+
+  <body>
+  
+  {% form_theme form 'CollectifAdminBundle:Form:fields.html.twig' %}
+  	<div class="container">		
+		{% block content %}
+		    <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="form-horizontal">
+		        {{ form_widget(form) }}
+		        <div>
+		        	<input type="button" class="btn btn-warning" value="Annuler" onclick="window.open('{{ path('collectif_front_homepage') }}', '_parent');" />
+		        	<a href="#myModal" role="button" class="btn btn-info maModale" data-toggle="modal">Infos pratiques</a>
+		            <input type="submit" class="btn btn-primary pull-right" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+		        </div>
+		    </form>    
+		{% endblock %}
+	</div>
+
+	
+	
+	 
+	<!-- Modal -->
+	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	    <h3 id="myModalLabel">Modal header</h3>
+	  </div>
+	  <div class="modal-body">
+	    <p>One fine body…</p>
+	  </div>
+	  <div class="modal-footer">
+	    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	    <button class="btn btn-primary">Save changes</button>
+	  </div>
+	</div>
+
+
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap-datepicker.js') }}"></script>
+	
+	<script>		
+		$(function() {
+	    	$( ".datePicker" ).datepicker({
+				format: 'dd/mm/yyyy'
+			});
+		});
+	</script>
+	
+	</body>
+</html>

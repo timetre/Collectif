@@ -1,0 +1,19 @@
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+
+<h1>Topic creation</h1>
+
+{% form_theme form 'CollectifAdminBundle:Form:fields.html.twig' %}
+
+<form action="{{ path('reseau_sousforum_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+    {{ form_widget(form) }}
+    
+    <a class="btn btn-warning" href="{{ path('reseau_sousforum') }}">Retour</a>
+    <input type="submit" class="btn btn-success" />
+    
+</form>
+
+{% endblock %}

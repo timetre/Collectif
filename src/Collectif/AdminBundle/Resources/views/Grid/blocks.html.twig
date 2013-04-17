@@ -1,0 +1,94 @@
+{% extends 'APYDataGridBundle::blocks.html.twig' %}
+
+{# ------------------------------------------------------ grid ------------------------------------------------------ #}
+{% block grid %}{# CHANGE #}
+<div class="grid">
+{% if grid.totalCount > 0 or grid.isFiltered or grid.noDataMessage is sameas(false) %}
+    <form id="{{ grid.hash }}" action="{{ grid.routeUrl }}" method="post">
+        <div class="grid_header">
+        {% if grid.massActions|length > 0 %}
+            {{ grid_actions(grid) }}
+        {% endif %}
+        </div>
+        <div class="grid_body">
+        <table class="table table-bordered table-striped table-hover">
+        {% if grid.isTitleSectionVisible %}
+            {{ grid_titles(grid) }}
+        {% endif %}
+        {% if grid.isFilterSectionVisible %}
+            {{ grid_filters(grid) }}
+        {% endif %}
+        {{ grid_rows(grid) }}
+        </table>
+        </div>
+        <div class="grid_footer">
+        {% if grid.isPagerSectionVisible %}
+            {{ grid_pager(grid) }}
+        {% endif %}
+        {% if grid.exports|length > 0 %}
+            {{ grid_exports(grid) }}
+        {% endif %}
+    </form>
+{% else %}
+    {{ grid_no_data(grid) }}
+{% endif %}
+</div>
+{% endblock grid %}
+
+{# -------------------------------------------------- grid_search -------------------------------------------------- #}
+{% block grid_search %}
+{% if grid.isFilterSectionVisible %}
+    <div class="grid-search">
+    	<fieldset class="fieldset">
+    		<legend>{{ 'Filtre de recherche'|trans }}</legend>
+	        <form id="{{ grid.hash }}_search" action="{{ grid.routeUrl }}" method="post" class="form-horizontal form-grid form-filtre">
+	        <div class="row">
+	        {% for column in grid.columns %}
+	            {% if column.visible(true) and column.isFilterable and column.type not in ['actions', 'massaction'] %}
+	                {% set columnTitle = grid.prefixTitle ~ column.title %}
+	                <div class="{{ cycle(['even', 'odd'], loop.index) }} span5 control-group">
+	                	<label class="control-label">{{ columnTitle|trans }}</label>
+	                	<div class="controls">{{ grid_filter(column, grid, false)|raw }}</div>
+	                </div>
+	            {% endif %}
+	        {% endfor %}
+	        </div>
+	        <div class="row">
+	        	<div class="grid-search-action pull-right">
+	        		<input type="submit" class="grid-search-submit btn btn-primary" value="{{ 'Filtrer'|trans }}"/>	        		
+	        		<a class="grid-search-reset btn" onclick="return {{ grid.hash }}_reset();">
+	        		    <i class="icon icon-refresh"></i>&nbsp;{{ 'Réinitialiser'|trans }}
+	        		</a>
+	        	</div>
+	        </div>
+	        </form>
+		</fieldset>
+    </div>
+{% endif %}
+{% endblock grid_search %}
+
+{# --------------------------------------------------- grid_actions ------------------------------------------------- #}
+{% block grid_column_actions_cell %}
+    {% set actions = column.getActionsToRender(row) %}
+    <div class="grid-row-actions">
+        <div class="align-center">
+{#           <button class="btn btn-primary" type="button">{{ 'button.actions'|trans }}</button>#}
+{#           <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">#}
+{#             <span class="caret"></span>#}
+{#           </button>#}
+{#               <ul class="dropdown-menu">                                  #}
+                {% for action in actions %}
+{#                     <li>#}
+                       {% set urlRoute =  url(action.route, column.routeParameters(row, action), false) %}                                                         
+                        <a href="{{ urlRoute }}" target="{{ action.target }}"{% if action.confirm %} onclick="return confirm('{{ action.confirmMessage }}')"{% endif %}{% for name, value in action.attributes %} {{ name }}="{{ value }}" {% endfor %}>
+                            {% if 'edit' in action.route %}                
+                                <i class="icon-pencil icon"></i>
+                            {% endif %}
+                            {{ action.title}}
+                        </a>
+{#                     </li>#}
+                {% endfor %}
+{#             </ul>#}
+        </div>
+    </div>
+{% endblock grid_column_actions_cell %}

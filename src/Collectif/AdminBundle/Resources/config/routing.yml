@@ -1,0 +1,181 @@
+collectif_back_homepage:
+    pattern:  /reseau
+    defaults: { _controller: CollectifAdminBundle:Admin:index }
+
+collectif_back_homepage:
+    pattern:  /reseau/
+    defaults: { _controller: CollectifAdminBundle:Admin:index }
+
+collectif_membre_homepage:
+    pattern:  /reseau/admin/membres
+    defaults: { _controller: CollectifAdminBundle:Membre:list }
+    
+collectif_membre_detail:
+    pattern:  /reseau/admin/membres/detail/{id}
+    defaults: { _controller: CollectifAdminBundle:Membre:detail }
+
+collectif_membre_create:
+    pattern:  /reseau/admin/membres/create
+    defaults: { _controller: CollectifAdminBundle:Membre:edit }
+    
+collectif_membre_create_admin:
+    pattern:  /reseau/admin/membres/create/admin
+    defaults: { _controller: CollectifAdminBundle:Membre:editAdmin }
+
+collectif_membre_edit:
+    pattern:  /reseau/admin/membres/edit/{id}
+    defaults: { _controller: CollectifAdminBundle:Membre:edit }
+
+collectif_membre_edit_page:
+    pattern:  /reseau/membres/edit-page/{id}
+    defaults: { _controller: CollectifAdminBundle:Membre:editPage }
+
+collectif_membre_delete:
+    pattern:  /reseau/admin/membres/delete/{id}
+    defaults: { _controller: CollectifAdminBundle:Membre:delete }
+    
+collectif_membre_register:
+    pattern:  /registration
+    defaults: { _controller: CollectifAdminBundle:Membre:register }
+    
+collectif_domaine_homepage:
+    pattern:  /reseau/admin/domaines
+    defaults: { _controller: CollectifAdminBundle:Domaine:list }
+    
+collectif_domaine_detail:
+    pattern:  /reseau/admin/domaines/detail/{id}
+    defaults: { _controller: CollectifAdminBundle:Domaine:detail }
+
+collectif_domaine_create:
+    pattern:  /reseau/admin/domaines/create
+    defaults: { _controller: CollectifAdminBundle:Domaine:edit }
+
+collectif_domaine_edit:
+    pattern:  /reseau/admin/domaines/edit/{id}
+    defaults: { _controller: CollectifAdminBundle:Domaine:edit }
+
+collectif_domaine_delete:
+    pattern:  /reseau/admin/domaines/delete/{id}
+    defaults: { _controller: CollectifAdminBundle:Domaine:delete }
+
+
+collectif_page_homepage:
+    pattern:  /reseau/admin/pages/{parent}
+    defaults: { _controller: CollectifAdminBundle:Page:list }
+    
+collectif_page_detail:
+    pattern:  /reseau/admin/pages/detail/{id}
+    defaults: { _controller: CollectifAdminBundle:Page:detail }
+
+collectif_page_create:
+    pattern:  /reseau/admin/pages/create/{parent}
+    defaults: { _controller: CollectifAdminBundle:Page:edit }
+
+collectif_page_edit:
+    pattern:  /reseau/admin/pages/edit/{id}/{parent}
+    defaults: { _controller: CollectifAdminBundle:Page:edit }
+
+collectif_page_delete:
+    pattern:  /reseau/admin/pages/delete/{id}/{parent}
+    defaults: { _controller: CollectifAdminBundle:Page:delete }
+
+collectif_publication_homepage:
+    pattern:  /reseau/admin/publications
+    defaults: { _controller: CollectifAdminBundle:Publication:list }
+    
+collectif_publication_detail:
+    pattern:  /reseau/admin/publications/detail/{id}
+    defaults: { _controller: CollectifAdminBundle:Publication:detail }
+
+collectif_publication_create:
+    pattern:  /reseau/admin/publications/create
+    defaults: { _controller: CollectifAdminBundle:Publication:edit }
+    
+collectif_publication_edit:
+    pattern:  /reseau/admin/publications/edit/{id}
+    defaults: { _controller: CollectifAdminBundle:Publication:edit }
+
+collectif_publication_delete:
+    pattern:  /reseau/admin/publications/delete/{id}
+    defaults: { _controller: CollectifAdminBundle:Publication:delete }
+    
+collectif_publication_list_own:
+    pattern:  /reseau/publications/own/{id}
+    defaults: { _controller: CollectifAdminBundle:Publication:list }
+    
+collectif_publication_create_own:
+    pattern:  /reseau/publications/create/own
+    defaults: { _controller: CollectifAdminBundle:Publication:editOwn }
+    
+collectif_publication_edit_own:
+    pattern:  /reseau/publications/edit/own/{pubId}
+    defaults: { _controller: CollectifAdminBundle:Publication:editOwn }
+   
+collectif_publication_delete_own:
+    pattern:  /reseau/admin/publications/delete/own/{id}
+    defaults: { _controller: CollectifAdminBundle:Publication:deleteOwn }
+
+collectif_parameters_homepage:
+    pattern:  /reseau/admin/parameters
+    defaults: { _controller: CollectifAdminBundle:Parameters:edit }
+
+collectif_categories_homepage:
+    pattern:  /reseau/admin/blog/categories
+    defaults: { _controller: CollectifAdminBundle:Categorie:list }
+
+collectif_categories_create:
+    pattern:  /reseau/admin/blog/categories/create
+    defaults: { _controller: CollectifAdminBundle:Categorie:edit }
+
+collectif_categories_edit:
+    pattern:  /reseau/admin/blog/categories/edit/{id}
+    defaults: { _controller: CollectifAdminBundle:Categorie:edit }
+
+collectif_categories_delete:
+    pattern:  /reseau/admin/blog/categories/delete/{id}
+    defaults: { _controller: CollectifAdminBundle:Categorie:delete }
+
+collectif_articles_homepage:
+    pattern:  /reseau/admin/blog/articles
+    defaults: { _controller: CollectifAdminBundle:Article:list }
+
+collectif_articles_create:
+    pattern:  /reseau/admin/blog/articles/create
+    defaults: { _controller: CollectifAdminBundle:Article:edit }
+
+collectif_articles_edit:
+    pattern:  /reseau/admin/blog/articles/edit/{id}
+    defaults: { _controller: CollectifAdminBundle:Article:edit }
+
+collectif_articles_delete:
+    pattern:  /reseau/admin/blog/articles/delete/{id}
+    defaults: { _controller: CollectifAdminBundle:Article:delete }
+
+collectif_partenaires_homepage:
+    pattern:  /reseau/admin/partenaires
+    defaults: { _controller: CollectifAdminBundle:Partenaire:list }
+
+collectif_partenaires_create:
+    pattern:  /reseau/admin/partenaires/create
+    defaults: { _controller: CollectifAdminBundle:Partenaire:edit }
+
+collectif_partenaires_edit:
+    pattern:  /reseau/admin/partenaires/edit/{id}
+    defaults: { _controller: CollectifAdminBundle:Partenaire:edit }
+
+collectif_partenaires_delete:
+    pattern:  /reseau/admin/partenaires/delete/{id}
+    defaults: { _controller: CollectifAdminBundle:Partenaire:delete }
+    
+CollectifAdminBundle_reseau_forum:
+    resource: "@CollectifAdminBundle/Resources/config/routing/forum.yml"
+    prefix:   /reseau/forum
+    
+CollectifAdminBundle_reseau_sousforum:
+    resource: "@CollectifAdminBundle/Resources/config/routing/sousforum.yml"
+    prefix:   /reseau/sousforum
+    
+CollectifAdminBundle_reseau_post:
+    resource: "@CollectifAdminBundle/Resources/config/routing/post.yml"
+    prefix:   /reseau/post
+

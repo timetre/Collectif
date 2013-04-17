@@ -1,0 +1,33 @@
+reseau_forum:
+    pattern:  /
+    defaults: { _controller: "CollectifAdminBundle:Forum:index" }
+
+reseau_forum_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CollectifAdminBundle:Forum:show" }
+
+reseau_forum_new:
+    pattern:  /new
+    defaults: { _controller: "CollectifAdminBundle:Forum:new" }
+
+reseau_forum_create:
+    pattern:  /create
+    defaults: { _controller: "CollectifAdminBundle:Forum:create" }
+    requirements: { _method: post }
+
+reseau_forum_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CollectifAdminBundle:Forum:edit" }
+
+reseau_forum_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CollectifAdminBundle:Forum:update" }
+    requirements: { _method: post }
+
+reseau_forum_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CollectifAdminBundle:Forum:delete" }
+    
+reseau_forum_nav:
+    pattern:  /forums/nav/
+    defaults: { _controller: "CollectifAdminBundle:Forum:navigation" }

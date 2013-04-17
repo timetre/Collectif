@@ -1,0 +1,23 @@
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+
+<h1>Ajouter une page</h1>
+
+{% if message %}
+<p>{{ message }}</p>
+{% endif %}
+
+{% form_theme form 'CollectifAdminBundle:Form:fields.html.twig' %}
+
+<form action="" method="post" {{ form_enctype(form) }} class="form-horizontal">
+    {{ form_widget(form) }}
+    
+	<input type="button" class="btn btn-warning" onclick="window.open('{{ path('collectif_page_homepage', { 'parent': parent }) }}', '_parent');" value="Retour" />
+	<input type="hidden" name="retour" value="{{ parent }}">
+	<input type="submit" class="btn btn-success" />
+</form>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% for f in forums %}
+	<li class="dropdown">
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ f.titre }}<b class="caret"></b></a>
+		<ul class="dropdown-menu">
+		{% for s in f.sousForums %}
+	    	<li><a href="#">{{ s.titre }}</a></li>
+        {% endfor %}
+        </ul>
+	</li>
+{% endfor %}

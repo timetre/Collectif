@@ -1,0 +1,27 @@
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+
+<h1>Ajouter un partenaire</h1>
+
+{% if message %}
+<p>{{ message }}</p>
+{% endif %}
+
+{% form_theme form 'CollectifAdminBundle:Form:fields.html.twig' %}
+
+<form action="" method="post" {{ form_enctype(form) }} class="form-horizontal" >
+    {{ form_widget(form) }}
+	
+	<input type="button" class="btn btn-warning" onclick="window.open('{{ path('collectif_partenaires_homepage') }}', '_parent');" value="Retour" />
+
+    <input type="submit" class="btn btn-success" />
+</form>
+
+{% if partenaire.path != null %}
+	<img width="940" height="300" src="{{ asset('upload/Partenaires/' ~ partenaire.path)}}" class="img-polaroid" />
+{% endif %}
+
+{% endblock %}

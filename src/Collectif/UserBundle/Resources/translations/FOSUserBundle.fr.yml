@@ -1,0 +1,7 @@
+# Profile
+profile:
+    show:
+        name: Nom
+        firstname: Prenom
+        email: Email
+        ddn: Date de naissance

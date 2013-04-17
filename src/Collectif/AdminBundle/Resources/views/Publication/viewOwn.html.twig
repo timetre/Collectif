@@ -1,0 +1,32 @@
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+
+<h1>Liste des publications</h1>
+
+<div class="header-buttons">
+	<input type="button" class="btn btn-success right" onclick="window.open('{{ path('collectif_publication_create_own', { 'userId': id }) }}', '_parent');" value="Ajouter une publication">
+</div>
+
+<table class="table table-hover">
+	<tr>
+		<th>Editer</th>
+		<th>Titre</th>
+		<th>Auteur</th>
+		<th>Supprimer</th>
+	</tr>
+{% for p in publications %}
+	<tr>
+<td><a class="btn" href="{{ path('collectif_publication_edit_own', { 'pubId': p.id, 'userId': id }) }}"><i class="icon-edit"></i></a></td>
+<td>{{ p.titre }}</td>
+<td>{{ p.membre.nom }} {{ p.membre.prenom }} ({{ p.membre.domaine.nom }})</td>
+<td><a onclick="if(!confirm('Voulez-vous vraiment supprimer cette publication ?')) { return false };" class="btn" href="{{ path('collectif_publication_delete_own', { 'id': p.id }) }}"><i class="icon-trash"></i></a></td>
+</tr>
+{% else %}
+	<tr><td>Aucune publication n'à été trouvée.</td></tr>
+{% endfor %}
+</table>
+
+{% endblock %}

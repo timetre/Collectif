@@ -1,0 +1,31 @@
+collectif_front_homepage:
+    pattern:  /
+    defaults: { _controller: CollectifFrontBundle:Home:index }
+    
+collectif_front_homepage_home:
+    pattern:  /home
+    defaults: { _controller: CollectifFrontBundle:Home:index }
+
+collectif_front_inner:
+    pattern:  /page/{alias}
+    defaults: { _controller: CollectifFrontBundle:Home:inner }
+
+collectif_front_domaine:
+    pattern:  /domaine/{titrePage}
+    defaults: { _controller: CollectifFrontBundle:Home:domaine }
+
+collectif_front_chercheur:
+    pattern:  /chercheur/{id}
+    defaults: { _controller: CollectifFrontBundle:Home:membre }
+
+collectif_front_articles:
+    pattern:  /articles
+    defaults: { _controller: CollectifFrontBundle:Home:listArticles }
+
+collectif_front_article:
+    pattern:  /article/{id}
+    defaults: { _controller: CollectifFrontBundle:Home:viewArticle }
+
+collectif_front_search:
+    pattern:  /recherche
+    defaults: { _controller: CollectifFrontBundle:Home:research }

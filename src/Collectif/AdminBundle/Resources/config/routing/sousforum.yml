@@ -1,0 +1,29 @@
+reseau_sousforum:
+    pattern:  /
+    defaults: { _controller: "CollectifAdminBundle:SousForum:index" }
+
+reseau_sousforum_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CollectifAdminBundle:SousForum:show" }
+
+reseau_sousforum_new:
+    pattern:  /new
+    defaults: { _controller: "CollectifAdminBundle:SousForum:new" }
+
+reseau_sousforum_create:
+    pattern:  /create
+    defaults: { _controller: "CollectifAdminBundle:SousForum:create" }
+    requirements: { _method: post }
+
+reseau_sousforum_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CollectifAdminBundle:SousForum:edit" }
+
+reseau_sousforum_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CollectifAdminBundle:SousForum:update" }
+    requirements: { _method: post }
+
+reseau_sousforum_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CollectifAdminBundle:SousForum:delete" }

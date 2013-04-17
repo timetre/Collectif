@@ -1,0 +1,22 @@
+{% extends 'CollectifFrontBundle::layout_index.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+<div class="textwidget">
+	<div id="NewsPostDetailDate">{{ lastArticle.dateModification|date('d/m/Y') }}</div>
+	<h3 id="NewsPostDetailTitle">{{ lastArticle.titre }}</h3>
+	<hr id="NewsPostDetailHorizRule">
+	<div id="NewsPostDetailContent">
+		{{ lastArticle.contenu }}
+	</div>
+
+	<div id="NewsPostDetailCategory">
+		<b>Cat&eacute;gorie&nbsp;:</b> {{ lastArticle.categorie.titre }}
+	</div>
+	<div id="NewsPostDetailAuthor">
+		<b>Posté par&nbsp;:</b> Collectif Confluence
+	</div>
+</div>
+
+{% endblock %}

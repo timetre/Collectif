@@ -1,0 +1,52 @@
+security:
+    encoders:
+        "FOS\UserBundle\Model\UserInterface": sha512
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_manager
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            pattern: ^/reseau
+            form_login:
+                provider:    fos_userbundle  
+                remember_me: true
+                login_path: /reseau/login
+                check_path: /reseau/login_check
+                default_target_path: /reseau
+                failure_path: /reseau/login
+            remember_me:
+                key:         %secret%
+            anonymous:       true            
+            logout:
+                path:        /reseau/logout
+                target:      /reseau/login
+        reseau:
+            pattern: ^/reseau
+            form_login:
+                provider:    fos_userbundle  
+                remember_me: true
+                login_path: /reseau/login
+                check_path: /reseau/login_check
+                default_target_path: /reseau/home
+                failure_path: /reseau/login
+            remember_me:
+                key:         %secret%
+            anonymous:       true            
+            logout:
+                path:        /reseau/logout
+                target:      /reseau/login
+
+    access_control:
+        - { path: ^/reseau/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/reseau/admin, role: ROLE_SUPER_ADMIN }
+        - { path: ^/reseau, role: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
+        

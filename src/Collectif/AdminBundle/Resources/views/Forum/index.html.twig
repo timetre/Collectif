@@ -1,0 +1,50 @@
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+
+<h1>Liste des forums</h1>
+
+{#
+{{ grid_search(grid, 'CollectifAdminBundle:Grid:blocks.html.twig') }}
+
+<a class="pull-right btn btn-success" href="{{ path('reseau_forum_new') }}"><i class="icon-plus-sign icon-white"></i>Create a new entry</a>
+<br/><br/>
+
+ {{ grid(grid, 'CollectifAdminBundle:Grid:blocks.html.twig') }} #}
+
+<a class="pull-right btn btn-success" href="{{ path('reseau_forum_new') }}"><i class="icon-plus-sign icon-white"></i>Nouveau forum</a>
+<br/><br/> 
+<table class="table table-hover">
+    <thead>
+        <tr>
+        	<th>Editer</th>
+            <th>Titre</th>
+            <th>Actif</th>
+            <th>Date de création</th>
+            <th>Supprimer</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a class="btn" href="{{ path('reseau_forum_edit', { 'id': entity.id }) }}"><i class="icon-edit"></i></a></td>
+            <td>{{ entity.titre }}</td>
+            <td>{% if entity.actif %}
+					<i class="icon-ok"></i>
+				{% else %}
+					<i class="icon-remove"></i>
+				{% endif %}	
+			</td>
+            <td>{% if entity.dateCreation %}{{ entity.dateCreation|date('d/m/Y') }}{% endif %}</td>
+            <td>
+               <a onclick="if(!confirm('Voulez-vous vraiment supprimer ce forum ?')) { return false };" class="btn btn-danger" 
+                   href="{{ path('reseau_forum_delete', { 'id': entity.id }) }}"><i class="icon-trash icon-white"></i></a></li>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
