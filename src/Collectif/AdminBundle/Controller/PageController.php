@@ -9,6 +9,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Collectif\AdminBundle\Entity\Page;
 
 use Collectif\AdminBundle\Form\PageForm;
+use Collectif\AdminBundle\Form\PageLienForm;
+use Collectif\AdminBundle\Form\PageBureauForm;
+use Collectif\AdminBundle\Form\PageContactForm;
+use Collectif\AdminBundle\Form\PagePartenairesForm;
 use Collectif\AdminBundle\Controller\PageController;
 
 class PageController extends Controller {
@@ -60,7 +64,7 @@ class PageController extends Controller {
     	));
     }
     
-    public function editAction($id = null, $parent = 0)
+	public function editAction($id = null, $parent = 0, $type = "CONTENU")
     {
     	$message='';
         $em = $this->getDoctrine()->getManager();
@@ -92,14 +96,23 @@ class PageController extends Controller {
     		$page->setClickable(true);
     		$ordre = $repository->getMaxOrdre();
 			$page->setOrdre($ordre+1);
-			//$parent = new Page();
 			if($parent != 0) {
 				$page->setParent($repository->find($parent));
 			}
 			
         }
 
-        $form = $this->container->get('form.factory')->create(new PageForm(), $page);
+        if($type == "CONTENU") {
+       		$form = $this->container->get('form.factory')->create(new PageForm(), $page);
+        } else if($type == "LIEN") {
+        	$form = $this->container->get('form.factory')->create(new PageLienForm(), $page);
+        } else if($type == "BUREAU") {
+        	$form = $this->container->get('form.factory')->create(new PageBureauForm(), $page);
+        } else if($type == "CONTACT") {
+        	$form = $this->container->get('form.factory')->create(new PageContactForm(), $page);
+        } else if($type == "PARTENAIRES") {
+        	$form = $this->container->get('form.factory')->create(new PagePartenairesForm(), $page);
+        }
 
         $request = $this->container->get('request');
 
@@ -118,11 +131,11 @@ class PageController extends Controller {
 				
                 if (isset($id)) 
                 {
-                     $message='Page modifié avec succès !';
+                     $message='Page modifiée avec succès !';
                 }
                 else 
                 {
-                    $message='Page ajouté avec succès !';
+                    $message='Page ajoutée avec succès !';
                 }
                 
                 return new RedirectResponse($this->container->get('router')->generate('collectif_page_homepage', array(
@@ -135,6 +148,25 @@ class PageController extends Controller {
 			'backlink' => $backlink,
 			'parent' => $parent
     	));
+    }
+    
+    public function beforeAction()
+    {
+    	
+    	$request = $this->container->get('request');
+
+    	if ($request->getMethod() == 'POST')
+    	{
+    		$type = $request->request->get('type');
+    		$parent = $request->request->get('parent');
+    		
+    		
+    		return $this->redirect($this->generateUrl('collectif_page_create', array(
+    			'parent' => $parent,
+    			'type' => $type
+    		)));
+    		
+    	}
     }
     
     

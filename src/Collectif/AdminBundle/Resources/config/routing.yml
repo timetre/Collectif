@@ -60,7 +60,7 @@ collectif_domaine_delete:
 
 
 collectif_page_homepage:
-    pattern:  /reseau/admin/pages/{parent}
+    pattern:  /reseau/admin/pages/home/{parent}
     defaults: { _controller: CollectifAdminBundle:Page:list }
     
 collectif_page_detail:
@@ -68,8 +68,12 @@ collectif_page_detail:
     defaults: { _controller: CollectifAdminBundle:Page:detail }
 
 collectif_page_create:
-    pattern:  /reseau/admin/pages/create/{parent}
+    pattern:  /reseau/admin/pages/create/{parent}/{type}
     defaults: { _controller: CollectifAdminBundle:Page:edit }
+    
+collectif_page_before_create:
+    pattern:  /reseau/admin/pages/create_before
+    defaults: { _controller: CollectifAdminBundle:Page:before }
 
 collectif_page_edit:
     pattern:  /reseau/admin/pages/edit/{id}/{parent}
