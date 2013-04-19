@@ -1,0 +1,30 @@
+{% extends 'CollectifFrontBundle::layout_inner-page.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+
+<div id="text-3" class="widget widget_text">
+	<h2>Liste des articles</h2>
+	<div class="textwidget">
+		<hr>
+		<div id="custom_posts-widget-3" class="widget custom_posts">
+			<ul class="clean latest-posts">
+				{% for a in articles %}
+				<li>
+					<p><a href="{{ path('collectif_front_article', { 'id': a.id }) }}"><span>{{ a.dateModification|date('d/m/Y') }}</span> {{ a.titre }} <br>
+						{{ a.resume | raw }}
+					</a>
+					</p>
+					<div id="NewsPostDetailCategory">
+						<b>Catégorie&nbsp;:</b> {{ a.categorie.titre }}
+					</div>					
+				</li>
+				<hr>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+</div>
+
+{% endblock %}					

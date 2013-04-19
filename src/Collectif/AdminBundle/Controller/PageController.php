@@ -101,6 +101,8 @@ class PageController extends Controller {
 			}
 			
         }
+        
+        $page->setTypePage($type);
 
         if($type == "CONTENU") {
        		$form = $this->container->get('form.factory')->create(new PageForm(), $page);

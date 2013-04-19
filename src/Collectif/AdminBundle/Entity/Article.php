@@ -4,6 +4,7 @@ namespace Collectif\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Eko\FeedBundle\Item\Writer\RoutedItemInterface;
 
 /**
  * Collectif\AdminBundle\Entity\Article
@@ -11,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Collectif\AdminBundle\Entity\ArticleRepository")
  */
-class Article
+class Article implements RoutedItemInterface
 {
     /**
      * @var integer $id
@@ -245,5 +246,29 @@ class Article
     public function getCategorie()
     {
         return $this->categorie;
+    }
+    
+    public function getFeedItemTitle() {
+    	return $this->titre;
+    }
+    
+    public function getFeedItemDescription() {
+    	return $this->contenu;
+    }
+    
+    public function getFeedItemPubDate() {
+    	return $this->dateCreation;
+    }
+    
+    public function getFeedItemRouteName() {
+    	return 'collectif_front_article';
+    }
+    
+    public function getFeedItemRouteParameters() {
+    	return array('id' => $this->id);
+    }
+    
+    public function getFeedItemUrlAnchor() {
+    	return '';
     }
 }

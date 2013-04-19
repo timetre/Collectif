@@ -20,4 +20,14 @@ class PublicationRepository extends EntityRepository
 		
 		return $qb->getQuery()->getResult();
 	}
+	
+	public function getPublicationsSearch($arg="")
+	{
+		$qb = $this->createQueryBuilder('a');
+	
+		$qb->where('a.titre like :arg OR a.contenu like :arg')
+		->setParameter('arg', "%".$arg."%");
+	
+		return $qb->getQuery()->getResult();
+	}
 }

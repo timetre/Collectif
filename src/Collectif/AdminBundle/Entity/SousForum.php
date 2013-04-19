@@ -64,6 +64,15 @@ class SousForum
      * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Post", cascade={"persist"}, mappedBy="membre")
      */
     private $posts;
+    
+    /**
+     * @var string $typeTopic
+     *
+     * @ORM\Column(name="typeTopic", type="string", length=255, nullable=true)
+     */
+    private $typeTopic;
+    
+    
     /**
      * Constructor
      */
@@ -252,5 +261,28 @@ class SousForum
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set typeTopic
+     *
+     * @param string $typeTopic
+     * @return SousForum
+     */
+    public function setTypeTopic($typeTopic)
+    {
+        $this->typeTopic = $typeTopic;
+    
+        return $this;
+    }
+
+    /**
+     * Get typeTopic
+     *
+     * @return string 
+     */
+    public function getTypeTopic()
+    {
+        return $this->typeTopic;
     }
 }

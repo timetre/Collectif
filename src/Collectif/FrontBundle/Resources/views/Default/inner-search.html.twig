@@ -6,7 +6,23 @@
 <h2>Résultats de la recherche : {{ arg }}</h2>
 <div class="textwidget">
 	<p> 
-		prout
+		<h3>Résultats dans les domaines ({{ searchDomaines|length }})</h3>
+		{% for d in searchDomaines %}
+			<h5><a href="{{ path('collectif_front_domaine', { 'titrePage': d.titrePage }) }}">{{ d.nom }}</a></h5>
+			{{ d.description|raw }}
+		{% endfor %}
+		
+		<h3>Résultats dans les articles ({{ searchArticles|length }})</h3>
+		{% for a in searchArticles %}
+			<h5><a href="{{ path('collectif_front_article', { 'id': a.id }) }}">{{ a.titre }}</a></h5>
+			{{ a.resume|raw }}
+		{% endfor %}
+		
+		<h3>Résultats dans les publications ({{ searchPublications|length }})</h3>
+		{% for p in searchPublications %}
+			<h5><a href="{{ path('collectif_front_publication', { 'id': p.id }) }}">{{ p.titre }}</a></h5>
+			{{ p.resume|raw }}
+		{% endfor %}		
 	</p>
 </div>
 

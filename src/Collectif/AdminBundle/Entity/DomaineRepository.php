@@ -52,4 +52,14 @@ class DomaineRepository extends EntityRepository
 	    return $qb->getQuery()->getSingleResult();
 	}
 	
+	
+	public function getDomainesSearch($arg="")
+	{
+		$qb = $this->createQueryBuilder('d');
+		
+		$qb->where('d.nom like :arg OR d.description like :arg')
+		->setParameter('arg', "%".$arg."%");
+		
+		return $qb->getQuery()->getResult();
+	}
 }

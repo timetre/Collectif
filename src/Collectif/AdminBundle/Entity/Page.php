@@ -127,6 +127,13 @@ class Page
      * @ORM\JoinColumn(nullable=true)
      */    
     private $categorie;
+    
+    /**
+     * @var string $typePage
+     *
+     * @ORM\Column(name="typePage", type="string", length=255, nullable=true)
+     */
+    private $typePage;
 
 	
 	public function __construct()
@@ -544,5 +551,28 @@ class Page
     public function getClickable()
     {
         return $this->clickable;
+    }
+
+    /**
+     * Set typePage
+     *
+     * @param string $typePage
+     * @return Page
+     */
+    public function setTypePage($typePage)
+    {
+        $this->typePage = $typePage;
+    
+        return $this;
+    }
+
+    /**
+     * Get typePage
+     *
+     * @return string 
+     */
+    public function getTypePage()
+    {
+        return $this->typePage;
     }
 }

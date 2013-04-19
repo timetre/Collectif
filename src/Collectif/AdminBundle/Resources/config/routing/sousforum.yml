@@ -7,7 +7,7 @@ reseau_sousforum_show:
     defaults: { _controller: "CollectifAdminBundle:SousForum:show" }
 
 reseau_sousforum_new:
-    pattern:  /new
+    pattern:  /new/{type}
     defaults: { _controller: "CollectifAdminBundle:SousForum:new" }
 
 reseau_sousforum_create:
@@ -27,3 +27,7 @@ reseau_sousforum_update:
 reseau_sousforum_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "CollectifAdminBundle:SousForum:delete" }
+
+reseau_sousforum_before_new:
+    pattern:  /before/new
+    defaults: { _controller: "CollectifAdminBundle:SousForum:before" }

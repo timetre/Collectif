@@ -1,0 +1,26 @@
+<div id="glob" style="float: right;width: 30%;">                       
+		<div class="grid_4 widget">
+			<div id="custom_posts-widget-3" class="widget custom_posts">
+				<h2>Actualit&eacute;s</h2>
+				<ul class='clean latest-posts'>
+					{% for a in articles %}
+						<li>
+							<p><a href="{{ path('collectif_front_article', { 'id': a.id }) }}"><span>{{ a.dateModification|date('d/m/Y') }}</span> {{ a.titre }}</a>{{ a.resume }}</p>
+						</li>
+					{% endfor %}
+					<hr>
+					[<a href="{{ path('collectif_front_articles') }}">Archives</a>]<br><br>
+				</ul>
+			</div>
+		</div><!--//grid4-->
+		
+		<div class="grid_4 widget" style="width: 360px;">
+			<div id="text-4" class="widget widget_text">
+				<h2 style="text-align: justify;">Partenaires</h2>
+				{% for p in partenaires %}
+					<p style="float: left;margin-right: 15px;"><a target="_blank" href="{{ p.lien }}"><img height="80" src="{{ asset('upload/Partenaires/' ~ p.path)}}"></a></p>
+				{% endfor %}
+			</div>
+		</div><!--//grid4-->      
+	</div>      
+             

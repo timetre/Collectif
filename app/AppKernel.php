@@ -26,6 +26,7 @@ class AppKernel extends Kernel
 			new Gregwar\ImageBundle\GregwarImageBundle(),
         	new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
 			new APY\DataGridBundle\APYDataGridBundle(),
+        	new Eko\FeedBundle\EkoFeedBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

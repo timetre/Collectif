@@ -54,10 +54,26 @@ class SousForumController extends Controller
      * Displays a form to create a new SousForum entity.
      *
      */
-    public function newAction()
+    public function newAction($type)
     {
         $entity = new SousForum();
-        $form   = $this->createForm(new SousForumType(), $entity);
+        
+        $entity->setTypeTopic($type);
+        
+        if($type == "CONTENU") {
+        	$form = $this->container->get('form.factory')->create(new SousForumType(), $entity);
+        } else if($type == "LIEN") {
+        	$form = $this->container->get('form.factory')->create(new SousForumType(), $entity);
+        } else if($type == "BUREAU") {
+        	$form = $this->container->get('form.factory')->create(new SousForumType(), $entity);
+        } else if($type == "CONTACT") {
+        	$form = $this->container->get('form.factory')->create(new SousForumType(), $entity);
+        } else if($type == "PARTENAIRES") {
+        	$form = $this->container->get('form.factory')->create(new SousForumType(), $entity);
+        }
+        
+        
+        //$form   = $this->createForm(new SousForumType(), $entity);
 
         return $this->render('CollectifAdminBundle:SousForum:new.html.twig', array(
             'entity' => $entity,
@@ -112,6 +128,23 @@ class SousForumController extends Controller
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
+    }
+    
+    
+    public function beforeAction()
+    {
+    	 
+    	$request = $this->container->get('request');
+    
+    	if ($request->getMethod() == 'POST')
+    	{
+    		$type = $request->request->get('type');
+    
+    		return $this->redirect($this->generateUrl('reseau_sousforum_new', array(
+    				'type' => $type
+    		)));
+    
+    	}
     }
 
     /**

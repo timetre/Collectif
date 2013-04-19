@@ -69,3 +69,18 @@ fos_user:
     profile:
         form:
             type: collectif_user_profile
+
+eko_feed:
+    feeds:
+        article:
+            title:       'Articles'
+            description: 'Derniers articles'
+            link:        'http://collectif-confuence.fr'
+            encoding:    'utf-8'
+            author:      'Collectif Confluence' # Only required for Atom feeds
+        publication:
+            title:       'Publications'
+            description: 'Dernières publications'
+            link:        'http://collectif-confuence.fr'
+            encoding:    'utf-8'
+            author:      'Collectif Confluence' # Only required for Atom feeds

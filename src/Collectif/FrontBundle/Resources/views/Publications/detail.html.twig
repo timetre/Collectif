@@ -8,22 +8,22 @@
 	<h2>Actualit&eacute;</h2>
 	<div class="textwidget">					  
 		<div id="NewsPostDetailDate">
-			{{ article.dateModification|date('d/m/Y') }}
+			{{ publication.dateModification|date('d/m/Y') }}
 		</div>
 		
-		<h3 id="NewsPostDetailTitle">{{ article.titre }}</h3>
+		<h3 id="NewsPostDetailTitle">{{ publication.titre }}</h3>
 		<hr id="NewsPostDetailHorizRule">
 
 		<div id="NewsPostDetailContent">
-			{{ article.contenu|raw }}
+			{{ publication.contenu|raw }}
 		</div>
 
 		<div id="NewsPostDetailCategory">
-			<b>Catégorie&nbsp;:</b> {{ article.categorie.titre }}
+			<b>Catégorie&nbsp;:</b> {{ publication.membre.domaine.nom }}
 		</div>
 
 		<div id="NewsPostDetailAuthor">
-			<b>Posté par&nbsp;:</b> Collectif Confluence
+			<b>Posté par&nbsp;:</b> {{ publication.membre.nom }} {{ publication.membre.prenom }}
 		</div>
 
 	</div>

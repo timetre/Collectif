@@ -11,6 +11,9 @@ use Collectif\AdminBundle\Entity\Article;
 use Collectif\AdminBundle\Form\ArticleForm;
 use Collectif\AdminBundle\Controller\ArticleController;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 class ArticleController extends Controller
 {
     public function listAction()
@@ -54,7 +57,7 @@ class ArticleController extends Controller
             
             if (!$article)
             {
-                $message='Aucun article trouvé';
+                $message='Aucun article trouvï¿½';
             }
         }
         else 
@@ -80,11 +83,11 @@ class ArticleController extends Controller
                 
                 if (isset($id)) 
                 {
-                     $message='Article modifié avec succès !';
+                     $message='Article modifiï¿½ avec succï¿½s !';
                 }
                 else 
                 {
-                    $message='Article ajouté avec succès !';
+                    $message='Article ajoutï¿½ avec succï¿½s !';
                 }
                 
                 return new RedirectResponse($this->container->get('router')->generate('collectif_articles_homepage'));
@@ -114,4 +117,14 @@ class ArticleController extends Controller
     	
     	 return new RedirectResponse($this->container->get('router')->generate('collectif_articles_homepage'));
     }    
+    
+    public function feedAction()
+    {
+    	$articles = $this->getDoctrine()->getRepository('CollectifAdminBundle:Article')->findAll();
+    	
+    	$feed = $this->get('eko_feed.feed.manager')->get('article');
+    	$feed->addFromArray($articles);
+    
+    	return new Response($feed->render('atom')); // or 'atom'
+    }
 }

@@ -8,25 +8,13 @@ use Collectif\AdminBundle\Entity\Page;
 
 class HomeController extends Controller
 {
-    public function indexAction() {
-		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Page');
-    	$page = $repository->getDefaultPage();
-		
-		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Domaine');
-    	$domaines = $repository->getAll();
-		
+    
+	public function indexAction() {
 		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Article');
     	$articles = $repository->getArticles(true, 5);
 		//$articles = $repository->getArticlesPublications();
 		
-		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Partenaire');
-    	$partenaires = $repository->findAll();
-		
     	return $this->render('CollectifFrontBundle:Default:index.html.twig', array(
-    		'page' 			=> $page,
-			'domaines' 		=> $domaines, 
-			'articles' 		=> $articles, 
-			'partenaires'	=> $partenaires,
 			'lastArticle' 	=> $articles[0]
     	));
     }
@@ -34,15 +22,6 @@ class HomeController extends Controller
     public function innerAction($alias) {
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Page');
     	$page = $repository->getPageByAlias($alias);
-		
-		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Domaine');
-    	$domaines = $repository->getAll();
-		
-		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Article');
-    	$articles = $repository->getArticles(true, 5);
-		
-		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Partenaire');
-    	$partenaires = $repository->findAll();
 		
 		$articlesPage = null;
 		
@@ -53,9 +32,6 @@ class HomeController extends Controller
     	
     	return $this->render('CollectifFrontBundle:Default:inner-page.html.twig', array(
     		'page' 			=> $page,
-			'domaines'  	=> $domaines,
-			'articles' 		=> $articles, 
-			'partenaires'	=> $partenaires, 
 			'articlesPage'	=> $articlesPage
     	));
     }
@@ -63,19 +39,9 @@ class HomeController extends Controller
     public function domaineAction($titrePage) {
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Domaine');
     	$domaine = $repository->getDomaineByTitre($titrePage);
-		
-		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Article');
-    	$articles = $repository->getArticles(true, 5);
-		
-		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Partenaire');
-    	$partenaires = $repository->findAll();
     	
-    	return $this->render('CollectifFrontBundle:Default:domaine.html.twig', array(
-    		'description' 	=> $domaine->getDescription(), 
+    	return $this->render('CollectifFrontBundle:Default:domaine.html.twig', array( 
 			'domaine'		=> $domaine, 
-			'articles' 		=> $articles, 
-			'partenaires'	=> $partenaires,
-    		'nom' 			=> $domaine->getNom()
     	));
     }
     
@@ -83,18 +49,10 @@ class HomeController extends Controller
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifUserBundle:User');
     	$membre = $repository->find($id);
 		$domaine = $membre->getDomaine();
-		
-		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Article');
-    	$articles = $repository->getArticles(true, 5);
-		
-		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Partenaire');
-    	$partenaires = $repository->findAll();
     	
     	return $this->render('CollectifFrontBundle:Default:membre.html.twig', array(
     		'membre' 		=> $membre,
 			'domaine'		=> $domaine,
-			'partenaires'	=> $partenaires,
-			'articles' 		=> $articles
     	));
     }
     
@@ -103,37 +61,26 @@ class HomeController extends Controller
 		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Article');
     	$articles = $repository->getArticles(true);
     	
-    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Domaine');
-    	$domaines = $repository->getAll();
-		
-		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Partenaire');
-    	$partenaires = $repository->findAll();
-    	
     	return $this->render('CollectifFrontBundle:Articles:view.html.twig', array(
-			'domaines'		=> $domaines,
-			'partenaires'	=> $partenaires,
 			'articles' 		=> $articles
     	));
     }
     
-    public function viewArticleAction($id) {
+	public function viewArticleAction($id) {
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Article');
     	$article = $repository->find($id);
     	
-    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Domaine');
-    	$domaines = $repository->getAll();
-		
-		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Article');
-    	$articles = $repository->getArticles(true, 5);
-		
-		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Partenaire');
-    	$partenaires = $repository->findAll();
-    	
     	return $this->render('CollectifFrontBundle:Articles:detail.html.twig', array(
-    		'domaines'		=> $domaines,
-			'partenaires'	=> $partenaires,
-			'articles' 		=> $articles, 
     		'article'		=> $article,
+    	));
+    }
+    
+    public function viewPublicationAction($id) {
+    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Publication');
+    	$publication = $repository->find($id);
+    	 
+    	return $this->render('CollectifFrontBundle:Publications:detail.html.twig', array(
+    			'publication'		=> $publication,
     	));
     }
     
@@ -151,7 +98,7 @@ class HomeController extends Controller
         ));
     }
     
-    public function menuBottomAction() {
+	public function menuBottomAction() {
         $repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Domaine');
     	$domaines = $repository->getDomaines(true);
     	
@@ -165,37 +112,61 @@ class HomeController extends Controller
         
     }
     
-    public function researchAction() {       
-       	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Domaine');
-    	$domaines = $repository->getAll();
-		
-		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Article');
+	public function sidebarAction() {
+    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Article');
     	$articles = $repository->getArticles(true, 5);
+		//$articles = $repository->getArticlesPublications();
 		
 		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Partenaire');
     	$partenaires = $repository->findAll();
 		
-		$arg = "";
+    	return $this->render('CollectifFrontBundle:Commons:sidebar.html.twig', array(
+			'articles' 		=> $articles, 
+			'partenaires'	=> $partenaires
+    	));
+    
+    }
+    
+    public function sidebarInnerAction() {
+    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Article');
+    	$articles = $repository->getArticles(true, 5);
+    	//$articles = $repository->getArticlesPublications();
+    
+    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Partenaire');
+    	$partenaires = $repository->findAll();
+    
+    	return $this->render('CollectifFrontBundle:Commons:sidebar-inner.html.twig', array(
+    			'articles' 		=> $articles,
+    			'partenaires'	=> $partenaires
+    	));
+    
+    }
+    
+    public function researchAction() {       
+       	$arg = "";
 
-		
 		$request = $this->container->get('request');
 
         if ($request->getMethod() == 'POST') {
         	$arg = $request->get('search');
+        	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Domaine');
+        	$searchDomaines = $repository->getDomainesSearch($arg);
         	
-        	//Méthodes de recherche
-        	//On retourne une liste d'éléments avec un titre, un lien et une pertinence
+        	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Article');
+        	$searchArticles = $repository->getArticlesSearch($arg);
         	
+        	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Publication');
+        	$searchPublications = $repository->getPublicationsSearch($arg);
         	
         } else {
         	return $this->redirect($this->generateUrl('collectif_front_homepage'));
         }
     	
     	return $this->render('CollectifFrontBundle:Default:inner-search.html.twig', array(
-			'domaines'  	=> $domaines,
-			'articles' 		=> $articles, 
-			'partenaires'	=> $partenaires, 
-			'arg'			=> $arg,
+			'searchDomaines'  		=> $searchDomaines,
+			'searchArticles'		=> $searchArticles, 
+			'searchPublications'	=> $searchPublications, 
+			'arg'					=> $arg,
     	));
     }
     

@@ -6,7 +6,7 @@
 
 <h1>Liste des topics</h1>
 
-<a class="pull-right btn btn-success" href="{{ path('reseau_sousforum_new') }}"><i class="icon-plus-sign icon-white"></i>Nouveau topic</a>
+<a class="btn btn-success right" href="#chooseType" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Nouveau topic</a>
 <br/><br/> 
 <table class="table table-hover">
     <thead>
@@ -34,5 +34,29 @@
     </tbody>
 </table>
 
+
+<!-- Modal -->
+<div id="chooseType" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<form action="{{ path('reseau_sousforum_before_new') }}" method="post" class="form-horizontal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Type de topic</h3>
+  </div>
+  <div class="modal-body">
+    <p>Quel type de sous-forum souhaitez vous créer ?</p>
+    <select name="type">
+		<option value="CONTENU">Contenu</option>
+		<option value="LIEN">Lien de redirection</option>
+		<option value="CONTACT">Contact</option>
+		<option value="BUREAU">Bureau</option>
+		<option value="PARTENAIRES">Partenaires</option>
+	</select>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <input type="submit" class="btn btn-success right" value="Créer" />
+  </div>
+</form>
+</div>
 
 {% endblock %}

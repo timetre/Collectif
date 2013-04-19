@@ -33,4 +33,14 @@ class ArticleRepository extends EntityRepository
 
     	return $resultats;
 	}
+	
+	public function getArticlesSearch($arg="")
+	{
+		$qb = $this->createQueryBuilder('a');
+	
+		$qb->where('a.titre like :arg OR a.contenu like :arg')
+		->setParameter('arg', "%".$arg."%");
+	
+		return $qb->getQuery()->getResult();
+	}
 }

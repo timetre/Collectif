@@ -25,8 +25,16 @@ collectif_front_articles:
 collectif_front_article:
     pattern:  /article/{id}
     defaults: { _controller: CollectifFrontBundle:Home:viewArticle }
+    
+collectif_front_publication:
+    pattern:  /publication/{id}
+    defaults: { _controller: CollectifFrontBundle:Home:viewPublication }
 
-collectif_front_search:
+collectif_front_article_feed:
+    pattern:  /feed/article
+    defaults: { _controller: CollectifAdminBundle:Article:feed }
+
+collectif_front_research:
     pattern:  /recherche
     defaults: { _controller: CollectifFrontBundle:Home:research }
 
@@ -49,3 +57,11 @@ front_menuBottom:
 front_menuTop:
     pattern:  /front/menuTop/
     defaults: { _controller: CollectifFrontBundle:Home:menuTop }
+    
+front_sidebar:
+    pattern:  /front/sidebar/
+    defaults: { _controller: CollectifFrontBundle:Home:sidebar }
+    
+front_sidebar_inner:
+    pattern:  /front/sidebar-inner/
+    defaults: { _controller: CollectifFrontBundle:Home:sidebarInner }
