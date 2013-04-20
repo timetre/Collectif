@@ -14,7 +14,6 @@ class PageBureauForm extends AbstractType
 
 		$builder->add('actif', 'checkbox', array('required' => false, 'label' => 'Actif'));
 		
-		$builder->add('seoDescription', 'text', array('required' => false, 'label' => 'Description SEO'));
 		$builder->add('ordre', 'text', array('required' => false, 'label' => 'Ordre'));
 		$builder->add('parent','entity', array(
 	            'class' => 'Collectif\AdminBundle\Entity\Page',
@@ -22,13 +21,6 @@ class PageBureauForm extends AbstractType
 	            'multiple' => false,
 	            'required' => false, 
 				'label' => 'Page parente'
-            ));
-		$builder->add('categorie','entity', array(
-	            'class' => 'Collectif\AdminBundle\Entity\Categorie',
-	            'property' => 'titre',
-	            'multiple' => false,
-	            'required' => false,
-				'label'    => 'Articles du groupe'
             ));
     }
 	

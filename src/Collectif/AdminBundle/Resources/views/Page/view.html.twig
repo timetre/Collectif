@@ -22,7 +22,7 @@
 	</tr>
 {% for p in pages %}
 	<tr>
-<td><a class="btn" href="{{ path('collectif_page_edit', { 'id': p.id, 'parent': parent }) }}"><i class="icon-edit"></i></a></td>
+<td><a class="btn" href="{{ path('collectif_page_edit', { 'id': p.id, 'parent': parent, 'type': p.typePage }) }}"><i class="icon-edit"></i></a></td>
 <td>{{ p.titre }}</td>
 <td><a class="btn" href="{{ path('collectif_page_homepage', { 'parent': p.id }) }}"><i class="icon-zoom-in"></i></a></td>
 <td>{% if p.actif %}

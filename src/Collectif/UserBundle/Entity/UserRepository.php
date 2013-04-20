@@ -36,7 +36,7 @@ class UserRepository extends EntityRepository
 	}
 	
 	/**
-	 * Permet de rŽcupŽrer le nombre d'utilisateurs
+	 * Permet de rÃ©cupÃ©rer le nombre d'utilisateurs
 	 */
 	public function getNbUsers()
 	{
@@ -45,5 +45,19 @@ class UserRepository extends EntityRepository
 			->select('COUNT(u)');
 	
 		return $query->getQuery()->getSingleScalarResult();
+	}
+	
+	
+	public function getUsersBureau()
+	{	
+		$parameters = array(
+			'membreBureau' => true
+		);
+		
+		$qb = $this->createQueryBuilder('u');
+		$qb->where('u.membreBureau = :membreBureau')->setParameters($parameters);
+		$qb->orderBy('u.nom', 'ASC');
+	
+		return $qb->getQuery()->getResult();
 	}
 }

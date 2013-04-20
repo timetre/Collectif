@@ -1,0 +1,42 @@
+{% extends 'CollectifFrontBundle::layout_inner-page.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+<h2>{{ page.titre }}</h2>
+<hr/>
+<div class="textwidget">
+	{% for membre in usersBureau %}
+	<div id="text-3" class="widget widget_text">
+		<h5>{{ membre.prenom }} {{ membre.nom }} - {{ membre.fonctionBureau }}</h5>
+		<div class="textwidget">
+			<table width="100%" cellspacing="1" cellpadding="1" border="1">
+				<tbody>
+					<tr>
+						<td>
+							<p><img align="left" src="{{ image('upload/Membres/' ~ membre.path).resize(null, 138) }}" alt="" /><strong>{{ membre.prenom }} {{ membre.nom }}</strong></p>
+							{{ membre.contenuPage | raw  }}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	{% endfor %}
+	
+</div>
+
+<div id="custom_posts-widget-3" class="widget custom_posts">
+	<ul class="clean latest-posts">
+		{% if articlesPage != null %}
+			{% for a in articlesPage %}
+			<li>
+				<p><a href="{{ path('collectif_front_article', { 'id': a.id }) }}"><span>{{ a.dateModification|date('d/m/Y') }}</span> {{ a.titre }}</a>{{ a.resume }}</p>
+			</li>
+			<hr>
+			{% endfor %}
+		{% endif %}
+	</ul>
+</div>
+
+{% endblock %}

@@ -22,18 +22,35 @@ class HomeController extends Controller
     public function innerAction($alias) {
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Page');
     	$page = $repository->getPageByAlias($alias);
-		
-		$articlesPage = null;
-		
-		if($page->getCategorie() != null) {
-			$articlesPage = $page->getCategorie()->getArticles();
-		}
-		
     	
-    	return $this->render('CollectifFrontBundle:Default:inner-page.html.twig', array(
-    		'page' 			=> $page,
-			'articlesPage'	=> $articlesPage
-    	));
+    	$articlesPage = null;
+    	
+    	if($page->getCategorie() != null) {
+    		$articlesPage = $page->getCategorie()->getArticles();
+    	}
+    	
+    	if($page->getTypePage() == "CONTENU") {
+    		return $this->render('CollectifFrontBundle:Default:inner-page.html.twig', array(
+    				'page' 			=> $page,
+    				'articlesPage'	=> $articlesPage
+    		));
+    	} else if($page->getTypePage() == "BUREAU") {
+    		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifUserBundle:User');
+    		$users = $repository->getUsersBureau();
+    		
+    		return $this->render('CollectifFrontBundle:Default:inner-bureau.html.twig', array(
+    				'page' 			=> $page,
+    				'articlesPage'	=> $articlesPage,
+    				'usersBureau' 	=> $users
+    		));
+    	}
+		
+		
+    		return $this->render('CollectifFrontBundle:Default:inner-page.html.twig', array(
+    				'page' 			=> $page,
+    				'articlesPage'	=> $articlesPage
+    		));
+    	
     }
     
     public function domaineAction($titrePage) {

@@ -39,6 +39,18 @@ class PageForm extends AbstractType
 	            'required' => false,
 				'label'    => 'Articles du groupe'
             ));
+		
+		$builder->add('typePage','choice', array(
+				'required' => true,
+				'label'    => 'Type de page', 
+				'choices' => array(
+						'CONTENU' => 'Contenu', 
+						'LIEN' => 'Lien de redirection',
+						'CONTACT' => 'Contact',
+						'BUREAU' => 'Bureau',
+						'PARTENAIRES' => 'Partenaires'
+				)
+		));
     }
 	
 	public function getName()

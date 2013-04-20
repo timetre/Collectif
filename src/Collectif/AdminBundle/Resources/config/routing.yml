@@ -76,7 +76,7 @@ collectif_page_before_create:
     defaults: { _controller: CollectifAdminBundle:Page:before }
 
 collectif_page_edit:
-    pattern:  /reseau/admin/pages/edit/{id}/{parent}
+    pattern:  /reseau/admin/pages/edit/{id}/{parent}/{type}
     defaults: { _controller: CollectifAdminBundle:Page:edit }
 
 collectif_page_delete:

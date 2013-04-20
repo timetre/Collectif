@@ -202,27 +202,4 @@ class Partenaire
     {
         return $this->lien;
     }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return Partenaire
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string 
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
 }
