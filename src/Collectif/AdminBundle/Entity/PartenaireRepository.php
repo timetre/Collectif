@@ -12,4 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class PartenaireRepository extends EntityRepository
 {
+	public function getAll()
+	{
+		$qb = $this->createQueryBuilder('p');
+	
+		$qb->orderBy('p.ordre', 'ASC');
+	
+		return $qb->getQuery()->getResult();
+	}
 }

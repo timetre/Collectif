@@ -1,3 +1,11 @@
+collectif_front:
+    resource: "@CollectifFrontBundle/Resources/config/routing.yml"
+    prefix:   /
+
+collectif_membre:
+    resource: "@CollectifAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
     prefix: /reseau

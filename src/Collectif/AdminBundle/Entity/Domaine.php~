@@ -354,37 +354,4 @@ class Domaine
     {
         return $this->path;
     }
-
-    /**
-     * Add users
-     *
-     * @param \Collectif\UserBundle\Entity\User $users
-     * @return Domaine
-     */
-    public function addUser(\Collectif\UserBundle\Entity\User $users)
-    {
-        $this->users[] = $users;
-    
-        return $this;
-    }
-
-    /**
-     * Remove users
-     *
-     * @param \Collectif\UserBundle\Entity\User $users
-     */
-    public function removeUser(\Collectif\UserBundle\Entity\User $users)
-    {
-        $this->users->removeElement($users);
-    }
-
-    /**
-     * Get users
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getUsers()
-    {
-        return $this->users;
-    }
 }

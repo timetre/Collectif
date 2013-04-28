@@ -12,7 +12,7 @@
 			<ul class="clean latest-posts">
 				{% for a in articles %}
 				<li>
-					<p><a href="{{ path('collectif_front_article', { 'id': a.id }) }}"><span>{{ a.dateModification|date('d/m/Y') }}</span> {{ a.titre }} <br>
+					<p><a href="{{ path('collectif_front_article', { 'id': a.id }) }}"><span>{{ a.datePublication|date('d/m/Y') }}</span> {{ a.titre }} <br>
 						{{ a.resume | raw }}
 					</a>
 					</p>

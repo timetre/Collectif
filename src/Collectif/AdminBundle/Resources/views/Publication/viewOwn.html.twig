@@ -14,6 +14,7 @@
 	<tr>
 		<th>Editer</th>
 		<th>Titre</th>
+		<th>Date de publication</th>
 		<th>Auteur</th>
 		<th>Supprimer</th>
 	</tr>
@@ -21,11 +22,12 @@
 	<tr>
 <td><a class="btn" href="{{ path('collectif_publication_edit_own', { 'pubId': p.id, 'userId': id }) }}"><i class="icon-edit"></i></a></td>
 <td>{{ p.titre }}</td>
+<td>{{ p.datePublication|date('d/m/Y') }}</td>
 <td>{{ p.membre.nom }} {{ p.membre.prenom }} ({{ p.membre.domaine.nom }})</td>
 <td><a onclick="if(!confirm('Voulez-vous vraiment supprimer cette publication ?')) { return false };" class="btn" href="{{ path('collectif_publication_delete_own', { 'id': p.id }) }}"><i class="icon-trash"></i></a></td>
 </tr>
 {% else %}
-	<tr><td>Aucune publication n'ˆ ŽtŽ trouvŽe.</td></tr>
+	<tr><td>Aucune publication n'ï¿½ ï¿½tï¿½ trouvï¿½e.</td></tr>
 {% endfor %}
 </table>
 

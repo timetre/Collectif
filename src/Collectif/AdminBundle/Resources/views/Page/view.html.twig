@@ -17,6 +17,7 @@
 		<th>Editer</th>
 		<th>Titre</th>
 		<th>Enfants</th>
+		<th>Ordre</th>
 		<th>Actif</th>
 		<th>Supprimer</th>
 	</tr>
@@ -25,6 +26,7 @@
 <td><a class="btn" href="{{ path('collectif_page_edit', { 'id': p.id, 'parent': parent, 'type': p.typePage }) }}"><i class="icon-edit"></i></a></td>
 <td>{{ p.titre }}</td>
 <td><a class="btn" href="{{ path('collectif_page_homepage', { 'parent': p.id }) }}"><i class="icon-zoom-in"></i></a></td>
+<td>{{ p.ordre }}</td>
 <td>{% if p.actif %}
 		<i class="icon-ok"></i>
 	{% else %}

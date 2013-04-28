@@ -37,6 +37,10 @@ collectif_front_article_feed:
 collectif_front_research:
     pattern:  /recherche
     defaults: { _controller: CollectifFrontBundle:Home:research }
+    
+collectif_front_contact:
+    pattern:  /contact/envoi
+    defaults: { _controller: CollectifFrontBundle:Home:contact }
 
 front_header:
     pattern:  /front/header/
