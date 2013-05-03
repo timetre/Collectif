@@ -1,10 +1,5 @@
-collectif_front:
-    resource: "@CollectifFrontBundle/Resources/config/routing.yml"
-    prefix:   /
-
-collectif_membre:
-    resource: "@CollectifAdminBundle/Resources/config/routing.yml"
-    prefix:   /
+console:
+    resource: "@CoreSphereConsoleBundle/Resources/config/routing.yml"
    
 _wdt:
     resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"

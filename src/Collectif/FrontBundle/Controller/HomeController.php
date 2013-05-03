@@ -12,7 +12,6 @@ class HomeController extends Controller
 	public function indexAction() {
 		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Article');
     	$articles = $repository->getArticles(true, 5);
-		//$articles = $repository->getArticlesPublications();
 		
     	return $this->render('CollectifFrontBundle:Default:index.html.twig', array(
 			'lastArticle' 	=> $articles[0]
@@ -30,7 +29,7 @@ class HomeController extends Controller
     	}
     	
     	if($page->getTypePage() == "CONTENU") {
-    		return $this->render('CollectifFrontBundle:Default:inner-page.html.twig', array(
+    		return $this->render('CollectifFrontBundle:Page:inner-page.html.twig', array(
     				'page' 			=> $page,
     				'articlesPage'	=> $articlesPage
     		));
@@ -38,10 +37,22 @@ class HomeController extends Controller
     		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifUserBundle:User');
     		$users = $repository->getUsersBureau();
     		
-    		return $this->render('CollectifFrontBundle:Default:inner-bureau.html.twig', array(
+    		return $this->render('CollectifFrontBundle:Page:inner-bureau.html.twig', array(
     				'page' 			=> $page,
     				'articlesPage'	=> $articlesPage,
     				'usersBureau' 	=> $users
+    		));
+    	} else if($page->getTypePage() == "CONTACT") {
+    		return $this->render('CollectifFrontBundle:Page:inner-contact.html.twig', array(
+    				'page' 			=> $page
+    		));
+    	} else if($page->getTypePage() == "PARTENAIRES") {
+    		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Partenaire');
+    		$partenaires = $repository->getAll();
+    		
+    		return $this->render('CollectifFrontBundle:Page:inner-partenaires.html.twig', array(
+    				'page' 			=> $page,
+    				'partenaires'   => $partenaires
     		));
     	}
 		
@@ -57,8 +68,19 @@ class HomeController extends Controller
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Domaine');
     	$domaine = $repository->getDomaineByTitre($titrePage);
     	
+    	$users = $domaine->getUsers();
+    	$publications = array();
+    	
+    	foreach ($users as $user) {
+    		foreach($user->getPublications() as $pub) {
+    			$publications[] = $pub;
+    		}
+    	}
+    	
+    	
     	return $this->render('CollectifFrontBundle:Default:domaine.html.twig', array( 
 			'domaine'		=> $domaine, 
+			'publications'  => $publications
     	));
     }
     
@@ -135,7 +157,7 @@ class HomeController extends Controller
 		//$articles = $repository->getArticlesPublications();
 		
 		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Partenaire');
-    	$partenaires = $repository->findAll();
+    	$partenaires = $repository->getAll();
 		
     	return $this->render('CollectifFrontBundle:Commons:sidebar.html.twig', array(
 			'articles' 		=> $articles, 
@@ -150,7 +172,7 @@ class HomeController extends Controller
     	//$articles = $repository->getArticlesPublications();
     
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Partenaire');
-    	$partenaires = $repository->findAll();
+    	$partenaires = $repository->getAll();
     
     	return $this->render('CollectifFrontBundle:Commons:sidebar-inner.html.twig', array(
     			'articles' 		=> $articles,
@@ -199,7 +221,33 @@ class HomeController extends Controller
         return $this->render('CollectifFrontBundle:Commons:footer.html.twig');
     }
 
-    
+    public function contactAction() {
+    	$request = $this->container->get('request');
+    	
+    	if ($request->getMethod() == 'POST')
+    	{
+    		$nom = $request->request->get('nom');
+    		$mail = $request->request->get('mail');
+    		$sujet = $request->request->get('sujet');
+    		$message = $request->request->get('message');
+    		//die;
+    		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Parameters');
+    		$parametres = $repository->getParameters();
+    		$to = $parametres->getContactInfos();
+    		
+    		$send = \Swift_Message::newInstance()
+    			->setSubject($sujet)
+    			->setFrom($mail)
+    			->setTo($to)
+    			->setBody($this->renderView('CollectifFrontBundle:Mail:contact.html.twig', array('message' => $message)))
+    		;
+    		$this->get('mailer')->send($send);
+    		
+    	
+    		return $this->render('CollectifFrontBundle:Page:inner-contact-envoye.html.twig');
+    	
+    	}
+    }
     
     
 }

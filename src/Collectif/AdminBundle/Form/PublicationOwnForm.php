@@ -24,6 +24,12 @@ class PublicationOwnForm extends AbstractType
 		            'data-theme' => 'advanced' // simple, medium, advanced, bbcode
 		        )
 	    	))
+	    	->add('datePublication', 'date', array(
+	    			'widget'    => 'single_text',
+	    			'attr' => array('class' => 'datePicker'),
+	    			'format' => 'dd/MM/yyyy',
+	    			'input'  => 'datetime',
+	    			'required'  => true))
         ;
     }
 

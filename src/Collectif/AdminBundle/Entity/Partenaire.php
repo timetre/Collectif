@@ -53,6 +53,11 @@ class Partenaire
      * @ORM\Column(name="contenu", type="text")
      */
     private $description;
+    
+    /**
+     * @ORM\Column(name="ordre", type="integer", length=255)
+     */
+    private $ordre;
 
 
     /**
@@ -224,5 +229,28 @@ class Partenaire
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set ordre
+     *
+     * @param integer $ordre
+     * @return Partenaire
+     */
+    public function setOrdre($ordre)
+    {
+        $this->ordre = $ordre;
+    
+        return $this;
+    }
+
+    /**
+     * Get ordre
+     *
+     * @return integer 
+     */
+    public function getOrdre()
+    {
+        return $this->ordre;
     }
 }

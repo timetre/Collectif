@@ -8,6 +8,21 @@
 	<p> 
 		{{ domaine.description | raw }}
 	</p>
+	
+	<p>&nbsp;</p>
+	<div id="custom_posts-widget-3" class="widget custom_posts">
+		<ul class="clean latest-posts">
+			{% for p in publications %}
+			<li>
+				<p><a href=""><span>{{ p.datePublication|date('d/m/Y') }}</span> {{ p.titre }} <br>
+					{{ p.resume | raw }}
+				</a></p>
+			</li>
+			<hr>
+			{% endfor %}
+		</ul>
+	</div>
 </div>
+
 
 {% endblock %}

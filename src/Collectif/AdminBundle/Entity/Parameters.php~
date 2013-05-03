@@ -354,27 +354,4 @@ class Parameters
     {
         return $this->lienTwitter;
     }
-
-    /**
-     * Set contactInfos
-     *
-     * @param string $contactInfos
-     * @return Parameters
-     */
-    public function setContactInfos($contactInfos)
-    {
-        $this->contactInfos = $contactInfos;
-    
-        return $this;
-    }
-
-    /**
-     * Get contactInfos
-     *
-     * @return string 
-     */
-    public function getContactInfos()
-    {
-        return $this->contactInfos;
-    }
 }

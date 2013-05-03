@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Collectif\AdminBundle\Entity\Publication;
 use Collectif\AdminBundle\Form\PublicationForm;
 use Collectif\AdminBundle\Form\PublicationOwnForm;
+use Collectif\UserBundle\Entity\User;
 
 class PublicationController extends Controller
 {
@@ -25,8 +26,12 @@ class PublicationController extends Controller
     		));
     		
     	} else {
-    		$repository = $em->getRepository('CollectifAdminBundle:Publication');
-    		$publications = $repository->getPublicationsByUser($id);
+    		//$repository = $em->getRepository('CollectifAdminBundle:Publication');
+    		$repository = $em->getRepository('CollectifUserBundle:User');
+    		$user = new User();
+    		$user = $repository->find($id);
+    		$publications = $user->getPublications();
+    		
     		
     		return $this->render('CollectifAdminBundle:Publication:viewOwn.html.twig', array(
     				'publications' => $publications,
@@ -66,7 +71,7 @@ class PublicationController extends Controller
             
             if (!$publication)
             {
-                $message='Aucune publication trouvée';
+                $message='Aucune publication trouvï¿½e';
             }
         }
         else 
@@ -93,11 +98,11 @@ class PublicationController extends Controller
                 
                 if (isset($id)) 
                 {
-                     $message='Publication modifié avec succès !';
+                     $message='Publication modifiï¿½ avec succï¿½s !';
                 }
                 else 
                 {
-                    $message='Publication ajouté avec succès !';
+                    $message='Publication ajoutï¿½ avec succï¿½s !';
                 }
                 
                 return new RedirectResponse($this->container->get('router')->generate('collectif_publication_homepage'));
@@ -126,7 +131,7 @@ class PublicationController extends Controller
             
             if (!$publication)
             {
-                $message='Aucune publication trouvée';
+                $message='Aucune publication trouvï¿½e';
             }
         }
         else 
@@ -154,11 +159,11 @@ class PublicationController extends Controller
                 
                 if (isset($id)) 
                 {
-                     $message='Publication modifiŽ avec succs !';
+                     $message='Publication modifiï¿½ avec succï¿½s !';
                 }
                 else 
                 {
-                    $message='Publication ajoutŽe avec succs !';
+                    $message='Publication ajoutï¿½e avec succï¿½s !';
                 }
                 
                 return new RedirectResponse($this->container->get('router')->generate('collectif_publication_list_own', array('id' => $user->getId())));

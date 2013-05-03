@@ -18,6 +18,7 @@ class ParametersForm extends AbstractType
 		//$builder->add('logoSite');
 		$builder->add('lienFacebook');
 		$builder->add('lienTwitter');
+		$builder->add('contactInfos');
     }
 	
 	public function getName()

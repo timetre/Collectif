@@ -1,0 +1,87 @@
+{% extends 'CollectifFrontBundle::layout_inner-page.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+<h2>{{ page.titre }}</h2>
+<div class="textwidget">
+	<p> 
+		{{ page.contenu | raw }}
+	</p>
+	
+	<form id="cntnt01moduleform_2" method="post" action="{{ path('collectif_front_contact') }}" class="cms_form">
+		<table class="contactform">
+			<tbody>
+				<tr>
+					<td valign="top" class="required">
+						Nom : <font color="red">*</font>
+					</td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top">
+						<input type="text" name="nom" value="" size="25">
+					</td>
+				</tr>
+			
+				<tr>
+					<td valign="top" class="required">
+						Adresse Mail : <font color="red">*</font>
+					</td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top">
+						<input type="text" name="mail" value="" size="25">
+					</td>
+				</tr>
+				
+				<tr>
+					<td valign="top" class="required">
+						Sujet : <font color="red">*</font>
+					</td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top">
+						<input type="text" name="sujet" value="" size="25">
+					</td>
+				</tr>
+					
+				<tr>
+					<td valign="top" class="required">
+						Message : <font color="red">*</font>
+					</td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top">
+						<textarea id="message" name="message" cols="60" rows="5" class="cms_textarea">Votre message ici</textarea>
+						<script type="text/javascript">
+							var f = document.getElementById('message');
+							
+							if (f) {
+								f.onfocus=function(){
+									if (this.value==this.defaultValue) {this.value='';}
+								}
+								f.onblur=function(){
+								
+									if (this.value=='') {this.value=this.defaultValue;}
+								}
+							};
+						</script>
+					</td>
+				</tr>
+				
+				<tr><td></td></tr>
+				<tr>
+					<td>
+						<input class="cms_submit fbsubmit" value="Envoyer" type="submit">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>
+
+{% endblock %}

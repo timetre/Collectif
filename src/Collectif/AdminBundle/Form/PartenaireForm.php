@@ -13,6 +13,7 @@ class PartenaireForm extends AbstractType
 		$builder->add('lien');
 		$builder->add('description');
 		$builder->add('file');
+		$builder->add('ordre');
     }
 	
 	public function getName()

@@ -1,0 +1,29 @@
+{% extends 'CollectifFrontBundle::layout_inner-page.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+<h2>{{ page.titre }}</h2>
+<hr/>
+<div class="textwidget">
+	{% for p in partenaires %}
+	<p>
+		<strong>
+			{{ p.nom }}
+		</strong>
+		<p style="text-align: justify;>
+			<a target="_blank" href="{{ p.lien }}">
+				{% if image('upload/Partenaires/' ~ p.path).width >= 499 %}
+					<img width="624" align="left" src="{{ image('upload/Partenaires/' ~ p.path) }}" alt="{{ p.nom }}">
+				{% else %}
+					<img height="120" align="left" src="{{ image('upload/Partenaires/' ~ p.path) }}" alt="{{ p.nom }}" style="margin-right: 20px;">
+				{% endif %}
+			</a>
+			{{ p.description | raw }}
+		</p>
+	</p>
+		<hr>
+	{% endfor %}
+	
+</div>
+{% endblock %}

@@ -83,7 +83,6 @@ class Publication
 	public function __construct()
     {
         $this->dateCreation = new \Datetime();
-        $this->datePublication = new \Datetime();
     }
 
     /**
@@ -255,28 +254,5 @@ class Publication
     public function getMembre()
     {
         return $this->membre;
-    }
-
-    /**
-     * Set datePublication
-     *
-     * @param \DateTime $datePublication
-     * @return Publication
-     */
-    public function setDatePublication($datePublication)
-    {
-        $this->datePublication = $datePublication;
-    
-        return $this;
-    }
-
-    /**
-     * Get datePublication
-     *
-     * @return \DateTime 
-     */
-    public function getDatePublication()
-    {
-        return $this->datePublication;
     }
 }

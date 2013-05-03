@@ -23,7 +23,7 @@
 			<ul class="clean latest-posts">
 				{% for p in membre.getPublications %}
 				<li>
-					<p><a href=""><span>{{ p.dateModification|date('d/m/Y') }}</span> {{ p.titre }} <br>
+					<p><a href=""><span>{{ p.datePublication|date('d/m/Y') }}</span> {{ p.titre }} <br>
 						{{ p.resume | raw }}
 					</a></p>
 				</li>

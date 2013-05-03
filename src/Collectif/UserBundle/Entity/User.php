@@ -97,6 +97,7 @@ class User extends BaseUser
 	
 	/**
      * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Publication", cascade={"persist"}, mappedBy="membre")
+     * @ORM\OrderBy({"datePublication" = "DESC"})
      */
     private $publications;
     
