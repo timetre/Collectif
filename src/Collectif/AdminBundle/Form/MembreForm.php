@@ -31,7 +31,9 @@ class MembreForm extends AbstractType
 				)
 		));
 		$builder->add('actif', 'checkbox', array('required' => false));
-		$builder->add('file');
+		$builder->add('file', 'file', array(
+                'data_class' => null
+            ));
 
 		$builder->add('domaine','entity', array(
 	            'class' => 'Collectif\AdminBundle\Entity\Domaine',

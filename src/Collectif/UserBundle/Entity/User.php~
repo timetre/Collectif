@@ -64,7 +64,6 @@ class User extends BaseUser
 	
 	/**
      * @Assert\File(maxSize="6000000")
-     * @ORM\Column(nullable=true)
      */
     public $file;
 
@@ -159,8 +158,7 @@ class User extends BaseUser
      */
     public function preUpload()
     {
-    	if (null !== $this->file) {
-    		// do whatever you want to generate a unique name
+    	if (null !== $this->path) {
     		$filename = sha1(uniqid(mt_rand(), true));
     		$this->path = $filename.'.'.$this->file->guessExtension();
     	}
@@ -175,10 +173,6 @@ class User extends BaseUser
     	if (null === $this->file) {
     		return;
     	}
-    
-    	// if there is an error when moving the file, an exception will
-    	// be automatically thrown by move(). This will properly prevent
-    	// the entity from being persisted to the database on error
     	$this->file->move($this->getUploadRootDir(), $this->path);
     
     	unset($this->file);
@@ -485,30 +479,7 @@ class User extends BaseUser
     {
     	return $this->nom . " " . $this->prenom;
     }
-    
 
-    /**
-     * Set file
-     *
-     * @param string $file
-     * @return User
-     */
-    public function setFile($file)
-    {
-        $this->file = $file;
-    
-        return $this;
-    }
-
-    /**
-     * Get file
-     *
-     * @return string 
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
 
     /**
      * Add posts

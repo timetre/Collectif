@@ -56,15 +56,9 @@ class User extends BaseUser
      * @ORM\Column(name="fonctionBureau", type="string", length=255, nullable=true)
      */
     private $fonctionBureau;
-
-    /**
-     * @ORM\Column(name="path", type="string", length=255, nullable=true)
-     */
-    private $path;
 	
 	/**
      * @Assert\File(maxSize="6000000")
-     * @ORM\Column(nullable=true)
      */
     public $file;
 
@@ -105,6 +99,11 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Post", cascade={"persist"}, mappedBy="membre")
      */
     private $posts;
+    
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    public $path;
 	
     
     public function __construct()
@@ -123,33 +122,24 @@ class User extends BaseUser
     {
         return $this->id;
     }
-    
 
-    public function getAbsolutePath()
+	public function getAbsolutePath()
     {
-    	return null === $this->path
-    	? null
-    	: $this->getUploadRootDir().'/'.$this->path;
+    	return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
     }
     
     public function getWebPath()
     {
-    	return null === $this->path
-    	? null
-    	: $this->getUploadDir().'/'.$this->path;
+    	return null === $this->path ? null : $this->getUploadDir().'/'.$this->path;
     }
     
     protected function getUploadRootDir()
     {
-    	// the absolute directory path where uploaded
-    	// documents should be saved
     	return __DIR__.'/../../../../web/'.$this->getUploadDir();
     }
     
     protected function getUploadDir()
     {
-    	// get rid of the __DIR__ so it doesn't screw up
-    	// when displaying uploaded doc/image in the view.
     	return 'upload/Membres';
     }
     
@@ -160,9 +150,7 @@ class User extends BaseUser
     public function preUpload()
     {
     	if (null !== $this->file) {
-    		// do whatever you want to generate a unique name
-    		$filename = sha1(uniqid(mt_rand(), true));
-    		$this->path = $filename.'.'.$this->file->guessExtension();
+    		$this->path = sha1(uniqid(mt_rand(), true)).'.'.$this->file->guessExtension();
     	}
     }
     
@@ -175,10 +163,7 @@ class User extends BaseUser
     	if (null === $this->file) {
     		return;
     	}
-    
-    	// if there is an error when moving the file, an exception will
-    	// be automatically thrown by move(). This will properly prevent
-    	// the entity from being persisted to the database on error
+
     	$this->file->move($this->getUploadRootDir(), $this->path);
     
     	unset($this->file);
@@ -192,29 +177,6 @@ class User extends BaseUser
     	if ($file = $this->getAbsolutePath()) {
     		unlink($file);
     	}
-    }
-    
-    /**
-     * Set path
-     *
-     * @param string $path
-     * @return Domaine
-     */
-    public function setPath($path)
-    {
-    	$this->path = $path;
-    
-    	return $this;
-    }
-    
-    /**
-     * Get path
-     *
-     * @return string
-     */
-    public function getPath()
-    {
-    	return $this->path;
     }
 
 
@@ -485,30 +447,7 @@ class User extends BaseUser
     {
     	return $this->nom . " " . $this->prenom;
     }
-    
 
-    /**
-     * Set file
-     *
-     * @param string $file
-     * @return User
-     */
-    public function setFile($file)
-    {
-        $this->file = $file;
-    
-        return $this;
-    }
-
-    /**
-     * Get file
-     *
-     * @return string 
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
 
     /**
      * Add posts

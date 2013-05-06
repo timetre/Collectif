@@ -61,7 +61,7 @@ class MembreController extends Controller {
             
             if (!$membre)
             {
-                $message='Aucun membre trouvŽ';
+                $message='Aucun membre trouvï¿½';
             }
 			$form = $this->container->get('form.factory')->create(new MembreForm(), $membre);
         }
@@ -87,11 +87,11 @@ class MembreController extends Controller {
                 
                 if (isset($id)) 
                 {
-                     $message='Membre modifiŽ avec succs !';
+                     $message='Membre modifiï¿½ avec succï¿½s !';
                 }
                 else 
                 {
-                    $message='Membre ajoutŽ avec succs !';
+                    $message='Membre ajoutï¿½ avec succï¿½s !';
                 }
                 
                 return new RedirectResponse($this->container->get('router')->generate('collectif_membre_homepage'));
@@ -120,7 +120,7 @@ class MembreController extends Controller {
     
     		if (!$membre)
     		{
-    			$message='Aucun membre trouvŽ';
+    			$message='Aucun membre trouvï¿½';
     		}
     		$form = $this->container->get('form.factory')->create(new MembreForm(), $membre);
     	}
@@ -148,11 +148,11 @@ class MembreController extends Controller {
     
     			if (isset($id))
     			{
-    				$message='Membre modifiŽ avec succs !';
+    				$message='Membre modifiï¿½ avec succï¿½s !';
     			}
     			else
     			{
-    				$message='Membre ajoutŽ avec succs !';
+    				$message='Membre ajoutï¿½ avec succï¿½s !';
     			}
     
     			return new RedirectResponse($this->container->get('router')->generate('collectif_membre_homepage'));
@@ -179,7 +179,7 @@ class MembreController extends Controller {
     
     		if (!$membre)
     		{
-    			$message='Aucun membre trouvŽ';
+    			$message='Aucun membre trouvï¿½';
     		}
     		$form = $this->container->get('form.factory')->create(new MembrePageForm(), $membre);
     	}
@@ -207,11 +207,11 @@ class MembreController extends Controller {
     
     			if (isset($id))
     			{
-    				$message='Membre modifiŽ avec succs !';
+    				$message='Membre modifiï¿½ avec succï¿½s !';
     			}
     			else
     			{
-    				$message='Membre ajoutŽ avec succs !';
+    				$message='Membre ajoutï¿½ avec succï¿½s !';
     			}
     
     			return new RedirectResponse($this->container->get('router')->generate('collectif_membre_edit_page', array('id' => $id)));
@@ -288,11 +288,11 @@ class MembreController extends Controller {
     
     			if (isset($id))
     			{
-    				$message='Membre modifiŽ avec succs !';
+    				$message='Membre modifiï¿½ avec succï¿½s !';
     			}
     			else
     			{
-    				$message='Membre ajoutŽ avec succs !';
+    				$message='Membre ajoutï¿½ avec succï¿½s !';
     			}
     
     			//return new RedirectResponse($this->container->get('router')->generate('collectif_membre_homepage'));
