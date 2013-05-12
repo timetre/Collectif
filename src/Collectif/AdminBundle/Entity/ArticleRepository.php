@@ -43,4 +43,14 @@ class ArticleRepository extends EntityRepository
 	
 		return $qb->getQuery()->getResult();
 	}
+	
+	public function findByAlias($alias)
+	{
+		$qb = $this->createQueryBuilder('a');
+	
+		$qb->where('a.alias = :alias')
+		->setParameter('alias', $alias);
+	
+		return $qb->getQuery()->getSingleResult();
+	}
 }

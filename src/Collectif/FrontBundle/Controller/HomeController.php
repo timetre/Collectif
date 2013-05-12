@@ -84,9 +84,10 @@ class HomeController extends Controller
     	));
     }
     
-    public function membreAction($id) {
+    public function membreAction($alias) {
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifUserBundle:User');
-    	$membre = $repository->find($id);
+    	//$membre = $repository->find($id);
+    	$membre = $repository->findByAlias($alias);
 		$domaine = $membre->getDomaine();
     	
     	return $this->render('CollectifFrontBundle:Default:membre.html.twig', array(
@@ -105,18 +106,18 @@ class HomeController extends Controller
     	));
     }
     
-	public function viewArticleAction($id) {
+	public function viewArticleAction($alias) {
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Article');
-    	$article = $repository->find($id);
+    	$article = $repository->findByAlias($alias);
     	
     	return $this->render('CollectifFrontBundle:Articles:detail.html.twig', array(
     		'article'		=> $article,
     	));
     }
     
-    public function viewPublicationAction($id) {
+    public function viewPublicationAction($alias) {
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Publication');
-    	$publication = $repository->find($id);
+    	$publication = $repository->findByAlias($alias);
     	 
     	return $this->render('CollectifFrontBundle:Publications:detail.html.twig', array(
     			'publication'		=> $publication,
@@ -142,7 +143,7 @@ class HomeController extends Controller
     	$domaines = $repository->getDomaines(true);
     	
     	
-        $liste_membres = $this->getDoctrine()->getManager()->getRepository('CollectifUserBundle:User')->getActifEnabled(true, true);
+        $liste_membres = $this->getDoctrine()->getManager()->getRepository('CollectifUserBundle:User')->getActifEnabled(true);
     	    	
         return $this->render('CollectifFrontBundle:Commons:menu-bottom.html.twig', array(
        		'domaines' => $domaines, 

@@ -6,8 +6,16 @@
 
 <h2>Réseau CONFLUENCE</h2>
 
+{% if disabled|length > 0 %}
+	<div class="alert alert-block">
+	  <button type="button" class="close" data-dismiss="alert">&times;</button>
+	  Il y'a {{ disabled|length }} {% if disabled|length > 1 %}membres{% else %}membre{% endif %} en attente de confirmation
+	</div>
+{% endif %}
+
+
+
 <p>
-	Bienvenue sur le Réseau CONFLUENCE.
-	Texte à définir + aggrégation des flux à la FB	
+	En construction...
 </p>
 {% endblock %}

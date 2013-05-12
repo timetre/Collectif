@@ -18,7 +18,8 @@ class PartenaireController extends Controller {
     {
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Partenaire');
     	
-    	$partenaires = $repository->findAll();
+    	//findAll();
+    	$partenaires = $repository->getAll();
     	
         return $this->render('CollectifAdminBundle:Partenaire:view.html.twig', array(
             'partenaires' => $partenaires

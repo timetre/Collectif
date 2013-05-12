@@ -59,6 +59,11 @@
 	            	{% else %}
 	              		<li><a href="{{ path('collectif_publication_list_own', { 'id': app.user.id }) }}">Mes articles</a></li>
 	           	 	{% endif %}
+	           	 	{% if app.request.attributes.get('_route') == 'collectif_cv_list' %}
+	            		<li class="active"><a href="{{ path('collectif_cv_list') }}">Mon CV</a></li>
+	            	{% else %}
+	              		<li><a href="{{ path('collectif_cv_list') }}">Mon CV</a></li>
+	           	 	{% endif %}
 	          	</ul>
 			  </li>
 			  
@@ -198,7 +203,8 @@
 	<script>		
 		$(function() {
 	    	$( ".datePicker" ).datepicker({
-				format: 'dd/mm/yyyy'
+				format: 'dd/mm/yyyy',
+				weekStart: 1
 			});
 		});
 	</script>

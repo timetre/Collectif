@@ -106,7 +106,7 @@ collectif_publication_delete:
 collectif_publication_list_own:
     pattern:  /reseau/publications/own/{id}
     defaults: { _controller: CollectifAdminBundle:Publication:list }
-    
+
 collectif_publication_create_own:
     pattern:  /reseau/publications/create/own
     defaults: { _controller: CollectifAdminBundle:Publication:editOwn }
@@ -182,4 +182,8 @@ CollectifAdminBundle_reseau_sousforum:
 CollectifAdminBundle_reseau_post:
     resource: "@CollectifAdminBundle/Resources/config/routing/post.yml"
     prefix:   /reseau/post
+    
+CollectifAdminBundle_reseau_cv:
+    resource: "@CollectifAdminBundle/Resources/config/routing/cv.yml"
+    prefix:   /reseau/cv
 

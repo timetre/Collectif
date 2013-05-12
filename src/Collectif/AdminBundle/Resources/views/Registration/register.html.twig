@@ -59,11 +59,12 @@
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap-datepicker.js') }}"></script>
-	
+	{{ tinymce_init() }}
 	<script>		
 		$(function() {
 	    	$( ".datePicker" ).datepicker({
-				format: 'dd/mm/yyyy'
+				format: 'dd/mm/yyyy',
+				weekStart: 1
 			});
 		});
 	</script>

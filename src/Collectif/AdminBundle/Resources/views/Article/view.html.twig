@@ -7,7 +7,7 @@
 <h1>Liste des articles</h1>
 
 <div class="header-buttons">
-	<input type="button" class="btn btn-success right" onclick="window.open('{{ path('collectif_articles_create') }}', '_parent');" value="Ajouter un article">
+	<a class="btn btn-success right" href="{{ path('collectif_articles_create') }}"><i class="icon-plus-sign icon-white"></i>Ajouter un article</a>
 </div>
 
 <table class="table table-hover">
@@ -30,7 +30,7 @@
 		Inactif
 	{% endif %}
 </td>
-<td><a onclick="if(!confirm('Voulez-vous vraiment supprimer cet article ?')) { return false };" class="btn" href="{{ path('collectif_articles_delete', { 'id': a.id }) }}"><i class="icon-trash"></i></a></td>
+<td><a onclick="if(!confirm('Voulez-vous vraiment supprimer cet article ?')) { return false };" class="btn btn-danger" href="{{ path('collectif_articles_delete', { 'id': a.id }) }}"><i class="icon-trash icon-white"></i></a></td>
 </tr>
 {% else %}
 	<tr><td>Aucun article n’a été trouvé.</td></tr>

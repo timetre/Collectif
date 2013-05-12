@@ -9,11 +9,40 @@ class PartenaireForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {  	        
-        $builder->add('nom');
-		$builder->add('lien');
-		$builder->add('description');
-		$builder->add('file');
-		$builder->add('ordre');
+        $builder->add('nom', 'text', array(
+        		'label' => 'Nom'
+        	)
+        );
+        $builder->add('lien', 'text', array(
+        		'label' => 'Lien'
+        	)
+        );
+        $builder->add('description', 'textarea', array(
+        		'label' => 'Description'
+        	)
+        );
+        $builder->add('file', 'file', array(
+        		'label' => 'Image', 
+        		'required' => false
+        	)
+        );
+        $builder->add('ordre', 'text', array(
+        		'label' => 'Ordre'
+      		)
+        );
+        $builder->add('height', 'text', array(
+        		'label' => 'Hauteur'
+        	)
+        );
+        $builder->add('width', 'text', array(
+        		'label' => 'Largeur'
+        	)
+        );
+        $builder->add('align', 'choice', array(
+        		'choices'   => array('left' => 'Gauche', 'center' => 'Milieu'),
+        		'label' => 'Alignement principal'
+        	)
+        );
     }
 	
 	public function getName()

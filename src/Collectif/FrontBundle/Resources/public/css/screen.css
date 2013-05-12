@@ -68,6 +68,7 @@ h1 { font-size:2.7em;}
 h2 { font-size:2.3em; }
 h3 { font-size:1.9em; }
 h4 { font-size:1.8em; }
+h4 { font-size:1.3em; }
 h5 { font-size:1.7em; }
 h6 { font-size:1.5em; }
 
@@ -645,3 +646,25 @@ html[xmlns] .clearfix {
 
 /* updated 6.20.10 - wp3 menu now uses children class and so do the comments */
 .sf-menu UL.children { margin-top:0; }
+
+.label,
+.badge {
+  display: inline-block;
+  padding: 5px 6px;
+  line-height: 14px;
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+  vertical-align: baseline;
+  background-color: #999999;
+}
+
+.label {
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}
+
+.label-info, .badge-info {
+	background-color: #3a87ad;
+}

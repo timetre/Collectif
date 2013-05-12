@@ -22,7 +22,7 @@
 							{% for m in membres %}
 								{% if d.id == m.domaine.id %}
 								<li class="page_item">
-									<a href="{{ path('collectif_front_chercheur', { 'id': m.id }) }}">{{ m.nom }} {{ m.prenom }}</a>
+									<a href="{{ path('collectif_front_chercheur', { 'alias': m.alias }) }}">{{ m.prenom }} {{ m.nom }}</a>
 								</li>
 								{% endif %}
 							{% endfor %}

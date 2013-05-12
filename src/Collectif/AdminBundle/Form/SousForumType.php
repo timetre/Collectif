@@ -11,11 +11,12 @@ class SousForumType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre')
-            ->add('isRss')
-            ->add('urlFlux')
-            ->add('description')
+            ->add('titre', 'text', array('label' => 'Titre'))
+            ->add('isRss', 'checkbox', array('label' => 'Flux rss ?'))
+            ->add('urlFlux', 'text', array('label' => 'URL flux'))
+            ->add('description', 'textarea', array('label' => 'Description'))
             ->add('forum','entity', array(
+            		'label' => 'Forum',
             		'class' => 'Collectif\AdminBundle\Entity\Forum',
             		'property' => 'titre',
             		'multiple' => false,

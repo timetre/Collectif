@@ -18,3 +18,7 @@ textarea,
 .uneditable-input {
   width: 300px;
 }
+
+.accordion-heading {
+	background-color: #f5f5f5;
+}

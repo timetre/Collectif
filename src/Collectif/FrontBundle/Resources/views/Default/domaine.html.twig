@@ -14,7 +14,7 @@
 		<ul class="clean latest-posts">
 			{% for p in publications %}
 			<li>
-				<p><a href=""><span>{{ p.datePublication|date('d/m/Y') }}</span> {{ p.titre }} <br>
+				<p><a href="{{ path('collectif_front_publication', { 'alias': p.alias }) }}"><span>{{ p.datePublication|date('d/m/Y') }}</span> {{ p.titre }} <br>
 					{{ p.resume | raw }}
 				</a></p>
 			</li>

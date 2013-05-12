@@ -107,7 +107,7 @@ class Page
     /**
      * @var boolean $defaut
      *
-     * @ORM\Column(name="defaut", type="boolean")
+     * @ORM\Column(name="defaut", type="boolean", nullable=true)
      */
     private $defaut;
     

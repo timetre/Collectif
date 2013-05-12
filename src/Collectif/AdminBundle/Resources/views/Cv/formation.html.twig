@@ -1,0 +1,28 @@
+<div class="header-buttons">
+	<a class="btn btn-success right" href="{{ path('collectif_cv_create_formation') }}"><i class="icon-plus-sign icon-white"></i>Ajouter une formation</a>
+</div>
+
+<table class="table table-hover">
+	<tr>
+		<th>Editer</th>
+		<th>Ecole</th>
+		<th>Diplôme</th>
+		<th>Date de début</th>
+		<th>Date de fin</th>
+		<th>Ordre</th>
+		<th>Supprimer</th>
+	</tr>
+{% for f in user.getFormations %}
+	<tr>
+		<td><a class="btn" href="{{ path('collectif_cv_edit_formation', { 'formationId': f.id }) }}"><i class="icon-edit"></i></a></td>
+		<td>{{ f.ecole }}</td>
+		<td>{{ f.diplome }}</td>
+		<td>{{ f.dateDebut|date('d/m/Y') }}</td>
+		<td>{{ f.dateFin|date('d/m/Y') }}</td>
+		<td>{{ f.ordre }}</td>
+		<td><a onclick="if(!confirm('Voulez-vous vraiment supprimer cette formation ?')) { return false };" class="btn btn-danger" href="{{ path('collectif_cv_delete_formation', { 'formationId': f.id }) }}"><i class="icon-trash icon-white"></i></a></td>
+	</tr>
+{% else %}
+	<tr><td>Aucune formation n'a été trouvée.</td></tr>
+{% endfor %}
+</table>

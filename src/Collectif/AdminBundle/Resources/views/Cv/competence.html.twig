@@ -1,0 +1,22 @@
+<div class="header-buttons">
+	<a class="btn btn-success right" href="{{ path('collectif_cv_create_competence') }}"><i class="icon-plus-sign icon-white"></i>Ajouter une compétence</a>
+</div>
+
+<table class="table table-hover">
+	<tr>
+		<th>Editer</th>
+		<th>Libellé</th>
+		<th>Ordre</th>
+		<th>Supprimer</th>
+	</tr>
+{% for c in user.getCompetences %}
+	<tr>
+		<td><a class="btn" href="{{ path('collectif_cv_edit_competence', { 'competenceId': c.id }) }}"><i class="icon-edit"></i></a></td>
+		<td>{{ c.libelle }}</td>
+		<td>{{ c.ordre }}</td>
+		<td><a onclick="if(!confirm('Voulez-vous vraiment supprimer cette compétence ?')) { return false };" class="btn btn-danger" href="{{ path('collectif_cv_delete_competence', { 'competenceId': c.id }) }}"><i class="icon-trash icon-white"></i></a></td>
+	</tr>
+{% else %}
+	<tr><td>Aucune competence n'a été trouvée.</td></tr>
+{% endfor %}
+</table>

@@ -11,8 +11,8 @@ class ForumType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre')
-            ->add('actif', 'checkbox', array('required' => false))
+            ->add('titre', 'text', array('label' => 'Titre'))
+            ->add('actif', 'checkbox', array('required' => false, 'label' => 'Actif'))
         ;
     }
 

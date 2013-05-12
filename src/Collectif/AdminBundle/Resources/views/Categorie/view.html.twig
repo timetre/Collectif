@@ -7,7 +7,7 @@
 <h1>Liste des cat&eacute;gories</h1>
 
 <div class="header-buttons">
-	<input type="button" class="btn btn-success right" onclick="window.open('{{ path('collectif_categories_create') }}', '_parent');" value="Ajouter une catégorie">
+	<a class="btn btn-success right" href="{{ path('collectif_categories_create') }}"><i class="icon-plus-sign icon-white"></i>Ajouter une catégorie</a>
 </div>
 
 <table class="table table-hover">
@@ -20,7 +20,7 @@
 	<tr>
 <td><a class="btn" href="{{ path('collectif_categories_edit', { 'id': c.id }) }}"><i class="icon-edit"></i></a></td>
 <td>{{ c.titre }}</td>
-<td><a onclick="if(!confirm('Voulez-vous vraiment supprimer cette catégorie ?')) { return false };" class="btn" href="{{ path('collectif_categories_delete', { 'id': c.id }) }}"><i class="icon-trash"></i></a></td>
+<td><a onclick="if(!confirm('Voulez-vous vraiment supprimer cette catégorie ?')) { return false };" class="btn btn-danger" href="{{ path('collectif_categories_delete', { 'id': c.id }) }}"><i class="icon-white icon-trash"></i></a></td>
 </tr>
 {% else %}
 	<tr><td>Aucune catégorie n’a été trouvée.</td></tr>

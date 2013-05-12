@@ -11,12 +11,14 @@
 		<strong>
 			{{ p.nom }}
 		</strong>
-		<p style="text-align: justify;>
+		<p style="text-align: justify;">
 			<a target="_blank" href="{{ p.lien }}">
-				{% if image('upload/Partenaires/' ~ p.path).width >= 499 %}
-					<img width="624" align="left" src="{{ image('upload/Partenaires/' ~ p.path) }}" alt="{{ p.nom }}">
+				{% if image('upload/Partenaires/' ~ p.path).width > 500 and image('upload/Partenaires/' ~ p.path).width <= 624 and p.align == "center" %}
+					<img width="624" align="{{ p.align }}" src="{{ image('upload/Partenaires/' ~ p.path) }}" alt="{{ p.nom }}">
+				{% elseif image('upload/Partenaires/' ~ p.path).width <= 624 and p.align == "center" %}
+					<img height="120" align="{{ p.align }}" src="{{ image('upload/Partenaires/' ~ p.path) }}" alt="{{ p.nom }}">
 				{% else %}
-					<img height="120" align="left" src="{{ image('upload/Partenaires/' ~ p.path) }}" alt="{{ p.nom }}" style="margin-right: 20px;">
+					<img height="120" align="{{ p.align }}" src="{{ image('upload/Partenaires/' ~ p.path) }}" alt="{{ p.nom }}" style="margin-right: 20px;">
 				{% endif %}
 			</a>
 			{{ p.description | raw }}
@@ -24,6 +26,5 @@
 	</p>
 		<hr>
 	{% endfor %}
-	
 </div>
 {% endblock %}

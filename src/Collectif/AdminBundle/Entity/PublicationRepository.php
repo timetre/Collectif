@@ -30,4 +30,14 @@ class PublicationRepository extends EntityRepository
 	
 		return $qb->getQuery()->getResult();
 	}
+	
+	public function findByAlias($alias)
+	{
+		$qb = $this->createQueryBuilder('p');
+	
+		$qb->where('p.alias = :alias')
+		->setParameter('alias', $alias);
+	
+		return $qb->getQuery()->getSingleResult();
+	}
 }

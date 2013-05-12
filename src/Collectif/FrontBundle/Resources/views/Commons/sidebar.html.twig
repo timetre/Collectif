@@ -4,7 +4,7 @@
  		<ul class='clean latest-posts'>
 	{% for a in articles %}
 		<li>
-			<p><a href="{{ path('collectif_front_article', { 'id': a.id }) }}"><span>{{ a.dateModification|date('d/m/Y') }}</span> {{ a.titre }}</a>{{ a.resume }}</p>
+			<p><a href="{{ path('collectif_front_article', { 'alias': a.alias }) }}"><span>{{ a.dateModification|date('d/m/Y') }}</span> {{ a.titre }}</a>{{ a.resume | raw  }}</p>
 		</li>
 	{% endfor %}
 	<hr>
@@ -17,7 +17,17 @@
     	<div id="text-4" class="widget widget_text">
  		<h2 style="text-align: justify;">Partenaires</h2>
 {% for p in partenaires %}
-	<p style="float: left;margin-right: 15px;"><a target="_blank" href="{{ p.lien }}"><img height="80" src="{{ asset('upload/Partenaires/' ~ p.path)}}"></a></p>
+	<p style="float: left;margin-right: 15px;">
+		<a target="_blank" href="{{ p.lien }}">
+			{% if p.height == 0 %}
+				<img width="{{ p.width }}" src="{{ asset('upload/Partenaires/' ~ p.path)}}" alt="{{ p.nom }}"></a></p>
+			{% elseif p.width == 0 %}
+				<img height="{{ p.height }}" src="{{ asset('upload/Partenaires/' ~ p.path)}}" alt="{{ p.nom }}"></a></p>
+			{% else %}
+				<img height="{{ p.height }}" width="{{ p.width }}" src="{{ asset('upload/Partenaires/' ~ p.path)}}" alt="{{ p.nom }}"></a></p>
+			{% endif %}
+		</a>
+	</p>
 {% endfor %}
  	</div>
  </div><!--//grid4--> 

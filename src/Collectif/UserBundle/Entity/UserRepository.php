@@ -21,15 +21,27 @@ class UserRepository extends EntityRepository
 		return $qb->getQuery()->getResult();
 	}
 	
-	public function getActifEnabled($actif, $enabled)
+	public function getActifEnabled($enabled)
 	{
 		$parameters = array(
-			'actif' => $actif,
 			'enabled' => $enabled
 		);
 		
 		$qb = $this->createQueryBuilder('u');
-		$qb->where('u.actif = :actif and u.enabled = :enabled')->setParameters($parameters);
+		$qb->where('u.enabled = :enabled')->setParameters($parameters);
+		$qb->orderBy('u.nom', 'ASC');
+	
+		return $qb->getQuery()->getResult();
+	}
+	
+	public function getDisabledUsersSize()
+	{
+		$parameters = array(
+			'enabled' => false
+		);
+	
+		$qb = $this->createQueryBuilder('u');
+		$qb->where('u.enabled = :enabled')->setParameters($parameters);
 		$qb->orderBy('u.nom', 'ASC');
 	
 		return $qb->getQuery()->getResult();
@@ -59,5 +71,15 @@ class UserRepository extends EntityRepository
 		$qb->orderBy('u.nom', 'ASC');
 	
 		return $qb->getQuery()->getResult();
+	}
+	
+	public function findByAlias($alias)
+	{
+		$qb = $this->createQueryBuilder('u');
+	
+		$qb->where('u.alias = :alias')
+		->setParameter('alias', $alias);
+	
+		return $qb->getQuery()->getSingleResult();
 	}
 }

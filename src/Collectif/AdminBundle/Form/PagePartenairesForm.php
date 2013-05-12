@@ -21,7 +21,6 @@ class PagePartenairesForm extends AbstractType
 
 		$builder->add('actif', 'checkbox', array('required' => false, 'label' => 'Actif'));
 		
-		$builder->add('seoDescription', 'text', array('required' => false, 'label' => 'Description SEO'));
 		$builder->add('ordre', 'text', array('required' => false, 'label' => 'Ordre'));
 		$builder->add('parent','entity', array(
 	            'class' => 'Collectif\AdminBundle\Entity\Page',

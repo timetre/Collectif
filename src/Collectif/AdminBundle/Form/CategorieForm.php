@@ -9,7 +9,7 @@ class CategorieForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('titre');
+        $builder->add('titre', 'text', array('label' => 'Titre'));
 		$builder->add('description', 'textarea', array(
 				'label' => 'Contenu',
 				'attr' => array(

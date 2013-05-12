@@ -1,0 +1,57 @@
+collectif_cv_list:
+    pattern:  /
+    defaults: { _controller: CollectifAdminBundle:Cv:list }
+
+collectif_cv_create_experience:
+    pattern:  /create/experience
+    defaults: { _controller: CollectifAdminBundle:Cv:editExperience }
+    
+collectif_cv_edit_experience:
+    pattern:  /edit/experience/{experienceId}
+    defaults: { _controller: CollectifAdminBundle:Cv:editExperience }
+    
+collectif_cv_delete_experience:
+    pattern:  /delete/experience/{experienceId}
+    defaults: { _controller: CollectifAdminBundle:Cv:deleteExperience }
+
+
+
+collectif_cv_create_competence:
+    pattern:  /create/competence
+    defaults: { _controller: CollectifAdminBundle:Cv:editCompetence }
+    
+collectif_cv_edit_competence:
+    pattern:  /edit/competence/{competenceId}
+    defaults: { _controller: CollectifAdminBundle:Cv:editCompetence }
+    
+collectif_cv_delete_competence:
+    pattern:  /delete/competence/{competenceId}
+    defaults: { _controller: CollectifAdminBundle:Cv:deleteCompetence }
+
+
+
+collectif_cv_create_formation:
+    pattern:  /create/formation
+    defaults: { _controller: CollectifAdminBundle:Cv:editFormation }
+    
+collectif_cv_edit_formation:
+    pattern:  /edit/formation/{formationId}
+    defaults: { _controller: CollectifAdminBundle:Cv:editFormation }
+    
+collectif_cv_delete_formation:
+    pattern:  /delete/formation/{formationId}
+    defaults: { _controller: CollectifAdminBundle:Cv:deleteFormation }
+    
+
+
+collectif_cv_create_interet:
+    pattern:  /create/interet
+    defaults: { _controller: CollectifAdminBundle:Cv:editInteret }
+    
+collectif_cv_edit_interet:
+    pattern:  /edit/interet/{interetId}
+    defaults: { _controller: CollectifAdminBundle:Cv:editInteret }
+    
+collectif_cv_delete_interet:
+    pattern:  /delete/interet/{interetId}
+    defaults: { _controller: CollectifAdminBundle:Cv:deleteInteret }

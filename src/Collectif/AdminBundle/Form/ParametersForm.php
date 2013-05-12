@@ -9,16 +9,16 @@ class ParametersForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {  	        
-    	$builder->add('nomSite');
-		$builder->add('proprietaireSite');
-		$builder->add('adresseSite');
-		$builder->add('mailSite');
-		$builder->add('telephoneSite');
-		$builder->add('faxSite');
+    	$builder->add('nomSite', 'text', array('label' => 'Nom du site'));
+		$builder->add('proprietaireSite', 'text', array('label' => 'Propriétair du site'));
+		$builder->add('adresseSite', 'text', array('label' => 'Adresse'));
+		$builder->add('mailSite', 'text', array('label' => 'Email principal'));
+		$builder->add('telephoneSite', 'text', array('label' => 'Tél.'));
+		$builder->add('faxSite', 'text', array('label' => 'Fax'));
 		//$builder->add('logoSite');
-		$builder->add('lienFacebook');
-		$builder->add('lienTwitter');
-		$builder->add('contactInfos');
+		$builder->add('lienFacebook', 'text', array('label' => 'Facebook'));
+		$builder->add('lienTwitter', 'text', array('label' => 'Twitter'));
+		$builder->add('contactInfos', 'text', array('label' => 'Adresse mail de contact'));
     }
 	
 	public function getName()

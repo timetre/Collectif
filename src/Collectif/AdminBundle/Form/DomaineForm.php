@@ -9,8 +9,8 @@ class DomaineForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {  	        
-		$builder->add('actif', 'checkbox', array('required' => false));
-        $builder->add('nom');
+		$builder->add('actif', 'checkbox', array('required' => false, 'label' => 'Actif'));
+        $builder->add('nom', 'text', array('label' => 'Nom'));
 		$builder->add('description', 'textarea', array(
 				'label' => 'Description',
 				'attr' => array(
@@ -18,8 +18,8 @@ class DomaineForm extends AbstractType
 						'data-theme' => 'advanced' // simple, medium, advanced, bbcode
 				)
 		));
-        $builder->add('ordre', 'text');
-		$builder->add('file');
+        $builder->add('ordre', 'text', array('label' => 'Ordre'));
+		$builder->add('file', 'file', array('label' => 'Bannière'));
     }
 	
 	public function getName()

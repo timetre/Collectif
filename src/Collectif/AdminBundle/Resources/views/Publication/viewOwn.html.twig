@@ -7,7 +7,7 @@
 <h1>Liste des publications</h1>
 
 <div class="header-buttons">
-	<input type="button" class="btn btn-success right" onclick="window.open('{{ path('collectif_publication_create_own', { 'userId': id }) }}', '_parent');" value="Ajouter une publication">
+	<a class="btn btn-success right" href="{{ path('collectif_publication_create_own', { 'userId': id }) }}"><i class="icon-plus-sign icon-white"></i>Ajouter une publication</a>
 </div>
 
 <table class="table table-hover">
@@ -24,10 +24,10 @@
 <td>{{ p.titre }}</td>
 <td>{{ p.datePublication|date('d/m/Y') }}</td>
 <td>{{ p.membre.nom }} {{ p.membre.prenom }} ({{ p.membre.domaine.nom }})</td>
-<td><a onclick="if(!confirm('Voulez-vous vraiment supprimer cette publication ?')) { return false };" class="btn" href="{{ path('collectif_publication_delete_own', { 'id': p.id }) }}"><i class="icon-trash"></i></a></td>
+<td><a onclick="if(!confirm('Voulez-vous vraiment supprimer cette publication ?')) { return false };" class="btn btn-danger" href="{{ path('collectif_publication_delete_own', { 'id': p.id }) }}"><i class="icon-trash icon-white"></i></a></td>
 </tr>
 {% else %}
-	<tr><td>Aucune publication n'� �t� trouv�e.</td></tr>
+	<tr><td>Aucune publication n'a été trouvée.</td></tr>
 {% endfor %}
 </table>
 

@@ -1,0 +1,70 @@
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+
+<h1>Gérer mon CV</h1>
+
+<div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+        Mes expériences professionnelles
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse {% if app.session.get('tabNum') == 1 %} in {% endif%}">
+      <div class="accordion-inner">
+        {% include 'CollectifAdminBundle:Cv:experience.html.twig'
+			with {'user': user}
+		%}
+      </div>
+    </div>
+  </div>
+  
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+        Mes compétences
+      </a>
+    </div>
+    <div id="collapseTwo" class="accordion-body collapse {% if app.session.get('tabNum') == 2 %} in {% endif%}">
+      <div class="accordion-inner">
+        {% include 'CollectifAdminBundle:Cv:competence.html.twig'
+			with {'user': user}
+		%}
+      </div>
+    </div>
+  </div>
+  
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+        Ma formation
+      </a>
+    </div>
+    <div id="collapseThree" class="accordion-body collapse {% if app.session.get('tabNum') == 3 %} in {% endif%}">
+      <div class="accordion-inner">
+        {% include 'CollectifAdminBundle:Cv:formation.html.twig'
+			with {'user': user}
+		%}
+      </div>
+    </div>
+  </div>
+  
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+        Mes centres d'intérêt
+      </a>
+    </div>
+    <div id="collapseFour" class="accordion-body collapse {% if app.session.get('tabNum') == 4 %} in {% endif%}">
+      <div class="accordion-inner">
+        {% include 'CollectifAdminBundle:Cv:interet.html.twig'
+			with {'user': user}
+		%}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

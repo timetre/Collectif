@@ -11,20 +11,23 @@ class PublicationOwnForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre')
+            ->add('titre', 'text', array('label' => 'Titre'))
             ->add('resume', 'textarea', array(
+            		'label' => 'Réumé',
 		        	'attr' => array(
 		            'class' => 'tinymce',
 		            'data-theme' => 'advanced' // simple, medium, advanced, bbcode
 		        )
 		    ))
             ->add('contenu', 'textarea', array(
+            		'label' => 'Contenu',
 		       	 	'attr' => array(
 		            'class' => 'tinymce',
 		            'data-theme' => 'advanced' // simple, medium, advanced, bbcode
 		        )
 	    	))
 	    	->add('datePublication', 'date', array(
+	    			'label' => 'Date de publication',
 	    			'widget'    => 'single_text',
 	    			'attr' => array('class' => 'datePicker'),
 	    			'format' => 'dd/MM/yyyy',

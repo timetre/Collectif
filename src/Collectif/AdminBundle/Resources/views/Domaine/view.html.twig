@@ -7,7 +7,7 @@
 <h1>Liste des domaines</h1>
 
 <div class="header-buttons">
-	<input type="button" class="btn btn-success right" onclick="window.open('{{ path('collectif_domaine_create') }}', '_parent');" value="Ajouter un domaine">
+	<a class="btn btn-success right" href="{{ path('collectif_domaine_create') }}"><i class="icon-plus-sign icon-white"></i>Ajouter un domaine</a>
 </div>
 
 <table class="table table-hover">
@@ -28,7 +28,7 @@
 		Inactif
 	{% endif %}
 </td>
-<td><a onclick="if(!confirm('Voulez-vous vraiment supprimer ce domaine ?')) { return false };" class="btn" href="{{ path('collectif_domaine_delete', { 'id': a.id }) }}"><i class="icon-trash"></i></a></td>
+<td><a onclick="if(!confirm('Voulez-vous vraiment supprimer ce domaine ?')) { return false };" class="btn btn-danger" href="{{ path('collectif_domaine_delete', { 'id': a.id }) }}"><i class="icon-trash icon-white"></i></a></td>
 </tr>
 {% else %}
 	<tr><td>Aucun domaine n’a été trouvé.</td></tr>

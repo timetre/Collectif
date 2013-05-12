@@ -22,7 +22,7 @@ class User extends BaseUser
      */
     protected $id;
     
-     /**
+    /**
      * @var string $nom
      *
      * @ORM\Column(name="nom", type="string", length=255)
@@ -35,6 +35,13 @@ class User extends BaseUser
      * @ORM\Column(name="prenom", type="string", length=255)
      */
     private $prenom;
+    
+    /**
+     * @var string $alias
+     *
+     * @ORM\Column(name="alias", type="string", length=255)
+     */
+    private $alias;
 
     /**
      * @var \DateTime $dateNaissance
@@ -65,7 +72,7 @@ class User extends BaseUser
     /**
      * @var \DateTime $contenuPage
      *
-     * @ORM\Column(name="contenuPage", type="string", nullable=true)
+     * @ORM\Column(name="contenuPage", type="text", nullable=true)
      */
     private $contenuPage;
 	
@@ -75,13 +82,6 @@ class User extends BaseUser
      * @ORM\Column(name="dateCreation", type="datetime")
      */
     private $dateCreation;
-
-    /**
-     * @var boolean $actif
-     *
-     * @ORM\Column(name="actif", type="boolean", nullable=true)
-     */
-    private $actif;
     
     /**
      * @ORM\ManyToOne(targetEntity="Collectif\AdminBundle\Entity\Domaine")
@@ -96,6 +96,31 @@ class User extends BaseUser
     private $publications;
     
     /**
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Experience", cascade={"persist"}, mappedBy="membre")
+     * @ORM\OrderBy({"ordre" = "ASC"})
+     */
+    private $experiences;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Formation", cascade={"persist"}, mappedBy="membre")
+     * @ORM\OrderBy({"ordre" = "ASC"})
+     */
+    private $formations;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Competence", cascade={"persist"}, mappedBy="membre")
+     * @ORM\OrderBy({"ordre" = "ASC"})
+     */
+    private $competences;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Interet", cascade={"persist"}, mappedBy="membre")
+     * @ORM\OrderBy({"ordre" = "ASC"})
+     */
+    private $interets;
+    
+    
+    /**
      * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Post", cascade={"persist"}, mappedBy="membre")
      */
     private $posts;
@@ -104,6 +129,69 @@ class User extends BaseUser
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     public $path;
+    
+    /**
+     * @var string $activiteNumerique
+     *
+     * @ORM\Column(name="activiteNumerique", type="text", nullable=true)
+     */
+    private $activiteNumerique;
+    
+    /**
+     * @var string $lieu
+     *
+     * @ORM\Column(name="lieu", type="text")
+     */
+    private $lieu;
+    
+    /**
+     * @var string $statut
+     *
+     * @ORM\Column(name="statut", type="text")
+     */
+    private $statut;
+    
+    /**
+     * @var string $sujetRecherche
+     *
+     * @ORM\Column(name="sujetRecherche", type="text")
+     */
+    private $sujetRecherche;
+    
+    /**
+     * @var string $structure
+     *
+     * @ORM\Column(name="structure", type="text", nullable=true)
+     */
+    private $structure;
+    
+    /**
+     * @var string $twitter
+     *
+     * @ORM\Column(name="$twitter", type="text", nullable=true)
+     */
+    private $twitter;
+    
+    /**
+     * @var string $facebook
+     *
+     * @ORM\Column(name="facebook", type="text", nullable=true)
+     */
+    private $facebook;
+    
+    /**
+     * @var string $googlePlus
+     *
+     * @ORM\Column(name="googlePlus", type="text", nullable=true)
+     */
+    private $googlePlus;
+    
+    /**
+     * @var string $hypothese
+     *
+     * @ORM\Column(name="hypothese", type="text", nullable=true)
+     */
+    private $hypothese;
 	
     
     public function __construct()
@@ -151,6 +239,12 @@ class User extends BaseUser
     {
     	if (null !== $this->file) {
     		$this->path = sha1(uniqid(mt_rand(), true)).'.'.$this->file->guessExtension();
+    	}
+    	
+    	if (null !== $this->nom && null !== $this->prenom) {
+    		$this->alias = $this->clear_str($this->prenom)."-".$this->clear_str($this->nom);
+    	} else {
+    		$this->alias = sha1(uniqid(mt_rand(), true));
     	}
     }
     
@@ -365,29 +459,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set actif
-     *
-     * @param boolean $actif
-     * @return User
-     */
-    public function setActif($actif)
-    {
-        $this->actif = $actif;
-    
-        return $this;
-    }
-
-    /**
-     * Get actif
-     *
-     * @return boolean 
-     */
-    public function getActif()
-    {
-        return $this->actif;
-    }
-
-    /**
      * Set domaine
      *
      * @param $domaine
@@ -480,5 +551,420 @@ class User extends BaseUser
     public function getPosts()
     {
         return $this->posts;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return User
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * Set alias
+     *
+     * @param string $alias
+     * @return User
+     */
+    public function setAlias($alias)
+    {
+        $this->alias = $alias;
+    
+        return $this;
+    }
+
+    /**
+     * Get alias
+     *
+     * @return string 
+     */
+    public function getAlias()
+    {
+        return $this->alias;
+    }
+    
+    private function clear_str($text, $separator = '-', $charset = 'utf-8') {
+    	// Pour l'encodage
+    	$text = mb_convert_encoding($text,'HTML-ENTITIES',$charset);
+    	$text = strtolower(trim($text));
+    	// On vire les accents
+    	$text = preg_replace(   array('/ß/','/&(..)lig;/', '/&([aouAOU])uml;/','/&(.)[^;]*;/'),
+    			array('ss',"$1","$1".'e',"$1"),
+    			$text);
+    	// on vire tout ce qui n'est pas alphanumérique
+    	$text_clear = preg_replace("[^a-z0-9_-]",' ',trim($text));// ^a-zA-Z0-9_-
+    	// Nettoyage pour un espace maxi entre les mots
+    	$array = explode(' ', $text_clear);
+    	$str = '';
+    	$i = 0;
+    	foreach($array as $cle=>$valeur){
+    			
+    		if(trim($valeur) != '' AND trim($valeur) != $separator AND $i > 0)
+    			$str .= $separator.$valeur;
+    		elseif(trim($valeur) != '' AND trim($valeur) != $separator AND $i == 0)
+    		$str .= $valeur;
+    			
+    		$i++;
+    
+    	}
+    
+    	//on renvoie la chaîne transformée
+    	return $str;
+    
+    }
+
+    /**
+     * Add experiences
+     *
+     * @param \Collectif\AdminBundle\Entity\Experience $experiences
+     * @return User
+     */
+    public function addExperience(\Collectif\AdminBundle\Entity\Experience $experiences)
+    {
+        $this->experiences[] = $experiences;
+    
+        return $this;
+    }
+
+    /**
+     * Remove experiences
+     *
+     * @param \Collectif\AdminBundle\Entity\Experience $experiences
+     */
+    public function removeExperience(\Collectif\AdminBundle\Entity\Experience $experiences)
+    {
+        $this->experiences->removeElement($experiences);
+    }
+
+    /**
+     * Get experiences
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getExperiences()
+    {
+        return $this->experiences;
+    }
+
+    /**
+     * Add formations
+     *
+     * @param \Collectif\AdminBundle\Entity\Formation $formations
+     * @return User
+     */
+    public function addFormation(\Collectif\AdminBundle\Entity\Formation $formations)
+    {
+        $this->formations[] = $formations;
+    
+        return $this;
+    }
+
+    /**
+     * Remove formations
+     *
+     * @param \Collectif\AdminBundle\Entity\Formation $formations
+     */
+    public function removeFormation(\Collectif\AdminBundle\Entity\Formation $formations)
+    {
+        $this->formations->removeElement($formations);
+    }
+
+    /**
+     * Get formations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFormations()
+    {
+        return $this->formations;
+    }
+
+    /**
+     * Add competences
+     *
+     * @param \Collectif\AdminBundle\Entity\Competence $competences
+     * @return User
+     */
+    public function addCompetence(\Collectif\AdminBundle\Entity\Competence $competences)
+    {
+        $this->competences[] = $competences;
+    
+        return $this;
+    }
+
+    /**
+     * Remove competences
+     *
+     * @param \Collectif\AdminBundle\Entity\Competence $competences
+     */
+    public function removeCompetence(\Collectif\AdminBundle\Entity\Competence $competences)
+    {
+        $this->competences->removeElement($competences);
+    }
+
+    /**
+     * Get competences
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCompetences()
+    {
+        return $this->competences;
+    }
+
+    /**
+     * Add interets
+     *
+     * @param \Collectif\AdminBundle\Entity\Interet $interets
+     * @return User
+     */
+    public function addInteret(\Collectif\AdminBundle\Entity\Interet $interets)
+    {
+        $this->interets[] = $interets;
+    
+        return $this;
+    }
+
+    /**
+     * Remove interets
+     *
+     * @param \Collectif\AdminBundle\Entity\Interet $interets
+     */
+    public function removeInteret(\Collectif\AdminBundle\Entity\Interet $interets)
+    {
+        $this->interets->removeElement($interets);
+    }
+
+    /**
+     * Get interets
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getInterets()
+    {
+        return $this->interets;
+    }
+
+    /**
+     * Set activiteNumerique
+     *
+     * @param string $activiteNumerique
+     * @return User
+     */
+    public function setActiviteNumerique($activiteNumerique)
+    {
+        $this->activiteNumerique = $activiteNumerique;
+    
+        return $this;
+    }
+
+    /**
+     * Get activiteNumerique
+     *
+     * @return string 
+     */
+    public function getActiviteNumerique()
+    {
+        return $this->activiteNumerique;
+    }
+
+    /**
+     * Set lieu
+     *
+     * @param string $lieu
+     * @return User
+     */
+    public function setLieu($lieu)
+    {
+        $this->lieu = $lieu;
+    
+        return $this;
+    }
+
+    /**
+     * Get lieu
+     *
+     * @return string 
+     */
+    public function getLieu()
+    {
+        return $this->lieu;
+    }
+
+    /**
+     * Set statut
+     *
+     * @param string $statut
+     * @return User
+     */
+    public function setStatut($statut)
+    {
+        $this->statut = $statut;
+    
+        return $this;
+    }
+
+    /**
+     * Get statut
+     *
+     * @return string 
+     */
+    public function getStatut()
+    {
+        return $this->statut;
+    }
+
+    /**
+     * Set sujetRecherche
+     *
+     * @param string $sujetRecherche
+     * @return User
+     */
+    public function setSujetRecherche($sujetRecherche)
+    {
+        $this->sujetRecherche = $sujetRecherche;
+    
+        return $this;
+    }
+
+    /**
+     * Get sujetRecherche
+     *
+     * @return string 
+     */
+    public function getSujetRecherche()
+    {
+        return $this->sujetRecherche;
+    }
+
+    /**
+     * Set structure
+     *
+     * @param string $structure
+     * @return User
+     */
+    public function setStructure($structure)
+    {
+        $this->structure = $structure;
+    
+        return $this;
+    }
+
+    /**
+     * Get structure
+     *
+     * @return string 
+     */
+    public function getStructure()
+    {
+        return $this->structure;
+    }
+
+    /**
+     * Set twitter
+     *
+     * @param string $twitter
+     * @return User
+     */
+    public function setTwitter($twitter)
+    {
+        $this->twitter = $twitter;
+    
+        return $this;
+    }
+
+    /**
+     * Get twitter
+     *
+     * @return string 
+     */
+    public function getTwitter()
+    {
+        return $this->twitter;
+    }
+
+    /**
+     * Set facebook
+     *
+     * @param string $facebook
+     * @return User
+     */
+    public function setFacebook($facebook)
+    {
+        $this->facebook = $facebook;
+    
+        return $this;
+    }
+
+    /**
+     * Get facebook
+     *
+     * @return string 
+     */
+    public function getFacebook()
+    {
+        return $this->facebook;
+    }
+
+    /**
+     * Set googlePlus
+     *
+     * @param string $googlePlus
+     * @return User
+     */
+    public function setGooglePlus($googlePlus)
+    {
+        $this->googlePlus = $googlePlus;
+    
+        return $this;
+    }
+
+    /**
+     * Get googlePlus
+     *
+     * @return string 
+     */
+    public function getGooglePlus()
+    {
+        return $this->googlePlus;
+    }
+
+    /**
+     * Set hypothese
+     *
+     * @param string $hypothese
+     * @return User
+     */
+    public function setHypothese($hypothese)
+    {
+        $this->hypothese = $hypothese;
+    
+        return $this;
+    }
+
+    /**
+     * Get hypothese
+     *
+     * @return string 
+     */
+    public function getHypothese()
+    {
+        return $this->hypothese;
     }
 }

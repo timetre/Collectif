@@ -5,7 +5,7 @@
 {% block content %}
 
 <div id="text-3" class="widget widget_text">
-	<h2>Actualit&eacute;</h2>
+	<h2>Publication</h2>
 	<div class="textwidget">					  
 		<div id="NewsPostDetailDate">
 			{{ publication.datePublication|date('d/m/Y') }}
@@ -19,11 +19,17 @@
 		</div>
 
 		<div id="NewsPostDetailCategory">
-			<b>Catégorie&nbsp;:</b> {{ publication.membre.domaine.nom }}
+			<b>Catégorie&nbsp;:</b> 
+			<a href="{{ path('collectif_front_domaine', { 'titrePage': publication.membre.domaine.titrePage }) }}">
+				{{ publication.membre.domaine.nom }}
+			</a>
 		</div>
 
 		<div id="NewsPostDetailAuthor">
-			<b>Posté par&nbsp;:</b> {{ publication.membre.nom }} {{ publication.membre.prenom }}
+			<b>Posté par&nbsp;:</b> 
+			<a href="{{ path('collectif_front_chercheur', { 'alias': publication.membre.alias }) }}">
+				{{ publication.membre.nom }} {{ publication.membre.prenom }}
+			</a>
 		</div>
 
 	</div>

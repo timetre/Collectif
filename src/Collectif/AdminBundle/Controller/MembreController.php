@@ -269,7 +269,6 @@ class MembreController extends Controller {
     	
     	$membre = new User();
     	$membre->setEnabled(false);
-    	$membre->setActif(false);
     	$membre->addRole("ROLE_ADMIN");
     	
     	$form = $this->container->get('form.factory')->create(new MembreRegisterForm(), $membre);

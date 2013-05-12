@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 class PageBureauForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
-    {  	        
+    {
     	$builder->add('titre', 'text', array('label' => 'Titre de la page', 'attr' => array('size' => "250")));
 		$builder->add('texteMenu', 'text', array('label' => 'Texte du menu'));
 

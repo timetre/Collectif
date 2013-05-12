@@ -11,20 +11,23 @@ class ProfileFormType extends BaseType
     {
         parent::buildForm($builder, $options);
         $builder->add('username', 'text', array(
+        		'label' => 'Login',
     			'disabled' => true, 
     			'attr' => array('class' => 'test')));
         $builder->add('plainPassword', 'repeated', array(
         		'type' => 'password',
+        		'label' => 'Mot de passe',
         		'required'  => false, 
         		'options' => array('translation_domain' => 'FOSUserBundle'),
         		'first_options' => array('label' => 'form.password'),
         		'second_options' => array('label' => 'form.password_confirmation'),
         ));
-        $builder->add('nom');
-        $builder->add('prenom');
-		$builder->add('email');
+        $builder->add('nom', 'text', array('label' => 'Nom'));
+        $builder->add('prenom', 'text', array('label' => 'Prénom'));
+		$builder->add('email', 'text', array('label' => 'Email'));
 		$builder->add('dateNaissance', 'date', array(
                 'widget'    => 'single_text',
+				'label' => 'Date de naissance',
                 'attr' => array('class' => 'datePicker'),
                 'format' => 'dd/MM/yyyy', 
 				'input'  => 'datetime',

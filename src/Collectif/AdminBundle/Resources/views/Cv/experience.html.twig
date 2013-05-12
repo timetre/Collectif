@@ -1,0 +1,28 @@
+<div class="header-buttons">
+	<a class="btn btn-success right" href="{{ path('collectif_cv_create_experience') }}"><i class="icon-plus-sign icon-white"></i>Ajouter une expérience</a>
+</div>
+
+<table class="table table-hover">
+	<tr>
+		<th>Editer</th>
+		<th>Intitulé</th>
+		<th>Lieu</th>
+		<th>Date de début</th>
+		<th>Date de fin</th>
+		<th>Ordre</th>
+		<th>Supprimer</th>
+	</tr>
+{% for e in user.getExperiences %}
+	<tr>
+		<td><a class="btn" href="{{ path('collectif_cv_edit_experience', { 'experienceId': e.id }) }}"><i class="icon-edit"></i></a></td>
+		<td>{{ e.titre }}</td>
+		<td>{{ e.lieu }}</td>
+		<td>{{ e.dateDebut|date('d/m/Y') }}</td>
+		<td>{{ e.dateFin|date('d/m/Y') }}</td>
+		<td>{{ e.ordre }}</td>
+		<td><a onclick="if(!confirm('Voulez-vous vraiment supprimer cette expérience ?')) { return false };" class="btn btn-danger" href="{{ path('collectif_cv_delete_experience', { 'experienceId': e.id }) }}"><i class="icon-trash icon-white"></i></a></td>
+	</tr>
+{% else %}
+	<tr><td>Aucune expérience n'a été trouvée.</td></tr>
+{% endfor %}
+</table>

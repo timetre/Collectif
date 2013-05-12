@@ -15,7 +15,7 @@ collectif_front_domaine:
     defaults: { _controller: CollectifFrontBundle:Home:domaine }
 
 collectif_front_chercheur:
-    pattern:  /chercheur/{id}
+    pattern:  /chercheur/{alias}
     defaults: { _controller: CollectifFrontBundle:Home:membre }
 
 collectif_front_articles:
@@ -23,11 +23,11 @@ collectif_front_articles:
     defaults: { _controller: CollectifFrontBundle:Home:listArticles }
 
 collectif_front_article:
-    pattern:  /article/{id}
+    pattern:  /article/{alias}
     defaults: { _controller: CollectifFrontBundle:Home:viewArticle }
     
 collectif_front_publication:
-    pattern:  /publication/{id}
+    pattern:  /publication/{alias}
     defaults: { _controller: CollectifFrontBundle:Home:viewPublication }
 
 collectif_front_article_feed:

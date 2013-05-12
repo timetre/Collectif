@@ -58,6 +58,27 @@ class Partenaire
      * @ORM\Column(name="ordre", type="integer", length=255)
      */
     private $ordre;
+    
+    /**
+     * @var string $height
+     *
+     * @ORM\Column(name="height", type="integer")
+     */
+    private $height;
+    
+    /**
+     * @var string $width
+     *
+     * @ORM\Column(name="width", type="integer")
+     */
+    private $width;
+    
+    /**
+     * @var string $align
+     *
+     * @ORM\Column(name="align", type="string", length=255)
+     */
+    private $align;
 
 
     /**
@@ -252,5 +273,74 @@ class Partenaire
     public function getOrdre()
     {
         return $this->ordre;
+    }
+
+    /**
+     * Set height
+     *
+     * @param integer $height
+     * @return Partenaire
+     */
+    public function setHeight($height)
+    {
+        $this->height = $height;
+    
+        return $this;
+    }
+
+    /**
+     * Get height
+     *
+     * @return integer 
+     */
+    public function getHeight()
+    {
+        return $this->height;
+    }
+
+    /**
+     * Set width
+     *
+     * @param integer $width
+     * @return Partenaire
+     */
+    public function setWidth($width)
+    {
+        $this->width = $width;
+    
+        return $this;
+    }
+
+    /**
+     * Get width
+     *
+     * @return integer 
+     */
+    public function getWidth()
+    {
+        return $this->width;
+    }
+
+    /**
+     * Set align
+     *
+     * @param string $align
+     * @return Partenaire
+     */
+    public function setAlign($align)
+    {
+        $this->align = $align;
+    
+        return $this;
+    }
+
+    /**
+     * Get align
+     *
+     * @return string 
+     */
+    public function getAlign()
+    {
+        return $this->align;
     }
 }

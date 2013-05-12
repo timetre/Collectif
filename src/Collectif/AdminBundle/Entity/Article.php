@@ -11,6 +11,7 @@ use Eko\FeedBundle\Item\Writer\RoutedItemInterface;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Collectif\AdminBundle\Entity\ArticleRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Article implements RoutedItemInterface
 {
@@ -71,6 +72,14 @@ class Article implements RoutedItemInterface
      * @Assert\NotBlank()
      */    
     private $categorie;
+    
+    /**
+     * @var string $alias
+     *
+     * @ORM\Column(name="alias", type="string", length=255)
+     */
+    private $alias;
+    
 
 	public function __construct()
     {
@@ -270,5 +279,76 @@ class Article implements RoutedItemInterface
     
     public function getFeedItemUrlAnchor() {
     	return '';
+    }
+    
+    /**
+     * Set alias
+     *
+     * @param string $alias
+     * @return Publication
+     */
+    public function setAlias($alias)
+    {
+    	$this->alias = $alias;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get alias
+     *
+     * @return string
+     */
+    public function getAlias()
+    {
+    	return $this->alias;
+    }
+    
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function updateAlias()
+    {
+    	if (null !== $this->titre) {
+    		/*if(null === $this->id) {
+    		 $this->alias = mt_rand(100, 10000) . "-" . $this->clear_str($this->titre);
+    		} else {
+    		$this->alias = $this->id . "-" . $this->clear_str($this->titre);
+    		}*/
+    		$this->alias = $this->clear_str($this->titre);
+    	} else {
+    		$this->alias = sha1(uniqid(mt_rand(), true));
+    	}
+    }
+    
+    private function clear_str($text, $separator = '-', $charset = 'utf-8') {
+    	// Pour l'encodage
+    	$text = mb_convert_encoding($text,'HTML-ENTITIES',$charset);
+    	$text = strtolower(trim($text));
+    	// On vire les accents
+    	$text = preg_replace(   array('/ß/','/&(..)lig;/', '/&([aouAOU])uml;/','/&(.)[^;]*;/'),
+    			array('ss',"$1","$1".'e',"$1"),
+    			$text);
+    	// on vire tout ce qui n'est pas alphanumérique
+    	$text_clear = preg_replace("[^a-z0-9_-]",' ',trim($text));// ^a-zA-Z0-9_-
+    	// Nettoyage pour un espace maxi entre les mots
+    	$array = explode(' ', $text_clear);
+    	$str = '';
+    	$i = 0;
+    	foreach($array as $cle=>$valeur){
+    		 
+    		if(trim($valeur) != '' AND trim($valeur) != $separator AND $i > 0)
+    			$str .= $separator.$valeur;
+    		elseif(trim($valeur) != '' AND trim($valeur) != $separator AND $i == 0)
+    		$str .= $valeur;
+    		 
+    		$i++;
+    
+    	}
+    
+    	//on renvoie la chaîne transformée
+    	return $str;
+    
     }
 }

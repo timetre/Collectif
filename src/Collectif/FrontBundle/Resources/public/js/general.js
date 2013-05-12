@@ -55,5 +55,7 @@ jQuery(function($){
 			return "#promo-nav li:eq("+ idx +") a"; 
 		}
 	});
+	
+	$( "#tabs" ).tabs();
 
 });// end jquery

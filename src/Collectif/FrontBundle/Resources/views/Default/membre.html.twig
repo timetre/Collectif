@@ -8,28 +8,140 @@
 	<h2>{{ membre.prenom }} {{ membre.nom }}</h2>
 	<div class="textwidget">
 		<hr>
-		<table width="100%" cellspacing="1" cellpadding="1" border="1">
+		<table width="100%" cellspacing="1" cellpadding="1" border="0">
 			<tbody>
 				<tr>
 					<td>
-						<p><img align="left" src="{{ image('upload/Membres/' ~ membre.path).resize(null, 138) }}" alt="" /><strong>{{ membre.prenom }} {{ membre.nom }}</strong></p>
+						{% if membre.path == null %}
+							<p><img align="left" src="{{ image('bundles/collectiffront/images/ghost.png').resize(null, 138) }}" alt="" style="margin-right: 10px;" /><strong>{{ membre.prenom }} {{ membre.nom }}</strong></p>
+						{% else %}
+							<p><img align="left" src="{{ image('upload/Membres/' ~ membre.path).resize(null, 138) }}" alt="" style="margin-right: 10px;" /><strong>{{ membre.prenom }} {{ membre.nom }}</strong></p>
+						{% endif %}
 						{{ membre.contenuPage | raw  }}
 					</td>
 				</tr>
 			</tbody>
 		</table>
-		<p>&nbsp;</p>
-		<div id="custom_posts-widget-3" class="widget custom_posts">
-			<ul class="clean latest-posts">
-				{% for p in membre.getPublications %}
-				<li>
-					<p><a href=""><span>{{ p.datePublication|date('d/m/Y') }}</span> {{ p.titre }} <br>
-						{{ p.resume | raw }}
-					</a></p>
-				</li>
-				<hr>
-				{% endfor %}
-			</ul>
+		
+		<hr/>
+
+		<div id="tabs">
+		  <ul>
+		    <li><a href="#tabs-1">Parcours</a></li>
+		    <li><a href="#tabs-2">Formation</a></li>
+		    <li><a href="#tabs-3">Publications</a></li>
+		    <li><a href="#tabs-4">Divers</a></li>
+		  </ul>
+		  
+		  
+		  <div id="tabs-1">
+		    {% if membre.getExperiences | length == 0 %}
+		  		<p>Aucune expérience pour ce membre</p>
+		  	{% else %}
+		  		<h3>Expériences</h3>
+			  	<div id="custom_posts-widget-3" class="widget custom_posts">
+					
+					{% for e in membre.getExperiences %}
+						<h4 style="padding-bottom: 2px;">{{ e.titre }} - {{ e.entreprise }}</h4>
+						<p style="padding-bottom: 2px;">du {{ e.dateDebut|date('d/m/Y') }} au {{ e.dateFin|date('d/m/Y') }} - {{ e.lieu }}</p>
+						<p style="padding-bottom: 2px;">{{ e.description | raw }}</p>
+						<hr style="margin-top: 0;" />
+					{% endfor %}
+				</div>
+			{% endif %}
+			
+			{% if membre.getCompetences | length == 0 %}
+		  		<p>Aucune compétence pour ce membre</p>
+		  	{% else %}
+		  		<h3>Compétences</h3>
+			  	<div id="custom_posts-widget-3" class="widget custom_posts">
+					{% for c in membre.getCompetences %}
+						<span class="label label-info">{{ c.libelle }}</span>
+					{% endfor %}
+				</div>
+			{% endif %}
+		  </div>
+		  
+		  
+		  <div id="tabs-2">
+		    {% if membre.getFormations | length == 0 %}
+		  		Aucune formation pour ce membre
+		  	{% else %}
+		  		<h3>Formation</h3>
+			  	<div id="custom_posts-widget-3" class="widget custom_posts">
+					{% for e in membre.getFormations %}
+						<h4 style="padding-bottom: 2px;">{{ e.ecole }}</h4>
+						<p style="padding-bottom: 2px;">{{ e.diplome }}, {{ e.domaineEtude }}</p>
+						<p style="padding-bottom: 2px;">{{ e.dateDebut|date('Y') }} - {{ e.dateFin|date('Y') }}</p>
+						{% if e.description != null %}<p style="padding-bottom: 2px;"><u>Description</u> : {{ e.description | raw }}</p>{% endif %}
+						{% if e.activites != null %}<p style="padding-bottom: 2px;"><u>Activités et associations</u> : {{ e.activites | raw }}</p>{% endif %}
+						<hr style="margin-top: 0;" />
+					{% endfor %}
+				</div>
+			{% endif %}
+		  </div>
+		  
+		  <!-- Publications tab -->
+		  <div id="tabs-3">
+		  	{% if membre.getPublications | length == 0 %}
+		  		Aucune publication pour ce membre
+		  	{% else %}
+		  		<h3>Publications</h3>
+			  	<div id="custom_posts-widget-3" class="widget custom_posts">
+					<ul class="clean latest-posts">
+						{% for p in membre.getPublications %}
+						<li>
+							<p><a href="{{ path('collectif_front_publication', { 'alias': p.alias }) }}"><span>{{ p.datePublication|date('d/m/Y') }}</span> {{ p.titre }} <br>
+								{{ p.resume | raw }}
+							</a></p>
+						</li>
+						<hr>
+						{% endfor %}
+					</ul>
+				</div>
+			{% endif %}
+		  </div>
+		  <!-- End publications tab -->
+		  
+		  <div id="tabs-4">
+		    {% if membre.getInterets | length == 0 %}
+		  		Aucun centre d'intérêts pour ce membre
+		  	{% else %}
+		  		<h3>Centres d'intérêt</h3>
+			  	<div id="custom_posts-widget-3" class="widget custom_posts">
+					{% for c in membre.getInterets %}
+						<span class="label label-info">{{ c.libelle }}</span>
+					{% endfor %}
+				</div>
+			{% endif %}
+			
+			<h3 style="margin-top: 20px;">Infos perso</h3>
+			Date de naissance : {{ membre.dateNaissance|date('d/m/Y') }}<br/>
+			Adresse mail : {{ membre.email }}
+			
+			<h3 style="margin-top: 20px;">Activité numérique</h3>
+			{% if membre.twitter != null %}
+			<a href="{{ membre.twitter }}" target="_blank" style="text-decoration: none; margin-right: 5px;">
+				<img src="{{ asset('bundles/collectiffront/images/social_icons/Twitter-logo.png') }}" alt="twitter" height="30px" />
+			</a>
+			{% endif %}
+			{% if membre.facebook != null %}
+			<a href="{{ membre.facebook }}" target="_blank" style="text-decoration: none; margin-right: 5px;">
+				<img src="{{ asset('bundles/collectiffront/images/social_icons/Facebook-logo.png') }}" alt="twitter" height="30px" />
+			</a>
+			{% endif %}
+			{% if membre.googlePlus != null %}
+			<a href="{{ membre.googlePlus }}" target="_blank" style="text-decoration: none; margin-right: 5px;">
+				<img src="{{ asset('bundles/collectiffront/images/social_icons/GooglePlus-logo.png') }}" alt="twitter" height="30px" />
+			</a>
+			{% endif %}
+			{% if membre.hypothese != null %}
+			<a href="{{ membre.hypothese }}" target="_blank" style="text-decoration: none; margin-right: 5px;">
+				<img src="{{ asset('bundles/collectiffront/images/social_icons/Hypothese.png') }}" alt="twitter" height="30px" />
+			</a>
+			{% endif %}
+		  </div>
+		  
 		</div>
 	</div>
 </div>
