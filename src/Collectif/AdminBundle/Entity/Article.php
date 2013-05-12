@@ -274,7 +274,7 @@ class Article implements RoutedItemInterface
     }
     
     public function getFeedItemRouteParameters() {
-    	return array('id' => $this->id);
+    	return array('alias' => $this->alias);
     }
     
     public function getFeedItemUrlAnchor() {
