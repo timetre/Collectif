@@ -13,9 +13,9 @@ class PageForm extends AbstractType
 		$builder->add('texteMenu', 'text', array('label' => 'Texte du menu'));
 		$builder->add('contenu', 'textarea', array(
 				'label' => 'Contenu',
+				'required'  => false,
 				'attr' => array(
-						'class' => 'tinymce',
-						'data-theme' => 'advanced' // simple, medium, advanced, bbcode
+						'class' => 'ckeditor'
 				)
 		));
 

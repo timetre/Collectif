@@ -13,19 +13,19 @@ class PublicationOwnForm extends AbstractType
         $builder
             ->add('titre', 'text', array('label' => 'Titre'))
             ->add('resume', 'textarea', array(
-            		'label' => 'Réumé',
-		        	'attr' => array(
-		            'class' => 'tinymce',
-		            'data-theme' => 'advanced' // simple, medium, advanced, bbcode
-		        )
+            		'label' => 'Résumé',
+            		'required'  => false,
+            		'attr' => array(
+            				'class' => 'ckeditor'
+            		)
+            ))
+		    ->add('contenu', 'textarea', array(
+		    		'label' => 'Contenu',
+		    		'required'  => false,
+		    		'attr' => array(
+		    				'class' => 'ckeditor'
+		    		)
 		    ))
-            ->add('contenu', 'textarea', array(
-            		'label' => 'Contenu',
-		       	 	'attr' => array(
-		            'class' => 'tinymce',
-		            'data-theme' => 'advanced' // simple, medium, advanced, bbcode
-		        )
-	    	))
 	    	->add('datePublication', 'date', array(
 	    			'label' => 'Date de publication',
 	    			'widget'    => 'single_text',

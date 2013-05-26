@@ -5,7 +5,7 @@
 				<ul class='clean latest-posts'>
 					{% for a in articles %}
 						<li>
-							<p><a href="{{ path('collectif_front_article', { 'alias': a.alias }) }}"><span>{{ a.dateModification|date('d/m/Y') }}</span> {{ a.titre }}</a>{{ a.resume | raw }}</p>
+							<p><a href="{{ path('collectif_front_article', { 'alias': a.alias }) }}"><span>{{ a.datePublication|date('d/m/Y') }}</span> {{ a.titre }}</a>{{ a.resume | raw }}</p>
 						</li>
 					{% endfor %}
 					<hr>

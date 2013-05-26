@@ -14,7 +14,11 @@
 				<tbody>
 					<tr>
 						<td>
-							<p><img align="left" src="{{ image('upload/Membres/' ~ membre.path).resize(null, 138) }}" alt="" /><strong>{{ membre.prenom }} {{ membre.nom }}</strong></p>
+							{% if membre.path == null %}
+								<p><img align="left" src="{{ image('bundles/collectiffront/images/ghost.png').resize(null, 138) }}" alt="" style="margin-right: 10px;" /><strong>{{ membre.prenom }} {{ membre.nom }}</strong></p>
+							{% else %}
+								<p><img align="left" src="{{ image('upload/Membres/' ~ membre.path).resize(null, 138) }}" alt="" style="margin-right: 10px;" /><strong>{{ membre.prenom }} {{ membre.nom }}</strong></p>
+							{% endif %}
 							{{ membre.contenuPage | raw  }}
 						</td>
 					</tr>
@@ -31,7 +35,7 @@
 		{% if articlesPage != null %}
 			{% for a in articlesPage %}
 			<li>
-				<p><a href="{{ path('collectif_front_article', { 'id': a.id }) }}"><span>{{ a.dateModification|date('d/m/Y') }}</span> {{ a.titre }}</a>{{ a.resume }}</p>
+				<p><a href="{{ path('collectif_front_article', { 'alias': a.alias }) }}"><span>{{ a.datePublication|date('d/m/Y') }}</span> {{ a.titre }}</a>{{ a.resume | raw }}</p>
 			</li>
 			<hr>
 			{% endfor %}

@@ -14,7 +14,13 @@ class SousForumType extends AbstractType
             ->add('titre', 'text', array('label' => 'Titre'))
             ->add('isRss', 'checkbox', array('label' => 'Flux rss ?'))
             ->add('urlFlux', 'text', array('label' => 'URL flux'))
-            ->add('description', 'textarea', array('label' => 'Description'))
+            ->add('description', 'textarea', array(
+            		'label' => 'Description',
+            		'required'  => false,
+            		'attr' => array(
+            				'class' => 'ckeditor'
+            		)
+            ))
             ->add('forum','entity', array(
             		'label' => 'Forum',
             		'class' => 'Collectif\AdminBundle\Entity\Forum',

@@ -29,8 +29,20 @@ class FormationForm extends AbstractType
             ->add('diplome', 'text', array('label' => 'Diplôme'))
             ->add('domaineEtude', 'text', array('label' => "Domaine d'étude"))
             ->add('resultat', 'text', array('label' => 'Résultats'))
-            ->add('activites', 'textarea', array('label' => 'Activités et associations'))
-            ->add('description', 'textarea', array('label' => 'Description'))
+            ->add('activites', 'textarea', array(
+            		'label' => 'Activités et associations',
+            		'required'  => false,
+            		'attr' => array(
+            				'class' => 'ckeditor'
+            		)
+            ))
+            ->add('description', 'textarea', array(
+            		'label' => 'Description',
+            		'required'  => false,
+            		'attr' => array(
+            				'class' => 'ckeditor'
+            		)
+            ))
             ->add('ordre', 'text', array('label' => 'Ordre'))
         ;
     }

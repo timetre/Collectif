@@ -18,9 +18,12 @@ class PartenaireForm extends AbstractType
         	)
         );
         $builder->add('description', 'textarea', array(
-        		'label' => 'Description'
-        	)
-        );
+        		'label' => 'Description',
+        		'required'  => false,
+        		'attr' => array(
+        				'class' => 'ckeditor'
+        		)
+        ));
         $builder->add('file', 'file', array(
         		'label' => 'Image', 
         		'required' => false

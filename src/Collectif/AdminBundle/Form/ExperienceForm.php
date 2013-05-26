@@ -28,7 +28,13 @@ class ExperienceForm extends AbstractType
     				'format' => 'dd/MM/yyyy',
     				'input'  => 'datetime',
     				'required'  => false))
-            ->add('description', 'textarea', array('label' => 'Description'))
+            ->add('description', 'textarea', array(
+            		'label' => 'Description',
+            		'required'  => false,
+            		'attr' => array(
+            				'class' => 'ckeditor'
+            		)
+            ))
             ->add('ordre', 'text', array('label' => 'Ordre'))
         ;
     }

@@ -12,20 +12,21 @@ class PublicationForm extends AbstractType
     {
         $builder
             ->add('titre', 'text', array('label' => 'Titre'))
-            ->add('resume', 'textarea', array(
+			->add('resume', 'textarea', array(
 					'label' => 'Résumé',
+					'required'  => false,
 					'attr' => array(
-							'class' => 'tinymce',
-							'data-theme' => 'advanced' // simple, medium, advanced, bbcode
+							'class' => 'ckeditor'
 					)
 			))
-            ->add('contenu', 'textarea', array(
-					'label' => 'Description',
-					'attr' => array(
-							'class' => 'tinymce',
-							'data-theme' => 'advanced' // simple, medium, advanced, bbcode
-					)
-			))
+			
+           ->add('contenu', 'textarea', array(
+		    		'label' => 'Contenu',
+           			'required'  => false,
+		    		'attr' => array(
+		    				'class' => 'ckeditor'
+		    		)
+		    ))
 			->add('datePublication', 'date', array(
 	    			'widget'    => 'single_text',
 					'label' => 'Date de publication',

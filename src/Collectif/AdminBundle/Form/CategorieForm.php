@@ -11,12 +11,12 @@ class CategorieForm extends AbstractType
     {
         $builder->add('titre', 'text', array('label' => 'Titre'));
 		$builder->add('description', 'textarea', array(
-				'label' => 'Contenu',
-				'attr' => array(
-						'class' => 'tinymce',
-						'data-theme' => 'advanced' // simple, medium, advanced, bbcode
-				)
-		));
+            		'label' => 'Contenu',
+					'required'  => false,
+            		'attr' => array(
+            				'class' => 'ckeditor'
+            		)
+            ));
     }
 	
 	public function getName()

@@ -44,10 +44,10 @@ jQuery(function($){
 	
 	$('#promos').cycle({ 
 		fx:     'fade', 
-		speed:  1000, 
+		speed:  2000, 
 		timeout: 3000,
 		pager: '#promo-nav',
-		pause: 1,
+		pause: 3,
 		height: 300,
 		pauseOnPagerHover: 1,
 		fastOnEvent: 350,

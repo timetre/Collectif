@@ -18,7 +18,7 @@ class ArticleRepository extends EntityRepository
 
 	    $qb->where('a.actif = :actif')
 	         ->setParameter('actif', $actif)
-	       ->orderBy('a.dateModification', 'DESC')
+	       ->orderBy('a.datePublication', 'DESC')
 		   ->setMaxResults( $limit );
 	
 	    return $qb->getQuery()->getResult();
@@ -26,7 +26,7 @@ class ArticleRepository extends EntityRepository
 	
 	public function getArticlesPublications()
 	{
-		$string = "SELECT titre, resume, contenu, dateModification FROM CollectifAdminBundle:Article UNION SELECT titre, resume, contenu, dateModification FROM CollectifAdminBundle:Publication order by dateModification DESC";
+		$string = "SELECT titre, resume, contenu, dateModification FROM CollectifAdminBundle:Article UNION SELECT titre, resume, contenu, dateModification FROM CollectifAdminBundle:Publication order by datePublication DESC";
 		$query = $this->_em->createQuery($string);
 
 		$resultats = $query->getResult();

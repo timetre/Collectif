@@ -358,27 +358,4 @@ class Article implements RoutedItemInterface
     	return $str;
     
     }
-
-    /**
-     * Set datePublication
-     *
-     * @param \DateTime $datePublication
-     * @return Article
-     */
-    public function setDatePublication($datePublication)
-    {
-        $this->datePublication = $datePublication;
-    
-        return $this;
-    }
-
-    /**
-     * Get datePublication
-     *
-     * @return \DateTime 
-     */
-    public function getDatePublication()
-    {
-        return $this->datePublication;
-    }
 }

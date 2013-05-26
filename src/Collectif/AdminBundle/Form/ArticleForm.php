@@ -11,20 +11,30 @@ class ArticleForm extends AbstractType
     {  	        
 		$builder->add('actif', 'checkbox', array('required' => false, 'label' => 'Actif'));
         $builder->add('titre', 'text', array('label' => 'Actif'));
+        $builder->add('datePublication', 'date', array(
+	    			'widget'    => 'single_text',
+					'label' => 'Date de publication',
+	    			'attr' => array('class' => 'datePicker'),
+	    			'format' => 'dd/MM/yyyy',
+	    			'input'  => 'datetime',
+	    			'required'  => true));
+        
 		$builder->add('resume', 'textarea', array(
 				'label' => 'Résumé',
+				'required'  => false,
 				'attr' => array(
-						'class' => 'tinymce',
-						'data-theme' => 'advanced' // simple, medium, advanced, bbcode
+						'class' => 'ckeditor'
 				)
 		));
 		$builder->add('contenu', 'textarea', array(
 				'label' => 'Contenu',
+				'required'  => false,
 				'attr' => array(
-						'class' => 'tinymce',
-						'data-theme' => 'advanced' // simple, medium, advanced, bbcode
+						'class' => 'ckeditor'
 				)
 		));
+
+		
 		$builder->add('categorie','entity', array(
 	            'class' => 'Collectif\AdminBundle\Entity\Categorie',
 	            'property' => 'titre',

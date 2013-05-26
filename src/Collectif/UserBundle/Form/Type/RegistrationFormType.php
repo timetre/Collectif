@@ -12,15 +12,14 @@ class RegistrationFormType extends BaseType
     	parent::buildForm($builder, $options);
         $builder->add('nom', 'text', array('label' => 'Nom'));
         $builder->add('prenom', 'text', array('label' => 'Prénom'));
-        $builder->add('dateNaissance', 'date', array(
-        		'label' => 'Date de naissance',
-                'widget'    => 'single_text',
-                'attr' => array('class' => 'datePicker'),
-                'format' => 'dd/MM/yyyy', 
-				'input'  => 'datetime',
-                'required'  => true));
         
-        $builder->add('contenuPage', 'textarea', array('label' => 'Présentation'));
+        $builder->add('contenuPage', 'textarea', array(
+        		'label' => 'Présentation',
+        		'required'  => false,
+        		'attr' => array(
+        				'class' => 'ckeditor'
+        		)
+        ));
         
         $builder->add('activiteNumerique', 'text', array('label' => 'Activité numérique (site, blog, ...)', 'required' => false));
         $builder->add('lieu', 'text', array('label' => 'Lieu'));
@@ -30,8 +29,7 @@ class RegistrationFormType extends BaseType
         
         $builder->add('twitter', 'text', array('label' => 'Compte Twitter', 'required' => false));
         $builder->add('facebook', 'text', array('label' => 'Compte Facebook', 'required' => false));
-        $builder->add('googlePlus', 'text', array('label' => 'Compte Google Plus', 'required' => false));
-        $builder->add('hypothese', 'text', array('label' => 'Carnet hypothèse', 'required' => false));
+        $builder->add('hypothese', 'text', array('label' => 'Carnet de recherche', 'required' => false));
         
     }
 

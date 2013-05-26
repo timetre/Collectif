@@ -44,13 +44,6 @@ class User extends BaseUser
     private $alias;
 
     /**
-     * @var \DateTime $dateNaissance
-     *
-     * @ORM\Column(name="dateNaissance", type="date")
-     */
-    private $dateNaissance;
-
-    /**
      * @var boolean $membreBureau
      *
      * @ORM\Column(name="membreBureau", type="boolean", nullable=true)
@@ -178,13 +171,7 @@ class User extends BaseUser
      * @ORM\Column(name="facebook", type="text", nullable=true)
      */
     private $facebook;
-    
-    /**
-     * @var string $googlePlus
-     *
-     * @ORM\Column(name="googlePlus", type="text", nullable=true)
-     */
-    private $googlePlus;
+
     
     /**
      * @var string $hypothese
@@ -318,29 +305,6 @@ class User extends BaseUser
     public function getPrenom()
     {
         return $this->prenom;
-    }
-
-    /**
-     * Set dateNaissance
-     *
-     * @param \DateTime $dateNaissance
-     * @return User
-     */
-    public function setDateNaissance($dateNaissance)
-    {
-        $this->dateNaissance = $dateNaissance;
-    
-        return $this;
-    }
-
-    /**
-     * Get dateNaissance
-     *
-     * @return \DateTime 
-     */
-    public function getDateNaissance()
-    {
-        return $this->dateNaissance;
     }
 
     /**
@@ -923,29 +887,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set googlePlus
-     *
-     * @param string $googlePlus
-     * @return User
-     */
-    public function setGooglePlus($googlePlus)
-    {
-        $this->googlePlus = $googlePlus;
-    
-        return $this;
-    }
-
-    /**
-     * Get googlePlus
-     *
-     * @return string 
-     */
-    public function getGooglePlus()
-    {
-        return $this->googlePlus;
-    }
-
-    /**
      * Set hypothese
      *
      * @param string $hypothese
@@ -966,5 +907,10 @@ class User extends BaseUser
     public function getHypothese()
     {
         return $this->hypothese;
+    }
+    
+    public function getFormatedEmail() {
+    	$formated = str_replace ( '@', '[arobase]', $this->email) ;
+    	return $formated;	
     }
 }

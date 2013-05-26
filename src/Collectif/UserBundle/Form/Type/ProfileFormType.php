@@ -25,13 +25,6 @@ class ProfileFormType extends BaseType
         $builder->add('nom', 'text', array('label' => 'Nom'));
         $builder->add('prenom', 'text', array('label' => 'Prénom'));
 		$builder->add('email', 'text', array('label' => 'Email'));
-		$builder->add('dateNaissance', 'date', array(
-                'widget'    => 'single_text',
-				'label' => 'Date de naissance',
-                'attr' => array('class' => 'datePicker'),
-                'format' => 'dd/MM/yyyy', 
-				'input'  => 'datetime',
-                'required'  => true));
     }
 
     public function getName()
