@@ -27,6 +27,7 @@ class AppKernel extends Kernel
         	new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
 			new APY\DataGridBundle\APYDataGridBundle(),
         	new Eko\FeedBundle\EkoFeedBundle(),
+            new Collectif\StatisticsBundle\CollectifStatisticsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

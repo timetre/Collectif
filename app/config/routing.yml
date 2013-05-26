@@ -1,3 +1,7 @@
+collectif_statistics:
+    resource: "@CollectifStatisticsBundle/Resources/config/routing.yml"
+    prefix:   /
+
 collectif_front:
     resource: "@CollectifFrontBundle/Resources/config/routing.yml"
     prefix:   /

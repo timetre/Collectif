@@ -119,6 +119,11 @@ class User extends BaseUser
     private $posts;
     
     /**
+     * @ORM\OneToMany(targetEntity="Collectif\StatisticsBundle\Entity\Statistic", cascade={"persist"}, mappedBy="membre")
+     */
+    private $statistics;
+    
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     public $path;

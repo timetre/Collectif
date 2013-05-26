@@ -1,0 +1,21 @@
+{% render url('front_header') %}
+<div class="clearfix">
+	<div class="grid_12 promo-container">					 
+		{% render url('front_menuBottom_domaine') %}
+	</div><!--//grid12-->
+</div><!--// clearfix-->
+				
+<div class="clearfix widget-area">
+	<div class="grid_4 widget" style="width:65%;text-align:justify;">
+		<div id="text-3" class="widget widget_text">
+			{% block content %}
+         	{% endblock %}
+		</div>
+	</div><!--//grid4-->
+	                             
+    {% render url('front_sidebar_inner') %}
+</div><!--//clearfix-->
+			
+{% render url('front_footer') %}
+
+	

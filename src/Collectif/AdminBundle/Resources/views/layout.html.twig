@@ -64,6 +64,11 @@
 	            	{% else %}
 	              		<li><a href="{{ path('collectif_cv_list') }}">Mon CV</a></li>
 	           	 	{% endif %}
+	           	 	{% if app.request.attributes.get('_route') == 'collectif_stat_list' %}
+	            		<li class="active"><a href="{{ path('collectif_stat_list') }}">Mes statistiques</a></li>
+	            	{% else %}
+	              		<li><a href="{{ path('collectif_stat_list') }}">Mes statistiques</a></li>
+	           	 	{% endif %}
 	          	</ul>
 			  </li>
 			  
@@ -199,6 +204,7 @@
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap-datepicker.js') }}"></script>
+	
 	
 	<script type="text/javascript" src="/bundles/ckfinder/ckeditor/ckeditor.js"></script>
 	<script type="text/javascript" src="/bundles/ckfinder/ckfinder.js"></script>

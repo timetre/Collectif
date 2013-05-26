@@ -186,4 +186,3 @@ CollectifAdminBundle_reseau_post:
 CollectifAdminBundle_reseau_cv:
     resource: "@CollectifAdminBundle/Resources/config/routing/cv.yml"
     prefix:   /reseau/cv
-

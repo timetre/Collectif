@@ -3,9 +3,18 @@
 namespace Collectif\FrontBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\Session;
+
+
 use Collectif\AdminBundle\Entity\Domaine;
 use Collectif\AdminBundle\Entity\Page;
 use Collectif\AdminBundle\Entity\Article;
+use Collectif\StatisticsBundle\Entity\Statistic;
+use Collectif\UserBundle\Entity\User;
 
 class HomeController extends Controller
 {
@@ -74,6 +83,8 @@ class HomeController extends Controller
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Domaine');
     	$domaine = $repository->getDomaineByTitre($titrePage);
     	
+    	$this->container->get('request')->getSession()->set('domaine', $domaine->getId());
+    	
     	$users = $domaine->getUsers();
     	$publications = array();
     	
@@ -83,7 +94,6 @@ class HomeController extends Controller
     		}
     	}
     	
-    	
     	return $this->render('CollectifFrontBundle:Default:domaine.html.twig', array( 
 			'domaine'		=> $domaine, 
 			'publications'  => $publications
@@ -92,9 +102,12 @@ class HomeController extends Controller
     
     public function membreAction($alias) {
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifUserBundle:User');
-    	//$membre = $repository->find($id);
     	$membre = $repository->findByAlias($alias);
 		$domaine = $membre->getDomaine();
+		
+		$this->setStatistic($membre);
+
+		$this->container->get('request')->getSession()->set('domaine', $domaine->getId());
     	
     	return $this->render('CollectifFrontBundle:Default:membre.html.twig', array(
     		'membre' 		=> $membre,
@@ -156,6 +169,26 @@ class HomeController extends Controller
        		'membres' => $liste_membres
         ));
         
+    }
+    
+    public function menuBottomDomaineAction() {
+    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Domaine');
+    	$domaines = $repository->getDomaines(true);
+    	
+    	if($this->container->get('request')->getSession()->get('domaine') != null) {
+    		$mondomaine = $repository->find($this->container->get('request')->getSession()->get('domaine'));
+    	} else {
+    		$mondomaine = null;
+    	}
+    	 
+    	$liste_membres = $this->getDoctrine()->getManager()->getRepository('CollectifUserBundle:User')->getActifEnabled(true);
+    
+    	return $this->render('CollectifFrontBundle:Commons:menu-bottom-domaine.html.twig', array(
+    			'domaines' => $domaines,
+    			'monDomaine' => $mondomaine,
+    			'membres' => $liste_membres
+    	));
+    
     }
     
 	public function sidebarAction() {
@@ -220,7 +253,7 @@ class HomeController extends Controller
        	return $this->render('CollectifFrontBundle:Commons:search.html.twig');
     }
     
-    public function headerAction() {       
+	public function headerAction() {       
         return $this->render('CollectifFrontBundle:Commons:header.html.twig');
     }
     
@@ -237,7 +270,7 @@ class HomeController extends Controller
     		$mail = $request->request->get('mail');
     		$sujet = $request->request->get('sujet');
     		$message = $request->request->get('message');
-    		//die;
+
     		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Parameters');
     		$parametres = $repository->getParameters();
     		$to = $parametres->getContactInfos();
@@ -256,5 +289,43 @@ class HomeController extends Controller
     	}
     }
     
-    
+    private function setStatistic($membre) {
+    	$stat = new Statistic();
+    	
+    	$test = $this->getRequest()->server->get('HTTP_X_FORWARDED_FOR');
+    	
+    	if(isset($test)) {
+    		$ip = $this->getRequest()->server->get('HTTP_X_FORWARDED_FOR');
+    	} else {
+    		$test = $this->getRequest()->server->get('HTTP_CLIENT_IP');
+    		if(isset($test)) {
+    			$ip = $this->getRequest()->server->get('HTTP_CLIENT_IP');
+    		} else {
+    			$ip = $this->getRequest()->server->get('REMOTE_ADDR');
+    		}
+    	}
+    	
+    	$test = $this->getRequest()->server->get('HTTP_REFERER');
+    	if (isset($test)) {
+    		$httphost = $this->getRequest()->server->get('HTTP_HOST');
+    		if (eregi($httphost, $test)) {
+    			$referer = '';
+    		}
+    		else {
+    			$referer = $this->getRequest()->server->get('HTTP_REFERER');
+    		}
+    	} else {
+    		$referer ='';
+    	}
+    	
+    	$stat->setIp($ip);
+    	$stat->setHost(gethostbyaddr($ip));
+    	$stat->setNavigateur($this->getRequest()->server->get('HTTP_USER_AGENT'));
+    	$stat->setReferer($referer);
+    	$stat->setMembre($membre);
+    	
+    	$em = $this->getDoctrine()->getManager();
+    	$em->persist($stat);
+    	$em->flush();
+    }
 }

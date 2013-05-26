@@ -1,0 +1,3 @@
+collectif_stat_list:
+    pattern:  /reseau/statistiques/
+    defaults: { _controller: CollectifStatisticsBundle:Statistics:index }

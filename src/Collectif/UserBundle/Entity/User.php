@@ -119,6 +119,11 @@ class User extends BaseUser
     private $posts;
     
     /**
+     * @ORM\OneToMany(targetEntity="Collectif\StatisticsBundle\Entity\Statistic", cascade={"persist"}, mappedBy="membre")
+     */
+    private $statistics;
+    
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     public $path;
@@ -912,5 +917,38 @@ class User extends BaseUser
     public function getFormatedEmail() {
     	$formated = str_replace ( '@', '[arobase]', $this->email) ;
     	return $formated;	
+    }
+
+    /**
+     * Add statistics
+     *
+     * @param \Collectif\StatisticsBundle\Entity\Statistic $statistics
+     * @return User
+     */
+    public function addStatistic(\Collectif\StatisticsBundle\Entity\Statistic $statistics)
+    {
+        $this->statistics[] = $statistics;
+    
+        return $this;
+    }
+
+    /**
+     * Remove statistics
+     *
+     * @param \Collectif\StatisticsBundle\Entity\Statistic $statistics
+     */
+    public function removeStatistic(\Collectif\StatisticsBundle\Entity\Statistic $statistics)
+    {
+        $this->statistics->removeElement($statistics);
+    }
+
+    /**
+     * Get statistics
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getStatistics()
+    {
+        return $this->statistics;
     }
 }

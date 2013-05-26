@@ -1,0 +1,41 @@
+<div id="promos">
+	{% if monDomaine != null %}
+		<a href=''>
+			<img width="940" height="300" src="{{ asset('upload/Domaines/' ~ monDomaine.path)}}" class="attachment-home-slider-image wp-post-image" alt="{{ monDomaine.nom }}" title="{{ monDomaine.nom }}" />
+		</a>
+	{% else %}
+		{% for domaine in domaines %}
+		<div class='promo'>
+			<a href=''>
+				<img width="940" height="300" src="{{ asset('upload/Domaines/' ~ domaine.path)}}" class="attachment-home-slider-image wp-post-image" alt="{{ domaine.nom }}" title="{{ domaine.nom }}" />
+			</a>
+		</div>
+		{% endfor %}
+	{% endif %}
+</div>
+
+<div class="menu-horizontal clearfix" style="border-top: 0px;margin-top: 0px;">
+	<ul class="sf-menu">
+		{% for d in domaines %}
+			<li class="page_item"><a>{{ d.nom }}</a>
+				<ul class="sub">
+					<li class="page_item">
+						<a href="{{ path('collectif_front_domaine', { 'titrePage': d.titrePage }) }}">Travaux/Publications</a>
+					</li>
+					<li class="page_item">
+						<a>Chercheurs</a>
+						<ul class="sub">
+							{% for m in membres %}
+								{% if d.id == m.domaine.id %}
+								<li class="page_item">
+									<a href="{{ path('collectif_front_chercheur', { 'alias': m.alias }) }}">{{ m.prenom }} {{ m.nom }}</a>
+								</li>
+								{% endif %}
+							{% endfor %}
+						</ul>
+					</li>
+				</ul>
+			</li>
+		{% endfor %}
+	</ul>
+</div><!--// menu-horizontal-->

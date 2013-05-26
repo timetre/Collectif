@@ -57,6 +57,10 @@ front_footer:
 front_menuBottom:
     pattern:  /front/menuBottom/
     defaults: { _controller: CollectifFrontBundle:Home:menuBottom }
+    
+front_menuBottom_domaine:
+    pattern:  /front/menuBottomDomaine/
+    defaults: { _controller: CollectifFrontBundle:Home:menuBottomDomaine }
 
 front_menuTop:
     pattern:  /front/menuTop/
