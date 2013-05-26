@@ -1,0 +1,30 @@
+superclassarticle:
+    pattern:  /
+    defaults: { _controller: "CollectifAdminBundle:SuperClassArticle:index" }
+
+superclassarticle_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CollectifAdminBundle:SuperClassArticle:show" }
+
+superclassarticle_new:
+    pattern:  /new
+    defaults: { _controller: "CollectifAdminBundle:SuperClassArticle:new" }
+
+superclassarticle_create:
+    pattern:  /create
+    defaults: { _controller: "CollectifAdminBundle:SuperClassArticle:create" }
+    requirements: { _method: post }
+
+superclassarticle_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CollectifAdminBundle:SuperClassArticle:edit" }
+
+superclassarticle_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CollectifAdminBundle:SuperClassArticle:update" }
+    requirements: { _method: post|put }
+
+superclassarticle_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CollectifAdminBundle:SuperClassArticle:delete" }
+    requirements: { _method: post|delete }

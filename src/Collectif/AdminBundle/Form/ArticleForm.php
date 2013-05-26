@@ -10,7 +10,7 @@ class ArticleForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {  	        
 		$builder->add('actif', 'checkbox', array('required' => false, 'label' => 'Actif'));
-        $builder->add('titre', 'text', array('label' => 'Actif'));
+        $builder->add('titre', 'text', array('label' => 'Titre'));
         $builder->add('datePublication', 'date', array(
 	    			'widget'    => 'single_text',
 					'label' => 'Date de publication',

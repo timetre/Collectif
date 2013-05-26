@@ -4,7 +4,11 @@
  		<ul class='clean latest-posts'>
 	{% for a in articles %}
 		<li>
-			<p><a href="{{ path('collectif_front_article', { 'alias': a.alias }) }}"><span>{{ a.datePublication|date('d/m/Y') }}</span> {{ a.titre }}</a>{{ a.resume | raw  }}</p>
+			{% if a.isArticle() %}
+				<p><a href="{{ path('collectif_front_article', { 'alias': a.alias }) }}"><span>{{ a.datePublication|date('d/m/Y') }}</span> {{ a.titre }}</a>{{ a.resume | raw  }}</p>
+			{% else %}
+				<p><a href="{{ path('collectif_front_publication', { 'alias': a.alias }) }}"><span>{{ a.datePublication|date('d/m/Y') }}</span> {{ a.titre }}</a>{{ a.resume | raw  }}</p>
+			{% endif %}
 		</li>
 	{% endfor %}
 	<hr>

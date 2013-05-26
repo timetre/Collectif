@@ -4,6 +4,7 @@
 
 {% block content %}
 <div class="textwidget">
+	{% if lastArticle != null %}
 	<div id="NewsPostDetailDate">{{ lastArticle.datePublication|date('d/m/Y') }}</div>
 	<h3 id="NewsPostDetailTitle">{{ lastArticle.titre }}</h3>
 	<hr id="NewsPostDetailHorizRule">
@@ -12,11 +13,21 @@
 	</div>
 
 	<div id="NewsPostDetailCategory">
-		<b>Cat&eacute;gorie&nbsp;:</b> {{ lastArticle.categorie.titre }}
+		{% if lastArticle.isArticle() %}
+			<b>Cat&eacute;gorie&nbsp;:</b> {{ lastArticle.categorie.titre }}
+		{% else %}
+			<b>Cat&eacute;gorie&nbsp;:</b> {{ lastArticle.membre.domaine.nom }}
+		{% endif %}
 	</div>
 	<div id="NewsPostDetailAuthor">
-		<b>Posté par&nbsp;:</b> Collectif Confluence
+		{% if lastArticle.isArticle() %}
+			<b>Posté par&nbsp;:</b> Collectif Confluence
+		{% else %}
+			<b>Posté par&nbsp;:</b> {{ lastArticle.membre.nom }} {{ lastArticle.membre.prenom }}
+		{% endif %}
+		
 	</div>
+	{% endif %}
 </div>
 
 {% endblock %}

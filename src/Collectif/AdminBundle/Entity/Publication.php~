@@ -15,11 +15,32 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Publication extends SuperClassArticle
 {
     /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+  
+
+    /**
      * @ORM\ManyToOne(targetEntity="Collectif\UserBundle\Entity\User", cascade={"persist"}, inversedBy="posts")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank()
      */
     private $membre;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
 
     /**
      * Set membre

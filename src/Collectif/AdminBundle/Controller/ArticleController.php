@@ -19,7 +19,6 @@ class ArticleController extends Controller
     public function listAction()
     {
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Article');
-    	
     	$articles = $repository->findAll();
     	
         return $this->render('CollectifAdminBundle:Article:view.html.twig', array(

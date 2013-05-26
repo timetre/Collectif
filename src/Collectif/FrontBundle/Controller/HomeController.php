@@ -5,16 +5,22 @@ namespace Collectif\FrontBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Collectif\AdminBundle\Entity\Domaine;
 use Collectif\AdminBundle\Entity\Page;
+use Collectif\AdminBundle\Entity\Article;
 
 class HomeController extends Controller
 {
     
 	public function indexAction() {
-		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Article');
+		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:SuperClassArticle');
     	$articles = $repository->getArticles(true, 5);
+    	$art = null;
+    	
+    	if(count($articles) > 0) {
+    		$art = $articles[0];
+    	}  	
 		
     	return $this->render('CollectifFrontBundle:Default:index.html.twig', array(
-			'lastArticle' 	=> $articles[0]
+			'lastArticle' 	=> $art
     	));
     }
     
@@ -153,9 +159,10 @@ class HomeController extends Controller
     }
     
 	public function sidebarAction() {
-    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Article');
+    	/*$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Article');
+    	$articles = $repository->getArticles(true, 5);*/
+    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:SuperClassArticle');
     	$articles = $repository->getArticles(true, 5);
-		//$articles = $repository->getArticlesPublications();
 		
 		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Partenaire');
     	$partenaires = $repository->getAll();
@@ -168,9 +175,8 @@ class HomeController extends Controller
     }
     
     public function sidebarInnerAction() {
-    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Article');
+    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:SuperClassArticle');
     	$articles = $repository->getArticles(true, 5);
-    	//$articles = $repository->getArticlesPublications();
     
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Partenaire');
     	$partenaires = $repository->getAll();
