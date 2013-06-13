@@ -28,61 +28,27 @@
 		<div id="tabs">
 		  <ul>
 		    <li><a href="#tabs-1">Parcours</a></li>
-		    <li><a href="#tabs-2">Formation</a></li>
-		    <li><a href="#tabs-3">Publications</a></li>
-		    <li><a href="#tabs-4">Divers</a></li>
+		    <li><a href="#tabs-2">Publications</a></li>
+		    <li><a href="#tabs-3">Divers</a></li>
 		  </ul>
 		  
 		  
 		  <div id="tabs-1">
-		    {% if membre.getExperiences | length == 0 %}
-		  		<p>Aucune expérience pour ce membre</p>
+		    {% if membre.mesCvs | length == 0 %}
+		  		<p>Aucun CV pour ce membre</p>
 		  	{% else %}
-		  		<h3>Expériences</h3>
-			  	<div id="custom_posts-widget-3" class="widget custom_posts">
-					
-					{% for e in membre.getExperiences %}
-						<h4 style="padding-bottom: 2px;">{{ e.titre }} - {{ e.entreprise }}</h4>
-						<p style="padding-bottom: 2px;">du {{ e.dateDebut|date('d/m/Y') }} au {{ e.dateFin|date('d/m/Y') }} - {{ e.lieu }}</p>
-						<p style="padding-bottom: 2px;">{{ e.description | raw }}</p>
-						<hr style="margin-top: 0;" />
-					{% endfor %}
-				</div>
-			{% endif %}
-			
-			{% if membre.getCompetences | length == 0 %}
-		  		<p>Aucune compétence pour ce membre</p>
-		  	{% else %}
-		  		<h3>Compétences</h3>
-			  	<div id="custom_posts-widget-3" class="widget custom_posts">
-					{% for c in membre.getCompetences %}
-						<span class="label label-info">{{ c.libelle }}</span>
-					{% endfor %}
-				</div>
-			{% endif %}
-		  </div>
-		  
-		  
-		  <div id="tabs-2">
-		    {% if membre.getFormations | length == 0 %}
-		  		Aucune formation pour ce membre
-		  	{% else %}
-		  		<h3>Formation</h3>
-			  	<div id="custom_posts-widget-3" class="widget custom_posts">
-					{% for e in membre.getFormations %}
-						<h4 style="padding-bottom: 2px;">{{ e.ecole }}</h4>
-						<p style="padding-bottom: 2px;">{{ e.diplome }}, {{ e.domaineEtude }}</p>
-						<p style="padding-bottom: 2px;">{{ e.dateDebut|date('Y') }} - {{ e.dateFin|date('Y') }}</p>
-						{% if e.description != null %}<p style="padding-bottom: 2px;"><u>Description</u> : {{ e.description | raw }}</p>{% endif %}
-						{% if e.activites != null %}<p style="padding-bottom: 2px;"><u>Activités et associations</u> : {{ e.activites | raw }}</p>{% endif %}
-						<hr style="margin-top: 0;" />
-					{% endfor %}
-				</div>
+		  		<h3>CV</h3>
+				{% if cv != null %}
+					{% if cv.path != null %}
+						<h4><a target="_blank" href="{{ asset('upload/CVTheque/' ~ cv.path)}}" >Télécharger PDF</a></h4>
+						<a class="mediaSmall" href="{{ asset('upload/CVTheque/' ~ cv.path)}}" ></a>
+					{% endif %}
+				{% endif %}
 			{% endif %}
 		  </div>
 		  
 		  <!-- Publications tab -->
-		  <div id="tabs-3">
+		  <div id="tabs-2">
 		  	{% if membre.getPublications | length == 0 %}
 		  		Aucune publication pour ce membre
 		  	{% else %}
@@ -103,11 +69,11 @@
 		  </div>
 		  <!-- End publications tab -->
 		  
-		  <div id="tabs-4">
+		  <div id="tabs-3">
 		    {% if membre.getInterets | length == 0 %}
 		  		Aucun centre d'intérêts pour ce membre
 		  	{% else %}
-		  		<h3>Centres d'intérêt</h3>
+		  		<h3>Objets de recherche</h3>
 			  	<div id="custom_posts-widget-3" class="widget custom_posts">
 					{% for c in membre.getInterets %}
 						<span class="label label-info">{{ c.libelle }}</span>
@@ -115,8 +81,9 @@
 				</div>
 			{% endif %}
 			
-			<h3 style="margin-top: 20px;">Infos perso</h3>
-			Adresse mail : {{ membre.formatedEmail }}
+			<h3 style="margin-top: 20px;">Contact</h3>
+			Adresse mail : {{ membre.formatedEmail }}<br/>
+			Tél : {{ membre.telephone }}
 			
 			<h3 style="margin-top: 20px;">Activité numérique</h3>
 			{% if membre.twitter != null %}

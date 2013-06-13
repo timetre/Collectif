@@ -1,0 +1,42 @@
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+
+<h1>Gérer mon CV</h1>
+
+{% if user.mesCvs|length == 0 %}
+<div class="header-buttons">
+	<a class="pull-right btn btn-success" href="{{ path('collectif_mescv_create') }}"><i class="icon-plus-sign icon-white"></i>Ajouter un CV</a>
+</div>
+{% endif %}
+
+
+<table class="table table-hover">
+	<tr>
+		<th>Editer</th>
+		<th>Titre</th>
+		<th>Langue</th>
+		<th>Supprimer</th>
+	</tr>
+
+
+{% for cv in user.mesCvs %}
+	<tr>
+<td><a class="btn" href="{{ path('collectif_mescv_edit', { 'monCvId': cv.id }) }}"><i class="icon-edit"></i></a></td>
+<td>{{ cv.titre }}</td>
+<td>{{ cv.langue }}</td>
+<td><a onclick="if(!confirm('Voulez-vous vraiment supprimer ce CV ?')) { return false };" class="btn btn-danger" href="{{ path('collectif_mescv_delete', { 'monCvId': cv.id }) }}"><i class="icon-trash icon-white"></i></a></td>
+
+</tr>
+
+{% else %}
+
+	<tr><td>Aucun CV n’a été trouvé.</td></tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

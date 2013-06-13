@@ -15,7 +15,7 @@ collectif_front_domaine:
     defaults: { _controller: CollectifFrontBundle:Home:domaine }
 
 collectif_front_chercheur:
-    pattern:  /chercheur/{alias}
+    pattern:  /{alias}
     defaults: { _controller: CollectifFrontBundle:Home:membre }
 
 collectif_front_articles:

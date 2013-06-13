@@ -37,6 +37,13 @@ class User extends BaseUser
     private $prenom;
     
     /**
+     * @var string $telephone
+     *
+     * @ORM\Column(name="telephone", type="string", length=255, nullable=true)
+     */
+    private $telephone;
+    
+    /**
      * @var string $alias
      *
      * @ORM\Column(name="alias", type="string", length=255)
@@ -122,6 +129,11 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Collectif\StatisticsBundle\Entity\Statistic", cascade={"persist"}, mappedBy="membre")
      */
     private $statistics;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\MonCv", cascade={"persist"}, mappedBy="membre")
+     */
+    private $mesCvs;
     
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -950,5 +962,61 @@ class User extends BaseUser
     public function getStatistics()
     {
         return $this->statistics;
+    }
+
+    /**
+     * Add mesCvs
+     *
+     * @param \Collectif\AdminBundle\Entity\MonCv $mesCvs
+     * @return User
+     */
+    public function addMesCv(\Collectif\AdminBundle\Entity\MonCv $mesCvs)
+    {
+        $this->mesCvs[] = $mesCvs;
+    
+        return $this;
+    }
+
+    /**
+     * Remove mesCvs
+     *
+     * @param \Collectif\AdminBundle\Entity\MonCv $mesCvs
+     */
+    public function removeMesCv(\Collectif\AdminBundle\Entity\MonCv $mesCvs)
+    {
+        $this->mesCvs->removeElement($mesCvs);
+    }
+
+    /**
+     * Get mesCvs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMesCvs()
+    {
+        return $this->mesCvs;
+    }
+
+    /**
+     * Set telephone
+     *
+     * @param string $telephone
+     * @return User
+     */
+    public function setTelephone($telephone)
+    {
+        $this->telephone = $telephone;
+    
+        return $this;
+    }
+
+    /**
+     * Get telephone
+     *
+     * @return string 
+     */
+    public function getTelephone()
+    {
+        return $this->telephone;
     }
 }

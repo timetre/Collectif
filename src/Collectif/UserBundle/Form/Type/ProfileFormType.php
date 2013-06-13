@@ -25,6 +25,7 @@ class ProfileFormType extends BaseType
         $builder->add('nom', 'text', array('label' => 'Nom'));
         $builder->add('prenom', 'text', array('label' => 'Prénom'));
 		$builder->add('email', 'text', array('label' => 'Email'));
+		$builder->add('telephone', 'text', array('label' => 'Téléphone', 'required' => false));
     }
 
     public function getName()

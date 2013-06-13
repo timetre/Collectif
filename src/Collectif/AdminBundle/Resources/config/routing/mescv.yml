@@ -1,0 +1,16 @@
+collectif_mescv_list:
+    pattern:  /
+    defaults: { _controller: CollectifAdminBundle:MesCv:list }
+
+collectif_mescv_create:
+    pattern:  /create/moncv
+    defaults: { _controller: CollectifAdminBundle:MesCv:edit }
+    
+collectif_mescv_edit:
+    pattern:  /edit/moncv/{monCvId}
+    defaults: { _controller: CollectifAdminBundle:MesCv:edit }
+    
+collectif_mescv_delete:
+    pattern:  /delete/moncv/{monCvId}
+    defaults: { _controller: CollectifAdminBundle:MesCv:delete }
+

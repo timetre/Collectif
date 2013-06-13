@@ -6,6 +6,7 @@
 	<p>{{ 'profile.show.name'|trans({}, 'FOSUserBundle') }} : {{ user.nom }}</p>
 	<p>{{ 'profile.show.firstname'|trans({}, 'FOSUserBundle') }} : {{ user.prenom }}</p>
 	<p>{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }} : {{ user.email }}</p>
+	<p>Téléphone : {{ user.telephone }}</p>
 	<p>
 		<input type="button" class="btn btn-info" onclick="window.open('{{ path('fos_user_profile_edit') }}', '_parent');" value="Editer" />
 	</p>

@@ -44,7 +44,6 @@ class PartenaireController extends Controller {
     
     public function editAction($id = null)
     {
-    	
     	$message='';
         $em = $this->getDoctrine()->getManager();
         $repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Partenaire');

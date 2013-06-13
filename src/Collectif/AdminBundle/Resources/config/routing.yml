@@ -186,3 +186,7 @@ CollectifAdminBundle_reseau_post:
 CollectifAdminBundle_reseau_cv:
     resource: "@CollectifAdminBundle/Resources/config/routing/cv.yml"
     prefix:   /reseau/cv
+    
+CollectifAdminBundle_reseau_mescv:
+    resource: "@CollectifAdminBundle/Resources/config/routing/mescv.yml"
+    prefix:   /reseau/mescv

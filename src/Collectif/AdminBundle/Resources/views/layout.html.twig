@@ -44,31 +44,44 @@
 	          {% endif %}
 			  	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Page personnelle<b class="caret"></b></a>
 			  	<ul class="dropdown-menu">
-			  		{% if app.request.attributes.get('_route') == 'fos_user_profile_show' %}
-	            		<li class="active"><a href="{{ path('fos_user_profile_show') }}">Editer mes infos perso</a></li>
+			  		{% if app.request.attributes.get('_route') == 'collectif_mescv_list' %}
+	            		<li class="active"><a href="{{ path('collectif_mescv_list') }}">Mon CV</a></li>
 	            	{% else %}
-	              		<li><a href="{{ path('fos_user_profile_show') }}">Editer mes infos perso</a></li>
+	              		<li><a href="{{ path('collectif_mescv_list') }}">Mon CV</a></li>
 	           	 	{% endif %}
-	           	 	{% if app.request.attributes.get('_route') == 'collectif_membre_edit_page' %}
-	            		<li class="active"><a href="{{ path('collectif_membre_edit_page', { 'id': app.user.id }) }}">Editer ma page perso</a></li>
-	            	{% else %}
-	              		<li><a href="{{ path('collectif_membre_edit_page', { 'id': app.user.id }) }}">Editer ma page perso</a></li>
-	           	 	{% endif %}
+	           	 	
 	           	 	{% if app.request.attributes.get('_route') == 'collectif_publication_list_own' %}
-	            		<li class="active"><a href="{{ path('collectif_publication_list_own', { 'id': app.user.id }) }}">Mes articles</a></li>
+	            		<li class="active"><a href="{{ path('collectif_publication_list_own', { 'id': app.user.id }) }}">Mes publications</a></li>
 	            	{% else %}
-	              		<li><a href="{{ path('collectif_publication_list_own', { 'id': app.user.id }) }}">Mes articles</a></li>
+	              		<li><a href="{{ path('collectif_publication_list_own', { 'id': app.user.id }) }}">Mes publications</a></li>
 	           	 	{% endif %}
+	           	 	
+	           	 	{% if app.request.attributes.get('_route') == 'collectif_membre_edit_page' %}
+	            		<li class="active"><a href="{{ path('collectif_membre_edit_page', { 'id': app.user.id }) }}">Présentation</a></li>
+	            	{% else %}
+	              		<li><a href="{{ path('collectif_membre_edit_page', { 'id': app.user.id }) }}">Présentation</a></li>
+	           	 	{% endif %}
+	           	 	
+			  		{% if app.request.attributes.get('_route') == 'fos_user_profile_show' %}
+	            		<li class="active"><a href="{{ path('fos_user_profile_show') }}">Infos perso</a></li>
+	            	{% else %}
+	              		<li><a href="{{ path('fos_user_profile_show') }}">Infos perso</a></li>
+	           	 	{% endif %}
+
+	           	 	
 	           	 	{% if app.request.attributes.get('_route') == 'collectif_cv_list' %}
-	            		<li class="active"><a href="{{ path('collectif_cv_list') }}">Mon CV</a></li>
+	            		<li class="active"><a href="{{ path('collectif_cv_list') }}">Divers</a></li>
 	            	{% else %}
-	              		<li><a href="{{ path('collectif_cv_list') }}">Mon CV</a></li>
+	              		<li><a href="{{ path('collectif_cv_list') }}">Divers</a></li>
 	           	 	{% endif %}
+	           	 	
 	           	 	{% if app.request.attributes.get('_route') == 'collectif_stat_list' %}
 	            		<li class="active"><a href="{{ path('collectif_stat_list') }}">Mes statistiques</a></li>
 	            	{% else %}
 	              		<li><a href="{{ path('collectif_stat_list') }}">Mes statistiques</a></li>
 	           	 	{% endif %}
+	           	 	
+	           	 	
 	          	</ul>
 			  </li>
 			  
@@ -204,7 +217,8 @@
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap-datepicker.js') }}"></script>
-	
+	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/jquery.media.js') }}"></script> 
+	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/jquery.metadata.js') }}"></script> 
 	
 	<script type="text/javascript" src="/bundles/ckfinder/ckeditor/ckeditor.js"></script>
 	<script type="text/javascript" src="/bundles/ckfinder/ckfinder.js"></script>
@@ -222,6 +236,8 @@
 				weekStart: 1
 			});
 		});
+		
+		$('a.mediaBig').media({width:800, height:600});
 	</script>
 
 	</body>

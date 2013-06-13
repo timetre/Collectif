@@ -108,10 +108,18 @@ class HomeController extends Controller
 		$this->setStatistic($membre);
 
 		$this->container->get('request')->getSession()->set('domaine', $domaine->getId());
+		
+		if(sizeof($membre->getMesCvs()) > 0) {
+			$cvList = $membre->getMesCvs();
+			$cv = $cvList[0];
+		} 
+		else 
+			$cv = null;
     	
     	return $this->render('CollectifFrontBundle:Default:membre.html.twig', array(
     		'membre' 		=> $membre,
 			'domaine'		=> $domaine,
+    		'cv'			=> $cv,
     	));
     }
     
