@@ -69,11 +69,13 @@ class PostController extends Controller
      * Creates a new Post entity.
      *
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, $sfId = null)
     {
         $entity  = new Post();
         $form = $this->createForm(new PostType(), $entity);
         $form->bind($request);
+        
+        die;
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();

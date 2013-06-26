@@ -14,6 +14,11 @@ reseau_sousforum_create:
     pattern:  /create
     defaults: { _controller: "CollectifAdminBundle:SousForum:create" }
     requirements: { _method: post }
+    
+reseau_sousforum_create_post:
+    pattern:  /createpost/{sfId}
+    defaults: { _controller: "CollectifAdminBundle:SousForum:createPost" }
+    requirements: { _method: post }
 
 reseau_sousforum_edit:
     pattern:  /{id}/edit

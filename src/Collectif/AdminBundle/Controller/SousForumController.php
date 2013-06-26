@@ -51,11 +51,8 @@ class SousForumController extends Controller
             throw $this->createNotFoundException('Unable to find SousForum entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-
         return $this->render('CollectifAdminBundle:SousForum:show.html.twig', array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
         	'form'	=> $form->createView()
 		));
     }
@@ -212,5 +209,44 @@ class SousForumController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+    
+    public function createPostAction(Request $request, $sfId)
+    {
+    	$entity  = new Post();
+    	$form = $this->createForm(new PostType(), $entity);
+    	$form->bind($request);
+
+    	if (!$form->isValid()) {
+    		
+    		$em = $this->getDoctrine()->getManager();
+    		
+    		$user = $this->container->get('security.context')->getToken()->getUser();
+    		$sf = $em->getRepository('CollectifAdminBundle:SousForum')->find($sfId);
+    		
+    		$entity->setMembre($user);
+    		$entity->setSousForum($sf);
+    		
+    		$em->persist($entity);
+    		$em->flush();
+    
+    		
+        
+	        $post = new Post();
+	        $post->setSousForum($sf);
+	        $post->setMembre($user);
+	        $form = $this->createForm(new PostType(), $post);
+	
+	        if (!$sf) {
+	            throw $this->createNotFoundException('Unable to find SousForum entity.');
+	        }
+	
+	        return $this->redirect($this->generateUrl('reseau_sousforum_show', array('id' => $sf->getId())));
+    	}
+    
+    	return $this->render('CollectifAdminBundle:Post:new.html.twig', array(
+    			'entity' => $entity,
+    			'form'   => $form->createView(),
+    	));
     }
 }

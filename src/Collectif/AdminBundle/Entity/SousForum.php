@@ -61,7 +61,8 @@ class SousForum
     private $forum;
     
     /**
-     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Post", cascade={"persist"}, mappedBy="membre")
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Post", cascade={"persist"}, mappedBy="sousForum")
+     * @ORM\OrderBy({"dateCreation" = "DESC"})
      */
     private $posts;
     

@@ -10,8 +10,12 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre', 'text', array('label' => 'Titre'))
-            ->add('contenu', 'textarea', array('label' => 'Contenu'))
+            ->add('contenu', 'textarea', array(
+            		'label' => 'Poster un commentaire',
+            		'attr' => array(
+						'class' => 'full-width'
+					)
+            	))
             /*->add('dateCreation', 'text', array('label' => 'Date de création'))
             ->add('membre', 'text', array('label' => 'Membre'))
             ->add('sousForum','entity', array(
