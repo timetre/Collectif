@@ -25,14 +25,14 @@ class User extends BaseUser
     /**
      * @var string $nom
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
      */
     private $nom;
 
     /**
      * @var string $prenom
      *
-     * @ORM\Column(name="prenom", type="string", length=255)
+     * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
      */
     private $prenom;
     
@@ -46,7 +46,7 @@ class User extends BaseUser
     /**
      * @var string $alias
      *
-     * @ORM\Column(name="alias", type="string", length=255)
+     * @ORM\Column(name="alias", type="string", length=255, nullable=true)
      */
     private $alias;
 
@@ -79,7 +79,7 @@ class User extends BaseUser
 	/**
      * @var \DateTime $dateCreation
      *
-     * @ORM\Column(name="dateCreation", type="datetime")
+     * @ORM\Column(name="dateCreation", type="datetime", nullable=true)
      */
     private $dateCreation;
     
@@ -150,21 +150,21 @@ class User extends BaseUser
     /**
      * @var string $lieu
      *
-     * @ORM\Column(name="lieu", type="text")
+     * @ORM\Column(name="lieu", type="text", nullable=true)
      */
     private $lieu;
     
     /**
      * @var string $statut
      *
-     * @ORM\Column(name="statut", type="text")
+     * @ORM\Column(name="statut", type="text", nullable=true)
      */
     private $statut;
     
     /**
      * @var string $sujetRecherche
      *
-     * @ORM\Column(name="sujetRecherche", type="text")
+     * @ORM\Column(name="sujetRecherche", type="text", nullable=true)
      */
     private $sujetRecherche;
     
