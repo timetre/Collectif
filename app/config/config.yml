@@ -77,10 +77,4 @@ eko_feed:
             description: 'Derniers articles'
             link:        'http://collectif-confuence.fr'
             encoding:    'utf-8'
-            author:      'Collectif Confluence' # Only required for Atom feeds
-        publication:
-            title:       'Publications'
-            description: 'Dernières publications'
-            link:        'http://collectif-confuence.fr'
-            encoding:    'utf-8'
-            author:      'Collectif Confluence' # Only required for Atom feeds
+            author:      'Collectif Confluence' # Only required for Atom feeds        

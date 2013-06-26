@@ -10,14 +10,14 @@
 	<div id="text-3" class="widget widget_text">
 		<h5>{{ membre.prenom }} {{ membre.nom }} - {{ membre.fonctionBureau }}</h5>
 		<div class="textwidget">
-			<table width="100%" cellspacing="1" cellpadding="1" border="1">
+			<table width="100%" cellspacing="1" cellpadding="1" border="0">
 				<tbody>
 					<tr>
 						<td>
 							{% if membre.path == null %}
-								<p><img align="left" src="{{ image('bundles/collectiffront/images/ghost.png').resize(null, 138) }}" alt="" style="margin-right: 10px;" /><strong>{{ membre.prenom }} {{ membre.nom }}</strong></p>
+								<img align="left" src="{{ image('bundles/collectiffront/images/ghost.png').resize(null, 138) }}" alt="" style="margin-right: 10px;" />
 							{% else %}
-								<p><img align="left" src="{{ image('upload/Membres/' ~ membre.path).resize(null, 138) }}" alt="" style="margin-right: 10px;" /><strong>{{ membre.prenom }} {{ membre.nom }}</strong></p>
+								<img align="left" src="{{ image('upload/Membres/' ~ membre.path).resize(null, 138) }}" alt="" style="margin-right: 10px;" />
 							{% endif %}
 							{{ membre.contenuPage | raw  }}
 						</td>

@@ -11,7 +11,7 @@ reseau_sousforum_new:
     defaults: { _controller: "CollectifAdminBundle:SousForum:new" }
 
 reseau_sousforum_create:
-    pattern:  /create
+    pattern:  /create/{type}
     defaults: { _controller: "CollectifAdminBundle:SousForum:create" }
     requirements: { _method: post }
     

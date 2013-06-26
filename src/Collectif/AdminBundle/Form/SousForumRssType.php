@@ -6,14 +6,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SousForumType extends AbstractType
+class SousForumRssType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('titre', 'text', array('label' => 'Titre'))
-            /*->add('isRss', 'checkbox', array('label' => 'Flux rss ?', 'required'  => false))
-            ->add('urlFlux', 'text', array('label' => 'URL flux', 'required'  => false))*/
+            /*->add('isRss', 'checkbox', array('label' => 'Flux rss ?', 'required'  => false))*/
+            ->add('urlFlux', 'text', array('label' => 'URL du flux à suivre', 'required'  => false))
             ->add('description', 'textarea', array(
             		'label' => 'Description',
             		'required'  => false,

@@ -113,7 +113,10 @@ abstract class SuperClassArticle implements RoutedItemInterface
     }
     
     public function getFeedItemRouteName() {
-    	return 'collectif_front_article';
+    	if($this->isArticle())
+    		return 'collectif_front_article';
+    	else 
+    		return 'collectif_front_publication';
     }
     
     public function getFeedItemRouteParameters() {

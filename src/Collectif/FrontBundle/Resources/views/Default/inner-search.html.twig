@@ -20,7 +20,7 @@
 		
 		<h3>Résultats dans les publications ({{ searchPublications|length }})</h3>
 		{% for p in searchPublications %}
-			<h5><a href="{{ path('collectif_front_publication', { 'id': p.id }) }}">{{ p.titre }}</a></h5>
+			<h5><a href="{{ path('collectif_front_publication', { 'alias': p.alias }) }}">{{ p.titre }}</a></h5>
 			{{ p.resume|raw }}
 		{% endfor %}		
 	</p>

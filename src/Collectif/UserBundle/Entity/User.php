@@ -143,9 +143,11 @@ class User extends BaseUser
     private $mesCvs;
     
     /**
+     * @var string $path
+     * 
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    public $path;
+    private $path;
     
     /**
      * @var string $activiteNumerique

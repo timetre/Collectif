@@ -13,9 +13,9 @@
 				<tr>
 					<td>
 						{% if membre.path == null %}
-							<p><img align="left" src="{{ image('bundles/collectiffront/images/ghost.png').resize(null, 138) }}" alt="" style="margin-right: 10px;" /><strong>{{ membre.prenom }} {{ membre.nom }}</strong></p>
+							<img align="left" src="{{ image('bundles/collectiffront/images/ghost.png').resize(null, 138) }}" alt="" style="margin-right: 10px;" />
 						{% else %}
-							<p><img align="left" src="{{ image('upload/Membres/' ~ membre.path).resize(null, 138) }}" alt="" style="margin-right: 10px;" /><strong>{{ membre.prenom }} {{ membre.nom }}</strong></p>
+							<img align="left" src="{{ image('upload/Membres/' ~ membre.path).resize(null, 138) }}" alt="" style="margin-right: 10px;" />
 						{% endif %}
 						{{ membre.contenuPage | raw  }}
 					</td>
@@ -76,7 +76,11 @@
 		  		<h3>Objets de recherche</h3>
 			  	<div id="custom_posts-widget-3" class="widget custom_posts">
 					{% for c in membre.getInterets %}
-						<span class="label label-info">{{ c.libelle }}</span>
+						<span class="label label-info">
+							<a href="{{ path('collectif_front_membres_interets', { 'interet': c.libelle }) }}" style="color:white; text-decoration: none;">
+								{{ c.libelle }}
+							</a>
+						</span>
 					{% endfor %}
 				</div>
 			{% endif %}

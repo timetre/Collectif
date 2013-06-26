@@ -7,6 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Collectif\AdminBundle\Entity\SousForum;
 use Collectif\AdminBundle\Form\SousForumType;
+use Collectif\AdminBundle\Form\SousForumRssType;
+use Collectif\AdminBundle\Form\SousForumOutilsType;
+use Collectif\AdminBundle\Form\SousForumStagesType;
+use Collectif\AdminBundle\Form\SousForumPdfType;
 use Collectif\AdminBundle\Form\PostType;
 use Collectif\AdminBundle\Entity\Post;
 
@@ -41,20 +45,61 @@ class SousForumController extends Controller
 
         $entity = $em->getRepository('CollectifAdminBundle:SousForum')->find($id);
         
-        $user = $this->container->get('security.context')->getToken()->getUser();
-        $post = new Post();
-        $post->setSousForum($entity);
-        $post->setMembre($user);
-        $form = $this->createForm(new PostType(), $post);
-
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find SousForum entity.');
+        	throw $this->createNotFoundException('Unable to find SousForum entity.');
         }
+        
+        $type = $entity->getTypeTopic();
+        
+        if($type == "CLASSIQUE") {
+        	$user = $this->container->get('security.context')->getToken()->getUser();
+	        $post = new Post();
+	        $post->setSousForum($entity);
+	        $post->setMembre($user);
+	        $form = $this->createForm(new PostType(), $post);
+	        
+	        return $this->render('CollectifAdminBundle:SousForum:show.html.twig', array(
+	        		'entity'      => $entity,
+	        		'form'	=> $form->createView()
+	        ));
+	        
+        } else if($type == "OUTILS") {
 
-        return $this->render('CollectifAdminBundle:SousForum:show.html.twig', array(
-            'entity'      => $entity,
-        	'form'	=> $form->createView()
-		));
+	        return $this->render('CollectifAdminBundle:SousForum:showOutils.html.twig', array(
+	        		'entity'      => $entity
+	        ));
+	        
+        } else if($type == "STAGES") {
+        	
+	        return $this->render('CollectifAdminBundle:SousForum:showStages.html.twig', array(
+	        		'entity'      => $entity
+	        ));
+	        
+        } else if($type == "RSS") {
+			
+	        return $this->render('CollectifAdminBundle:SousForum:showRss.html.twig', array(
+	        		'entity'      => $entity
+	        ));
+	        
+        } else if($type == "PDF") {
+			
+	        return $this->render('CollectifAdminBundle:SousForum:showPdf.html.twig', array(
+	        		'entity'      => $entity
+	        ));
+	        
+        } else {
+	        
+        	$user = $this->container->get('security.context')->getToken()->getUser();
+	        $post = new Post();
+	        $post->setSousForum($entity);
+	        $post->setMembre($user);
+	        $form = $this->createForm(new PostType(), $post);
+	         
+	        return $this->render('CollectifAdminBundle:SousForum:show.html.twig', array(
+	        		'entity'      => $entity,
+	        		'form'	=> $form->createView()
+	        ));
+        }
     }
 
     /**
@@ -70,16 +115,19 @@ class SousForumController extends Controller
         if($type == "CLASSIQUE") {
         	$form = $this->container->get('form.factory')->create(new SousForumType(), $entity);
         } else if($type == "OUTILS") {
-        	$form = $this->container->get('form.factory')->create(new SousForumType(), $entity);
+        	$form = $this->container->get('form.factory')->create(new SousForumOutilsType(), $entity);
         } else if($type == "STAGES") {
-        	$form = $this->container->get('form.factory')->create(new SousForumType(), $entity);
+        	$form = $this->container->get('form.factory')->create(new SousForumStagesType(), $entity);
         } else if($type == "RSS") {
-        	$form = $this->container->get('form.factory')->create(new SousForumType(), $entity);
+        	$form = $this->container->get('form.factory')->create(new SousForumRssType(), $entity);
+        } else if($type == "PDF") {
+        	$form = $this->container->get('form.factory')->create(new SousForumPdfType(), $entity);
         }        
         
         return $this->render('CollectifAdminBundle:SousForum:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+        	'type'   => $type	
         ));
     }
 
@@ -87,14 +135,27 @@ class SousForumController extends Controller
      * Creates a new SousForum entity.
      *
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, $type)
     {
         $entity  = new SousForum();
-        $form = $this->createForm(new SousForumType(), $entity);
+        
+    	if($type == "CLASSIQUE") {
+        	$form = $this->createForm(new SousForumType(), $entity);
+        } else if($type == "OUTILS") {
+        	$form = $this->createForm(new SousForumOutilsType(), $entity);
+        } else if($type == "STAGES") {
+        	$form = $this->createForm(new SousForumStagesType(), $entity);
+        } else if($type == "RSS") {
+        	$form = $this->createForm(new SousForumRssType(), $entity);
+        } else if($type == "PDF") {
+        	$form = $this->createForm(new SousForumPdfType(), $entity);
+        } 
+        
         $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->setTypeTopic($type);
             $em->persist($entity);
             $em->flush();
 

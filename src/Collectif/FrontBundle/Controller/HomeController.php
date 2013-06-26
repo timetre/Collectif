@@ -20,6 +20,7 @@ class HomeController extends Controller
 {
     
 	public function indexAction() {
+		
 		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:SuperClassArticle');
     	$articles = $repository->getArticles(true, 5);
     	$art = null;
@@ -295,6 +296,20 @@ class HomeController extends Controller
     		return $this->render('CollectifFrontBundle:Page:inner-contact-envoye.html.twig');
     	
     	}
+    }
+    
+    public function displayMembresInteretAction($interet) {
+    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifUserBundle:User');
+    	
+    	$em = $this->getDoctrine()->getManager();
+    	$query = $em->createQuery("SELECT u FROM Collectif\UserBundle\Entity\User u JOIN u.interets i WHERE i.libelle like '%".$interet."%' group by u.id order by u.nom, u.prenom");
+    	$users = $query->getResult();
+    	
+    	return $this->render('CollectifFrontBundle:Default:membre-interet.html.twig', array(
+    			'users'	=> $users,
+    			'interet' => $interet
+    	));
+    	
     }
     
     private function setStatistic($membre) {

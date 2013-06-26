@@ -29,11 +29,11 @@
 
 <div style="margin-bottom: 100px;">
 {% for post in entity.posts %}
-	<div style="margin-bottom: 25px;">
+	<div style="margin-bottom: 40px;">
 		{% if post.membre.path == null %}
-			<img align="left" class="img-polaroid" src="{{ image('bundles/collectiffront/images/ghost.png').resize(null, 50) }}" alt="" style="margin-right: 10px;" />
+			<img align="left" class="img-polaroid" src="{{ image('bundles/collectiffront/images/ghost.png').resize(null, 70) }}" alt="" style="margin-right: 10px;" />
 		{% else %}
-			<img align="left" class="img-polaroid" src="{{ image('upload/Membres/' ~ post.membre.path).resize(null, 50) }}" alt="" style="margin-right: 10px;" />
+			<img align="left" class="img-polaroid" src="{{ image('upload/Membres/' ~ post.membre.path).resize(null, 70) }}" alt="" style="margin-right: 10px;" />
 		{% endif %}
 		<p>
 			<strong><a href="{{ path('collectif_front_chercheur', { 'alias': post.membre.alias }) }}" target="_blank">{{ post.membre.prenom }} {{ post.membre.nom }}</a></strong>&nbsp;
@@ -44,8 +44,8 @@
 			{% endif %}
 		</p>
 		<p style="text-align: justify;">{{ post.contenu }}</p>
-		<hr/>
 	</div>
+	<hr/>
 	
 {% endfor %}
 </div>

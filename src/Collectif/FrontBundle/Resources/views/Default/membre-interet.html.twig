@@ -1,0 +1,37 @@
+{% extends 'CollectifFrontBundle::layout_inner-page.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+<h3>Membres ayant pour objet de recherche : {{ interet }}</h3>
+<div class="textwidget">
+
+	 {% if users | length == 0 %}
+		  Aucun membre n'a pour objet de recherche le thème : {{ interet }}
+	{% else %}
+
+		{% for membre in users %}
+			<div id="text-3" class="widget widget_text" style="min-height: 140px;">
+				<div class="textwidget">
+					<h6><a href="{{ path('collectif_front_chercheur', { 'alias': membre.alias }) }}">{{ membre.prenom }} {{ membre.nom }}</a></h6>
+					{% if membre.path == null %}
+						<img align="left" src="{{ image('bundles/collectiffront/images/ghost.png').resize(null, 70) }}" alt="" style="margin-right: 10px;" />
+					{% else %}
+						<img align="left" src="{{ image('upload/Membres/' ~ membre.path).resize(null, 70) }}" alt="" style="margin-right: 10px;" />
+					{% endif %}
+					<strong>Objets de recherche : </strong><br/>
+					{% for c in membre.getInterets %}
+						<div style="margin-right: 10px; float: left;">
+							<a href="{{ path('collectif_front_membres_interets', { 'interet': c.libelle }) }}">
+								{{ c.libelle }}
+							</a>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		{% endfor %}
+	{% endif %}
+</div>
+
+
+{% endblock %}

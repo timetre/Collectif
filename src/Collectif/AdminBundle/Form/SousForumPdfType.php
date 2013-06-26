@@ -6,21 +6,13 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SousForumType extends AbstractType
+class SousForumPdfType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('titre', 'text', array('label' => 'Titre'))
-            /*->add('isRss', 'checkbox', array('label' => 'Flux rss ?', 'required'  => false))
-            ->add('urlFlux', 'text', array('label' => 'URL flux', 'required'  => false))*/
-            ->add('description', 'textarea', array(
-            		'label' => 'Description',
-            		'required'  => false,
-            		'attr' => array(
-            				'class' => 'ckeditor'
-            		)
-            ))
+
             ->add('forum','entity', array(
             		'label' => 'Forum parent',
             		'class' => 'Collectif\AdminBundle\Entity\Forum',
@@ -40,6 +32,6 @@ class SousForumType extends AbstractType
 
     public function getName()
     {
-        return 'collectif_adminbundle_sousforumtype';
+        return 'collectif_adminbundle_sousforumpdftype';
     }
 }

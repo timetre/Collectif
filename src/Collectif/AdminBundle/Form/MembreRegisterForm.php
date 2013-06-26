@@ -39,7 +39,6 @@ class MembreRegisterForm extends AbstractType
 		
 		$builder->add('facebook', 'text', array('label' => 'Page Facebook', 'required' => false));
 		
-		
     }
 	
 	public function getName()

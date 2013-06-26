@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Collectif\AdminBundle\Entity\Article;
+use Collectif\AdminBundle\Entity\SuperClassArticle;
 
 use Collectif\AdminBundle\Form\ArticleForm;
 use Collectif\AdminBundle\Controller\ArticleController;
@@ -119,7 +120,7 @@ class ArticleController extends Controller
     
     public function feedAction()
     {
-    	$articles = $this->getDoctrine()->getRepository('CollectifAdminBundle:Article')->findAll();
+    	$articles = $this->getDoctrine()->getRepository('CollectifAdminBundle:SuperClassArticle')->findAll();
     	
     	$feed = $this->get('eko_feed.feed.manager')->get('article');
     	$feed->addFromArray($articles);
