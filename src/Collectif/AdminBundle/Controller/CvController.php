@@ -10,7 +10,8 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 use Collectif\AdminBundle\Form\ExperienceForm;
 use Collectif\AdminBundle\Form\CompetenceForm;
-use Collectif\AdminBundle\Form\FormationForm;
+use Collectif\AdminBundle\Form\MembreContactForm;
+use Collectif\AdminBundle\Form\MembreCompteForm;
 use Collectif\AdminBundle\Form\InteretForm;
 use Collectif\UserBundle\Entity\User;
 use Collectif\AdminBundle\Entity\Experience;
@@ -204,9 +205,75 @@ class CvController extends Controller
     	));
     }
     
+public function editContactAction()
+    {
+    	$this->container->get('request')->getSession()->set('tabNum', 2);
+    	$message='';
+    	$user = $this->container->get('security.context')->getToken()->getUser();
+    	$em = $this->getDoctrine()->getManager();
+    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifUserBundle:User');
+    
+    	$form = $this->container->get('form.factory')->create(new MembreContactForm(), $user);
+    	$request = $this->container->get('request');
+    
+    	if ($request->getMethod() == 'POST')
+    	{
+    		$form->bindRequest($request);
+    
+    		if ($form->isValid())
+    		{
+    
+    			$em->persist($user);
+    
+    			$em->flush();
+    
+    			return new RedirectResponse($this->container->get('router')->generate('collectif_cv_list'));
+    		}
+    	}
+    
+    	return $this->render('CollectifAdminBundle:Cv:edit.html.twig', array(
+    			'form' => $form->createView(),
+    			'message' => $message,
+    			'membre' => $user
+    	));
+    }
+    
+    public function editCompteAction()
+    {
+    	$this->container->get('request')->getSession()->set('tabNum', 3);
+    	$message='';
+    	$user = $this->container->get('security.context')->getToken()->getUser();
+    	$em = $this->getDoctrine()->getManager();
+    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifUserBundle:User');
+    
+    	$form = $this->container->get('form.factory')->create(new MembreCompteForm(), $user);
+    	$request = $this->container->get('request');
+    
+    	if ($request->getMethod() == 'POST')
+    	{
+    		$form->bindRequest($request);
+    
+    		if ($form->isValid())
+    		{
+    
+    			$em->persist($user);
+    
+    			$em->flush();
+    
+    			return new RedirectResponse($this->container->get('router')->generate('collectif_cv_list'));
+    		}
+    	}
+    
+    	return $this->render('CollectifAdminBundle:Cv:edit-compte.html.twig', array(
+    			'form' => $form->createView(),
+    			'message' => $message,
+    			'membre' => $user
+    	));
+    }
+    
     public function editInteretAction($interetId = null)
     {
-    	$this->container->get('request')->getSession()->set('tabNum', 4);
+    	$this->container->get('request')->getSession()->set('tabNum', 1);
     	$message='';
     	$user = $this->container->get('security.context')->getToken()->getUser();
     	$em = $this->getDoctrine()->getManager();
@@ -259,8 +326,6 @@ class CvController extends Controller
     			'message' => $message,
     	));
     }
-    
-    
     
 	public function deleteExperienceAction($experienceId)
     {
@@ -315,6 +380,7 @@ class CvController extends Controller
     
     public function deleteInteretAction($interetId)
     {
+    	$this->container->get('request')->getSession()->set('tabNum', 1);
     	$em = $this->getDoctrine()->getManager();
     	$interet = $em->find('CollectifAdminBundle:Interet', $interetId);
     	 

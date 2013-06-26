@@ -14,7 +14,7 @@ use Collectif\AdminBundle\Entity\MonCv;
 
 class MesCvController extends Controller
 {
-	public function listAction($tabNum = 1)
+	public function editAction($tabNum = 1)
     {
     	$user = $this->container->get('security.context')->getToken()->getUser();
     	
@@ -23,16 +23,22 @@ class MesCvController extends Controller
     	));
     }
     
-    public function editAction($monCvId = null)
+    public function listAction($monCvId = null)
     {
     	$message='';
     	$user = $this->container->get('security.context')->getToken()->getUser();
     	$em = $this->getDoctrine()->getManager();
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:MonCv');
+    	$cvList = $repository->getCvFR($user->getId());
+    	if(sizeof($cvList) > 0) {
+    		$monCvId = $cvList[0]->getId();
+    	}
+    		
     
     	if (isset($monCvId))
     	{
     		$cv = $repository->find($monCvId);
+    		$cv->setDateCreation(new \Datetime());
     
     		if (!$cv)
     		{

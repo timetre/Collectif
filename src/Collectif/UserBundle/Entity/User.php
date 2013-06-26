@@ -24,7 +24,7 @@ class User extends BaseUser
     
     /**
      * @var string $nom
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="nom", type="string", length=255)
      */
     private $nom;
@@ -82,6 +82,13 @@ class User extends BaseUser
      * @ORM\Column(name="dateCreation", type="datetime")
      */
     private $dateCreation;
+    
+    /**
+     * @var \DateTime $dateModification
+     *
+     * @ORM\Column(name="dateModification", type="datetime")
+     */
+    private $dateModification;
     
     /**
      * @ORM\ManyToOne(targetEntity="Collectif\AdminBundle\Entity\Domaine")
@@ -150,21 +157,21 @@ class User extends BaseUser
     /**
      * @var string $lieu
      *
-     * @ORM\Column(name="lieu", type="text")
+     * @ORM\Column(name="lieu", type="text", nullable=true)
      */
     private $lieu;
     
     /**
      * @var string $statut
      *
-     * @ORM\Column(name="statut", type="text")
+     * @ORM\Column(name="statut", type="text", nullable=true)
      */
     private $statut;
     
     /**
      * @var string $sujetRecherche
      *
-     * @ORM\Column(name="sujetRecherche", type="text")
+     * @ORM\Column(name="sujetRecherche", type="text", nullable=true)
      */
     private $sujetRecherche;
     
@@ -189,13 +196,26 @@ class User extends BaseUser
      */
     private $facebook;
 
-    
     /**
      * @var string $hypothese
      *
      * @ORM\Column(name="hypothese", type="text", nullable=true)
      */
     private $hypothese;
+    
+    /**
+     * @var string $sitePersonnel
+     *
+     * @ORM\Column(name="sitePersonnel", type="text", nullable=true)
+     */
+    private $sitePersonnel;
+    
+    /**
+     * @var string $pageStructure
+     *
+     * @ORM\Column(name="pageStructure", type="text", nullable=true)
+     */
+    private $pageStructure;
 	
     
     public function __construct()
@@ -245,11 +265,40 @@ class User extends BaseUser
     		$this->path = sha1(uniqid(mt_rand(), true)).'.'.$this->file->guessExtension();
     	}
     	
+    	$this->formatFields();
+    }
+    
+    private function formatFields()
+    {
+    	//die;
     	if (null !== $this->nom && null !== $this->prenom) {
     		$this->alias = $this->clear_str($this->prenom)."-".$this->clear_str($this->nom);
+    		$this->prenom = ucfirst ($this->prenom);
+    		$this->nom = strtoupper($this->nom);
     	} else {
     		$this->alias = sha1(uniqid(mt_rand(), true));
     	}
+    	 
+    	if(null !== $this->email)
+    		$this->username = $this->email;
+    	else
+    		$this->username = sha1(uniqid(mt_rand(), true));
+    	
+    	$this->facebook = $this->putHttp($this->facebook);
+    	$this->twitter = $this->putHttp($this->twitter);
+    	$this->pageStructure = $this->putHttp($this->pageStructure);
+    	$this->sitePersonnel = $this->putHttp($this->sitePersonnel);
+    	$this->activiteNumerique = $this->putHttp($this->activiteNumerique);
+    }
+    
+    private function putHttp($field) {
+    	if(null !== $field) {
+    		$begin = substr($field, 0, 7);
+    		if (strpos($begin,'http://') === false) {
+    			$field = "http://" . $field;
+    		}
+    	}
+    	return $field;
     }
     
     /**
@@ -1018,5 +1067,51 @@ class User extends BaseUser
     public function getTelephone()
     {
         return $this->telephone;
+    }
+
+    /**
+     * Set sitePersonnel
+     *
+     * @param string $sitePersonnel
+     * @return User
+     */
+    public function setSitePersonnel($sitePersonnel)
+    {
+        $this->sitePersonnel = $sitePersonnel;
+    
+        return $this;
+    }
+
+    /**
+     * Get sitePersonnel
+     *
+     * @return string 
+     */
+    public function getSitePersonnel()
+    {
+        return $this->sitePersonnel;
+    }
+
+    /**
+     * Set pageStructure
+     *
+     * @param string $pageStructure
+     * @return User
+     */
+    public function setPageStructure($pageStructure)
+    {
+        $this->pageStructure = $pageStructure;
+    
+        return $this;
+    }
+
+    /**
+     * Get pageStructure
+     *
+     * @return string 
+     */
+    public function getPageStructure()
+    {
+        return $this->pageStructure;
     }
 }

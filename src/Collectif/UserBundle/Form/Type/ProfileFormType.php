@@ -9,11 +9,13 @@ class ProfileFormType extends BaseType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-        $builder->add('username', 'text', array(
+        //parent::buildForm($builder, $options);
+        /*$builder->add('username', 'text', array(
         		'label' => 'Login',
     			'disabled' => true, 
-    			'attr' => array('class' => 'test')));
+    			'attr' => array('class' => 'test')));*/
+    	$builder->add('email', 'text', array('label' => 'Email'));
+    	
         $builder->add('plainPassword', 'repeated', array(
         		'type' => 'password',
         		'label' => 'Mot de passe',
@@ -24,7 +26,7 @@ class ProfileFormType extends BaseType
         ));
         $builder->add('nom', 'text', array('label' => 'Nom'));
         $builder->add('prenom', 'text', array('label' => 'Prénom'));
-		$builder->add('email', 'text', array('label' => 'Email'));
+		
 		$builder->add('telephone', 'text', array('label' => 'Téléphone', 'required' => false));
     }
 

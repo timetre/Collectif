@@ -25,7 +25,7 @@
           <div class="nav-collapse collapse dropdown">
           	
           	<p class="navbar-text pull-right">
-              Connecté en tant que <a href="#" class="navbar-link">{{ app.user.username }}</a>
+              Connecté en tant que <a href="{{ path('collectif_membre_edit_page', { 'id': app.user.id }) }}" class="navbar-link">{{ app.user.username }}</a>
             </p>
           
             <ul class="nav" role="menu" aria-labelledby="dLabel">
@@ -44,7 +44,14 @@
 	          {% endif %}
 			  	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Page personnelle<b class="caret"></b></a>
 			  	<ul class="dropdown-menu">
-			  		{% if app.request.attributes.get('_route') == 'collectif_mescv_list' %}
+			  	
+			  		{% if app.request.attributes.get('_route') == 'collectif_membre_edit_page' %}
+	            		<li class="active"><a href="{{ path('collectif_membre_edit_page', { 'id': app.user.id }) }}">Présentation</a></li>
+	            	{% else %}
+	              		<li><a href="{{ path('collectif_membre_edit_page', { 'id': app.user.id }) }}">Présentation</a></li>
+	           	 	{% endif %}
+	           	 	
+	           	 	{% if app.request.attributes.get('_route') == 'collectif_mescv_list' %}
 	            		<li class="active"><a href="{{ path('collectif_mescv_list') }}">Mon CV</a></li>
 	            	{% else %}
 	              		<li><a href="{{ path('collectif_mescv_list') }}">Mon CV</a></li>
@@ -55,26 +62,22 @@
 	            	{% else %}
 	              		<li><a href="{{ path('collectif_publication_list_own', { 'id': app.user.id }) }}">Mes publications</a></li>
 	           	 	{% endif %}
-	           	 	
-	           	 	{% if app.request.attributes.get('_route') == 'collectif_membre_edit_page' %}
-	            		<li class="active"><a href="{{ path('collectif_membre_edit_page', { 'id': app.user.id }) }}">Présentation</a></li>
+			  	
+			  		{% if app.request.attributes.get('_route') == 'collectif_cv_list' %}
+	            		<li class="active"><a href="{{ path('collectif_cv_list') }}">Divers</a></li>
 	            	{% else %}
-	              		<li><a href="{{ path('collectif_membre_edit_page', { 'id': app.user.id }) }}">Présentation</a></li>
+	              		<li><a href="{{ path('collectif_cv_list') }}">Divers</a></li>
 	           	 	{% endif %}
-	           	 	
+			  		
+	           	 	{#
 			  		{% if app.request.attributes.get('_route') == 'fos_user_profile_show' %}
 	            		<li class="active"><a href="{{ path('fos_user_profile_show') }}">Infos perso</a></li>
 	            	{% else %}
 	              		<li><a href="{{ path('fos_user_profile_show') }}">Infos perso</a></li>
 	           	 	{% endif %}
+					#}
+	           	 	
 
-	           	 	
-	           	 	{% if app.request.attributes.get('_route') == 'collectif_cv_list' %}
-	            		<li class="active"><a href="{{ path('collectif_cv_list') }}">Divers</a></li>
-	            	{% else %}
-	              		<li><a href="{{ path('collectif_cv_list') }}">Divers</a></li>
-	           	 	{% endif %}
-	           	 	
 	           	 	{% if app.request.attributes.get('_route') == 'collectif_stat_list' %}
 	            		<li class="active"><a href="{{ path('collectif_stat_list') }}">Mes statistiques</a></li>
 	            	{% else %}

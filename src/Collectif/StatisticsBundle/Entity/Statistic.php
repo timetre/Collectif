@@ -77,6 +77,34 @@ class Statistic
      */
     private $annee;
     
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="semaine", type="integer")
+     */
+    private $semaine;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="heure", type="integer")
+     */
+    private $heure;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="minute", type="integer")
+     */
+    private $minute;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="seconde", type="integer")
+     */
+    private $seconde;
+    
    
     /**
      * @ORM\ManyToOne(targetEntity="Collectif\UserBundle\Entity\User")
@@ -90,6 +118,11 @@ class Statistic
     	$this->jour = date_format($this->date, "d");
     	$this->mois = date_format($this->date, "m");
     	$this->annee = date_format($this->date, "Y");
+    	$this->semaine = date_format($this->date, "W");
+    	
+    	$this->heure = date_format($this->date, "H");
+    	$this->minute = date_format($this->date, "i");
+    	$this->seconde = date_format($this->date, "s");
     }
     
     /**
@@ -307,5 +340,97 @@ class Statistic
     public function getJour()
     {
         return $this->jour;
+    }
+
+    /**
+     * Set semaine
+     *
+     * @param integer $semaine
+     * @return Statistic
+     */
+    public function setSemaine($semaine)
+    {
+        $this->semaine = $semaine;
+    
+        return $this;
+    }
+
+    /**
+     * Get semaine
+     *
+     * @return integer 
+     */
+    public function getSemaine()
+    {
+        return $this->semaine;
+    }
+
+    /**
+     * Set heure
+     *
+     * @param integer $heure
+     * @return Statistic
+     */
+    public function setHeure($heure)
+    {
+        $this->heure = $heure;
+    
+        return $this;
+    }
+
+    /**
+     * Get heure
+     *
+     * @return integer 
+     */
+    public function getHeure()
+    {
+        return $this->heure;
+    }
+
+    /**
+     * Set minute
+     *
+     * @param integer $minute
+     * @return Statistic
+     */
+    public function setMinute($minute)
+    {
+        $this->minute = $minute;
+    
+        return $this;
+    }
+
+    /**
+     * Get minute
+     *
+     * @return integer 
+     */
+    public function getMinute()
+    {
+        return $this->minute;
+    }
+
+    /**
+     * Set seconde
+     *
+     * @param integer $seconde
+     * @return Statistic
+     */
+    public function setSeconde($seconde)
+    {
+        $this->seconde = $seconde;
+    
+        return $this;
+    }
+
+    /**
+     * Get seconde
+     *
+     * @return integer 
+     */
+    public function getSeconde()
+    {
+        return $this->seconde;
     }
 }

@@ -55,3 +55,11 @@ collectif_cv_edit_interet:
 collectif_cv_delete_interet:
     pattern:  /delete/interet/{interetId}
     defaults: { _controller: CollectifAdminBundle:Cv:deleteInteret }
+    
+collectif_cv_edit_contact:
+    pattern:  /edit/contact/
+    defaults: { _controller: CollectifAdminBundle:Cv:editContact }
+    
+collectif_cv_edit_compte:
+    pattern:  /edit/compte/
+    defaults: { _controller: CollectifAdminBundle:Cv:editCompte }

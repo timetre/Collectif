@@ -3,7 +3,7 @@
 {% block title %}Collectif CONFLUENCE{% endblock %}
 
 {% block content %}
-<p>{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }} : {{ user.username }}</p>
+	<p>Email : {{ user.email }}</p>
 	<p>{{ 'profile.show.name'|trans({}, 'FOSUserBundle') }} : {{ user.nom }}</p>
 	<p>{{ 'profile.show.firstname'|trans({}, 'FOSUserBundle') }} : {{ user.prenom }}</p>
 	<p>{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }} : {{ user.email }}</p>

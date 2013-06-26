@@ -7,11 +7,11 @@
 <hr/>
 <div class="textwidget">
 	{% for p in partenaires %}
-	<p>
+	<div>
 		<strong>
 			{{ p.nom }}
 		</strong>
-		<p style="text-align: justify;">
+		<div style="text-align: justify; margin-bottom: -30px;">
 			<a target="_blank" href="{{ p.lien }}">
 				{% if image('upload/Partenaires/' ~ p.path).width > 500 and image('upload/Partenaires/' ~ p.path).width <= 624 and p.align == "center" %}
 					<img width="624" align="{{ p.align }}" src="{{ image('upload/Partenaires/' ~ p.path) }}" alt="{{ p.nom }}">
@@ -22,8 +22,8 @@
 				{% endif %}
 			</a>
 			{{ p.description | raw }}
-		</p>
-	</p>
+		</div>
+	</div>
 		<hr>
 	{% endfor %}
 </div>

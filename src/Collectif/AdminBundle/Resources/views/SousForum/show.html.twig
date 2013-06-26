@@ -1,0 +1,21 @@
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+	<h1>{{ entity.titre }}</h1>
+	
+	{{ entity.description | raw }}
+
+{% form_theme form 'CollectifAdminBundle:Form:fields.html.twig' %}
+
+<form action="{{ path('reseau_post_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+    {{ form_widget(form) }}
+    
+    <input type="reset" class="btn btn-warning" />
+    <input type="submit" class="btn btn-success" />
+    
+</form>
+
+
+{% endblock %}

@@ -11,7 +11,7 @@ class MonCvForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre', 'text', array('label' => 'Titre du CV'))
+            /*->add('titre', 'text', array('label' => 'Titre du CV'))
             ->add('langue', 'choice', array(
             		'label' => 'Langue', 
             		'choices'   => array(
@@ -21,7 +21,7 @@ class MonCvForm extends AbstractType
             				//'DE'   => 'Deutsch'
             		),
             		'multiple'  => false 
-            ))
+            ))*/
             ->add('file', 'file', array('label' => 'Cv'));
         ;
     }

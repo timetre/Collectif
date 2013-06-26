@@ -5,6 +5,7 @@ namespace Collectif\AdminBundle\Controller;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 use Collectif\UserBundle\Entity\User;
 
@@ -58,16 +59,18 @@ class MembreController extends Controller {
         if (isset($id)) 
         {
             $membre = $repository->find($id);
+            $membre->setDateModification(new \DateTime());
             
             if (!$membre)
             {
-                $message='Aucun membre trouv�';
+                $message='Aucun membre trouvé';
             }
 			$form = $this->container->get('form.factory')->create(new MembreForm(), $membre);
         }
         else 
         {
 	 		$membre = new User();
+	 		$membre->setDateModification(new \DateTime());
 	 		$membre->setEnabled(true);
     		$form = $this->container->get('form.factory')->create(new MembreFormAdd(), $membre);
         }
@@ -87,11 +90,11 @@ class MembreController extends Controller {
                 
                 if (isset($id)) 
                 {
-                     $message='Membre modifi� avec succ�s !';
+                     $message='Membre modifié avec succès !';
                 }
                 else 
                 {
-                    $message='Membre ajout� avec succ�s !';
+                    $message='Membre ajouté avec succès !';
                 }
                 
                 return new RedirectResponse($this->container->get('router')->generate('collectif_membre_homepage'));
@@ -117,6 +120,7 @@ class MembreController extends Controller {
     	if (isset($id))
     	{
     		$membre = $repository->find($id);
+    		$membre->setDateModification(new \DateTime());
     
     		if (!$membre)
     		{
@@ -127,7 +131,7 @@ class MembreController extends Controller {
     	else
     	{
     		$membre = new User();
-    		
+    		$membre->setDateModification(new \DateTime());
     		$membre->addRole("ROLE_SUPER_ADMIN");
     		$membre->setEnabled(true);
     		$form = $this->container->get('form.factory')->create(new MembreFormAdd(), $membre);
@@ -176,6 +180,7 @@ class MembreController extends Controller {
     	if (isset($id))
     	{
     		$membre = $repository->find($id);
+    		$membre->setDateModification(new \DateTime());
     
     		if (!$membre)
     		{
@@ -186,7 +191,7 @@ class MembreController extends Controller {
     	else
     	{
     		$membre = new User();
-    		
+    		$membre->setDateModification(new \DateTime());
     		$membre->addRole("ROLE_SUPER_ADMIN");
     		$membre->setEnabled(true);
     		$form = $this->container->get('form.factory')->create(new MembreFormAdd(), $membre);
@@ -260,7 +265,6 @@ class MembreController extends Controller {
     
     public function registerAction()
     {
-    	 
     	$message='';
     	$titre="Inscription";
     	$em = $this->getDoctrine()->getManager();
@@ -270,7 +274,8 @@ class MembreController extends Controller {
     	$membre = new User();
     	$membre->setEnabled(false);
     	$membre->addRole("ROLE_ADMIN");
-    	
+    	$membre->setDateModification(new \DateTime());
+    	   	
     	$form = $this->container->get('form.factory')->create(new MembreRegisterForm(), $membre);
     	
     	$request = $this->container->get('request');
@@ -281,6 +286,7 @@ class MembreController extends Controller {
     
     		if ($form->isValid())
     		{
+    			
     			$em->persist($membre);
     
     			$em->flush();

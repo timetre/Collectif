@@ -22,6 +22,13 @@ class MonCv
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+    /**
+     * @var \DateTime $dateCreation
+     *
+     * @ORM\Column(name="dateCreation", type="datetime")
+     */
+    private $dateCreation;
 
     /**
      * @var string
@@ -230,7 +237,7 @@ class MonCv
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
     	$metadata->addPropertyConstraint('file', new Assert\File(array(
-    			'maxSize' => '1024k',
+    			'maxSize' => '4096k',
     			'mimeTypes' => array(
     					'application/pdf',
     					'application/x-pdf',
