@@ -22,6 +22,13 @@ class MonCv
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+    /**
+     * @var \DateTime $dateCreation
+     *
+     * @ORM\Column(name="dateCreation", type="datetime")
+     */
+    private $dateCreation;
 
     /**
      * @var string
@@ -53,6 +60,11 @@ class MonCv
      * @Assert\File(maxSize="6000000")
      */
     public $file;
+    
+    public function __construct()
+    {
+    	$this->dateCreation = new \Datetime();
+    }
 
 
     /**
@@ -237,5 +249,28 @@ class MonCv
     			),
     			'mimeTypesMessage' => 'Merci de télécharger un fichier PDF valide', 
     	)));
+    }
+
+    /**
+     * Set dateCreation
+     *
+     * @param \DateTime $dateCreation
+     * @return MonCv
+     */
+    public function setDateCreation($dateCreation)
+    {
+        $this->dateCreation = $dateCreation;
+    
+        return $this;
+    }
+
+    /**
+     * Get dateCreation
+     *
+     * @return \DateTime 
+     */
+    public function getDateCreation()
+    {
+        return $this->dateCreation;
     }
 }

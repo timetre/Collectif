@@ -24,15 +24,15 @@ class User extends BaseUser
     
     /**
      * @var string $nom
-     *
-     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
+     * @Assert\NotBlank()
+     * @ORM\Column(name="nom", type="string", length=255)
      */
     private $nom;
 
     /**
      * @var string $prenom
      *
-     * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
+     * @ORM\Column(name="prenom", type="string", length=255)
      */
     private $prenom;
     
@@ -46,7 +46,7 @@ class User extends BaseUser
     /**
      * @var string $alias
      *
-     * @ORM\Column(name="alias", type="string", length=255, nullable=true)
+     * @ORM\Column(name="alias", type="string", length=255)
      */
     private $alias;
 
@@ -63,7 +63,7 @@ class User extends BaseUser
      * @ORM\Column(name="fonctionBureau", type="string", length=255, nullable=true)
      */
     private $fonctionBureau;
-	
+
 	/**
      * @Assert\File(maxSize="6000000")
      */
@@ -75,20 +75,27 @@ class User extends BaseUser
      * @ORM\Column(name="contenuPage", type="text", nullable=true)
      */
     private $contenuPage;
-	
+
 	/**
      * @var \DateTime $dateCreation
      *
-     * @ORM\Column(name="dateCreation", type="datetime", nullable=true)
+     * @ORM\Column(name="dateCreation", type="datetime")
      */
     private $dateCreation;
+    
+    /**
+     * @var \DateTime $dateModification
+     *
+     * @ORM\Column(name="dateModification", type="datetime")
+     */
+    private $dateModification;
     
     /**
      * @ORM\ManyToOne(targetEntity="Collectif\AdminBundle\Entity\Domaine")
      * @ORM\JoinColumn(nullable=true)
      */    
     private $domaine;
-	
+
 	/**
      * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Publication", cascade={"persist"}, mappedBy="membre")
      * @ORM\OrderBy({"datePublication" = "DESC"})
@@ -189,14 +196,27 @@ class User extends BaseUser
      */
     private $facebook;
 
-    
     /**
      * @var string $hypothese
      *
      * @ORM\Column(name="hypothese", type="text", nullable=true)
      */
     private $hypothese;
-	
+    
+    /**
+     * @var string $sitePersonnel
+     *
+     * @ORM\Column(name="sitePersonnel", type="text", nullable=true)
+     */
+    private $sitePersonnel;
+    
+    /**
+     * @var string $pageStructure
+     *
+     * @ORM\Column(name="pageStructure", type="text", nullable=true)
+     */
+    private $pageStructure;
+
     
     public function __construct()
     {
@@ -245,11 +265,40 @@ class User extends BaseUser
     		$this->path = sha1(uniqid(mt_rand(), true)).'.'.$this->file->guessExtension();
     	}
     	
+    	$this->formatFields();
+    }
+    
+    private function formatFields()
+    {
+    	//die;
     	if (null !== $this->nom && null !== $this->prenom) {
     		$this->alias = $this->clear_str($this->prenom)."-".$this->clear_str($this->nom);
+    		$this->prenom = ucfirst ($this->prenom);
+    		$this->nom = strtoupper($this->nom);
     	} else {
     		$this->alias = sha1(uniqid(mt_rand(), true));
     	}
+    	 
+    	if(null !== $this->email)
+    		$this->username = $this->email;
+    	else
+    		$this->username = sha1(uniqid(mt_rand(), true));
+    	
+    	$this->facebook = $this->putHttp($this->facebook);
+    	$this->twitter = $this->putHttp($this->twitter);
+    	$this->pageStructure = $this->putHttp($this->pageStructure);
+    	$this->sitePersonnel = $this->putHttp($this->sitePersonnel);
+    	$this->activiteNumerique = $this->putHttp($this->activiteNumerique);
+    }
+    
+    private function putHttp($field) {
+    	if(null !== $field) {
+    		$begin = substr($field, 0, 7);
+    		if (strpos($begin,'http://') === false) {
+    			$field = "http://" . $field;
+    		}
+    	}
+    	return $field;
     }
     
     /**
@@ -1018,5 +1067,51 @@ class User extends BaseUser
     public function getTelephone()
     {
         return $this->telephone;
+    }
+
+    /**
+     * Set sitePersonnel
+     *
+     * @param string $sitePersonnel
+     * @return User
+     */
+    public function setSitePersonnel($sitePersonnel)
+    {
+        $this->sitePersonnel = $sitePersonnel;
+    
+        return $this;
+    }
+
+    /**
+     * Get sitePersonnel
+     *
+     * @return string 
+     */
+    public function getSitePersonnel()
+    {
+        return $this->sitePersonnel;
+    }
+
+    /**
+     * Set pageStructure
+     *
+     * @param string $pageStructure
+     * @return User
+     */
+    public function setPageStructure($pageStructure)
+    {
+        $this->pageStructure = $pageStructure;
+    
+        return $this;
+    }
+
+    /**
+     * Get pageStructure
+     *
+     * @return string 
+     */
+    public function getPageStructure()
+    {
+        return $this->pageStructure;
     }
 }

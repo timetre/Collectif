@@ -18,9 +18,9 @@ class MembrePageForm extends AbstractType
 		));
 		$builder->add('file', 'file', array('label' => 'Image de profil', 'required' => false));
 		
-		$builder->add('twitter', 'text', array('label' => 'Compte Twitter', 'required' => false));
+		/*$builder->add('twitter', 'text', array('label' => 'Compte Twitter', 'required' => false));
 		$builder->add('facebook', 'text', array('label' => 'Compte Facebook', 'required' => false));
-		$builder->add('hypothese', 'text', array('label' => 'Carnet de recherche', 'required' => false));
+		$builder->add('hypothese', 'text', array('label' => 'Carnet de recherche', 'required' => false));*/
     }
 	
 	public function getName()

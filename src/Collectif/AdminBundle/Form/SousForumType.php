@@ -12,8 +12,8 @@ class SousForumType extends AbstractType
     {
         $builder
             ->add('titre', 'text', array('label' => 'Titre'))
-            ->add('isRss', 'checkbox', array('label' => 'Flux rss ?'))
-            ->add('urlFlux', 'text', array('label' => 'URL flux'))
+            ->add('isRss', 'checkbox', array('label' => 'Flux rss ?', 'required'  => false))
+            ->add('urlFlux', 'text', array('label' => 'URL flux', 'required'  => false))
             ->add('description', 'textarea', array(
             		'label' => 'Description',
             		'required'  => false,

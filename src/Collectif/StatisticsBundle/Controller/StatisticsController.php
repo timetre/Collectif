@@ -13,18 +13,22 @@ class StatisticsController extends Controller
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifStatisticsBundle:Statistic');
     	$stats = $repository->getStatistics($user);
     	$statsUniques = $repository->getUniqueStatistics($user);
+    	$statsJour = $repository->getStatisticsDay($user);
+    	$statsSemaine = $repository->getStatisticsWeek($user);
+    	$statsMois = $repository->getStatisticsMonth($user);
+    	$statsAnnee = $repository->getStatisticsYear($user);
+    	$statsActif = $repository->getStatisticsActive($user);
     	
-
-    	//$stat = $user->getStatistics();
-    	
-
-    	
-    	
-    	
+   	
         return $this->render('CollectifAdminBundle:Statistics:index.html.twig', 
         		array(
         			'stat' => $stats,
-        			'unique' => $statsUniques
+        			'jour' => $statsJour,
+        			'mois' => $statsMois,
+        			'annee' => $statsAnnee,
+        			'semaine' => $statsSemaine,
+        			'active' => $statsActif
+        				
         		)
         );
     }

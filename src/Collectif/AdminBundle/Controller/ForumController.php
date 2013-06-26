@@ -9,6 +9,7 @@ use APY\DataGridBundle\Grid\Source\Entity;
 use Collectif\AdminBundle\Entity\Forum;
 use Collectif\AdminBundle\Form\ForumType;
 
+
 /**
  * Forum controller.
  *
@@ -43,6 +44,8 @@ class ForumController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CollectifAdminBundle:Forum')->find($id);
+        
+        
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Forum entity.');
@@ -52,7 +55,8 @@ class ForumController extends Controller
 
         return $this->render('CollectifAdminBundle:Forum:show.html.twig', array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+            'delete_form' => $deleteForm->createView()
+		));
     }
 
     /**

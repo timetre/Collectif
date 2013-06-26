@@ -3,7 +3,7 @@
 		<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ f.titre }}<b class="caret"></b></a>
 		<ul class="dropdown-menu">
 		{% for s in f.sousForums %}
-	    	<li><a href="#">{{ s.titre }}</a></li>
+	    	<li><a href="{{ path('reseau_sousforum_show', { 'id': s.id }) }}">{{ s.titre }}</a></li>
         {% endfor %}
         </ul>
 	</li>

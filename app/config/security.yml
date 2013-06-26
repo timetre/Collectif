@@ -8,7 +8,8 @@ security:
 
     providers:
         fos_userbundle:
-            id: fos_user.user_manager
+            #id: fos_user.user_manager
+            id: fos_user.user_provider.username_email
 
     firewalls:
         dev:
@@ -23,6 +24,7 @@ security:
                 check_path: /reseau/login_check
                 default_target_path: /reseau
                 failure_path: /reseau/login
+                default_target_path: /reseau/
             remember_me:
                 key:         %secret%
             anonymous:       true            

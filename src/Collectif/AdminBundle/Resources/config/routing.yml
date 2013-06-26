@@ -35,7 +35,7 @@ collectif_membre_delete:
     defaults: { _controller: CollectifAdminBundle:Membre:delete }
     
 collectif_membre_register:
-    pattern:  /registration
+    pattern:  /registration/
     defaults: { _controller: CollectifAdminBundle:Membre:register }
     
 collectif_domaine_homepage:

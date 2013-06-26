@@ -9,7 +9,9 @@ class MembreFormAdd extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {  	        
-    	$builder->add('username', 'text', array('label' => 'Login'));
+    	//$builder->add('username', 'text', array('label' => 'Login'));
+    	$builder->add('enabled', 'checkbox', array('required' => false, 'label' => 'Membre actif ?'));
+    	$builder->add('email', 'text', array('label' => 'Email'));
         $builder->add('plainPassword', 'repeated', array(
         		'label' => 'Mot de passe',
         		'type' => 'password',
@@ -19,9 +21,11 @@ class MembreFormAdd extends AbstractType
         		'second_options' => array('label' => 'form.password_confirmation')));
 		$builder->add('nom', 'text', array('label' => 'Nom'));
         $builder->add('prenom', 'text', array('label' => 'Prénom'));
-		$builder->add('email', 'text', array('label' => 'Email'));
+		
 		$builder->add('membreBureau', 'checkbox', array('required' => false, 'label' => 'Membre du bureau ?'));
+		
 		$builder->add('fonctionBureau', 'text', array('required' => false, 'label' => 'Fonction au sein du bureau'));
+		
 		$builder->add('contenuPage', 'textarea', array(
 				'label' => 'Présentation',
 				'required'  => false,
@@ -29,7 +33,7 @@ class MembreFormAdd extends AbstractType
 						'class' => 'ckeditor'
 				)
 		));
-		$builder->add('enabled', 'checkbox', array('required' => false, 'label' => 'Actif'));
+		
 		$builder->add('file', 'file', array(
 				'required'  => false,
 				'label' => 'Image de profil'
@@ -42,17 +46,26 @@ class MembreFormAdd extends AbstractType
 	            'multiple' => false,
 	            'required' => true
             ));
-            
-		$builder->add('activiteNumerique', 'text', array('label' => 'Activité numérique (site, blog, ...)', 'required' => false));
-		$builder->add('lieu', 'text', array('label' => 'Lieu'));
-		$builder->add('statut', 'text', array('label' => 'Statut'));
-		$builder->add('sujetRecherche', 'text', array('label' => 'Sujet de recherche'));
-		$builder->add('structure', 'text', array('label' => 'Structure', 'required' => false));
+        
 		
-		$builder->add('twitter', 'text', array('label' => 'Compte Twitter', 'required' => false));
-		$builder->add('facebook', 'text', array('label' => 'Compte Facebook', 'required' => false));
-		$builder->add('hypothese', 'text', array('label' => 'Carnet de recherche', 'required' => false));    }
-	
+		$builder->add('sitePersonnel', 'text', array('label' => 'Site personnel', 'required' => false));
+		
+		$builder->add('activiteNumerique', 'text', array('label' => 'Carnet de recherche', 'required' => false));
+		
+		$builder->add('pageStructure', 'text', array('label' => 'Page de la structure', 'required' => false));
+		
+		$builder->add('lieu', 'text', array('label' => 'Lieu', 'required' => false));
+		
+		$builder->add('statut', 'text', array('label' => 'Statut', 'required' => false));
+		
+		$builder->add('sujetRecherche', 'text', array('label' => 'Sujet de recherche', 'required' => false));
+		
+		$builder->add('twitter', 'text', array('label' => 'Page Twitter', 'required' => false));
+		
+		$builder->add('facebook', 'text', array('label' => 'Page Facebook', 'required' => false));
+		
+    }
+    
 	public function getName()
 	{
 		return 'membre';

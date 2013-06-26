@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Collectif\AdminBundle\Entity\SousForum;
 use Collectif\AdminBundle\Form\SousForumType;
+use Collectif\AdminBundle\Form\PostType;
+use Collectif\AdminBundle\Entity\Post;
 
 /**
  * SousForum controller.
@@ -38,6 +40,12 @@ class SousForumController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CollectifAdminBundle:SousForum')->find($id);
+        
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $post = new Post();
+        $post->setSousForum($entity);
+        $post->setMembre($user);
+        $form = $this->createForm(new PostType(), $post);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find SousForum entity.');
@@ -47,7 +55,9 @@ class SousForumController extends Controller
 
         return $this->render('CollectifAdminBundle:SousForum:show.html.twig', array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+            'delete_form' => $deleteForm->createView(),
+        	'form'	=> $form->createView()
+		));
     }
 
     /**
@@ -60,21 +70,16 @@ class SousForumController extends Controller
         
         $entity->setTypeTopic($type);
         
-        if($type == "CONTENU") {
+        if($type == "CLASSIQUE") {
         	$form = $this->container->get('form.factory')->create(new SousForumType(), $entity);
-        } else if($type == "LIEN") {
+        } else if($type == "OUTILS") {
         	$form = $this->container->get('form.factory')->create(new SousForumType(), $entity);
-        } else if($type == "BUREAU") {
+        } else if($type == "STAGES") {
         	$form = $this->container->get('form.factory')->create(new SousForumType(), $entity);
-        } else if($type == "CONTACT") {
+        } else if($type == "RSS") {
         	$form = $this->container->get('form.factory')->create(new SousForumType(), $entity);
-        } else if($type == "PARTENAIRES") {
-        	$form = $this->container->get('form.factory')->create(new SousForumType(), $entity);
-        }
+        }        
         
-        
-        //$form   = $this->createForm(new SousForumType(), $entity);
-
         return $this->render('CollectifAdminBundle:SousForum:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
