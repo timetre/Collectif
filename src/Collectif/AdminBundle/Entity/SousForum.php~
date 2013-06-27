@@ -411,37 +411,4 @@ class SousForum
     {
         return $this->visionneuses;
     }
-
-    /**
-     * Add feeds
-     *
-     * @param \Collectif\AdminBundle\Entity\Feed $feeds
-     * @return SousForum
-     */
-    public function addFeed(\Collectif\AdminBundle\Entity\Feed $feeds)
-    {
-        $this->feeds[] = $feeds;
-    
-        return $this;
-    }
-
-    /**
-     * Remove feeds
-     *
-     * @param \Collectif\AdminBundle\Entity\Feed $feeds
-     */
-    public function removeFeed(\Collectif\AdminBundle\Entity\Feed $feeds)
-    {
-        $this->feeds->removeElement($feeds);
-    }
-
-    /**
-     * Get feeds
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getFeeds()
-    {
-        return $this->feeds;
-    }
 }

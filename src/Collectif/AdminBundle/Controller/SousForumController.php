@@ -2,12 +2,21 @@
 
 namespace Collectif\AdminBundle\Controller;
 
+
+
+
+
+use Collectif\AdminBundle\Entity\Feed;
+use Collectif\AdminBundle\Entity\Outil;
 use Collectif\AdminBundle\Entity\Message;
+use Collectif\AdminBundle\Entity\Offre;
+use Collectif\AdminBundle\Entity\Post;
+use Collectif\AdminBundle\Entity\SousForum;
+use Collectif\AdminBundle\Entity\Visionneuse;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Collectif\AdminBundle\Entity\SousForum;
 use Collectif\AdminBundle\Form\SousForumType;
 use Collectif\AdminBundle\Form\SousForumRssType;
 use Collectif\AdminBundle\Form\SousForumOutilsType;
@@ -15,7 +24,12 @@ use Collectif\AdminBundle\Form\SousForumStagesType;
 use Collectif\AdminBundle\Form\SousForumPdfType;
 use Collectif\AdminBundle\Form\PostType;
 use Collectif\AdminBundle\Form\MessageType;
-use Collectif\AdminBundle\Entity\Post;
+use Collectif\AdminBundle\Form\OutilType;
+use Collectif\AdminBundle\Form\OffreType;
+use Collectif\AdminBundle\Form\FeedType;
+use Collectif\AdminBundle\Form\VisionneuseType;
+
+
 
 /**
  * SousForum controller.
@@ -67,27 +81,51 @@ class SousForumController extends Controller
 	        ));
 	        
         } else if($type == "OUTILS") {
-
-	        return $this->render('CollectifAdminBundle:SousForum:showOutils.html.twig', array(
-	        		'entity'      => $entity
+        	$user = $this->container->get('security.context')->getToken()->getUser();
+        	$outil = new Outil();
+        	$outil->setSousForum($entity);
+        	$outil->setMembre($user);
+        	$form = $this->createForm(new OutilType(), $outil);
+        	
+	        return $this->render('CollectifAdminBundle:Outil:show.html.twig', array(
+	        		'entity'      => $entity,
+	        		'form'	=> $form->createView()
 	        ));
 	        
         } else if($type == "STAGES") {
+        	$user = $this->container->get('security.context')->getToken()->getUser();
+        	$offre = new Offre();
+        	$offre->setSousForum($entity);
+        	$offre->setMembre($user);
+        	$form = $this->createForm(new OffreType(), $offre);
         	
-	        return $this->render('CollectifAdminBundle:SousForum:showStages.html.twig', array(
-	        		'entity'      => $entity
+	        return $this->render('CollectifAdminBundle:Offre:show.html.twig', array(
+	        		'entity'      => $entity,
+	        		'form'	=> $form->createView()
 	        ));
 	        
         } else if($type == "RSS") {
-			
-	        return $this->render('CollectifAdminBundle:SousForum:showRss.html.twig', array(
-	        		'entity'      => $entity
+        	$user = $this->container->get('security.context')->getToken()->getUser();
+        	$feed = new Feed();
+        	$feed->setSousForum($entity);
+        	$feed->setMembre($user);
+        	$form = $this->createForm(new FeedType(), $feed);
+        	
+	        return $this->render('CollectifAdminBundle:Rss:show.html.twig', array(
+	        		'entity'      => $entity,
+	        		'form'	=> $form->createView()
 	        ));
 	        
         } else if($type == "PDF") {
-			
-	        return $this->render('CollectifAdminBundle:SousForum:showPdf.html.twig', array(
-	        		'entity'      => $entity
+        	$user = $this->container->get('security.context')->getToken()->getUser();
+        	$visionneuse = new Visionneuse();
+        	$visionneuse->setSousForum($entity);
+        	$visionneuse->setMembre($user);
+        	$form = $this->createForm(new VisionneuseType(), $visionneuse);
+        	
+	        return $this->render('CollectifAdminBundle:Pdf:show.html.twig', array(
+	        		'entity'      => $entity,
+	        		'form'	=> $form->createView()
 	        ));
 	        
         } else {
@@ -212,7 +250,6 @@ class SousForumController extends Controller
         ));
     }
     
-    
     public function beforeAction()
     {
     	 
@@ -291,134 +328,6 @@ class SousForumController extends Controller
         ;
     }
     
-	public function createPostAction(Request $request, $sfId)
-    {
-    	$entity  = new Post();
-    	$form = $this->createForm(new PostType(), $entity);
-    	$form->bind($request);
-
-    	if (!$form->isValid()) {
-    		
-    		$em = $this->getDoctrine()->getManager();
-    		
-    		$user = $this->container->get('security.context')->getToken()->getUser();
-    		$message = $em->getRepository('CollectifAdminBundle:Message')->find($sfId);
- 
-    		$entity->setMembre($user);
-    		$entity->setMessage($message);
-    		
-    		$em->persist($entity);
-    		$em->flush();
-
-	        $post = new Post();
-	        
-	        $post->setMessage($message);
-	        $post->setMembre($user);
-	        
-	        $form = $this->createForm(new PostType(), $post);
-	       
-	        if (!$message) {
-	            throw $this->createNotFoundException('Unable to find SousForum entity.');
-	        }
-			
-	        return $this->redirect($this->generateUrl('reseau_sousforum_message_show', array('id' => $message->getId())));
-    	}
-    
-    	return $this->render('CollectifAdminBundle:Post:new.html.twig', array(
-    			'entity' => $entity,
-    			'form'   => $form->createView(),
-    	));
-    }
-    
-    public function createMessageAction(Request $request, $sfId)
-    {
-    	$entity  = new Message();
-    	$form = $this->createForm(new MessageType(), $entity);
-    	$form->bind($request);
-    
-    	if (!$form->isValid()) {
-    
-    		$em = $this->getDoctrine()->getManager();
-    
-    		$user = $this->container->get('security.context')->getToken()->getUser();
-    		$sf = $em->getRepository('CollectifAdminBundle:SousForum')->find($sfId);
-    
-    		$entity->setMembre($user);
-    		$entity->setSousForum($sf);
-    
-    		$em->persist($entity);
-    		$em->flush();
-    
-    		$message = new Message();
-    		$message->setSousForum($sf);
-    		$message->setMembre($user);
-    		$form = $this->createForm(new MessageType(), $message);
-    
-    		if (!$sf) {
-    			throw $this->createNotFoundException('Unable to find SousForum entity.');
-    		}
-    
-    		return $this->redirect($this->generateUrl('reseau_sousforum_show', array('id' => $sf->getId())));
-    	}
-    
-    	return $this->render('CollectifAdminBundle:Post:new.html.twig', array(
-    			'entity' => $entity,
-    			'form'   => $form->createView(),
-    	));
-    }
-    
-    public function showMessageAction($id)
-    {
-    	
-    	$em = $this->getDoctrine()->getManager();
-    
-    	$entity = $em->getRepository('CollectifAdminBundle:Message')->find($id);
-
-    	$user = $this->container->get('security.context')->getToken()->getUser();
-    	$post = new Post();
-    	$post->setMessage($entity);
-    	$post->setMembre($user);
-    	$form = $this->createForm(new PostType(), $post);
 	
-    	return $this->render('CollectifAdminBundle:Message:show.html.twig', array(
-    		'entity'      => $entity,
-    		'form'	=> $form->createView()
-    	));
-    }
     
-	public function deleteMessageAction($id)
-	{
-    	$em = $this->getDoctrine()->getManager();
-    	$article = $em->find('CollectifAdminBundle:Message', $id);
-    
-    	if (!$article)
-    	{
-    		throw $this->createNotFoundException('Topic [id='.$id.'] inexistant.');
-    	}
-    	
-    	$sf = $article->getSousForum();
-    	
-    	$em->remove($article);
-    	$em->flush();
-    
-    	return $this->redirect($this->generateUrl('reseau_sousforum_show', array('id' => $sf->getId())));
-    }
-    
-    public function deletePostAction($id)
-    {
-    	$em = $this->getDoctrine()->getManager();
-    	$post = $em->find('CollectifAdminBundle:Post', $id);
-    
-    	if (!$post)
-    	{
-    		throw $this->createNotFoundException('Topic [id='.$id.'] inexistant.');
-    	}
-    	 
-    	$msg = $post->getMessage();
-    	 
-    	$em->remove($post);
-    	$em->flush();
-    
-    	return $this->redirect($this->generateUrl('reseau_sousforum_message_show', array('id' => $msg->getId())));
-    }
 }

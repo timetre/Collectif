@@ -4,16 +4,14 @@ namespace Collectif\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 /**
- * Visionneuse
+ * Offre
  *
  * @ORM\Table()
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="Collectif\AdminBundle\Entity\VisionneuseRepository")
+ * @ORM\Entity(repositoryClass="Collectif\AdminBundle\Entity\OffreRepository")
  */
-class Visionneuse
+class Offre
 {
     /**
      * @var integer
@@ -23,7 +21,7 @@ class Visionneuse
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
+
     /**
      * @var string $titre
      * @ORM\Column(name="titre", type="string", length=255, nullable=true)
@@ -49,7 +47,49 @@ class Visionneuse
     private $dateCreation;
     
     /**
-     * @ORM\ManyToOne(targetEntity="SousForum", cascade={"persist"}, inversedBy="visionneuses")
+     * @var string $entreprise
+     * @ORM\Column(name="entreprise", type="string", length=255, nullable=true)
+     */
+    private $entreprise;
+    
+    /**
+     * @var string $ville
+     * @ORM\Column(name="ville", type="string", length=255, nullable=true)
+     */
+    private $ville;
+    
+    /**
+     * @var string $contrat
+     * @ORM\Column(name="contrat", type="string", length=255, nullable=true)
+     */
+    private $contrat;
+    
+    /**
+     * @var string $experience
+     * @ORM\Column(name="experience", type="string", length=255, nullable=true)
+     */
+    private $experience;
+    
+    /**
+     * @var string $salaire
+     * @ORM\Column(name="salaire", type="string", length=255, nullable=true)
+     */
+    private $salaire;
+    
+    /**
+     * @var string $duree
+     * @ORM\Column(name="duree", type="string", length=255, nullable=true)
+     */
+    private $duree;
+    
+    /**
+     * @var string $contact
+     * @ORM\Column(name="contact", type="string", length=255, nullable=true)
+     */
+    private $contact;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="SousForum", cascade={"persist"}, inversedBy="offres")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank()
      */
@@ -68,22 +108,10 @@ class Visionneuse
      */
     private $membre;
     
-    /**
-     * @ORM\Column(name="path", type="string", length=255, nullable=true)
-     */
-    private $path;
-    
-    /**
-     * @Assert\File(maxSize="6000000")
-     */
-    public $file;
-    
-    
     public function __construct()
     {
     	$this->dateCreation = new \DateTime();
     }
-
 
     /**
      * Get id
@@ -94,105 +122,12 @@ class Visionneuse
     {
         return $this->id;
     }
-    
-    public function getAbsolutePath()
-    {
-    	return null === $this->path
-    	? null
-    	: $this->getUploadRootDir().'/'.$this->path;
-    }
-    
-    public function getWebPath()
-    {
-    	return null === $this->path
-    	? null
-    	: $this->getUploadDir().'/'.$this->path;
-    }
-    
-    protected function getUploadRootDir()
-    {
-    	// the absolute directory path where uploaded
-    	// documents should be saved
-    	return __DIR__.'/../../../../web/'.$this->getUploadDir();
-    }
-    
-    protected function getUploadDir()
-    {
-    	// get rid of the __DIR__ so it doesn't screw up
-    	// when displaying uploaded doc/image in the view.
-    	return 'upload/Visionneuse';
-    }
-    
-    /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     */
-    public function preUpload()
-    {
-    	if (null !== $this->file) {
-    		// do whatever you want to generate a unique name
-    		$filename = sha1(uniqid(mt_rand(), true));
-    		$this->path = $filename.'.'.$this->file->guessExtension();
-    	}
-    }
-    
-    /**
-     * @ORM\PostPersist()
-     * @ORM\PostUpdate()
-     */
-    public function upload()
-    {
-    	if (null === $this->file) {
-    		return;
-    	}
-    
-    	// if there is an error when moving the file, an exception will
-    	// be automatically thrown by move(). This will properly prevent
-    	// the entity from being persisted to the database on error
-    	$this->file->move($this->getUploadRootDir(), $this->path);
-    
-    	unset($this->file);
-    }
-    
-    /**
-     * @ORM\PostRemove()
-     */
-    public function removeUpload()
-    {
-    	if ($file = $this->getAbsolutePath()) {
-    		unlink($file);
-    	}
-    }
-    
-    
-    /**
-     * Set path
-     *
-     * @param string $path
-     * @return MonCv
-     */
-    public function setPath($path)
-    {
-    	$this->path = $path;
-    
-    	return $this;
-    }
-    
-    /**
-     * Get path
-     *
-     * @return string
-     */
-    public function getPath()
-    {
-    	return $this->path;
-    }
 
     /**
      * Set titre
      *
      * @param string $titre
-     * @return Visionneuse
+     * @return Offre
      */
     public function setTitre($titre)
     {
@@ -215,7 +150,7 @@ class Visionneuse
      * Set resume
      *
      * @param string $resume
-     * @return Visionneuse
+     * @return Offre
      */
     public function setResume($resume)
     {
@@ -238,7 +173,7 @@ class Visionneuse
      * Set contenu
      *
      * @param string $contenu
-     * @return Visionneuse
+     * @return Offre
      */
     public function setContenu($contenu)
     {
@@ -261,7 +196,7 @@ class Visionneuse
      * Set dateCreation
      *
      * @param \DateTime $dateCreation
-     * @return Visionneuse
+     * @return Offre
      */
     public function setDateCreation($dateCreation)
     {
@@ -284,7 +219,7 @@ class Visionneuse
      * Set sousForum
      *
      * @param \Collectif\AdminBundle\Entity\SousForum $sousForum
-     * @return Visionneuse
+     * @return Offre
      */
     public function setSousForum(\Collectif\AdminBundle\Entity\SousForum $sousForum)
     {
@@ -307,7 +242,7 @@ class Visionneuse
      * Add posts
      *
      * @param \Collectif\AdminBundle\Entity\Post $posts
-     * @return Visionneuse
+     * @return Offre
      */
     public function addPost(\Collectif\AdminBundle\Entity\Post $posts)
     {
@@ -340,7 +275,7 @@ class Visionneuse
      * Set membre
      *
      * @param \Collectif\UserBundle\Entity\User $membre
-     * @return Visionneuse
+     * @return Offre
      */
     public function setMembre(\Collectif\UserBundle\Entity\User $membre)
     {

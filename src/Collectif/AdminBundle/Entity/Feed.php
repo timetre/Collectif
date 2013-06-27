@@ -6,15 +6,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Collectif\AdminBundle\Entity\Post
+ * Feed
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Collectif\AdminBundle\Entity\PostRepository")
+ * @ORM\Entity(repositoryClass="Collectif\AdminBundle\Entity\FeedRepository")
  */
-class Post
+class Feed
 {
     /**
-     * @var integer $id
+     * @var integer
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -22,39 +22,37 @@ class Post
      */
     private $id;
 
-
+    
     /**
      * @var string $titre
      * @ORM\Column(name="titre", type="string", length=255, nullable=true)
      */
     private $titre;
-
+    
+    /**
+     * @var string $lien
+     * @ORM\Column(name="lien", type="text", nullable=true)
+     */
+    private $lien;
+    
     /**
      * @var string $contenu
-     * @ORM\Column(name="contenu", type="text")
+     * @ORM\Column(name="contenu", type="text", nullable=true)
      */
     private $contenu;
-
+    
     /**
      * @var \DateTime $dateCreation
      * @ORM\Column(name="dateCreation", type="datetime")
      */
     private $dateCreation;
     
-    
     /**
-     * @ORM\ManyToOne(targetEntity="Message", cascade={"persist"}, inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity="SousForum", cascade={"persist"}, inversedBy="feeds")
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\Blank()
+     * @Assert\NotBlank()
      */
-    private $message;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="Visionneuse", cascade={"persist"}, inversedBy="posts")
-     * @ORM\JoinColumn(nullable=false)
-     * @Assert\Blank()
-     */
-    private $visionneuse;
+    private $sousForum;
     
     /**
      * @ORM\ManyToOne(targetEntity="Collectif\UserBundle\Entity\User", cascade={"persist"}, inversedBy="publications")
@@ -80,34 +78,10 @@ class Post
     }
 
     /**
-     * Set membre
-     *
-     * @param Collectif\UserBundle\Entity\User $membre
-     * @return Post
-     */
-    public function setMembre(\Collectif\UserBundle\Entity\User $membre)
-    {
-        $this->membre = $membre;
-    
-        return $this;
-    }
-
-    /**
-     * Get membre
-     *
-     * @return Collectif\UserBundle\Entity\User 
-     */
-    public function getMembre()
-    {
-        return $this->membre;
-    }
-
-
-    /**
      * Set titre
      *
      * @param string $titre
-     * @return Post
+     * @return Feed
      */
     public function setTitre($titre)
     {
@@ -127,10 +101,33 @@ class Post
     }
 
     /**
+     * Set lien
+     *
+     * @param string $lien
+     * @return Feed
+     */
+    public function setLien($lien)
+    {
+        $this->lien = $lien;
+    
+        return $this;
+    }
+
+    /**
+     * Get lien
+     *
+     * @return string 
+     */
+    public function getLien()
+    {
+        return $this->lien;
+    }
+
+    /**
      * Set contenu
      *
      * @param string $contenu
-     * @return Post
+     * @return Feed
      */
     public function setContenu($contenu)
     {
@@ -153,7 +150,7 @@ class Post
      * Set dateCreation
      *
      * @param \DateTime $dateCreation
-     * @return Post
+     * @return Feed
      */
     public function setDateCreation($dateCreation)
     {
@@ -173,48 +170,48 @@ class Post
     }
 
     /**
-     * Set message
+     * Set sousForum
      *
-     * @param \Collectif\AdminBundle\Entity\Message $message
-     * @return Post
+     * @param \Collectif\AdminBundle\Entity\SousForum $sousForum
+     * @return Feed
      */
-    public function setMessage(\Collectif\AdminBundle\Entity\Message $message)
+    public function setSousForum(\Collectif\AdminBundle\Entity\SousForum $sousForum)
     {
-        $this->message = $message;
+        $this->sousForum = $sousForum;
     
         return $this;
     }
 
     /**
-     * Get message
+     * Get sousForum
      *
-     * @return \Collectif\AdminBundle\Entity\Message 
+     * @return \Collectif\AdminBundle\Entity\SousForum 
      */
-    public function getMessage()
+    public function getSousForum()
     {
-        return $this->message;
+        return $this->sousForum;
     }
 
     /**
-     * Set visionneuse
+     * Set membre
      *
-     * @param \Collectif\AdminBundle\Entity\Visionneuse $visionneuse
-     * @return Post
+     * @param \Collectif\UserBundle\Entity\User $membre
+     * @return Feed
      */
-    public function setVisionneuse(\Collectif\AdminBundle\Entity\Visionneuse $visionneuse)
+    public function setMembre(\Collectif\UserBundle\Entity\User $membre)
     {
-        $this->visionneuse = $visionneuse;
+        $this->membre = $membre;
     
         return $this;
     }
 
     /**
-     * Get visionneuse
+     * Get membre
      *
-     * @return \Collectif\AdminBundle\Entity\Visionneuse 
+     * @return \Collectif\UserBundle\Entity\User 
      */
-    public function getVisionneuse()
+    public function getMembre()
     {
-        return $this->visionneuse;
+        return $this->membre;
     }
 }

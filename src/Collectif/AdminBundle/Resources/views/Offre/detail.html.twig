@@ -1,0 +1,23 @@
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+
+	<div class="header-buttons">
+		<a class="btn btn-warning right" href="{{ path('reseau_sousforum_show', { 'id': entity.sousForum.id }) }}"><i class="icon-arrow-left icon-white"></i>Retour</a>
+	</div>
+	
+	<h2>Détail de l'offre : {{ entity.titre }}</h2>
+	
+	{{ entity.contenu | raw }}
+	
+	<p><strong>Societe/Université : </strong>{{ entity.entreprise }}</p>
+	<p><strong>Ville : </strong>{{ entity.ville }}</p>
+	<p><strong>Type de contrat : </strong>{{ entity.contrat }}</p>
+	<p><strong>Salaire : </strong>{{ entity.salaire }}</p>
+	<p><strong>Durée : </strong>{{ entity.duree }}</p>
+	<p><strong>Contact : </strong>{{ entity.contact }}</p>
+	
+
+{% endblock %}

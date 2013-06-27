@@ -1,0 +1,56 @@
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+
+	{% if is_granted("ROLE_SUPER_ADMIN") %}
+		<div class="header-buttons">
+			<a class="btn btn-success right" href="#createFeed" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Nouveau flux</a>
+		</div>
+	{% endif %}
+
+	<h1>{{ entity.titre }}</h1>
+	
+	{{ entity.description | raw }}
+
+	<hr/>
+
+	<h3>{{ entity.feeds | length }} flux</h3>
+	
+	<div style="margin-bottom: 100px;">
+		{% for feed in entity.feeds %}
+			<div>
+				<h5><a href="{{ path('reseau_sousforum_feed_show', { 'id': feed.id }) }}">{{ feed.titre }}</a></h5>
+				<p style="font-size: 12px;"> Posté par <strong><a href="{{ path('collectif_front_chercheur', { 'alias': feed.membre.alias }) }}" target="_blank">{{ feed.membre.prenom }} {{ feed.membre.nom }}</a></strong>, 
+					<em> le {{ feed.dateCreation|date('d/m/Y') }}</em>&nbsp;
+					{% if app.user.id == feed.membre.id or is_granted("ROLE_SUPER_ADMIN") %}
+						<a href="#"><i class="icon-pencil"></i> Editer</a>&nbsp;
+						
+						<a onclick="if(!confirm('Voulez-vous vraiment supprimer ce flux ?')) { return false };" 
+							href="{{ path('reseau_sousforum_delete_feed', { 'id': feed.id }) }}"><i class="icon-trash"></i> Supprimer</a>
+					{% endif %}
+				</p>
+			</div>
+			<hr/>
+		{% endfor %}
+	</div>
+
+<!-- Modal -->
+<div id="createFeed" style="width: 750px;" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<form action="{{ path('reseau_sousforum_create_feed', { 'sfId': entity.id }) }}" method="post" class="form-horizontal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Nouveau flux</h3>
+  </div>
+  <div class="modal-body">
+	{{ form_widget(form) }}
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Fermer</button>
+    <input type="submit" class="btn btn-success right" value="Créer" />
+  </div>
+</form>
+</div>	
+
+{% endblock %}

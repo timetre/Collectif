@@ -14,11 +14,6 @@ reseau_sousforum_create:
     pattern:  /create/{type}
     defaults: { _controller: "CollectifAdminBundle:SousForum:create" }
     requirements: { _method: post }
-    
-reseau_sousforum_create_post:
-    pattern:  /createpost/{sfId}
-    defaults: { _controller: "CollectifAdminBundle:SousForum:createPost" }
-    requirements: { _method: post }
 
 reseau_sousforum_edit:
     pattern:  /{id}/edit
@@ -36,20 +31,93 @@ reseau_sousforum_delete:
 reseau_sousforum_before_new:
     pattern:  /before/new
     defaults: { _controller: "CollectifAdminBundle:SousForum:before" }
+
+
+
+reseau_sousforum_create_post:
+    pattern:  /createpost/{sfId}
+    defaults: { _controller: "CollectifAdminBundle:Post:createPost" }
+    requirements: { _method: post }
+
+reseau_sousforum_delete_post:
+    pattern:  /{id}/deletepost
+    defaults: { _controller: "CollectifAdminBundle:Post:deletePost" }
+
     
 reseau_sousforum_create_message:
     pattern:  /createmessage/{sfId}
-    defaults: { _controller: "CollectifAdminBundle:SousForum:createMessage" }
+    defaults: { _controller: "CollectifAdminBundle:Message:createMessage" }
     requirements: { _method: post }
 
 reseau_sousforum_message_show:
     pattern:  /{id}/message/show
-    defaults: { _controller: "CollectifAdminBundle:SousForum:showMessage" }
+    defaults: { _controller: "CollectifAdminBundle:Message:showMessage" }
     
 reseau_sousforum_delete_message:
-    pattern:  /{id}/deleteMessage
-    defaults: { _controller: "CollectifAdminBundle:SousForum:deleteMessage" }
+    pattern:  /{id}/deletemessage
+    defaults: { _controller: "CollectifAdminBundle:Message:deleteMessage" }
+    
+    
+    
+    
+reseau_sousforum_create_feed:
+    pattern:  /createfeed/{sfId}
+    defaults: { _controller: "CollectifAdminBundle:Feed:createFeed" }
+    requirements: { _method: post }
 
-reseau_sousforum_delete_post:
-    pattern:  /{id}/deletePost
-    defaults: { _controller: "CollectifAdminBundle:SousForum:deletePost" }
+reseau_sousforum_feed_show:
+    pattern:  /{id}/feed/show
+    defaults: { _controller: "CollectifAdminBundle:Feed:showFeed" }
+    
+reseau_sousforum_delete_feed:
+    pattern:  /{id}/deletefeed
+    defaults: { _controller: "CollectifAdminBundle:Feed:deleteFeed" }
+    
+    
+    
+    
+reseau_sousforum_create_outil:
+    pattern:  /createoutil/{sfId}
+    defaults: { _controller: "CollectifAdminBundle:Outil:createOutil" }
+    requirements: { _method: post }
+
+reseau_sousforum_outil_show:
+    pattern:  /{id}/outil/show
+    defaults: { _controller: "CollectifAdminBundle:Outil:showOutil" }
+    
+reseau_sousforum_delete_outil:
+    pattern:  /{id}/deleteoutil
+    defaults: { _controller: "CollectifAdminBundle:Outil:deleteOutil" }  
+    
+    
+
+reseau_sousforum_create_offre:
+    pattern:  /createoffre/{sfId}
+    defaults: { _controller: "CollectifAdminBundle:Offre:createOffre" }
+    requirements: { _method: post }
+
+reseau_sousforum_offre_show:
+    pattern:  /{id}/offre/show
+    defaults: { _controller: "CollectifAdminBundle:Offre:showOffre" }
+    
+reseau_sousforum_delete_offre:
+    pattern:  /{id}/deleteoffre
+    defaults: { _controller: "CollectifAdminBundle:Offre:deleteOffre" }
+
+
+
+
+reseau_sousforum_create_visionneuse:
+    pattern:  /createvisionneuse/{sfId}
+    defaults: { _controller: "CollectifAdminBundle:Visionneuse:createVisionneuse" }
+    requirements: { _method: post }
+
+reseau_sousforum_visionneuse_show:
+    pattern:  /{id}/visionneuse/show
+    defaults: { _controller: "CollectifAdminBundle:Visionneuse:showVisionneuse" }
+    
+reseau_sousforum_delete_visionneuse:
+    pattern:  /{id}/deletevisionneuse
+    defaults: { _controller: "CollectifAdminBundle:Visionneuse:deleteVisionneuse" }
+    
+    

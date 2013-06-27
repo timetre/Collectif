@@ -30,13 +30,13 @@ class Offre
     
     /**
      * @var string $resume
-     * @ORM\Column(name="resume", type="text")
+     * @ORM\Column(name="resume", type="text", nullable=true)
      */
     private $resume;
     
     /**
      * @var string $contenu
-     * @ORM\Column(name="contenu", type="text")
+     * @ORM\Column(name="contenu", type="text", nullable=true)
      */
     private $contenu;
     
@@ -45,6 +45,48 @@ class Offre
      * @ORM\Column(name="dateCreation", type="datetime")
      */
     private $dateCreation;
+    
+    /**
+     * @var string $entreprise
+     * @ORM\Column(name="entreprise", type="string", length=255, nullable=true)
+     */
+    private $entreprise;
+    
+    /**
+     * @var string $ville
+     * @ORM\Column(name="ville", type="string", length=255, nullable=true)
+     */
+    private $ville;
+    
+    /**
+     * @var string $contrat
+     * @ORM\Column(name="contrat", type="string", length=255, nullable=true)
+     */
+    private $contrat;
+    
+    /**
+     * @var string $experience
+     * @ORM\Column(name="experience", type="string", length=255, nullable=true)
+     */
+    private $experience;
+    
+    /**
+     * @var string $salaire
+     * @ORM\Column(name="salaire", type="string", length=255, nullable=true)
+     */
+    private $salaire;
+    
+    /**
+     * @var string $duree
+     * @ORM\Column(name="duree", type="string", length=255, nullable=true)
+     */
+    private $duree;
+    
+    /**
+     * @var string $contact
+     * @ORM\Column(name="contact", type="string", length=255, nullable=true)
+     */
+    private $contact;
     
     /**
      * @ORM\ManyToOne(targetEntity="SousForum", cascade={"persist"}, inversedBy="offres")
@@ -250,5 +292,166 @@ class Offre
     public function getMembre()
     {
         return $this->membre;
+    }
+
+    /**
+     * Set entreprise
+     *
+     * @param string $entreprise
+     * @return Offre
+     */
+    public function setEntreprise($entreprise)
+    {
+        $this->entreprise = $entreprise;
+    
+        return $this;
+    }
+
+    /**
+     * Get entreprise
+     *
+     * @return string 
+     */
+    public function getEntreprise()
+    {
+        return $this->entreprise;
+    }
+
+    /**
+     * Set ville
+     *
+     * @param string $ville
+     * @return Offre
+     */
+    public function setVille($ville)
+    {
+        $this->ville = $ville;
+    
+        return $this;
+    }
+
+    /**
+     * Get ville
+     *
+     * @return string 
+     */
+    public function getVille()
+    {
+        return $this->ville;
+    }
+
+    /**
+     * Set contrat
+     *
+     * @param string $contrat
+     * @return Offre
+     */
+    public function setContrat($contrat)
+    {
+        $this->contrat = $contrat;
+    
+        return $this;
+    }
+
+    /**
+     * Get contrat
+     *
+     * @return string 
+     */
+    public function getContrat()
+    {
+        return $this->contrat;
+    }
+
+    /**
+     * Set experience
+     *
+     * @param string $experience
+     * @return Offre
+     */
+    public function setExperience($experience)
+    {
+        $this->experience = $experience;
+    
+        return $this;
+    }
+
+    /**
+     * Get experience
+     *
+     * @return string 
+     */
+    public function getExperience()
+    {
+        return $this->experience;
+    }
+
+    /**
+     * Set salaire
+     *
+     * @param string $salaire
+     * @return Offre
+     */
+    public function setSalaire($salaire)
+    {
+        $this->salaire = $salaire;
+    
+        return $this;
+    }
+
+    /**
+     * Get salaire
+     *
+     * @return string 
+     */
+    public function getSalaire()
+    {
+        return $this->salaire;
+    }
+
+    /**
+     * Set duree
+     *
+     * @param string $duree
+     * @return Offre
+     */
+    public function setDuree($duree)
+    {
+        $this->duree = $duree;
+    
+        return $this;
+    }
+
+    /**
+     * Get duree
+     *
+     * @return string 
+     */
+    public function getDuree()
+    {
+        return $this->duree;
+    }
+
+    /**
+     * Set contact
+     *
+     * @param string $contact
+     * @return Offre
+     */
+    public function setContact($contact)
+    {
+        $this->contact = $contact;
+    
+        return $this;
+    }
+
+    /**
+     * Get contact
+     *
+     * @return string 
+     */
+    public function getContact()
+    {
+        return $this->contact;
     }
 }

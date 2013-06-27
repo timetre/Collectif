@@ -1,0 +1,57 @@
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+
+	{% if is_granted("ROLE_SUPER_ADMIN") %}
+		<div class="header-buttons">
+			<a class="btn btn-success right" href="#createOffre" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Nouvelle offre</a>
+		</div>
+	{% endif %}
+
+	<h1>{{ entity.titre }}</h1>
+	
+	{{ entity.description | raw }}
+
+	<hr/>
+
+	<h3>{{ entity.offres | length }} Offres</h3>
+	
+	<div style="margin-bottom: 100px;">
+		{% for offre in entity.offres %}
+			<div>
+				<h5><a href="{{ path('reseau_sousforum_offre_show', { 'id': offre.id }) }}">{{ offre.titre }}</a></h5>
+				<p style="text-align: justify;">{{ offre.resume }}</p>
+				<p style="font-size: 12px;"> Posté par <strong><a href="{{ path('collectif_front_chercheur', { 'alias': offre.membre.alias }) }}" target="_blank">{{ offre.membre.prenom }} {{ offre.membre.nom }}</a></strong>, 
+					<em> le {{ offre.dateCreation|date('d/m/Y') }}</em>&nbsp;
+					{% if app.user.id == offre.membre.id or is_granted("ROLE_SUPER_ADMIN") %}
+						<a href="#"><i class="icon-pencil"></i> Editer</a>&nbsp;
+						
+						<a onclick="if(!confirm('Voulez-vous vraiment supprimer cette offre ?')) { return false };" 
+							href="{{ path('reseau_sousforum_delete_offre', { 'id': offre.id }) }}"><i class="icon-trash"></i> Supprimer</a>
+					{% endif %}
+				</p>
+			</div>
+			<hr/>
+		{% endfor %}
+	</div>
+	
+<!-- Modal -->
+<div id="createOffre" style="width: 750px;" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<form action="{{ path('reseau_sousforum_create_offre', { 'sfId': entity.id }) }}" method="post" class="form-horizontal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Nouvelle offre</h3>
+  </div>
+  <div class="modal-body">
+	{{ form_widget(form) }}
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Fermer</button>
+    <input type="submit" class="btn btn-success right" value="Créer" />
+  </div>
+</form>
+</div>	
+
+{% endblock %}
