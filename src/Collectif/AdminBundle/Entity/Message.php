@@ -6,55 +6,58 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Collectif\AdminBundle\Entity\Post
+ * Message
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Collectif\AdminBundle\Entity\PostRepository")
+ * @ORM\Entity(repositoryClass="Collectif\AdminBundle\Entity\MessageRepository")
  */
-class Post
+class Message
 {
     /**
-     * @var integer $id
+     * @var integer
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-
+    
     /**
      * @var string $titre
      * @ORM\Column(name="titre", type="string", length=255, nullable=true)
      */
     private $titre;
-
+    
+    /**
+     * @var string $resume
+     * @ORM\Column(name="resume", type="text")
+     */
+    private $resume;
+    
     /**
      * @var string $contenu
      * @ORM\Column(name="contenu", type="text")
      */
     private $contenu;
-
+    
     /**
      * @var \DateTime $dateCreation
      * @ORM\Column(name="dateCreation", type="datetime")
      */
     private $dateCreation;
     
+    /**
+     * @ORM\ManyToOne(targetEntity="SousForum", cascade={"persist"}, inversedBy="messages")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank()
+     */
+    private $sousForum;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Message", cascade={"persist"}, inversedBy="posts")
-     * @ORM\JoinColumn(nullable=true)
-     * @Assert\Blank()
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Post", cascade={"remove"}, mappedBy="message")
+     * @ORM\OrderBy({"dateCreation" = "DESC"})
      */
-    private $message;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="Visionneuse", cascade={"persist"}, inversedBy="posts")
-     * @ORM\JoinColumn(nullable=true)
-     * @Assert\Blank()
-     */
-    private $visionneuse;
+    private $posts;
     
     /**
      * @ORM\ManyToOne(targetEntity="Collectif\UserBundle\Entity\User", cascade={"persist"}, inversedBy="publications")
@@ -63,12 +66,11 @@ class Post
      */
     private $membre;
     
-    
     public function __construct()
     {
     	$this->dateCreation = new \DateTime();
     }
-
+    
     /**
      * Get id
      *
@@ -80,34 +82,10 @@ class Post
     }
 
     /**
-     * Set membre
-     *
-     * @param Collectif\UserBundle\Entity\User $membre
-     * @return Post
-     */
-    public function setMembre(\Collectif\UserBundle\Entity\User $membre)
-    {
-        $this->membre = $membre;
-    
-        return $this;
-    }
-
-    /**
-     * Get membre
-     *
-     * @return Collectif\UserBundle\Entity\User 
-     */
-    public function getMembre()
-    {
-        return $this->membre;
-    }
-
-
-    /**
      * Set titre
      *
      * @param string $titre
-     * @return Post
+     * @return Message
      */
     public function setTitre($titre)
     {
@@ -130,7 +108,7 @@ class Post
      * Set contenu
      *
      * @param string $contenu
-     * @return Post
+     * @return Message
      */
     public function setContenu($contenu)
     {
@@ -153,7 +131,7 @@ class Post
      * Set dateCreation
      *
      * @param \DateTime $dateCreation
-     * @return Post
+     * @return Message
      */
     public function setDateCreation($dateCreation)
     {
@@ -173,48 +151,104 @@ class Post
     }
 
     /**
-     * Set message
+     * Set sousForum
      *
-     * @param \Collectif\AdminBundle\Entity\Message $message
-     * @return Post
+     * @param \Collectif\AdminBundle\Entity\SousForum $sousForum
+     * @return Message
      */
-    public function setMessage(\Collectif\AdminBundle\Entity\Message $message)
+    public function setSousForum(\Collectif\AdminBundle\Entity\SousForum $sousForum)
     {
-        $this->message = $message;
+        $this->sousForum = $sousForum;
     
         return $this;
     }
 
     /**
-     * Get message
+     * Get sousForum
      *
-     * @return \Collectif\AdminBundle\Entity\Message 
+     * @return \Collectif\AdminBundle\Entity\SousForum 
      */
-    public function getMessage()
+    public function getSousForum()
     {
-        return $this->message;
+        return $this->sousForum;
     }
 
     /**
-     * Set visionneuse
+     * Set membre
      *
-     * @param \Collectif\AdminBundle\Entity\Visionneuse $visionneuse
-     * @return Post
+     * @param \Collectif\UserBundle\Entity\User $membre
+     * @return Message
      */
-    public function setVisionneuse(\Collectif\AdminBundle\Entity\Visionneuse $visionneuse)
+    public function setMembre(\Collectif\UserBundle\Entity\User $membre)
     {
-        $this->visionneuse = $visionneuse;
+        $this->membre = $membre;
     
         return $this;
     }
 
     /**
-     * Get visionneuse
+     * Get membre
      *
-     * @return \Collectif\AdminBundle\Entity\Visionneuse 
+     * @return \Collectif\UserBundle\Entity\User 
      */
-    public function getVisionneuse()
+    public function getMembre()
     {
-        return $this->visionneuse;
+        return $this->membre;
+    }
+
+    /**
+     * Set resume
+     *
+     * @param string $resume
+     * @return Message
+     */
+    public function setResume($resume)
+    {
+        $this->resume = $resume;
+    
+        return $this;
+    }
+
+    /**
+     * Get resume
+     *
+     * @return string 
+     */
+    public function getResume()
+    {
+        return $this->resume;
+    }
+
+    /**
+     * Add posts
+     *
+     * @param \Collectif\AdminBundle\Entity\Post $posts
+     * @return Message
+     */
+    public function addPost(\Collectif\AdminBundle\Entity\Post $posts)
+    {
+        $this->posts[] = $posts;
+    
+        return $this;
+    }
+
+    /**
+     * Remove posts
+     *
+     * @param \Collectif\AdminBundle\Entity\Post $posts
+     */
+    public function removePost(\Collectif\AdminBundle\Entity\Post $posts)
+    {
+        $this->posts->removeElement($posts);
+    }
+
+    /**
+     * Get posts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPosts()
+    {
+        return $this->posts;
     }
 }

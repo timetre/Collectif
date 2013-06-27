@@ -41,6 +41,21 @@ class Post
      */
     private $dateCreation;
     
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Message", cascade={"persist"}, inversedBy="posts")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\Blank()
+     */
+    private $message;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Visionneuse", cascade={"persist"}, inversedBy="posts")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\Blank()
+     */
+    private $visionneuse;
+    
     /**
      * @ORM\ManyToOne(targetEntity="Collectif\UserBundle\Entity\User", cascade={"persist"}, inversedBy="publications")
      * @ORM\JoinColumn(nullable=false)
@@ -48,12 +63,6 @@ class Post
      */
     private $membre;
     
-    /**
-     * @ORM\ManyToOne(targetEntity="SousForum", cascade={"persist"}, inversedBy="posts")
-     * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotBlank()
-     */
-    private $sousForum;
     
     public function __construct()
     {
@@ -93,28 +102,6 @@ class Post
         return $this->membre;
     }
 
-    /**
-     * Set sousForum
-     *
-     * @param Collectif\AdminBundle\Entity\SousForum $sousForum
-     * @return Post
-     */
-    public function setSousForum(\Collectif\AdminBundle\Entity\SousForum $sousForum)
-    {
-        $this->sousForum = $sousForum;
-    
-        return $this;
-    }
-
-    /**
-     * Get sousForum
-     *
-     * @return Collectif\AdminBundle\Entity\SousForum 
-     */
-    public function getSousForum()
-    {
-        return $this->sousForum;
-    }
 
     /**
      * Set titre
@@ -183,5 +170,51 @@ class Post
     public function getDateCreation()
     {
         return $this->dateCreation;
+    }
+
+    /**
+     * Set message
+     *
+     * @param \Collectif\AdminBundle\Entity\Message $message
+     * @return Post
+     */
+    public function setMessage(\Collectif\AdminBundle\Entity\Message $message)
+    {
+        $this->message = $message;
+    
+        return $this;
+    }
+
+    /**
+     * Get message
+     *
+     * @return \Collectif\AdminBundle\Entity\Message 
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * Set visionneuse
+     *
+     * @param \Collectif\AdminBundle\Entity\Visionneuse $visionneuse
+     * @return Post
+     */
+    public function setVisionneuse(\Collectif\AdminBundle\Entity\Visionneuse $visionneuse)
+    {
+        $this->visionneuse = $visionneuse;
+    
+        return $this;
+    }
+
+    /**
+     * Get visionneuse
+     *
+     * @return \Collectif\AdminBundle\Entity\Visionneuse 
+     */
+    public function getVisionneuse()
+    {
+        return $this->visionneuse;
     }
 }

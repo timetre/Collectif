@@ -42,7 +42,7 @@ class Forum
     
     
     /**
-     * @ORM\OneToMany(targetEntity="SousForum", cascade={"persist"}, mappedBy="forum")
+     * @ORM\OneToMany(targetEntity="SousForum", cascade={"remove"}, mappedBy="forum")
      */
     private $sousForums;
     

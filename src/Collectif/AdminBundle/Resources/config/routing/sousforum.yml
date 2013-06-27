@@ -36,3 +36,20 @@ reseau_sousforum_delete:
 reseau_sousforum_before_new:
     pattern:  /before/new
     defaults: { _controller: "CollectifAdminBundle:SousForum:before" }
+    
+reseau_sousforum_create_message:
+    pattern:  /createmessage/{sfId}
+    defaults: { _controller: "CollectifAdminBundle:SousForum:createMessage" }
+    requirements: { _method: post }
+
+reseau_sousforum_message_show:
+    pattern:  /{id}/message/show
+    defaults: { _controller: "CollectifAdminBundle:SousForum:showMessage" }
+    
+reseau_sousforum_delete_message:
+    pattern:  /{id}/deleteMessage
+    defaults: { _controller: "CollectifAdminBundle:SousForum:deleteMessage" }
+
+reseau_sousforum_delete_post:
+    pattern:  /{id}/deletePost
+    defaults: { _controller: "CollectifAdminBundle:SousForum:deletePost" }

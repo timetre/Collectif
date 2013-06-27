@@ -1,0 +1,59 @@
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+
+<style>
+	.full-width {
+		width: 95%;
+	}
+</style>
+
+	<div class="header-buttons">
+		<a class="btn btn-warning right" href="{{ path('reseau_sousforum_show', { 'id': entity.sousForum.id }) }}"><i class="icon-arrow-left icon-white"></i>Retour</a>
+	</div>
+
+	<h1>{{ entity.titre }}</h1>
+	
+	{{ entity.contenu | raw }}
+
+<hr/>
+
+<h3>{{ entity.posts | length }} Commentaires</h3>
+
+<form action="{{ path('reseau_sousforum_create_post', { 'sfId': entity.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+    {{ form_widget(form) }}
+
+    <br/>
+    
+    <input type="submit" class="btn btn-primary pull-right" style="margin-right: 50px;" />
+    
+</form>
+
+<div style="margin-bottom: 100px;">
+{% for post in entity.posts %}
+	<div style="margin-bottom: 40px;">
+		{% if post.membre.path == null %}
+			<img align="left" class="img-polaroid" src="{{ image('bundles/collectiffront/images/ghost.png').resize(null, 70) }}" alt="" style="margin-right: 10px;" />
+		{% else %}
+			<img align="left" class="img-polaroid" src="{{ image('upload/Membres/' ~ post.membre.path).resize(null, 70) }}" alt="" style="margin-right: 10px;" />
+		{% endif %}
+		<p>
+			<strong><a href="{{ path('collectif_front_chercheur', { 'alias': post.membre.alias }) }}" target="_blank">{{ post.membre.prenom }} {{ post.membre.nom }}</a></strong>&nbsp;
+			<em>posté le {{ post.dateCreation|date('d/m/Y') }} à {{ post.dateCreation|date('H:i:s') }}</em>&nbsp;
+			{% if app.user.id == post.membre.id or is_granted("ROLE_SUPER_ADMIN") %}
+				<a href="#"><i class="icon-pencil"></i> Editer</a>&nbsp;
+				<a onclick="if(!confirm('Voulez-vous vraiment supprimer ce commentaire ?')) { return false };" 
+					href="{{ path('reseau_sousforum_delete_post', { 'id': post.id }) }}"><i class="icon-trash"></i> Supprimer</a>
+			{% endif %}
+		</p>
+		<p style="text-align: justify;">{{ post.contenu }}</p>
+	</div>
+	<hr/>
+	
+{% endfor %}
+</div>
+
+
+{% endblock %}

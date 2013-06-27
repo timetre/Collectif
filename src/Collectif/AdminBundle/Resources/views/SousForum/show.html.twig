@@ -9,11 +9,63 @@
 		width: 95%;
 	}
 </style>
+	{% if is_granted("ROLE_SUPER_ADMIN") %}
+		<div class="header-buttons">
+			<a class="btn btn-success right" href="#createTopic" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Nouveau sujet</a>
+		</div>
+	{% endif %}
 
 	<h1>{{ entity.titre }}</h1>
 	
 	{{ entity.description | raw }}
 
+	<hr/>
+
+	<h3>{{ entity.messages | length }} Messages</h3>
+	
+	<div style="margin-bottom: 100px;">
+		{% for message in entity.messages %}
+			<div>
+				<h5><a href="{{ path('reseau_sousforum_message_show', { 'id': message.id }) }}">{{ message.titre }}</a></h5>
+				<p style="text-align: justify;">{{ message.resume }}</p>
+				<p style="font-size: 12px;"> Posté par <strong><a href="{{ path('collectif_front_chercheur', { 'alias': message.membre.alias }) }}" target="_blank">{{ message.membre.prenom }} {{ message.membre.nom }}</a></strong>, 
+					<em> le {{ message.dateCreation|date('d/m/Y') }}</em>&nbsp;
+					{% if app.user.id == message.membre.id or is_granted("ROLE_SUPER_ADMIN") %}
+						<a href="#"><i class="icon-pencil"></i> Editer</a>&nbsp;
+						
+						<a onclick="if(!confirm('Voulez-vous vraiment supprimer ce topic ?')) { return false };" 
+							href="{{ path('reseau_sousforum_delete_message', { 'id': message.id }) }}"><i class="icon-trash"></i> Supprimer</a>
+					{% endif %}
+				</p>
+			</div>
+			<hr/>
+		{% endfor %}
+	</div>
+	
+
+<!-- Modal -->
+<div id="createTopic" style="width: 750px;" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<form action="{{ path('reseau_sousforum_create_message', { 'sfId': entity.id }) }}" method="post" class="form-horizontal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Nouveau sujet</h3>
+  </div>
+  <div class="modal-body">
+	{{ form_widget(form) }}
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Fermer</button>
+    <input type="submit" class="btn btn-success right" value="Créer" />
+  </div>
+</form>
+</div>	
+	
+{#	
+	
+	
+	
+	
+	
 <hr/>
 
 <h3>{{ entity.posts | length }} Commentaires</h3>
@@ -49,6 +101,6 @@
 	
 {% endfor %}
 </div>
-
+#}
 
 {% endblock %}

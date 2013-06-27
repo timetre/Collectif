@@ -61,10 +61,28 @@ class SousForum
     private $forum;
     
     /**
-     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Post", cascade={"persist"}, mappedBy="sousForum")
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Message", cascade={"remove"}, mappedBy="sousForum")
      * @ORM\OrderBy({"dateCreation" = "DESC"})
      */
-    private $posts;
+    private $messages;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Outil", cascade={"remove"}, mappedBy="sousForum")
+     * @ORM\OrderBy({"dateCreation" = "DESC"})
+     */
+    private $outils;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Offre", cascade={"remove"}, mappedBy="sousForum")
+     * @ORM\OrderBy({"dateCreation" = "DESC"})
+     */
+    private $offres;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Visionneuse", cascade={"remove"}, mappedBy="sousForum")
+     * @ORM\OrderBy({"dateCreation" = "DESC"})
+     */
+    private $visionneuses;
     
     /**
      * @var string $typeTopic
@@ -79,7 +97,7 @@ class SousForum
      */
     public function __construct()
     {
-        $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->messages = new \Doctrine\Common\Collections\ArrayCollection();
         $this->dateCreation = new \DateTime();
     }
     
@@ -116,38 +134,7 @@ class SousForum
         return $this->forum;
     }
 
-    /**
-     * Add posts
-     *
-     * @param Collectif\AdminBundle\Entity\Post $posts
-     * @return SousForum
-     */
-    public function addPost(\Collectif\AdminBundle\Entity\Post $posts)
-    {
-        $this->posts[] = $posts;
     
-        return $this;
-    }
-
-    /**
-     * Remove posts
-     *
-     * @param Collectif\AdminBundle\Entity\Post $posts
-     */
-    public function removePost(\Collectif\AdminBundle\Entity\Post $posts)
-    {
-        $this->posts->removeElement($posts);
-    }
-
-    /**
-     * Get posts
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getPosts()
-    {
-        return $this->posts;
-    }
 
     /**
      * Set titre
@@ -285,5 +272,137 @@ class SousForum
     public function getTypeTopic()
     {
         return $this->typeTopic;
+    }
+
+    /**
+     * Add messages
+     *
+     * @param \Collectif\AdminBundle\Entity\Message $messages
+     * @return SousForum
+     */
+    public function addMessage(\Collectif\AdminBundle\Entity\Message $messages)
+    {
+        $this->messages[] = $messages;
+    
+        return $this;
+    }
+
+    /**
+     * Remove messages
+     *
+     * @param \Collectif\AdminBundle\Entity\Message $messages
+     */
+    public function removeMessage(\Collectif\AdminBundle\Entity\Message $messages)
+    {
+        $this->messages->removeElement($messages);
+    }
+
+    /**
+     * Get messages
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMessages()
+    {
+        return $this->messages;
+    }
+
+    /**
+     * Add outils
+     *
+     * @param \Collectif\AdminBundle\Entity\Outil $outils
+     * @return SousForum
+     */
+    public function addOutil(\Collectif\AdminBundle\Entity\Outil $outils)
+    {
+        $this->outils[] = $outils;
+    
+        return $this;
+    }
+
+    /**
+     * Remove outils
+     *
+     * @param \Collectif\AdminBundle\Entity\Outil $outils
+     */
+    public function removeOutil(\Collectif\AdminBundle\Entity\Outil $outils)
+    {
+        $this->outils->removeElement($outils);
+    }
+
+    /**
+     * Get outils
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOutils()
+    {
+        return $this->outils;
+    }
+
+    /**
+     * Add offres
+     *
+     * @param \Collectif\AdminBundle\Entity\Offre $offres
+     * @return SousForum
+     */
+    public function addOffre(\Collectif\AdminBundle\Entity\Offre $offres)
+    {
+        $this->offres[] = $offres;
+    
+        return $this;
+    }
+
+    /**
+     * Remove offres
+     *
+     * @param \Collectif\AdminBundle\Entity\Offre $offres
+     */
+    public function removeOffre(\Collectif\AdminBundle\Entity\Offre $offres)
+    {
+        $this->offres->removeElement($offres);
+    }
+
+    /**
+     * Get offres
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOffres()
+    {
+        return $this->offres;
+    }
+
+    /**
+     * Add visionneuses
+     *
+     * @param \Collectif\AdminBundle\Entity\Visionneuse $visionneuses
+     * @return SousForum
+     */
+    public function addVisionneus(\Collectif\AdminBundle\Entity\Visionneuse $visionneuses)
+    {
+        $this->visionneuses[] = $visionneuses;
+    
+        return $this;
+    }
+
+    /**
+     * Remove visionneuses
+     *
+     * @param \Collectif\AdminBundle\Entity\Visionneuse $visionneuses
+     */
+    public function removeVisionneus(\Collectif\AdminBundle\Entity\Visionneuse $visionneuses)
+    {
+        $this->visionneuses->removeElement($visionneuses);
+    }
+
+    /**
+     * Get visionneuses
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getVisionneuses()
+    {
+        return $this->visionneuses;
     }
 }

@@ -6,7 +6,7 @@
 
 <h1>Liste des topics</h1>
 <div class="header-buttons">
-	<a class="btn btn-success right" href="#chooseType" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Nouveau topic</a>
+	<a class="btn btn-success right" href="#chooseType" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Nouveau sous-forum</a>
 </div>
 <table class="table table-hover">
     <thead>
@@ -14,6 +14,7 @@
             <th>Editer</th>
             <th>Titre</th>
             <th>Forum</th>
+            <th>Type</th>
             <th>Date de création</th>
             <th>Supprimer</th>
         </tr>
@@ -24,6 +25,7 @@
         	<td><a class="btn" href="{{ path('reseau_sousforum_edit', { 'id': entity.id }) }}"><i class="icon-edit"></i></a></td>
             <td>{{ entity.titre }}</td>
             <td>{{ entity.forum.titre }}</td>
+            <td>{{ entity.typeTopic }}</td>
             <td>{% if entity.dateCreation %}{{ entity.dateCreation|date('d/m/Y') }}{% endif %}</td>
             <td>
                <a onclick="if(!confirm('Voulez-vous vraiment supprimer ce topic ?')) { return false };" class="btn btn-danger" 
@@ -40,7 +42,7 @@
 <form action="{{ path('reseau_sousforum_before_new') }}" method="post" class="form-horizontal">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Type de topic</h3>
+    <h3 id="myModalLabel">Type de sous-forum</h3>
   </div>
   <div class="modal-body">
     <p>Quel type de sous-forum souhaitez vous créer ?</p>
@@ -53,7 +55,7 @@
 	</select>
   </div>
   <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Fermer</button>
     <input type="submit" class="btn btn-success right" value="Créer" />
   </div>
 </form>
