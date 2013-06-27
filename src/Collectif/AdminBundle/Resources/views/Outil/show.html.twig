@@ -12,30 +12,47 @@
 
 <h1>{{ entity.titre }}</h1>
 
-<div style="margin-bottom: 100px;">
 
-	<div style="margin-bottom: 100px;">
+
+<div class="row" style="margin-bottom: 30px;">
+	{% set cpt = 0 %}
 	{% for outil in entity.outils %}
-			<div>
-				<h5><a href="{{ path('reseau_sousforum_outil_show', { 'id': outil.id }) }}">{{ outil.titre }}</a></h5>
-				<p style="font-size: 12px;"> Posté par <strong><a href="{{ path('collectif_front_chercheur', { 'alias': outil.membre.alias }) }}" target="_blank">{{ outil.membre.prenom }} {{ outil.membre.nom }}</a></strong>, 
-					<em> le {{ outil.dateCreation|date('d/m/Y') }}</em>&nbsp;
-					{% if app.user.id == outil.membre.id or is_granted("ROLE_SUPER_ADMIN") %}
-						<a href="#"><i class="icon-pencil"></i> Editer</a>&nbsp;
-						
-						<a onclick="if(!confirm('Voulez-vous vraiment supprimer cette outil ?')) { return false };" 
-							href="{{ path('reseau_sousforum_delete_outil', { 'id': outil.id }) }}"><i class="icon-trash"></i> Supprimer</a>
-					{% endif %}
-				</p>
+		{% if cpt == 4 %}
+			{% set cpt = 0 %}
 			</div>
+			<div class="row" style="margin-bottom: 30px;">
+		{% endif %}
+		<div class="span3" style="border: 1px solid black;">
+			<h5><a style="padding:0 5px 0 5px;" href="{{ outil.lien }}" target="_blank">{{ outil.titre }}</a></h5>
+			<p style="text-align: center;">
+			{% if outil.path != null %}
+				<img align="center" class="img-polaroid" src="{{ image('upload/Outils/' ~ outil.path).resize(null, 135) }}" alt="" />
+			{% else %}
+				<img align="center" class="img-polaroid" src="{{ image('bundles/collectiffront/images/Tools_clipart.png').resize(null, 135) }}" alt="" />
+			{% endif %}
+			</p>
+			<p style="text-align: center;"><a href="{{ outil.lien }}" target="_blank">{{ outil.lien }}</a></p>
+			<p style="font-size: 12px;padding:0 5px 0 5px;word-wrap: break-word;">{{ outil.contenu }}</p>
 			<hr/>
-		{% endfor %}
-	</div>
+			<p style="font-size: 12px;padding:0 5px 0 5px;"><strong><a href="{{ path('collectif_front_chercheur', { 'alias': outil.membre.alias }) }}" target="_blank">{{ outil.membre.prenom }} {{ outil.membre.nom }}</a></strong></p> 
+			<p style="font-size: 12px;padding:0 5px 0 5px;"><em>{{ outil.dateCreation|date('d/m/Y') }}</em></p>
+			<p style="font-size: 12px;padding:0 5px 0 5px;">
+				{% if app.user.id == outil.membre.id or is_granted("ROLE_SUPER_ADMIN") %}
+					<a href="#"><i class="icon-pencil"></i> Editer</a>&nbsp;
+					
+					<a onclick="if(!confirm('Voulez-vous vraiment supprimer cette outil ?')) { return false };" 
+						href="{{ path('reseau_sousforum_delete_outil', { 'id': outil.id }) }}"><i class="icon-trash"></i> Supprimer</a>
+				{% endif %}
+			</p>
+		</div>
+		{% set cpt = cpt+1 %}
+	{% endfor %}
 </div>
+
 
 <!-- Modal -->
 <div id="createOutil" style="width: 750px;" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<form action="{{ path('reseau_sousforum_create_outil', { 'sfId': entity.id }) }}" method="post" class="form-horizontal">
+<form action="{{ path('reseau_sousforum_create_outil', { 'sfId': entity.id }) }}" {{ form_enctype(form) }} method="post" class="form-horizontal">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">Nouvel outil</h3>

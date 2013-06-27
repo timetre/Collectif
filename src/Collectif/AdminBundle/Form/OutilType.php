@@ -13,6 +13,16 @@ class OutilType extends AbstractType
             ->add('titre', 'text', array(
             		'label' => 'Titre'
             	))
+            ->add('file', 'file', array(
+            		'required'  => false,
+            		'label' => 'Image'
+            ))
+            ->add('contenu', 'textarea', array(
+            		'label' => 'Description'
+            ))
+            ->add('lien', 'text', array(
+            		'label' => "Lien vers l'outil"
+            ))
         ;
     }
 
