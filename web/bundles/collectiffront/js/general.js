@@ -57,7 +57,5 @@ jQuery(function($){
 	});
 	
 	$( "#tabs" ).tabs();
-	
-	$('a.mediaSmall').media({width:580, height:580});
 
 });// end jquery

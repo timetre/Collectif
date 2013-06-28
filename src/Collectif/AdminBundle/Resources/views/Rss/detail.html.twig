@@ -1,0 +1,25 @@
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+
+	<div class="header-buttons">
+		<a class="btn btn-warning right" href="{{ path('reseau_sousforum_show', { 'id': entity.sousForum.id }) }}"><i class="icon-arrow-left icon-white"></i>Retour</a>
+	</div>
+	
+	<h1>{{ entity.titre }}</h1>
+	
+	<h3>{{ feeds | length }} articles</h3>
+	
+	{% for feed in feeds %}
+		<div>
+			<h5><a href="{{ feed.link }}" target="_blank">{{ feed.title }}</a></h5>
+			<p style="text-align: justify;">{{ feed.content|slice(0,400)|raw }}...</p>
+			<p style="font-size: 12px;"> Posté <em> le {{ feed.dateModified|date('d/m/Y') }}</em>&nbsp;
+			</p>
+		</div>
+		<hr/>
+	{% endfor %}
+
+{% endblock %}

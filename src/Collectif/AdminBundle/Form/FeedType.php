@@ -13,6 +13,9 @@ class FeedType extends AbstractType
             ->add('titre', 'text', array(
             		'label' => 'Titre'
             	))
+           ->add('lien', 'text', array(
+            		'label' => 'Lien du flux'
+            ))
         ;
     }
 

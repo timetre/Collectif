@@ -3,6 +3,7 @@
 namespace Collectif\AdminBundle\Controller;
 
 use Collectif\AdminBundle\Entity\Feed;
+use Collectif\AdminBundle\Entity\Post;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -57,16 +58,28 @@ class FeedController extends Controller
     	$em = $this->getDoctrine()->getManager();
     
     	$entity = $em->getRepository('CollectifAdminBundle:Feed')->find($id);
-
-    	$user = $this->container->get('security.context')->getToken()->getUser();
-    	$post = new Post();
-    	$post->setFeed($entity);
-    	$post->setMembre($user);
-    	$form = $this->createForm(new PostType(), $post);
+    	
+    	$reader = $this->get('eko_feed.feed.reader');
+		$feeds = $reader->load($entity->getLien())->get();
+		
+		/*
+		$items = array();
+		
+    	foreach ($feed as $entry) {
+    	  echo $entry->getTitle() . " <br/>";
+          echo $entry->getContent();
+          echo $entry->getLink() . "<br/>";
+          // echo $entry->getDateModified();
+          $items[] =
+        }
+		
+		die;
+*/
+    	
 	
-    	return $this->render('CollectifAdminBundle:Feed:show.html.twig', array(
+    	return $this->render('CollectifAdminBundle:Rss:detail.html.twig', array(
     		'entity'      => $entity,
-    		'form'	=> $form->createView()
+    		'feeds' => $feeds
     	));
     }
     

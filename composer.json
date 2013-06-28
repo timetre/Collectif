@@ -26,7 +26,8 @@
 		"eko/FeedBundle": "*", 
         "davidbadura/faker-bundle": "1.0.*",
         "winzou/console-bundle": "dev-master",
-        "punkave/symfony2-file-uploader-bundle": "dev-master"
+        "punkave/symfony2-file-uploader-bundle": "dev-master", 
+        "fkr/simplepie-bundle": "1.0.*"
     },
     "scripts": {
         "post-install-cmd": [
