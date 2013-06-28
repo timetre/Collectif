@@ -83,4 +83,57 @@ class OutilController extends Controller
     
     	return $this->redirect($this->generateUrl('reseau_sousforum_show', array('id' => $sf->getId())));
     }
+    
+    public function editOutilAction($id = null)
+    {
+    	$message='';
+    	$em = $this->getDoctrine()->getManager();
+    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Outil');
+    
+    	if (isset($id))
+    	{
+    		$outil = $repository->find($id);
+    		if (!$outil)
+    		{
+    			$message='Aucun outil trouvé';
+    		}
+    	}
+    	else
+    	{
+    		$outil = new Outil();
+    	}
+    
+    	$form = $this->container->get('form.factory')->create(new OutilType(), $outil);
+    
+    	$request = $this->container->get('request');
+    
+    	if ($request->getMethod() == 'POST')
+    	{
+    		$form->bindRequest($request);
+    
+    		if ($form->isValid())
+    		{
+    			$em->persist($outil);
+    
+    			$em->flush();
+    
+    			if (isset($id))
+    			{
+    				$message='Outil modifié avec succès !';
+    			}
+    			else
+    			{
+    				$message='Outil ajouté avec succès !';
+    			}
+    
+    			return $this->redirect($this->generateUrl('reseau_sousforum_show', array('id' => $outil->getSousForum()->getId())));
+    		}
+    	}
+    
+    	return $this->render('CollectifAdminBundle:Outil:edit.html.twig', array(
+    			'entity' => $outil,
+    			'sfId'   => $outil->getSousForum()->getId(),
+    			'form'   => $form->createView(),
+    	));
+    }
 }

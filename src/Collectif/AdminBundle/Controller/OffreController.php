@@ -76,4 +76,57 @@ class OffreController extends Controller
     
     	return $this->redirect($this->generateUrl('reseau_sousforum_show', array('id' => $sf->getId())));
     }
+    
+    public function editOffreAction($id = null)
+    {
+    	$message='';
+    	$em = $this->getDoctrine()->getManager();
+    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Offre');
+    
+    	if (isset($id))
+    	{
+    		$offre = $repository->find($id);
+    		if (!$offre)
+    		{
+    			$message='Aucune offre trouvée';
+    		}
+    	}
+    	else
+    	{
+    		$offre = new Offre();
+    	}
+    
+    	$form = $this->container->get('form.factory')->create(new OffreType(), $offre);
+    
+    	$request = $this->container->get('request');
+    
+    	if ($request->getMethod() == 'POST')
+    	{
+    		$form->bindRequest($request);
+    
+    		if ($form->isValid())
+    		{
+    			$em->persist($offre);
+    
+    			$em->flush();
+    
+    			if (isset($id))
+    			{
+    				$message='Offre modifiée avec succès !';
+    			}
+    			else
+    			{
+    				$message='Offre ajoutée avec succès !';
+    			}
+    
+    			return $this->redirect($this->generateUrl('reseau_sousforum_show', array('id' => $offre->getSousForum()->getId())));
+    		}
+    	}
+    
+    	return $this->render('CollectifAdminBundle:Offre:edit.html.twig', array(
+    			'entity' => $offre,
+    			'sfId'   => $offre->getSousForum()->getId(),
+    			'form'   => $form->createView(),
+    	));
+    }
 }

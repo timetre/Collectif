@@ -62,21 +62,7 @@ class FeedController extends Controller
     	$reader = $this->get('eko_feed.feed.reader');
 		$feeds = $reader->load($entity->getLien())->get();
 		
-		/*
-		$items = array();
-		
-    	foreach ($feed as $entry) {
-    	  echo $entry->getTitle() . " <br/>";
-          echo $entry->getContent();
-          echo $entry->getLink() . "<br/>";
-          // echo $entry->getDateModified();
-          $items[] =
-        }
-		
-		die;
-*/
-    	
-	
+
     	return $this->render('CollectifAdminBundle:Rss:detail.html.twig', array(
     		'entity'      => $entity,
     		'feeds' => $feeds
@@ -99,5 +85,58 @@ class FeedController extends Controller
     	$em->flush();
     
     	return $this->redirect($this->generateUrl('reseau_sousforum_show', array('id' => $sf->getId())));
+    }
+    
+    public function editFeedAction($id = null)
+    {
+    	$message='';
+    	$em = $this->getDoctrine()->getManager();
+    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Feed');
+    
+    	if (isset($id))
+    	{
+    		$feed = $repository->find($id);
+    		if (!$feed)
+    		{
+    			$message='Aucun feed trouvé';
+    		}
+    	}
+    	else
+    	{
+    		$feed = new Feed();
+    	}
+    
+    	$form = $this->container->get('form.factory')->create(new FeedType(), $feed);
+    
+    	$request = $this->container->get('request');
+    
+    	if ($request->getMethod() == 'POST')
+    	{
+    		$form->bindRequest($request);
+    
+    		if ($form->isValid())
+    		{
+    			$em->persist($feed);
+    
+    			$em->flush();
+    
+    			if (isset($id))
+    			{
+    				$message='Feed modifié avec succès !';
+    			}
+    			else
+    			{
+    				$message='Feed ajouté avec succès !';
+    			}
+    
+    			return $this->redirect($this->generateUrl('reseau_sousforum_show', array('id' => $feed->getSousForum()->getId())));
+    		}
+    	}
+    
+    	return $this->render('CollectifAdminBundle:Rss:edit.html.twig', array(
+    			'entity' => $feed,
+    			'sfId'   => $feed->getSousForum()->getId(),
+    			'form'   => $form->createView(),
+    	));
     }
 }

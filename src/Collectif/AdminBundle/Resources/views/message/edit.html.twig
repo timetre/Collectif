@@ -1,0 +1,19 @@
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+
+<h1>Modifier le message</h1>
+
+{% form_theme form 'CollectifAdminBundle:Form:fields.html.twig' %}
+
+<form action="" method="post" {{ form_enctype(form) }} class="form-horizontal">
+    {{ form_widget(form) }}
+    
+    <a class="btn btn-warning" href="{{ path('reseau_sousforum_show', { 'id': sfId }) }}">Retour</a>
+    <input type="submit" class="btn btn-success" />
+    
+</form>
+
+{% endblock %}

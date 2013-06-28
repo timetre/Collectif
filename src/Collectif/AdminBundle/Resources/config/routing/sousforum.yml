@@ -57,7 +57,9 @@ reseau_sousforum_delete_message:
     pattern:  /{id}/deletemessage
     defaults: { _controller: "CollectifAdminBundle:Message:deleteMessage" }
     
-    
+reseau_sousforum_edit_message:
+    pattern:  /{id}/edit/message
+    defaults: { _controller: "CollectifAdminBundle:Message:editMessage" } 
     
     
 reseau_sousforum_create_feed:
@@ -73,7 +75,9 @@ reseau_sousforum_delete_feed:
     pattern:  /{id}/deletefeed
     defaults: { _controller: "CollectifAdminBundle:Feed:deleteFeed" }
     
-    
+reseau_sousforum_edit_feed:
+    pattern:  /{id}/edit/feed
+    defaults: { _controller: "CollectifAdminBundle:Feed:editFeed" }
     
     
 reseau_sousforum_create_outil:
@@ -89,6 +93,9 @@ reseau_sousforum_delete_outil:
     pattern:  /{id}/deleteoutil
     defaults: { _controller: "CollectifAdminBundle:Outil:deleteOutil" }  
     
+reseau_sousforum_edit_outil:
+    pattern:  /{id}/edit/outil
+    defaults: { _controller: "CollectifAdminBundle:Outil:editOutil" }
     
 
 reseau_sousforum_create_offre:
@@ -104,7 +111,9 @@ reseau_sousforum_delete_offre:
     pattern:  /{id}/deleteoffre
     defaults: { _controller: "CollectifAdminBundle:Offre:deleteOffre" }
 
-
+reseau_sousforum_edit_offre:
+    pattern:  /{id}/edit/offre
+    defaults: { _controller: "CollectifAdminBundle:Offre:editOffre" }
 
 
 reseau_sousforum_create_visionneuse:

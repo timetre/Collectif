@@ -25,7 +25,8 @@
 				<p style="font-size: 12px;"> Posté par <strong><a href="{{ path('collectif_front_chercheur', { 'alias': feed.membre.alias }) }}" target="_blank">{{ feed.membre.prenom }} {{ feed.membre.nom }}</a></strong>, 
 					<em> le {{ feed.dateCreation|date('d/m/Y') }}</em>&nbsp;
 					{% if app.user.id == feed.membre.id or is_granted("ROLE_SUPER_ADMIN") %}
-						<a href="#"><i class="icon-pencil"></i> Editer</a>&nbsp;
+						
+						<a href="{{ path('reseau_sousforum_edit_feed', { 'id': feed.id }) }}"><i class="icon-pencil"></i> Editer</a>&nbsp;
 						
 						<a onclick="if(!confirm('Voulez-vous vraiment supprimer ce flux ?')) { return false };" 
 							href="{{ path('reseau_sousforum_delete_feed', { 'id': feed.id }) }}"><i class="icon-trash"></i> Supprimer</a>
