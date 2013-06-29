@@ -100,5 +100,5 @@ class MesCvController extends Controller
     	 
     	return new RedirectResponse($this->container->get('router')->generate('collectif_mescv_list'));
     }
-    
+        
 }

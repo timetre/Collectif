@@ -13,38 +13,29 @@
 		.container {
 		  width: 600px;
 		}
-		.maModale {
-			margin-left: 24%;
-		}
 	</style>
 	
 	
   </head>
 
   <body>
-  
-  	<div class="container">		
-		Bien enregistré !! 
-		Lisez ceci : 
-		
-		
-		BLA BLA BLA
-		
-		
-		Vous serez redirigé dans 5 secondes.
-	</div>
 
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
-	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap-datepicker.js') }}"></script>
-	
-	<script>		
-	$(document).ready(function(){
-	    var delay = 5000;
-	    setTimeout(function(){ window.location = "{{ path('collectif_front_homepage') }}";}, delay); 
-	  });
-		
-	</script>
-	
-	</body>
+{% form_theme form 'CollectifAdminBundle:Form:fields.html.twig' %}
+
+	<div class="container">
+  		<h2>Formulaire d'insciption - Etape 2/3</h2>	
+  		<hr/>
+  		<h3>Mon CV (PDF seulement)</h3>	
+  		
+		{% block content %}
+		    <form action="" method="post" {{ form_enctype(form) }} class="form-horizontal" >
+		        {{ form_widget(form) }}
+	        		<a href="{{ path('collectif_front_homepage') }}" type="button" class="btn btn-warning">Annuler</a>
+		        	
+		        	<input type="submit" class="btn btn-primary pull-right" value="Continuer" /><br/><br/>
+				<br/><br/>
+			</form> 
+		{% endblock %}
+	</div>
+</body>
 </html>

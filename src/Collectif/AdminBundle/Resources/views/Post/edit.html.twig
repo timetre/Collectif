@@ -1,22 +1,19 @@
-<h1>Post edit</h1>
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
 
-<form action="{{ path('reseau_post_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit">Edit</button>
-    </p>
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+
+<h1>Modifier le commentaire</h1>
+
+{% form_theme form 'CollectifAdminBundle:Form:fields.html.twig' %}
+
+<form action="" method="post" {{ form_enctype(form) }} class="form-horizontal">
+    {{ form_widget(form) }}
+    
+    <a class="btn btn-warning" href="{{ path('reseau_sousforum_message_show', { 'id': sfId }) }}">Retour</a>
+    <input type="submit" class="btn btn-success" />
+    
 </form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('reseau_post') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('reseau_post_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+{% endblock %}

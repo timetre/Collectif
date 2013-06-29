@@ -218,7 +218,6 @@ class User extends BaseUser
      * @ORM\Column(name="pageStructure", type="text", nullable=true)
      */
     private $pageStructure;
-
     
     public function __construct()
     {
@@ -272,7 +271,6 @@ class User extends BaseUser
     
     private function formatFields()
     {
-    	//die;
     	if (null !== $this->nom && null !== $this->prenom) {
     		$this->alias = $this->clear_str($this->prenom)."-".$this->clear_str($this->nom);
     		$this->prenom = ucfirst ($this->prenom);
@@ -291,6 +289,7 @@ class User extends BaseUser
     	$this->pageStructure = $this->putHttp($this->pageStructure);
     	$this->sitePersonnel = $this->putHttp($this->sitePersonnel);
     	$this->activiteNumerique = $this->putHttp($this->activiteNumerique);
+    	
     }
     
     private function putHttp($field) {
@@ -1116,4 +1115,28 @@ class User extends BaseUser
     {
         return $this->pageStructure;
     }
+
+    /**
+     * Set candidature
+     *
+     * @param \Collectif\AdminBundle\Entity\Candidature $candidature
+     * @return User
+     */
+    public function setCandidature(\Collectif\AdminBundle\Entity\Candidature $candidature)
+    {
+        $this->candidature = $candidature;
+    
+        return $this;
+    }
+
+    /**
+     * Get candidature
+     *
+     * @return \Collectif\AdminBundle\Entity\Candidature 
+     */
+    public function getCandidature()
+    {
+        return $this->candidature;
+    }
+    
 }

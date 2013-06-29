@@ -13,38 +13,33 @@
 		.container {
 		  width: 600px;
 		}
-		.maModale {
-			margin-left: 24%;
-		}
 	</style>
-	
 	
   </head>
 
   <body>
   
-  	<div class="container">		
-		Bien enregistré !! 
-		Lisez ceci : 
-		
-		
-		BLA BLA BLA
-		
-		
-		Vous serez redirigé dans 5 secondes.
+  {% form_theme form 'CollectifAdminBundle:Form:fields.html.twig' %}
+  	<div class="container">
+  		<h2>Formulaire d'insciption - Etape 1/3</h2>	
+  		<hr/>
+  		<h3>Mes informations</h3>
+  		
+		{% block content %}
+		    <form action="" {{ form_enctype(form) }} method="POST" class="form-horizontal">
+		        {{ form_widget(form) }}
+		        <div>
+		        	<a href="{{ path('collectif_front_homepage') }}" type="button" class="btn btn-warning">Annuler</a>
+		        	
+		            <input type="submit" class="btn btn-primary pull-right" value="Continuer" /><br/><br/>
+		        </div>
+		    </form>    
+		{% endblock %}
 	</div>
-
+	
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap-datepicker.js') }}"></script>
-	
-	<script>		
-	$(document).ready(function(){
-	    var delay = 5000;
-	    setTimeout(function(){ window.location = "{{ path('collectif_front_homepage') }}";}, delay); 
-	  });
-		
-	</script>
 	
 	</body>
 </html>

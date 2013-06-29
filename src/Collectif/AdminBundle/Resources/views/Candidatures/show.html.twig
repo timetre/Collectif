@@ -1,0 +1,35 @@
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+
+<style>
+	.full-width {
+		width: 95%;
+	}
+</style>
+
+	<h1>{{ entity.titre }}</h1>
+	
+	{{ entity.description | raw }}
+
+	<hr/>
+
+	<h3>{{ pending|length }} Candidatures en attente</h3>
+	
+	<div style="margin-bottom: 100px;">
+		{% for c in pending %}
+			<div style="margin-bottom: 40px;">
+				<p>
+					<strong><a href="{{ path('reseau_sousforum_candidature_show', { 'id': c.id }) }}">{{ c.membre.prenom }} {{ c.membre.nom }}</a></strong>&nbsp;
+					<em>Inscrit le {{ c.membre.dateCreation|date('d/m/Y') }}</em>&nbsp;
+				</p>
+				
+				<p class="text-success" style="float:left;margin-right:10px;">{{ c.positiveVotes|length }} <i class="icon-thumbs-up"></i></p>
+				<p class="text-error">{{ c.negativeVotes|length }} <i class="icon-thumbs-down"></i></p>
+			</div>
+			<hr/>
+		{% endfor %}
+	</div>
+{% endblock %}

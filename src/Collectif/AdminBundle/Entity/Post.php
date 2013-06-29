@@ -50,6 +50,13 @@ class Post
     private $message;
     
     /**
+     * @ORM\ManyToOne(targetEntity="Candidature", cascade={"persist"}, inversedBy="posts")
+     * @ORM\JoinColumn(nullable=true)
+     * @Assert\Blank()
+     */
+    private $candidature;
+    
+    /**
      * @ORM\ManyToOne(targetEntity="Visionneuse", cascade={"persist"}, inversedBy="posts")
      * @ORM\JoinColumn(nullable=true)
      * @Assert\Blank()
@@ -216,5 +223,28 @@ class Post
     public function getVisionneuse()
     {
         return $this->visionneuse;
+    }
+
+    /**
+     * Set candidature
+     *
+     * @param \Collectif\AdminBundle\Entity\Candidature $candidature
+     * @return Post
+     */
+    public function setCandidature(\Collectif\AdminBundle\Entity\Candidature $candidature = null)
+    {
+        $this->candidature = $candidature;
+    
+        return $this;
+    }
+
+    /**
+     * Get candidature
+     *
+     * @return \Collectif\AdminBundle\Entity\Candidature 
+     */
+    public function getCandidature()
+    {
+        return $this->candidature;
     }
 }

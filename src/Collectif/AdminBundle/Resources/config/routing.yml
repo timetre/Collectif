@@ -35,8 +35,16 @@ collectif_membre_delete:
     defaults: { _controller: CollectifAdminBundle:Membre:delete }
     
 collectif_membre_register:
-    pattern:  /registration/
-    defaults: { _controller: CollectifAdminBundle:Membre:register }
+    pattern:  /registration/step1/
+    defaults: { _controller: CollectifAdminBundle:Registration:firstStep }
+    
+collectif_membre_register_step2:
+    pattern:  /registration/step2/{userId}
+    defaults: { _controller: CollectifAdminBundle:Registration:secondStep }
+    
+collectif_membre_register_step3:
+    pattern:  /registration/step3/{userId}
+    defaults: { _controller: CollectifAdminBundle:Registration:thirdStep }
     
 collectif_domaine_homepage:
     pattern:  /reseau/admin/domaines
@@ -190,3 +198,7 @@ CollectifAdminBundle_reseau_cv:
 CollectifAdminBundle_reseau_mescv:
     resource: "@CollectifAdminBundle/Resources/config/routing/mescv.yml"
     prefix:   /reseau/mescv
+
+CollectifAdminBundle_reseau_election:
+    resource: "@CollectifAdminBundle/Resources/config/routing/election.yml"
+    prefix:   /reseau/election

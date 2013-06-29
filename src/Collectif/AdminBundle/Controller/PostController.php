@@ -70,4 +70,56 @@ class PostController extends Controller
     
     	return $this->redirect($this->generateUrl('reseau_sousforum_message_show', array('id' => $msg->getId())));
     }
+    
+    public function editPostAction($id = null)
+    {
+    	$message='';
+    	$em = $this->getDoctrine()->getManager();
+    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Post');
+    
+    	if (isset($id))
+    	{
+    		$outil = $repository->find($id);
+    		if (!$outil)
+    		{
+    			$message='Aucun commentaire trouvé';
+    		}
+    	}
+    	else
+    	{
+    		$outil = new Post();
+    	}
+    
+    	$form = $this->container->get('form.factory')->create(new PostType(), $outil);
+    
+    	$request = $this->container->get('request');
+    
+    	if ($request->getMethod() == 'POST')
+    	{
+    		$form->bindRequest($request);
+    		
+    		//if ($form->isValid())
+    		//{
+    			$em->persist($outil);
+    			$em->flush();
+    
+    			if (isset($id))
+    			{
+    				$message='Post modifié avec succès !';
+    			}
+    			else
+    			{
+    				$message='Post ajouté avec succès !';
+    			}
+    
+    			return $this->redirect($this->generateUrl('reseau_sousforum_message_show', array('id' => $outil->getMessage()->getId())));
+    		//}
+    	}
+    
+    	return $this->render('CollectifAdminBundle:Post:edit.html.twig', array(
+    			'entity' => $outil,
+    			'sfId'   => $outil->getMessage()->getId(),
+    			'form'   => $form->createView(),
+    	));
+    }
 }

@@ -1,0 +1,131 @@
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+<style>
+	.full-width {
+		width: 95%;
+	}
+	
+	img {
+		height:30px !important;
+	}
+</style>	
+
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">Candidature</a></li>
+    <li><a href="#tab2" data-toggle="tab">Curriculum</a></li>
+    <li><a href="#tab3" data-toggle="tab">Commentaires</a></li>
+  </ul>
+  
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
+    
+    	<div class="span7">	
+			<h1>{{ entity.membre.prenom }} {{ entity.membre.nom }}</h1>
+			
+			<p class="text-success" style="float:left;margin-right:10px;">{{ pour|length }} <i class="icon-thumbs-up"></i></p>
+			<p class="text-error">{{ contre|length }} <i class="icon-thumbs-down"></i></p>
+			
+			<p><strong>Lieu : </strong>{{ entity.membre.lieu }}</p>
+			<p><strong>Statut : </strong>{{ entity.membre.statut }}</p>
+			<p><strong>Sujet de recherche : </strong>{{ entity.membre.sujetRecherche }}</p>
+			
+			<h3 style="margin-top: 20px;">Activité numérique</h3>
+			{% if entity.membre.twitter != null %}
+			<a href="{{ entity.membre.twitter }}" target="_blank" style="text-decoration: none; margin-right: 5px;height:30px;">
+				<img src="{{ asset('bundles/collectiffront/images/social_icons/Twitter-logo.png') }}" alt="twitter" height="30px" />
+			</a>
+			{% endif %}
+			
+			{% if entity.membre.facebook != null %}
+			<a href="{{ entity.membre.facebook }}" target="_blank" style="text-decoration: none; margin-right: 5px;height:30px;">
+				<img src="{{ asset('bundles/collectiffront/images/social_icons/Facebook-logo.png') }}" alt="twitter" height="30px" />
+			</a>
+			{% endif %}
+			
+			{% if entity.membre.activiteNumerique != null %}
+			<a href="{{ entity.membre.activiteNumerique }}" target="_blank" style="text-decoration: none; margin-right: 5px;height:30px;">
+				<img src="{{ asset('bundles/collectiffront/images/social_icons/Hypothese.png') }}" alt="twitter" height="30px" />
+			</a>
+			{% endif %}
+			
+			{% if entity.membre.sitePersonnel != null %}
+			<a href="{{ entity.membre.sitePersonnel }}" target="_blank" style="text-decoration: none; margin-right: 5px;height:30px;">
+				<img src="{{ asset('bundles/collectiffront/images/social_icons/site.png') }}" alt="twitter" height="30px" />
+			</a>
+			{% endif %}
+			
+		</div>
+		
+		<div class="span4 hero-unit" style="padding:10px;">
+		  	{% if dejaVote %}
+		  		<p style="text-align:center;"><strong>Merci d'avoir voté !</strong></p>
+		  	{% else %}
+			  	<p style="text-align:center;"><strong>Mon vote</strong></p>
+			  	<p style="text-align:center;">
+					<a href="{{ path('reseau_election', { 'candidatureId': entity.id, 'vote': 1 }) }}" class="btn btn-success"><i class="icon-white icon-thumbs-up"></i> Pour</a>
+					<a href="{{ path('reseau_election', { 'candidatureId': entity.id, 'vote': 0 }) }}" class="btn btn-danger"><i class="icon-white icon-thumbs-down"></i> Contre</a>
+				</p>
+			{% endif %}
+		</div>
+    
+    
+    
+    
+    
+    
+    </div>
+	<div class="tab-pane" id="tab2">
+		{% if cv.path != null %}
+			<a class="mediaBig" href="{{ asset('upload/CVTheque/' ~ cv.path)}}" ></a>
+		{% else %}
+			Aucun CV pour le moment !
+		{% endif %}
+	</div>
+  	<div class="tab-pane" id="tab3">
+      <div class="span12">	
+			<hr/>
+			
+			<h3>{{ entity.posts | length }} Commentaires</h3>
+			
+			<form action="{{ path('reseau_sousforum_create_post_candidature', { 'id': entity.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+			    {{ form_widget(form) }}
+			
+			    <br/>
+			    
+			    <input type="submit" class="btn btn-primary pull-right" style="margin-right: 50px;" />
+			    
+			</form>
+			
+			<div style="margin-bottom: 100px;">
+			{% for post in entity.posts %}
+				<div style="margin-bottom: 40px;">
+					{% if post.membre.path == null %}
+						<img align="left" class="img-polaroid" src="{{ image('bundles/collectiffront/images/ghost.png').resize(null, 70) }}" alt="" style="margin-right: 10px;" />
+					{% else %}
+						<img align="left" class="img-polaroid" src="{{ image('upload/Membres/' ~ post.membre.path).resize(null, 70) }}" alt="" style="margin-right: 10px;" />
+					{% endif %}
+					<p>
+						<strong><a href="{{ path('collectif_front_chercheur', { 'alias': post.membre.alias }) }}" target="_blank">{{ post.membre.prenom }} {{ post.membre.nom }}</a></strong>&nbsp;
+						<em>posté le {{ post.dateCreation|date('d/m/Y') }} à {{ post.dateCreation|date('H:i:s') }}</em>&nbsp;
+						{% if app.user.id == post.membre.id or is_granted("ROLE_SUPER_ADMIN") %}
+							<a href="{{ path('reseau_sousforum_edit_post_candidature', { 'id': post.id }) }}"><i class="icon-pencil"></i> Editer</a>&nbsp;
+							<a onclick="if(!confirm('Voulez-vous vraiment supprimer ce commentaire ?')) { return false };" 
+								href="{{ path('reseau_sousforum_delete_post_candidature', { 'id': post.id }) }}"><i class="icon-trash"></i> Supprimer</a>
+						{% endif %}
+					</p>
+					<p style="text-align: justify;">{{ post.contenu }}</p>
+				</div>
+				<hr/>
+				
+			{% endfor %}
+			</div>
+		</div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

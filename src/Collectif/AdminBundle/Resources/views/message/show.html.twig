@@ -43,7 +43,7 @@
 			<strong><a href="{{ path('collectif_front_chercheur', { 'alias': post.membre.alias }) }}" target="_blank">{{ post.membre.prenom }} {{ post.membre.nom }}</a></strong>&nbsp;
 			<em>posté le {{ post.dateCreation|date('d/m/Y') }} à {{ post.dateCreation|date('H:i:s') }}</em>&nbsp;
 			{% if app.user.id == post.membre.id or is_granted("ROLE_SUPER_ADMIN") %}
-				<a href="#"><i class="icon-pencil"></i> Editer</a>&nbsp;
+				<a href="{{ path('reseau_sousforum_edit_post', { 'id': post.id }) }}"><i class="icon-pencil"></i> Editer</a>&nbsp;
 				<a onclick="if(!confirm('Voulez-vous vraiment supprimer ce commentaire ?')) { return false };" 
 					href="{{ path('reseau_sousforum_delete_post', { 'id': post.id }) }}"><i class="icon-trash"></i> Supprimer</a>
 			{% endif %}

@@ -63,7 +63,7 @@ class User extends BaseUser
      * @ORM\Column(name="fonctionBureau", type="string", length=255, nullable=true)
      */
     private $fonctionBureau;
-	
+
 	/**
      * @Assert\File(maxSize="6000000")
      */
@@ -75,7 +75,7 @@ class User extends BaseUser
      * @ORM\Column(name="contenuPage", type="text", nullable=true)
      */
     private $contenuPage;
-	
+
 	/**
      * @var \DateTime $dateCreation
      *
@@ -95,7 +95,7 @@ class User extends BaseUser
      * @ORM\JoinColumn(nullable=true)
      */    
     private $domaine;
-	
+
 	/**
      * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Publication", cascade={"persist"}, mappedBy="membre")
      * @ORM\OrderBy({"datePublication" = "DESC"})
@@ -143,9 +143,11 @@ class User extends BaseUser
     private $mesCvs;
     
     /**
+     * @var string $path
+     * 
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    public $path;
+    private $path;
     
     /**
      * @var string $activiteNumerique
@@ -216,7 +218,6 @@ class User extends BaseUser
      * @ORM\Column(name="pageStructure", type="text", nullable=true)
      */
     private $pageStructure;
-	
     
     public function __construct()
     {
@@ -265,6 +266,11 @@ class User extends BaseUser
     		$this->path = sha1(uniqid(mt_rand(), true)).'.'.$this->file->guessExtension();
     	}
     	
+    	$this->formatFields();
+    }
+    
+    private function formatFields()
+    {
     	if (null !== $this->nom && null !== $this->prenom) {
     		$this->alias = $this->clear_str($this->prenom)."-".$this->clear_str($this->nom);
     		$this->prenom = ucfirst ($this->prenom);
@@ -272,11 +278,28 @@ class User extends BaseUser
     	} else {
     		$this->alias = sha1(uniqid(mt_rand(), true));
     	}
-    	
-    	if(null !== $this->email) 
+    	 
+    	if(null !== $this->email)
     		$this->username = $this->email;
     	else
     		$this->username = sha1(uniqid(mt_rand(), true));
+    	
+    	$this->facebook = $this->putHttp($this->facebook);
+    	$this->twitter = $this->putHttp($this->twitter);
+    	$this->pageStructure = $this->putHttp($this->pageStructure);
+    	$this->sitePersonnel = $this->putHttp($this->sitePersonnel);
+    	$this->activiteNumerique = $this->putHttp($this->activiteNumerique);
+    	
+    }
+    
+    private function putHttp($field) {
+    	if(null !== $field) {
+    		$begin = substr($field, 0, 7);
+    		if (strpos($begin,'http://') === false) {
+    			$field = "http://" . $field;
+    		}
+    	}
+    	return $field;
     }
     
     /**
@@ -1092,4 +1115,7 @@ class User extends BaseUser
     {
         return $this->pageStructure;
     }
+
+    
+    
 }

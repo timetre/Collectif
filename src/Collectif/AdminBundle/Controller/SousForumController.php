@@ -2,10 +2,6 @@
 
 namespace Collectif\AdminBundle\Controller;
 
-
-
-
-
 use Collectif\AdminBundle\Entity\Feed;
 use Collectif\AdminBundle\Entity\Outil;
 use Collectif\AdminBundle\Entity\Message;
@@ -28,7 +24,6 @@ use Collectif\AdminBundle\Form\OutilType;
 use Collectif\AdminBundle\Form\OffreType;
 use Collectif\AdminBundle\Form\FeedType;
 use Collectif\AdminBundle\Form\VisionneuseType;
-
 
 
 /**
@@ -128,6 +123,16 @@ class SousForumController extends Controller
 	        		'form'	=> $form->createView()
 	        ));
 	        
+        } else if($type == "CANDIDATURES") {
+        	
+        	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Candidature');
+        	$pending = $repository->getPending(true);
+        	
+	        return $this->render('CollectifAdminBundle:Candidatures:show.html.twig', array(
+	        		'entity'      => $entity,
+	        		'pending' 	  => $pending
+	        ));
+	        
         } else {
 	        
         	$user = $this->container->get('security.context')->getToken()->getUser();
@@ -163,6 +168,8 @@ class SousForumController extends Controller
         	$form = $this->container->get('form.factory')->create(new SousForumRssType(), $entity);
         } else if($type == "PDF") {
         	$form = $this->container->get('form.factory')->create(new SousForumPdfType(), $entity);
+        } else if($type == "CANDIDATURES") {
+        	$form = $this->container->get('form.factory')->create(new SousForumType(), $entity);
         }        
         
         return $this->render('CollectifAdminBundle:SousForum:new.html.twig', array(
@@ -190,6 +197,8 @@ class SousForumController extends Controller
         	$form = $this->createForm(new SousForumRssType(), $entity);
         } else if($type == "PDF") {
         	$form = $this->createForm(new SousForumPdfType(), $entity);
+        } else if($type == "CANDIDATURES") {
+        	$form = $this->createForm(new SousForumType(), $entity);
         } 
         
         $form->bind($request);
@@ -200,7 +209,6 @@ class SousForumController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            //return $this->redirect($this->generateUrl('reseau_sousforum_show', array('id' => $entity->getId())));
             return $this->redirect($this->generateUrl('reseau_sousforum'));
         }
 
@@ -235,6 +243,8 @@ class SousForumController extends Controller
         } else if($type == "RSS") {
         	$editForm = $this->createForm(new SousForumRssType(), $entity);
         } else if($type == "PDF") {
+        	$editForm = $this->createForm(new SousForumPdfType(), $entity);
+        } else if($type == "CANDIDATURES") {
         	$editForm = $this->createForm(new SousForumPdfType(), $entity);
         } else {
         	$editForm = $this->createForm(new SousForumType(), $entity);

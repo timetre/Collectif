@@ -14,6 +14,7 @@ use Collectif\AdminBundle\Form\MembreFormAdd;
 use Collectif\AdminBundle\Form\MembrePageForm;
 use Collectif\AdminBundle\Form\MembreRegisterForm;
 use Collectif\AdminBundle\Controller\MembreController;
+use Collectif\AdminBundle\Entity\Candidature;
 
 class MembreController extends Controller {
     
@@ -26,6 +27,7 @@ class MembreController extends Controller {
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifUserBundle:User');
 
     	$membres = $repository->getAll();
+    	
     	
         return $this->render('CollectifAdminBundle:Membre:view.html.twig', array(
             'membres' => $membres
@@ -263,59 +265,4 @@ class MembreController extends Controller {
     	 return new RedirectResponse($this->container->get('router')->generate('collectif_membre_homepage'));
     }
     
-    public function registerAction()
-    {
-    	$message='';
-    	$titre="Inscription";
-    	$em = $this->getDoctrine()->getManager();
-    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifUserBundle:User');
-    
-    	
-    	$membre = new User();
-    	$membre->setEnabled(false);
-    	$membre->addRole("ROLE_ADMIN");
-    	$membre->setDateModification(new \DateTime());
-    	   	
-    	$form = $this->container->get('form.factory')->create(new MembreRegisterForm(), $membre);
-    	
-    	$request = $this->container->get('request');
-    
-    	if ($request->getMethod() == 'POST')
-    	{
-    		$form->bindRequest($request);
-    
-    		if ($form->isValid())
-    		{
-    			
-    			$em->persist($membre);
-    
-    			$em->flush();
-    
-    			if (isset($id))
-    			{
-    				$message='Membre modifi� avec succ�s !';
-    			}
-    			else
-    			{
-    				$message='Membre ajout� avec succ�s !';
-    			}
-    
-    			//return new RedirectResponse($this->container->get('router')->generate('collectif_membre_homepage'));
-    			return $this->render('CollectifAdminBundle:Registration:confirmation.html.twig', array(
-    					'form' => $form->createView(),
-    					'message' => $message,
-    					'membre' => $membre,
-    					'titre'  => $titre
-    			));
-    		}
-    	} else {
-    
-	    	return $this->render('CollectifAdminBundle:Registration:register.html.twig', array(
-	    			'form' => $form->createView(),
-	    			'message' => $message,
-	    			'membre' => $membre,
-	    			'titre'  => $titre
-	    	));
-    	}
-    }
 }

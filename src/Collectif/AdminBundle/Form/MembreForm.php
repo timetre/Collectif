@@ -14,7 +14,7 @@ class MembreForm extends AbstractType
         $builder->add('plainPassword', 'repeated', array(
         		'label' => 'Mot de passe',
         		'type' => 'password',
-        		'required'  => true, 
+        		'required'  => false, 
         		'options' => array('translation_domain' => 'FOSUserBundle'),
         		'first_options' => array('label' => 'form.password'),
         		'second_options' => array('label' => 'form.password_confirmation')));

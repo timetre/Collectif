@@ -43,7 +43,11 @@ reseau_sousforum_delete_post:
     pattern:  /{id}/deletepost
     defaults: { _controller: "CollectifAdminBundle:Post:deletePost" }
 
-    
+reseau_sousforum_edit_post:
+    pattern:  /{id}/edit/post
+    defaults: { _controller: "CollectifAdminBundle:Post:editPost" }
+
+
 reseau_sousforum_create_message:
     pattern:  /createmessage/{sfId}
     defaults: { _controller: "CollectifAdminBundle:Message:createMessage" }
@@ -129,4 +133,21 @@ reseau_sousforum_delete_visionneuse:
     pattern:  /{id}/deletevisionneuse
     defaults: { _controller: "CollectifAdminBundle:Visionneuse:deleteVisionneuse" }
     
+
+reseau_sousforum_candidature_show:
+    pattern:  /{id}/candidature/show
+    defaults: { _controller: "CollectifAdminBundle:Candidature:showCandidature" }
+
+reseau_sousforum_create_post_candidature:
+    pattern:  /candidature/create/post/{id}
+    defaults: { _controller: "CollectifAdminBundle:Candidature:createPost" }
+    requirements: { _method: post }
+
+reseau_sousforum_delete_post_candidature:
+    pattern:  /{id}/candidature/delete/post
+    defaults: { _controller: "CollectifAdminBundle:Candidature:deletePost" }
+
+reseau_sousforum_edit_post_candidature:
+    pattern:  /{id}/candidature/edit/post
+    defaults: { _controller: "CollectifAdminBundle:Candidature:editPost" }
     

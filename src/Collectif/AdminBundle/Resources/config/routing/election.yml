@@ -1,0 +1,4 @@
+reseau_election:
+    pattern:  /pour/{candidatureId}/{vote}
+    defaults: { _controller: "CollectifAdminBundle:Election:vote" }
+    
