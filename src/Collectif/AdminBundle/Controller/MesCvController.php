@@ -33,8 +33,6 @@ class MesCvController extends Controller
     	if(sizeof($cvList) > 0) {
     		$monCvId = $cvList[0]->getId();
     	}
-    		
-    
     	if (isset($monCvId))
     	{
     		$cv = $repository->find($monCvId);
@@ -76,6 +74,9 @@ class MesCvController extends Controller
     			return new RedirectResponse($this->container->get('router')->generate('collectif_mescv_list'));
     		}
     	}
+    	
+    	//echo $;
+    	//die;
     
     	return $this->render('CollectifAdminBundle:MesCv:edit.html.twig', array(
     			'form' => $form->createView(),

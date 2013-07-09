@@ -176,4 +176,57 @@ class Candidature
     {
         return $this->votants;
     }
+
+    /**
+     * Add elections
+     *
+     * @param \Collectif\AdminBundle\Entity\Election $elections
+     * @return Candidature
+     */
+    public function addElection(\Collectif\AdminBundle\Entity\Election $elections)
+    {
+        $this->elections[] = $elections;
+    
+        return $this;
+    }
+
+    /**
+     * Remove elections
+     *
+     * @param \Collectif\AdminBundle\Entity\Election $elections
+     */
+    public function removeElection(\Collectif\AdminBundle\Entity\Election $elections)
+    {
+        $this->elections->removeElement($elections);
+    }
+
+    /**
+     * Get elections
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getElections()
+    {
+        return $this->elections;
+    }
+    
+	public function getPositiveVotes() {
+    	$votes = array();
+    	foreach ($this->elections as $election) {
+    		if($election->getVote())
+    			$votes[] = $election;
+    	}
+    	
+    	return $votes;
+    }
+    
+    public function getNegativeVotes() {
+    	$votes = array();
+    	foreach ($this->elections as $election) {
+    		if(!$election->getVote())
+    			$votes[] = $election;
+    	}
+    	 
+    	return $votes;
+    }
 }

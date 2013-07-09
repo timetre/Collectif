@@ -58,4 +58,6 @@ jQuery(function($){
 	
 	$( "#tabs" ).tabs();
 
+	$('a.mediaSmall').media({width:580, height: 600});
+	
 });// end jquery

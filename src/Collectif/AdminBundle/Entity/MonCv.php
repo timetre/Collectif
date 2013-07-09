@@ -64,6 +64,7 @@ class MonCv
     public function __construct()
     {
     	$this->dateCreation = new \Datetime();
+    	$this->langue = "FR";
     }
 
 

@@ -116,6 +116,7 @@ class HomeController extends Controller
 		} 
 		else 
 			$cv = null;
+		
     	
     	return $this->render('CollectifFrontBundle:Default:membre.html.twig', array(
     		'membre' 		=> $membre,
