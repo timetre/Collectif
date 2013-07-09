@@ -1,0 +1,26 @@
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+  		$.ajax({
+		    type: "GET",
+		    url: "http://collectif.local/app_dev.php/ws/position",
+		    dataType: "json",
+		    crossDomain:true,
+		    success: function(data){
+		    	var res = data;
+		        console.log(res);
+		    },
+		    error: function(data){
+		    	alert("error");
+		    }
+		});
+
+
+
+	});
+</script>
+
+<body>
+</body>
+</html>

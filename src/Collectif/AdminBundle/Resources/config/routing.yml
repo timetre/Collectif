@@ -206,3 +206,7 @@ CollectifAdminBundle_reseau_mescv:
 CollectifAdminBundle_reseau_election:
     resource: "@CollectifAdminBundle/Resources/config/routing/election.yml"
     prefix:   /reseau/election
+
+CollectifAdminBundle_reseau_ws:
+    resource: "@CollectifAdminBundle/Resources/config/routing/ws.yml"
+    prefix:   /ws

@@ -1,0 +1,3 @@
+collectif_ws_position:
+    pattern:  /position
+    defaults: { _controller: CollectifAdminBundle:WebService:positioning }

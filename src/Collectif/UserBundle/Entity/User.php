@@ -64,6 +64,20 @@ class User extends BaseUser
      */
     private $fonctionBureau;
 
+    /**
+     * @var string $latitude
+     *
+     * @ORM\Column(name="latitude", type="string", length=255, nullable=true)
+     */
+    private $latitude;
+
+    /**
+     * @var string $longitude
+     *
+     * @ORM\Column(name="longitude", type="string", length=255, nullable=true)
+     */
+    private $longitude;
+
 	/**
      * @Assert\File(maxSize="6000000")
      */
@@ -289,6 +303,16 @@ class User extends BaseUser
     	$this->pageStructure = $this->putHttp($this->pageStructure);
     	$this->sitePersonnel = $this->putHttp($this->sitePersonnel);
     	$this->activiteNumerique = $this->putHttp($this->activiteNumerique);
+
+        if($this->lieu !== null) {
+            $prepAddr = str_replace(' ','+',$this->lieu);
+            $prepAddr .= "+France";
+            $geocode=file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');
+            $output= json_decode($geocode);
+            $this->latitude = $output->results[0]->geometry->location->lat;
+            $this->longitude = $output->results[0]->geometry->location->lng;
+        }
+
     	
     }
     
@@ -1118,4 +1142,50 @@ class User extends BaseUser
         return $this->pageStructure;
     }    
     
+
+    /**
+     * Set latitude
+     *
+     * @param string $latitude
+     * @return User
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+    
+        return $this;
+    }
+
+    /**
+     * Get latitude
+     *
+     * @return string 
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * Set longitude
+     *
+     * @param string $longitude
+     * @return User
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+    
+        return $this;
+    }
+
+    /**
+     * Get longitude
+     *
+     * @return string 
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
 }

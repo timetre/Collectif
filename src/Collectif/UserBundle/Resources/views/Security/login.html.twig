@@ -10,36 +10,47 @@
   </head>
 
   <body>
-<div class="span3"></div>
-<div class="span9">
-    <div class="container section" id="section1">
-		{% for key, message in app.session.getFlashes() %}
-        <div class="{{ key }}">
-            {{ message|trans({}, 'FOSUserBundle') }}
-        </div>
-        {% endfor %}
-
-        <div class="slidingSpaces">
-			<form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin">
-				<h2 class="form-signin-heading">Identification</h2>
-		        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-	
-		        <input type="text"  class="input-block-level"  placeholder="Login" id="username" name="_username" value="{{ last_username }}" required="required" />
-	
-		        <input type="password" class="input-block-level" placeholder="Mot de passe" id="password" name="_password" required="required" />
-				
-				<label class="checkbox">
-				  <input type="checkbox" id="remember_me" name="_remember_me" value="on"> Se souvenir de moi
-				</label>
-	
-		        <input type="submit" class="btn btn-large btn-primary" id="_submit" name="_submit" value="Envoyer" />
-		    </form>
-		    
-		   	<div>
-        		<h2 class="center-title">Pas encore membre ? <a href="#section2" class="goSlide">Faites un tour</a></h2>
-        	</div>
-        </div>
+<div class="row">
+	<div class="span10">
+		<iframe height="600px" width="100%" frameborder="0" scrolling="no" 
+		src="{{ asset('/maps/map.html') }}">
+    </iframe>
 	</div>
+	<div class="span5">
+	    <div class="container section" id="section1">
+			{% for key, message in app.session.getFlashes() %}
+	        <div class="{{ key }}">
+	            {{ message|trans({}, 'FOSUserBundle') }}
+	        </div>
+	        {% endfor %}
+
+	        <div class="slidingSpaces">
+				<form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin">
+					<h2 class="form-signin-heading">Identification</h2>
+			        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+		
+			        <input type="text"  class="input-block-level"  placeholder="Login" id="username" name="_username" value="{{ last_username }}" required="required" />
+		
+			        <input type="password" class="input-block-level" placeholder="Mot de passe" id="password" name="_password" required="required" />
+					
+					<label class="checkbox">
+					  <input type="checkbox" id="remember_me" name="_remember_me" value="on"> Se souvenir de moi
+					</label>
+		
+			        <input type="submit" class="btn btn-large btn-primary" id="_submit" name="_submit" value="Envoyer" />
+			    </form>
+			    
+			   	<div>
+	        		<h2 class="center-title">Pas encore membre ? <a href="#section2" class="goSlide">Faites un tour</a></h2>
+	        	</div>
+	        </div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="span3"></div>
+	<div class="span9">
 
     <div class="container section" id="section2">
     
