@@ -8,37 +8,23 @@
 	<link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/custom.css') }}" />
 	<link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/login.css') }}" />
 	<link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/datepicker.css') }}" />
-	
-	<style type="text/css">
-		.container {
-		  width: 600px;
-		}
-		.maModale {
-			margin-left: 24%;
-		}
-	</style>
-	
-	
+		
   </head>
 
   <body>
   
   {% form_theme form 'CollectifAdminBundle:Form:fields.html.twig' %}
   	<div class="container">
-  		<h2>Formulaire d'insciption - Etape 3/3</h2>	
+  		<h2>Formulaire d'insciption - Etape 3/4</h2>	
   		<hr/>
-  		<h3>Activité numérique</h3>		
+  		<h3>Ma page perso</h3>		
 		{% block content %}
 		    <form action="" {{ form_enctype(form) }} method="POST" class="form-horizontal">
 		        {{ form_widget(form) }}
 		        <div>
 		        	<a href="{{ path('collectif_front_homepage') }}" type="button" class="btn btn-warning">Annuler</a>
 		        	
-		        	<a href="#myModal" role="button" class="btn btn-info maModale" data-toggle="modal">Conditions générales</a>
-		        	
-		            <input type="submit" class="btn btn-primary pull-right" value="Finaliser" /><br/><br/>
-		            
-		            <p class="pull-right" style="text-align:right;"><i>* En cliquant sur finaliser, <br/>j'accèpte les conditions générales énoncées</i></p>
+		        	<input type="submit" class="btn btn-primary pull-right" value="Continuer" /><br/><br/>
 		        </div>
 		    </form>    
 		{% endblock %}

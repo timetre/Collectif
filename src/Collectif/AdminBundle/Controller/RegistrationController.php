@@ -12,6 +12,7 @@ use Collectif\UserBundle\Entity\User;
 use Collectif\AdminBundle\Form\FirstStepForm;
 use Collectif\AdminBundle\Form\SecondStepForm;
 use Collectif\AdminBundle\Form\ThirdStepForm;
+use Collectif\AdminBundle\Form\FourthStepForm;
 use Collectif\AdminBundle\Controller\MembreController;
 use Collectif\AdminBundle\Entity\Candidature;
 use Collectif\AdminBundle\Entity\MonCv;
@@ -109,11 +110,36 @@ class RegistrationController extends Controller
 			{
 				$em->persist($user);
 				$em->flush();
-				return $this->render('CollectifAdminBundle:Registration:confirmation.html.twig');
+				return $this->redirect($this->generateUrl('collectif_membre_register_step4', array('userId' => $user->getId())));
 			}
 		}
 	
 		return $this->render('CollectifAdminBundle:Registration:step3.html.twig', array(
+				'form' => $form->createView()
+		));
+	}
+	
+	public function fourthStepAction($userId)
+	{
+		$user = $this->getDoctrine()->getManager()->getRepository('CollectifUserBundle:User')->find($userId);
+		$em = $this->getDoctrine()->getManager();
+	
+		$form = $this->container->get('form.factory')->create(new FourthStepForm(), $user);
+		$request = $this->container->get('request');
+	
+		if ($request->getMethod() == 'POST')
+		{
+			$form->bindRequest($request);
+	
+			if ($form->isValid())
+			{
+				$em->persist($user);
+				$em->flush();
+				return $this->render('CollectifAdminBundle:Registration:confirmation.html.twig');
+			}
+		}
+	
+		return $this->render('CollectifAdminBundle:Registration:step4.html.twig', array(
 				'form' => $form->createView()
 		));
 	}

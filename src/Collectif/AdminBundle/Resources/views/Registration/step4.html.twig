@@ -13,7 +13,11 @@
 		.container {
 		  width: 600px;
 		}
+		.maModale {
+			margin-left: 24%;
+		}
 	</style>
+	
 	
   </head>
 
@@ -21,25 +25,58 @@
   
   {% form_theme form 'CollectifAdminBundle:Form:fields.html.twig' %}
   	<div class="container">
-  		<h2>Formulaire d'insciption - Etape 1/4</h2>	
+  		<h2>Formulaire d'insciption - Etape 4/4</h2>	
   		<hr/>
-  		<h3>Mes informations</h3>
-  		
+  		<h3>Activité numérique</h3>		
 		{% block content %}
 		    <form action="" {{ form_enctype(form) }} method="POST" class="form-horizontal">
 		        {{ form_widget(form) }}
 		        <div>
 		        	<a href="{{ path('collectif_front_homepage') }}" type="button" class="btn btn-warning">Annuler</a>
 		        	
-		            <input type="submit" class="btn btn-primary pull-right" value="Continuer" /><br/><br/>
+		        	<a href="#myModal" role="button" class="btn btn-info maModale" data-toggle="modal">Conditions générales</a>
+		        	
+		            <input type="submit" class="btn btn-primary pull-right" value="Finaliser" /><br/><br/>
+		            
+		            <p class="pull-right" style="text-align:right;"><i>* En cliquant sur finaliser, <br/>j'accèpte les conditions générales énoncées</i></p>
 		        </div>
 		    </form>    
 		{% endblock %}
 	</div>
-	
+
+	<!-- Modal -->
+	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	    <h3 id="myModalLabel">Conditions générales</h3>
+	  </div>
+	  <div class="modal-body">
+	    <p>Bordel à cul, le collectif c'est trop cool !!</p>
+	  </div>
+	  <div class="modal-footer">
+	    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	  </div>
+	</div>
+
+
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap-datepicker.js') }}"></script>
+	
+	<script type="text/javascript" src="/bundles/ckfinder/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" src="/bundles/ckfinder/ckfinder.js"></script>
+	<script type="text/javascript">
+		CKFinder.setupCKEditor( null, '/bundles/ckfinder/' ) ;
+	</script>
+
+	<script>		
+		$(function() {
+	    	$( ".datePicker" ).datepicker({
+				format: 'dd/mm/yyyy',
+				weekStart: 1
+			});
+		});
+	</script>
 	
 	</body>
 </html>
