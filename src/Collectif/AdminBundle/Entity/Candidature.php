@@ -43,7 +43,7 @@ class Candidature
     private $membre;
     
     /**
-     * @ORM\OneToMany(targetEntity="Election", cascade={"persist"}, mappedBy="candidature")
+     * @ORM\OneToMany(targetEntity="Election", cascade={"remove"}, mappedBy="candidature")
      */
     private $elections;
 

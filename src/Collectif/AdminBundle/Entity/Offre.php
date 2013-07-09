@@ -102,7 +102,7 @@ class Offre
     private $posts;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Collectif\UserBundle\Entity\User", cascade={"persist"}, inversedBy="publications")
+     * @ORM\ManyToOne(targetEntity="Collectif\UserBundle\Entity\User", cascade={"remove"})
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank()
      */

@@ -97,48 +97,48 @@ class User extends BaseUser
     private $domaine;
 
 	/**
-     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Publication", cascade={"persist"}, mappedBy="membre")
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Publication", cascade={"remove"}, mappedBy="membre")
      * @ORM\OrderBy({"datePublication" = "DESC"})
      */
     private $publications;
     
     /**
-     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Experience", cascade={"persist"}, mappedBy="membre")
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Experience", cascade={"remove"}, mappedBy="membre")
      * @ORM\OrderBy({"ordre" = "ASC"})
      */
     private $experiences;
     
     /**
-     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Formation", cascade={"persist"}, mappedBy="membre")
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Formation", cascade={"remove"}, mappedBy="membre")
      * @ORM\OrderBy({"ordre" = "ASC"})
      */
     private $formations;
     
     /**
-     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Competence", cascade={"persist"}, mappedBy="membre")
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Competence", cascade={"remove"}, mappedBy="membre")
      * @ORM\OrderBy({"ordre" = "ASC"})
      */
     private $competences;
     
     /**
-     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Interet", cascade={"persist"}, mappedBy="membre")
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Interet", cascade={"remove"}, mappedBy="membre")
      * @ORM\OrderBy({"ordre" = "ASC"})
      */
     private $interets;
     
     
     /**
-     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Post", cascade={"persist"}, mappedBy="membre")
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Post", cascade={"remove"}, mappedBy="membre")
      */
     private $posts;
     
     /**
-     * @ORM\OneToMany(targetEntity="Collectif\StatisticsBundle\Entity\Statistic", cascade={"persist"}, mappedBy="membre")
+     * @ORM\OneToMany(targetEntity="Collectif\StatisticsBundle\Entity\Statistic", cascade={"remove"}, mappedBy="membre")
      */
     private $statistics;
     
     /**
-     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\MonCv", cascade={"persist"}, mappedBy="membre")
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\MonCv", cascade={"remove"}, mappedBy="membre")
      */
     private $mesCvs;
     
@@ -323,7 +323,9 @@ class User extends BaseUser
     public function removeUpload()
     {
     	if ($file = $this->getAbsolutePath()) {
-    		unlink($file);
+    		if (file_exists($file)) {
+    			unlink($file);
+    		}
     	}
     }
 
@@ -1114,29 +1116,6 @@ class User extends BaseUser
     public function getPageStructure()
     {
         return $this->pageStructure;
-    }
-
-    /**
-     * Set candidature
-     *
-     * @param \Collectif\AdminBundle\Entity\Candidature $candidature
-     * @return User
-     */
-    public function setCandidature(\Collectif\AdminBundle\Entity\Candidature $candidature)
-    {
-        $this->candidature = $candidature;
-    
-        return $this;
-    }
-
-    /**
-     * Get candidature
-     *
-     * @return \Collectif\AdminBundle\Entity\Candidature 
-     */
-    public function getCandidature()
-    {
-        return $this->candidature;
-    }
+    }    
     
 }

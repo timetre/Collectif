@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class CandidatureRepository extends EntityRepository
 {
-	public function getPending($pending)
+public function getPending($pending)
 	{
 		$qb = $this->createQueryBuilder('c');
 	
@@ -21,6 +21,21 @@ class CandidatureRepository extends EntityRepository
 		->orderBy('c.id', 'DESC');
 	
 		return $qb->getQuery()->getResult();
+	}
+	
+	public function getByUser($userId)
+	{
+		$qb = $this->createQueryBuilder('c');
+	
+		$qb->where('c.membre = :membre')
+		->setParameter('membre', $userId);
+		
+		$resultats = $qb->getQuery()->getResult();
+		
+		if(sizeof($resultats) > 0)
+			return $resultats[0];
+		else 
+			return null;
 	}
 	
 }

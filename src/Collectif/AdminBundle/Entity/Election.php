@@ -45,7 +45,7 @@ class Election
     
     
     /**
-     * @ORM\ManyToOne(targetEntity="Collectif\UserBundle\Entity\User", cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity="Collectif\UserBundle\Entity\User", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank()
      */
