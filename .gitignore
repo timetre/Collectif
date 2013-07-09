@@ -6,6 +6,7 @@ vendor/*
 */logs/*
 */cache/*
 
+web/upload/*
 
 # Configuration files
 app/config/parameters.ini
