@@ -189,7 +189,7 @@ class MonCv
     public function removeUpload()
     {
     	if ($file = $this->getAbsolutePath()) {
-    		unlink($file);
+    		//unlink($file);
     	}
     }
     

@@ -258,8 +258,18 @@ class MembreController extends Controller {
     		throw $this->createNotFoundException('Membre[id='.$id.'] inexistant.');
     	}
     	
-    	$em->remove($membre);
-    	$em->flush();
+    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Candidature');
+    	$candi = $repository->getByUser($id);
+    	
+    	if($candi !== null) {
+    		$em->remove($candi);
+	    	$em->flush();
+    	} else {
+    		$em->remove($membre);
+    		$em->flush();
+    	}
+    	
+    	
     	
     	
     	 return new RedirectResponse($this->container->get('router')->generate('collectif_membre_homepage'));

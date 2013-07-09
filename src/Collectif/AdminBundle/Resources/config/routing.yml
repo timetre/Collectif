@@ -45,6 +45,10 @@ collectif_membre_register_step2:
 collectif_membre_register_step3:
     pattern:  /registration/step3/{userId}
     defaults: { _controller: CollectifAdminBundle:Registration:thirdStep }
+
+collectif_membre_register_step4:
+    pattern:  /registration/step4/{userId}
+    defaults: { _controller: CollectifAdminBundle:Registration:fourthStep }
     
 collectif_domaine_homepage:
     pattern:  /reseau/admin/domaines

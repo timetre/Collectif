@@ -15,13 +15,14 @@
 
 <div class="tabbable">
   <ul class="nav nav-tabs">
-    <li class="active"><a href="#tab1" data-toggle="tab">Candidature</a></li>
-    <li><a href="#tab2" data-toggle="tab">Curriculum</a></li>
-    <li><a href="#tab3" data-toggle="tab">Commentaires</a></li>
+    <li class="active"><a href="#tabCandi" data-toggle="tab">Candidature</a></li>
+    <li><a href="#tabPres" data-toggle="tab">Présentation</a></li>
+    <li><a href="#tabCv" data-toggle="tab">Curriculum</a></li>
+    <li><a href="#tabComm" data-toggle="tab">Commentaires</a></li>
   </ul>
   
   <div class="tab-content">
-    <div class="tab-pane active" id="tab1">
+    <div class="tab-pane active" id="tabCandi">
     
     	<div class="span7">	
 			<h1>{{ entity.membre.prenom }} {{ entity.membre.nom }}</h1>
@@ -78,14 +79,24 @@
     
     
     </div>
-	<div class="tab-pane" id="tab2">
+	
+	<div class="tab-pane" id="tabPres">
+		{% if entity.membre.path != null %}
+			<img class="img-polaroid" src="{{ image('upload/Membres/' ~ entity.membre.path).resize(null, 350) }}" style="height: 200px !important;" />
+		{% endif %}
+		
+		{{ entity.membre.contenuPage | raw }}
+	</div>
+	
+	<div class="tab-pane" id="tabCv">
 		{% if cv.path != null %}
 			<a class="mediaBig" href="{{ asset('upload/CVTheque/' ~ cv.path)}}" ></a>
 		{% else %}
 			Aucun CV pour le moment !
 		{% endif %}
 	</div>
-  	<div class="tab-pane" id="tab3">
+		
+  	<div class="tab-pane" id="tabComm">
       <div class="span12">	
 			<hr/>
 			
