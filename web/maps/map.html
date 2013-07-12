@@ -45,12 +45,6 @@
 	  setMarkers(map, positions);
 	}
 
-	/*var beaches = [
-	  ['Lyon',  45.7640430, 4.8356590, 4],
-	  ['Paris', 48.8566140, 2.3522219, 5],
-	  ['Amage', 47.8373670, 6.4882310, 3]
-	];*/
-	
 	function setMarkers(map, locations) {
 	  // Add markers to the map
 	
@@ -92,6 +86,7 @@
 	    var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
 	    var marker = new google.maps.Marker({
 	        position: myLatLng,
+	        animation: google.maps.Animation.DROP,
 	        map: map,
 	        shadow: shadow,
 	        icon: image,
