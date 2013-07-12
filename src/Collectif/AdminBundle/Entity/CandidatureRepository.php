@@ -14,13 +14,22 @@ class CandidatureRepository extends EntityRepository
 {
 public function getPending($pending)
 	{
-		$qb = $this->createQueryBuilder('c');
-	
-		$qb->where('c.pending = :pending')
-		->setParameter('pending', $pending)
+		$params = array(
+			'pending', $pending
+		);
+		//$qb = $this->createQueryBuilder();
+		
+		return $this->getEntityManager()->createQuery('SELECT c FROM CollectifAdminBundle:Candidature c JOIN c.membre m WHERE c.pending = '.$pending.' AND m.enabled = false ORDER BY c.id DESC')->getResult();
+		/*
+		$qb->select('c')
+    	->from('Candidature', 'c')
+    	->join('c.membre', 'm')
+    	->where('c.pending = :pending')
+    	->andWhere('m.enabled = false')
+      	->setParameters($params)
 		->orderBy('c.id', 'DESC');
-	
-		return $qb->getQuery()->getResult();
+
+		return $qb->getQuery()->getResult();*/
 	}
 	
 	public function getByUser($userId)

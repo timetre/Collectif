@@ -46,7 +46,7 @@
 
 <!-- Modal -->
 <div id="createTopic" style="width: 750px;" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<form action="{{ path('reseau_sousforum_create_message', { 'sfId': entity.id }) }}" method="post" class="form-horizontal">
+<form action="{{ path('reseau_sousforum_create_message', { 'sfId': entity.id }) }}" method="post" class="form-horizontal" enctype="multipart/form-data" >
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">Nouveau sujet</h3>

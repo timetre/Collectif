@@ -11,8 +11,16 @@ class VisionneuseType extends AbstractType
     {
         $builder
             ->add('titre', 'text', array(
-            		'label' => 'Titre'
+            		'label' => 'Titre *'
             	))
+           	->add('contenu', 'textarea', array(
+            		'label' => 'Description',
+            		'required'  => false,
+            		'attr' => array(
+            				'class' => 'ckeditor'
+            		)
+            ))
+            ->add('file', 'file', array('label' => 'Document *', 'required' => true))
         ;
     }
 

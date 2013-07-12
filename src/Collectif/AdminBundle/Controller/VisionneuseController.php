@@ -66,7 +66,7 @@ class VisionneuseController extends Controller
     	$post->setMembre($user);
     	$form = $this->createForm(new PostType(), $post);
 	
-    	return $this->render('CollectifAdminBundle:Visionneuse:show.html.twig', array(
+    	return $this->render('CollectifAdminBundle:Pdf:detail.html.twig', array(
     		'entity'      => $entity,
     		'form'	=> $form->createView()
     	));
@@ -89,4 +89,138 @@ class VisionneuseController extends Controller
     
     	return $this->redirect($this->generateUrl('reseau_sousforum_show', array('id' => $sf->getId())));
     }
+    
+    public function editVisionneuseAction($id = null)
+    {
+    	$message='';
+    	$em = $this->getDoctrine()->getManager();
+    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Visionneuse');
+    
+    	if (isset($id))
+    	{
+    		$visionneuse = $repository->find($id);
+    		if (!$visionneuse)
+    		{
+    			$message='Aucun visionneuse trouvé';
+    		}
+    	}
+    	else
+    	{
+    		$visionneuse = new Visionneuse();
+    	}
+    
+    	$form = $this->container->get('form.factory')->create(new VisionneuseType(), $visionneuse);
+    
+    	$request = $this->container->get('request');
+    
+    	if ($request->getMethod() == 'POST')
+    	{
+    		$form->bindRequest($request);
+    
+    		if ($form->isValid())
+    		{
+    			$em->persist($visionneuse);
+    
+    			$em->flush();
+    
+    			if (isset($id))
+    			{
+    				$message='Visionneuse modifié avec succès !';
+    			}
+    			else
+    			{
+    				$message='Visionneuse ajouté avec succès !';
+    			}
+    
+    			return $this->redirect($this->generateUrl('reseau_sousforum_show', array('id' => $visionneuse->getSousForum()->getId())));
+    		}
+    	}
+    
+    	return $this->render('CollectifAdminBundle:Pdf:edit.html.twig', array(
+    			'entity' => $visionneuse,
+    			'sfId'   => $visionneuse->getSousForum()->getId(),
+    			'form'   => $form->createView(),
+    	));
+    }
+    
+	public function createPostAction(Request $request, $id)
+    {
+    	$entity  = new Post();
+    	$form = $this->createForm(new PostType(), $entity);
+    	$form->bind($request);
+    
+    	$em = $this->getDoctrine()->getManager();
+    
+    	$user = $this->container->get('security.context')->getToken()->getUser();
+    	$visionneuse = $em->getRepository('CollectifAdminBundle:Visionneuse')->find($id);
+    
+    	$entity->setMembre($user);
+    	$entity->setVisionneuse($visionneuse);
+    
+    	$em->persist($entity);
+    	$em->flush();
+    
+    	$post = new Post();
+    
+    	$entity->setMembre($user);
+    	$entity->setVisionneuse($visionneuse);
+    
+    	$form = $this->createForm(new PostType(), $post);
+    
+    	return $this->redirect($this->generateUrl('reseau_sousforum_visionneuse_show', array('id' => $visionneuse->getId())));
+    }
+    
+    public function deletePostAction($id)
+    {
+    	$em = $this->getDoctrine()->getManager();
+    	$post = $em->find('CollectifAdminBundle:Post', $id);
+    
+    	if (!$post)
+    	{
+    		throw $this->createNotFoundException('Topic [id='.$id.'] inexistant.');
+    	}
+    
+    	$visionneuse = $post->getVisionneuse();
+    
+    	$em->remove($post);
+    	$em->flush();
+    
+    	return $this->redirect($this->generateUrl('reseau_sousforum_visionneuse_show', array('id' => $visionneuse->getId())));
+    }
+    
+	public function editPostAction($id = null)
+    {
+    	$message='';
+    	$em = $this->getDoctrine()->getManager();
+    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Post');
+    
+    	if (isset($id))
+    	{
+    		$outil = $repository->find($id);
+    	}
+    	else
+    	{
+    		$outil = new Post();
+    	}
+    
+    	$form = $this->container->get('form.factory')->create(new PostType(), $outil);
+    
+    	$request = $this->container->get('request');
+    
+    	if ($request->getMethod() == 'POST')
+    	{
+    		$form->bindRequest($request);
+
+    		$em->persist($outil);
+    		$em->flush();
+    
+    		return $this->redirect($this->generateUrl('reseau_sousforum_visionneuse_show', array('id' => $outil->getVisionneuse()->getId())));
+    	}
+    
+    		return $this->render('CollectifAdminBundle:Pdf:editPost.html.twig', array(
+    				'entity' => $outil,
+    				'sfId'   => $outil->getVisionneuse()->getId(),
+    				'form'   => $form->createView(),
+    		));
+    	}
 }

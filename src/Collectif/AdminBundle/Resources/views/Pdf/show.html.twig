@@ -6,7 +6,7 @@
 
 	{% if is_granted("ROLE_SUPER_ADMIN") %}
 		<div class="header-buttons">
-			<a class="btn btn-success right" href="#createvisionneuse" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Nouvelle visionneuse</a>
+			<a class="btn btn-success right" href="#createvisionneuse" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Nouveau reader</a>
 		</div>
 	{% endif %}
 
@@ -16,7 +16,7 @@
 
 	<hr/>
 
-	<h3>{{ entity.visionneuses | length }} visionneuses</h3>
+	<h3>{{ entity.visionneuses | length }} documents</h3>
 	
 	<div style="margin-bottom: 100px;">
 		{% for visionneuse in entity.visionneuses %}
@@ -26,7 +26,8 @@
 				<p style="font-size: 12px;"> Posté par <strong><a href="{{ path('collectif_front_chercheur', { 'alias': visionneuse.membre.alias }) }}" target="_blank">{{ visionneuse.membre.prenom }} {{ visionneuse.membre.nom }}</a></strong>, 
 					<em> le {{ visionneuse.dateCreation|date('d/m/Y') }}</em>&nbsp;
 					{% if app.user.id == visionneuse.membre.id or is_granted("ROLE_SUPER_ADMIN") %}
-						<a href="#"><i class="icon-pencil"></i> Editer</a>&nbsp;
+					
+						<a href="{{ path('reseau_sousforum_edit_visionneuse', { 'id': visionneuse.id }) }}"><i class="icon-pencil"></i> Editer</a>&nbsp;
 						
 						<a onclick="if(!confirm('Voulez-vous vraiment supprimer cette visionneuse ?')) { return false };" 
 							href="{{ path('reseau_sousforum_delete_visionneuse', { 'id': visionneuse.id }) }}"><i class="icon-trash"></i> Supprimer</a>
@@ -39,10 +40,10 @@
 	
 <!-- Modal -->
 <div id="createvisionneuse" style="width: 750px;" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<form action="{{ path('reseau_sousforum_create_visionneuse', { 'sfId': entity.id }) }}" method="post" class="form-horizontal">
+<form action="{{ path('reseau_sousforum_create_visionneuse', { 'sfId': entity.id }) }}" method="post" class="form-horizontal" enctype="multipart/form-data">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Nouvelle visionneuse</h3>
+    <h3 id="myModalLabel">Nouveau reader</h3>
   </div>
   <div class="modal-body">
 	{{ form_widget(form) }}

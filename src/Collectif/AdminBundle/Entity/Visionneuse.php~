@@ -4,15 +4,15 @@ namespace Collectif\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 /**
- * @ORM\Entity
+ * Visionneuse
+ *
  * @ORM\Table()
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="Collectif\AdminBundle\Entity\OutilRepository")
+ * @ORM\Entity(repositoryClass="Collectif\AdminBundle\Entity\VisionneuseRepository")
  */
-class Outil
+class Visionneuse
 {
     /**
      * @var integer
@@ -30,10 +30,10 @@ class Outil
     private $titre;
     
     /**
-     * @var string $lien
-     * @ORM\Column(name="lien", type="text", nullable=true)
+     * @var string $resume
+     * @ORM\Column(name="resume", type="text", nullable=true)
      */
-    private $lien;
+    private $resume;
     
     /**
      * @var string $contenu
@@ -48,11 +48,17 @@ class Outil
     private $dateCreation;
     
     /**
-     * @ORM\ManyToOne(targetEntity="SousForum", cascade={"persist"}, inversedBy="outils")
+     * @ORM\ManyToOne(targetEntity="SousForum", cascade={"persist"}, inversedBy="visionneuses")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank()
      */
     private $sousForum;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Post", cascade={"remove"}, mappedBy="message")
+     * @ORM\OrderBy({"dateCreation" = "DESC"})
+     */
+    private $posts;
     
     /**
      * @ORM\ManyToOne(targetEntity="Collectif\UserBundle\Entity\User", cascade={"persist"}, inversedBy="publications")
@@ -61,24 +67,18 @@ class Outil
      */
     private $membre;
     
-    /**
+   /**
      * @ORM\Column(name="path", type="string", length=255, nullable=true)
      */
     private $path;
     
     /**
-     * @Assert\Image(
-     * maxSize="6000000",
-     * mimeTypes = {
-     *   "image/png",
-     *   "image/pjpeg",
-     *   "image/jpeg",
-     *   "image/gif"
-     * },
-     * mimeTypesMessage = "Votre image ne correspond pas au format autorisé (jpeg, gif ou png)",
-     * maxSizeMessage = "Votre image ne doit pas dépasser les 6 mo"
-     *)
-     *
+     * @Assert\File(
+     *     maxSize = "6000000",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Votre document ne correspond pas au format autorisé (PDF)",
+     *     maxSizeMessage = "Votre document ne doit pas dépasser les 6 mo"
+     * )
      */
     public $file;
     
@@ -98,12 +98,36 @@ class Outil
     {
         return $this->id;
     }
+    
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return MonCv
+     */
+    public function setPath($path)
+    {
+    	$this->path = $path;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get path
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+    	return $this->path;
+    }
 
     /**
      * Set titre
      *
      * @param string $titre
-     * @return Outil
+     * @return Visionneuse
      */
     public function setTitre($titre)
     {
@@ -123,33 +147,33 @@ class Outil
     }
 
     /**
-     * Set lien
+     * Set resume
      *
-     * @param string $lien
-     * @return Outil
+     * @param string $resume
+     * @return Visionneuse
      */
-    public function setLien($lien)
+    public function setResume($resume)
     {
-        $this->lien = $lien;
+        $this->resume = $resume;
     
         return $this;
     }
 
     /**
-     * Get lien
+     * Get resume
      *
      * @return string 
      */
-    public function getLien()
+    public function getResume()
     {
-        return $this->lien;
+        return $this->resume;
     }
 
     /**
      * Set contenu
      *
      * @param string $contenu
-     * @return Outil
+     * @return Visionneuse
      */
     public function setContenu($contenu)
     {
@@ -172,7 +196,7 @@ class Outil
      * Set dateCreation
      *
      * @param \DateTime $dateCreation
-     * @return Outil
+     * @return Visionneuse
      */
     public function setDateCreation($dateCreation)
     {
@@ -195,7 +219,7 @@ class Outil
      * Set sousForum
      *
      * @param \Collectif\AdminBundle\Entity\SousForum $sousForum
-     * @return Outil
+     * @return Visionneuse
      */
     public function setSousForum(\Collectif\AdminBundle\Entity\SousForum $sousForum)
     {
@@ -215,10 +239,43 @@ class Outil
     }
 
     /**
+     * Add posts
+     *
+     * @param \Collectif\AdminBundle\Entity\Post $posts
+     * @return Visionneuse
+     */
+    public function addPost(\Collectif\AdminBundle\Entity\Post $posts)
+    {
+        $this->posts[] = $posts;
+    
+        return $this;
+    }
+
+    /**
+     * Remove posts
+     *
+     * @param \Collectif\AdminBundle\Entity\Post $posts
+     */
+    public function removePost(\Collectif\AdminBundle\Entity\Post $posts)
+    {
+        $this->posts->removeElement($posts);
+    }
+
+    /**
+     * Get posts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
      * Set membre
      *
      * @param \Collectif\UserBundle\Entity\User $membre
-     * @return Outil
+     * @return Visionneuse
      */
     public function setMembre(\Collectif\UserBundle\Entity\User $membre)
     {
@@ -262,7 +319,7 @@ class Outil
     {
     	// get rid of the __DIR__ so it doesn't screw up
     	// when displaying uploaded doc/image in the view.
-    	return 'upload/Outils';
+    	return 'upload/Visionneuse';
     }
     
     /**
@@ -302,31 +359,9 @@ class Outil
     public function removeUpload()
     {
     	if ($file = $this->getAbsolutePath()) {
-    		unlink($file);
+    		if (file_exists($file)) {
+    			unlink($file);
+    		}
     	}
-    }
-    
-    
-    /**
-     * Set path
-     *
-     * @param string $path
-     * @return MonCv
-     */
-    public function setPath($path)
-    {
-    	$this->path = $path;
-    
-    	return $this;
-    }
-    
-    /**
-     * Get path
-     *
-     * @return string
-     */
-    public function getPath()
-    {
-    	return $this->path;
     }
 }

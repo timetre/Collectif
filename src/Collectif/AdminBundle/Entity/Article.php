@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Collectif\AdminBundle\Entity\Article
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Collectif\AdminBundle\Entity\ArticleRepository")
+ * @ORM\Entity(name="article", repositoryClass="Collectif\AdminBundle\Entity\ArticleRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Article extends SuperClassArticle

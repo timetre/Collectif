@@ -107,7 +107,7 @@ class Statistic
     
    
     /**
-     * @ORM\ManyToOne(targetEntity="Collectif\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Collectif\UserBundle\Entity\User", inversedBy="statistics")
      * @ORM\JoinColumn(nullable=true)
      */
     private $membre;
