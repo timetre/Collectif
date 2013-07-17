@@ -332,7 +332,12 @@ class User extends BaseUser
     		$begin = substr($field, 0, 7);
     		if (strpos($begin,'http://') === false) {
     			$field = "http://" . $field;
-    		}
+    		} else {
+				$begin = substr($field, 0, 7);
+				if (strpos($begin,'http://') === false) {
+					$field = "http://" . $field;
+				}
+			}
     	}
     	return $field;
     }

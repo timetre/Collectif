@@ -13,9 +13,9 @@
 				<tr>
 					<td>
 						{% if membre.path == null %}
-							<img align="left" src="{{ image('bundles/collectiffront/images/ghost.png').resize(null, 138) }}" alt="" style="margin-right: 10px;" />
+							<img align="left" src="{{ '/bundles/collectiffront/images/ghost.png' }}" height="138" alt="" style="margin-right: 10px;" />
 						{% else %}
-							<img align="left" src="{{ image('upload/Membres/' ~ membre.path).resize(null, 138) }}" alt="" style="margin-right: 10px;" />
+							<img align="left" src="{{ 'upload/Membres/' ~ membre.path }}" height="138" alt="" style="margin-right: 10px;" />
 						{% endif %}
 						{{ membre.contenuPage | raw  }}
 					</td>

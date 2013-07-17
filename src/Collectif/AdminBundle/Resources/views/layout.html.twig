@@ -8,10 +8,30 @@
 	<link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/custom.css') }}" />
 	<link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/datepicker.css') }}" />
 	
-	
+	<style type="text/css">
+
+     #footer {
+     	background-color: #f5f5f5;
+		border: 1px solid #e3e3e3;
+		height: 60px;
+		margin-left: -20px;
+             margin-right: -20px;
+             padding-left: 20px;
+             padding-right: 20px;
+     }
+     
+     .container {
+           width: auto;
+           max-width: 680px;
+         }
+         .container .credit {
+           margin: 20px 0;
+         }
+
+    </style>
 </head>
 	<body>
-
+<div id="wrap">
 	<div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
@@ -211,6 +231,15 @@
 		</div>
 	</div>
 		
+		<div id="push"></div>
+	</div>
+	
+	<div id="footer">
+      <div class="container">
+        <p class="muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>
+      </div>
+    </div>	
+</div>
 	<!-- <script src="http://code.jquery.com/jquery-latest.js"></script>-->
 	{# <script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/jquery-1.6.1.min.js') }}"></script> #}
 	<script type="text/javascript" src="{{ asset('/resources/js/jquery-2.0.3.min.js') }}"></script>
