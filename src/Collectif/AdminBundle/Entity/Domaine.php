@@ -75,7 +75,18 @@ class Domaine
     private $path;
 	
 	/**
-     * @Assert\File(maxSize="6000000")
+     * @Assert\Image(
+     * maxSize="6000000",
+     * mimeTypes = {
+     *   "image/png",
+     *   "image/pjpeg",
+     *   "image/jpeg",
+     *   "image/gif"
+     * },
+     * mimeTypesMessage = "Votre image ne correspond pas au format autorisé (jpeg, gif ou png)",
+     * maxSizeMessage = "Votre image ne doit pas dépasser les 6 mo"
+     *)
+     *
      */
     public $file;
     

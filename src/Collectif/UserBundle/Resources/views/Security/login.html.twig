@@ -12,9 +12,7 @@
   <body>
 <div class="row">
 	<div class="span10">
-		<iframe height="600px" width="100%" frameborder="0" scrolling="no" 
-		src="{{ asset('/maps/map.html') }}">
-    </iframe>
+		<iframe height="600px" width="100%" frameborder="0" scrolling="no" src="{{ asset('/maps/map.html') }}"></iframe>
 	</div>
 	<div class="span5">
 	    <div class="container section" id="section1">
@@ -89,7 +87,7 @@
     </div>
 </div>
 
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script type="text/javascript" src="{{ asset('/resources/js/jquery-2.0.3.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/jquery.easing.1.3.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap.js') }}"></script>
     <script type="text/javascript">

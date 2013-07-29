@@ -132,6 +132,10 @@ reseau_sousforum_visionneuse_show:
 reseau_sousforum_delete_visionneuse:
     pattern:  /{id}/deletevisionneuse
     defaults: { _controller: "CollectifAdminBundle:Visionneuse:deleteVisionneuse" }
+
+reseau_sousforum_edit_visionneuse:
+    pattern:  /{id}/edit/visionneuse
+    defaults: { _controller: "CollectifAdminBundle:Visionneuse:editVisionneuse" }
     
 
 reseau_sousforum_candidature_show:
@@ -150,4 +154,17 @@ reseau_sousforum_delete_post_candidature:
 reseau_sousforum_edit_post_candidature:
     pattern:  /{id}/candidature/edit/post
     defaults: { _controller: "CollectifAdminBundle:Candidature:editPost" }
+    
+reseau_sousforum_create_post_visionneuse:
+    pattern:  /visionneuse/create/post/{id}
+    defaults: { _controller: "CollectifAdminBundle:Visionneuse:createPost" }
+    requirements: { _method: post }
+
+reseau_sousforum_delete_post_visionneuse:
+    pattern:  /{id}/visionneuse/delete/post
+    defaults: { _controller: "CollectifAdminBundle:Visionneuse:deletePost" }
+
+reseau_sousforum_edit_post_visionneuse:
+    pattern:  /{id}/visionneuse/edit/post
+    defaults: { _controller: "CollectifAdminBundle:Visionneuse:editPost" }
     

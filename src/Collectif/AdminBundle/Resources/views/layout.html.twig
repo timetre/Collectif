@@ -69,15 +69,6 @@
 	            	{% else %}
 	              		<li><a href="{{ path('collectif_cv_list') }}">Divers</a></li>
 	           	 	{% endif %}
-			  		
-	           	 	{#
-			  		{% if app.request.attributes.get('_route') == 'fos_user_profile_show' %}
-	            		<li class="active"><a href="{{ path('fos_user_profile_show') }}">Infos perso</a></li>
-	            	{% else %}
-	              		<li><a href="{{ path('fos_user_profile_show') }}">Infos perso</a></li>
-	           	 	{% endif %}
-					#}
-	           	 	
 
 	           	 	{% if app.request.attributes.get('_route') == 'collectif_stat_list' %}
 	            		<li class="active"><a href="{{ path('collectif_stat_list') }}">Mes statistiques</a></li>
@@ -102,6 +93,7 @@
 
           </div>
         </div>
+
       </div>
     </div>
 
@@ -119,11 +111,13 @@
 		              	<li><a href="{{ path('collectif_back_homepage') }}">Accueil</a></li>
 		              {% endif %}
 		              
+		              {#
 		              {% if app.request.attributes.get('_route') == 'collectif_membre_edit_page' %}
 		              	<li class="active"><a href="{{ path('collectif_membre_edit_page', { 'id': app.user.id }) }}">Ma page perso</a></li>
 		              {% else %}
 		              	<li><a href="{{ path('collectif_membre_edit_page', { 'id': app.user.id }) }}">Ma page perso</a></li>
 		              {% endif %}
+		              #}
 		              
 		              <li class="nav-header">Contenu</li>
 		              {% if app.request.attributes.get('_route') == 'collectif_page_homepage' %}
@@ -220,7 +214,8 @@
 	</div>
 		
 	<!-- <script src="http://code.jquery.com/jquery-latest.js"></script>-->
-	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/jquery-1.6.1.min.js') }}"></script>
+	{# <script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/jquery-1.6.1.min.js') }}"></script> #}
+	<script type="text/javascript" src="{{ asset('/resources/js/jquery-2.0.3.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap-datepicker.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/jquery.media.js') }}"></script> 

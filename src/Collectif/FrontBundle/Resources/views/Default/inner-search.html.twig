@@ -14,7 +14,7 @@
 		
 		<h3>Résultats dans les articles ({{ searchArticles|length }})</h3>
 		{% for a in searchArticles %}
-			<h5><a href="{{ path('collectif_front_article', { 'id': a.id }) }}">{{ a.titre }}</a></h5>
+			<h5><a href="{{ path('collectif_front_article', { 'alias': a.alias }) }}">{{ a.titre }}</a></h5>
 			{{ a.resume|raw }}
 		{% endfor %}
 		
