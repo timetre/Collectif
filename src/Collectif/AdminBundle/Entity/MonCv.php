@@ -57,7 +57,7 @@ class MonCv
     private $path;
     
     /**
-     * @Assert\File(maxSize="6000000")
+     * @Assert\File(maxSize="60000000")
      */
     public $file;
     

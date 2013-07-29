@@ -29,15 +29,15 @@
 		  <ul>
 		    <li><a href="#tabs-1">Parcours</a></li>
 		    <li><a href="#tabs-2">Publications</a></li>
-		    <li><a href="#tabs-3">Divers</a></li>
+		    <li><a href="#tabs-3">Informations</a></li>
 		  </ul>
 		  
 		  
 		  <div id="tabs-1">
 		    {% if membre.mesCvs | length == 0 %}
-		  		<p>Aucun CV pour ce membre</p>
+		  		<p>Aucun parcours pour ce membre</p>
 		  	{% else %}
-		  		<h3>CV</h3>
+		  		<h3>Parcours</h3>
 				{% if cv != null %}
 					{% if cv.path != null %}
 						<h4><a target="_blank" href="{{ asset('upload/CVTheque/' ~ cv.path)}}" >Télécharger PDF</a></h4>
