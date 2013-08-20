@@ -6,6 +6,8 @@
 </div><!--// clearfix-->
 				
 <div class="clearfix widget-area">
+
+    {% render url('front_sidebar_inner') %}
 	<div class="grid_4 widget" style="width:65%;text-align:justify;">
 		<div id="text-3" class="widget widget_text">
 			{% block content %}
@@ -13,7 +15,7 @@
 		</div>
 	</div><!--//grid4-->
 	                             
-    {% render url('front_sidebar_inner') %}
+
 </div><!--//clearfix-->
 			
 {% render url('front_footer') %}

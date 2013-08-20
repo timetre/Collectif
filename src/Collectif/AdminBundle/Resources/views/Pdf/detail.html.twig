@@ -18,7 +18,14 @@
 	
 	{{ entity.contenu | raw }}
 	
-	<h4><a target="_blank" href="{{ asset('upload/Visionneuse/' ~ entity.path)}}" >Voir PDF</a></h4>
+	<h4><a target="_blank" href="{{ asset('upload/Visionneuse/' ~ entity.path)}}" >Télécharger</a></h4>
+
+	{% if entity.path != null %}
+		<a class="mediaBig" href="{{ asset('upload/Visionneuse/' ~ entity.path) }}" ></a>
+	{% else %}
+		Aucun document à visionner pour le moment !
+	{% endif %}
+	
 <hr/>
 
 <h3>{{ entity.posts | length }} Commentaires</h3>
