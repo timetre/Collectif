@@ -23,6 +23,7 @@
 	        {% endfor %}
 
 	        <div class="slidingSpaces">
+	        	<a href="/"><img src="/bundles/collectiffront/images/logo.png" /></a>
 				<form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin">
 					<h2 class="form-signin-heading">Identification</h2>
 			        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
@@ -81,7 +82,7 @@
     	<a class="carousel-control right" href="#this-carousel-id" data-slide="next">&rsaquo;</a>
 	
 	<div>
-    	<h2 class="center-title"><a target="_blank" href="{{ path('collectif_membre_register') }}">Adhérez en ligne</a></h2>
+    	<h2 class="center-title"><a target="_blank" href="{{ path('collectif_membre_register') }}">Adhérez en ligne</a></h2><p style="text-align:center;">(10€ par an)</p>
     </div>
 
     </div>

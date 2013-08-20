@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="fr-FR">
 <head profile="http://gmpg.org/xfn/11">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>{% block title %}Collectif CONFLUENCE{% endblock %}</title>
+	<title>An Error Occurred: {{ status_text }}</title>
 	
 	<link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/bootstrap.css') }}" />
 	<link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/custom.css') }}" />
@@ -11,9 +11,11 @@
 	
 	<style type="text/css">
 		.container {
-		  width: 600px;
+		  width: 900px;
 		  text-align: center;
 		}
+
+		
 	</style>
 	
 	
@@ -21,20 +23,31 @@
 
   <body>
   
-  <div class="container">
+  	<div class="container">
   		<img src="/bundles/collectiffront/images/logo.png" />		
-		<h1>Inscription enregistrée</h1>
-		<br/><br/>
-	    <p style="text-align: justify;">Vous recevrez un courriel de validation pour votre adhésion au Collectif Confluence après versement de la cotisation de 10 euros à l'ordre du Collectif Confluence par chèque (ou par virement, contacter contact@collectif-confluence.fr) à envoyer à Collectif Confluence, Résidence Le-Val-Croix-Rousse, 10 rue Janin, 69004 Lyon.</p>
-		
-		<br/><br/>
-	    <h2><a href="/">Revenir à l'accueil</a></h2>
+		<h1>Une erreur s'est produite…</h1>
+		{#<h2>Le serveur à retourné une erreur "{{ status_code }} {{ status_text }}".</h2>#}
+ 
+	    <div>
+	      <h2>La page demandée n'existe plus ou à été déplacée.</h2>
+	      <br/><br/>
+	      Vous serez redirigé vers la page d'accueil du site dans 10 secondes.<br/>
+	      Si la redirection ne fonctionne pas, cliquez <a href="/">ici</a>
+	    </div>
+
 	</div>
 
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap-datepicker.js') }}"></script>
 	
+	<script>		
+	$(document).ready(function(){
+	    var delay = 10000;
+	    setTimeout(function(){ window.location = "{{ path('collectif_front_homepage') }}";}, delay); 
+	  });
+		
+	</script>
 	
 	</body>
 </html>

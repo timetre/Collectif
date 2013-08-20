@@ -20,6 +20,8 @@ class MembreForm extends AbstractType
         		'second_options' => array('label' => 'form.password_confirmation')));
 		$builder->add('nom', 'text', array('label' => 'Nom'));
         $builder->add('prenom', 'text', array('label' => 'Prénom'));
+
+        $builder->add('ordreBureau', 'text', array('label' => 'Ordre du bureau', 'required' => false));	
 		
 		$builder->add('membreBureau', 'checkbox', array('required' => false, 'label' => 'Membre du bureau ?'));
 		

@@ -504,7 +504,12 @@ class Page
      */
     public function getEnfants()
     {
-        return $this->enfants;
+        $results = array();
+        foreach($this->enfants as $enfant) {
+            if($enfant->getActif())
+                $results[] = $enfant;
+        }
+        return $results;
     }
 
     /**

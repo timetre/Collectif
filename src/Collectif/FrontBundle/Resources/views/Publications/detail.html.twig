@@ -1,4 +1,4 @@
-{% extends 'CollectifFrontBundle::layout_inner-page.html.twig' %}
+{% extends 'CollectifFrontBundle::layout_inner-domaine.html.twig' %}
 
 {% block title %}Collectif CONFLUENCE{% endblock %}
 
@@ -7,13 +7,19 @@
 <div id="text-3" class="widget widget_text">
 	<h2>Publication</h2>
 	<div class="textwidget">					  
-		<div id="NewsPostDetailDate">
-			{{ publication.datePublication|date('d/m/Y') }}
+		<div id="NewsPostDetailDate" style="font-size: 15px;">
+			{{ publication.datePublication|date('d/m/Y') }} 
+		</div>
+
+		<div id="NewsPostDetailAuthor">
+			<b>Auteur&nbsp;:</b> 
+			<a href="{{ path('collectif_front_chercheur', { 'alias': publication.membre.alias }) }}">
+				{{ publication.membre.nom }} {{ publication.membre.prenom }}
+			</a>
 		</div>
 		
-		<h3 id="NewsPostDetailTitle">{{ publication.titre }}</h3>
 		<hr id="NewsPostDetailHorizRule">
-
+		<h3 id="NewsPostDetailTitle">{{ publication.titre }}</h3>
 		<div id="NewsPostDetailContent">
 			{{ publication.contenu|raw }}
 		</div>
@@ -24,14 +30,6 @@
 				{{ publication.membre.domaine.nom }}
 			</a>
 		</div>
-
-		<div id="NewsPostDetailAuthor">
-			<b>Posté par&nbsp;:</b> 
-			<a href="{{ path('collectif_front_chercheur', { 'alias': publication.membre.alias }) }}">
-				{{ publication.membre.nom }} {{ publication.membre.prenom }}
-			</a>
-		</div>
-
 	</div>
 </div>
 

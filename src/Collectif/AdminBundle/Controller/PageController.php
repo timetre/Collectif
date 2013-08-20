@@ -10,6 +10,7 @@ use Collectif\AdminBundle\Entity\Page;
 
 use Collectif\AdminBundle\Form\PageForm;
 use Collectif\AdminBundle\Form\PageLienForm;
+use Collectif\AdminBundle\Form\PageRssForm;
 use Collectif\AdminBundle\Form\PageBureauForm;
 use Collectif\AdminBundle\Form\PageContactForm;
 use Collectif\AdminBundle\Form\PagePartenairesForm;
@@ -113,7 +114,9 @@ class PageController extends Controller {
         } else if($type == "CONTACT") {
         	$form = $this->container->get('form.factory')->create(new PageContactForm(), $page);
         } else if($type == "PARTENAIRES") {
-        	$form = $this->container->get('form.factory')->create(new PagePartenairesForm(), $page);
+            $form = $this->container->get('form.factory')->create(new PagePartenairesForm(), $page);
+        } else if($type == "RSS") {
+            $form = $this->container->get('form.factory')->create(new PageRssForm(), $page);
         }
 
         $request = $this->container->get('request');

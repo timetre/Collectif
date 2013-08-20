@@ -25,9 +25,9 @@
 <td>{{ a.categorie.titre }}</td>
 <td>
 	{% if a.actif == 1 %}
-		Actif
+		<span class="label label-success">actif</span>
 	{% else %}
-		Inactif
+		<span class="label label-warning">inactif</span>
 	{% endif %}
 </td>
 <td><a onclick="if(!confirm('Voulez-vous vraiment supprimer cet article ?')) { return false };" class="btn btn-danger" href="{{ path('collectif_articles_delete', { 'id': a.id }) }}"><i class="icon-trash icon-white"></i></a></td>

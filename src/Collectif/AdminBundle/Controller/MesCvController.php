@@ -75,9 +75,6 @@ class MesCvController extends Controller
     		}
     	}
     	
-    	//echo $;
-    	//die;
-    
     	return $this->render('CollectifAdminBundle:MesCv:edit.html.twig', array(
     			'form' => $form->createView(),
     			'cv'   => $cv,

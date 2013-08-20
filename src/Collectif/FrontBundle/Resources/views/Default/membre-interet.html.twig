@@ -15,9 +15,9 @@
 				<div class="textwidget">
 					<h6><a href="{{ path('collectif_front_chercheur', { 'alias': membre.alias }) }}">{{ membre.prenom }} {{ membre.nom }}</a></h6>
 					{% if membre.path == null %}
-						<img align="left" src="{{ image('bundles/collectiffront/images/ghost.png').resize(null, 70) }}" alt="" style="margin-right: 10px;" />
+						<img align="left" src="/bundles/collectiffront/images/ghost.png" height="70px" alt="" style="margin-right: 10px;" />
 					{% else %}
-						<img align="left" src="{{ image('upload/Membres/' ~ membre.path).resize(null, 70) }}" alt="" style="margin-right: 10px;" />
+						<img align="left" src="/upload/Membres/{{ membre.path }}" height="70px" alt="" style="margin-right: 10px;" />
 					{% endif %}
 					<strong>Objets de recherche : </strong><br/>
 					{% for c in membre.getInterets %}

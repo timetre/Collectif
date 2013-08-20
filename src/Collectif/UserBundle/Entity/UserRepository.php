@@ -28,7 +28,7 @@ class UserRepository extends EntityRepository
 		);
 		
 		$qb = $this->createQueryBuilder('u');
-		$qb->where('u.enabled = :enabled')->setParameters($parameters);
+		$qb->where('u.enabled = :enabled AND u.webmaster = 0')->setParameters($parameters);
 		$qb->orderBy('u.nom', 'ASC');
 	
 		return $qb->getQuery()->getResult();
@@ -68,7 +68,7 @@ class UserRepository extends EntityRepository
 		
 		$qb = $this->createQueryBuilder('u');
 		$qb->where('u.membreBureau = :membreBureau')->setParameters($parameters);
-		$qb->orderBy('u.nom', 'ASC');
+		$qb->orderBy('u.ordreBureau', 'ASC');
 	
 		return $qb->getQuery()->getResult();
 	}
