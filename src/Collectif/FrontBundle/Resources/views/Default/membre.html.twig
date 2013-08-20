@@ -76,7 +76,7 @@
 		  		<h3>Objets de recherche</h3>
 			  	<div id="custom_posts-widget-3" class="widget custom_posts">
 					{% for c in membre.getInterets %}
-						<span class="label label-info">
+						<span class="label label-info" style="margin-bottom: 5px;">
 							<a href="{{ path('collectif_front_membres_interets', { 'interet': c.libelle }) }}" style="color:white; text-decoration: none;">
 								{{ c.libelle }}
 							</a>
@@ -87,32 +87,38 @@
 
 			<h3 style="margin-top: 20px;">Sujet de recherche</h3>
 			{{ membre.sujetRecherche }}<br/>
-			Page de la structure : <a target="_blank" href="{{ membre.pageStructure }}">{{ membre.pageStructure }}</a>
+			{% if membre.pageStructure != null and membre.pageStructure != "http://" and membre.pageStructure != "https://" %}
+				Page de la structure : <a target="_blank" href="{{ membre.pageStructure }}">{{ membre.pageStructure }}</a>
+			{% endif %}
+			
 			
 			<h3 style="margin-top: 20px;">Contact</h3>
 			Adresse mail : {{ membre.formatedEmail }}<br/>
-			Tél : {{ membre.telephone }}
+			{% if membre.telephone != null and membre.telephone != "http://" and membre.telephone != "https://" %}
+				Tél : {{ membre.telephone }}
+			{% endif %}
+
 			
 			<h3 style="margin-top: 20px;">Activité numérique</h3>
-			{% if membre.twitter != null %}
+			{% if membre.twitter != null and membre.twitter != "http://" and membre.twitter != "https://" %}
 			<a href="{{ membre.twitter }}" target="_blank" style="text-decoration: none; margin-right: 5px;">
 				<img src="{{ asset('bundles/collectiffront/images/social_icons/Twitter-logo.png') }}" alt="twitter" height="30px" />
 			</a>
 			{% endif %}
 			
-			{% if membre.facebook != null %}
+			{% if membre.facebook != null and membre.facebook != "http://" and membre.facebook != "https://" %}
 			<a href="{{ membre.facebook }}" target="_blank" style="text-decoration: none; margin-right: 5px;">
 				<img src="{{ asset('bundles/collectiffront/images/social_icons/Facebook-logo.png') }}" alt="twitter" height="30px" />
 			</a>
 			{% endif %}
 			
-			{% if membre.activiteNumerique != null %}
+			{% if membre.activiteNumerique != null and membre.activiteNumerique != "http://" and membre.activiteNumerique != "https://" %}
 			<a href="{{ membre.activiteNumerique }}" target="_blank" style="text-decoration: none; margin-right: 5px;">
 				<img src="{{ asset('bundles/collectiffront/images/social_icons/Hypothese.png') }}" alt="twitter" height="30px" />
 			</a>
 			{% endif %}
 			
-			{% if membre.sitePersonnel != null %}
+			{% if membre.sitePersonnel != null and membre.sitePersonnel != "http://" and membre.sitePersonnel != "https://" %}
 			<a href="{{ membre.sitePersonnel }}" target="_blank" style="text-decoration: none; margin-right: 5px;">
 				<img src="{{ asset('bundles/collectiffront/images/social_icons/site.png') }}" alt="twitter" height="30px" />
 			</a>
