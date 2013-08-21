@@ -19,12 +19,12 @@ class CandidatureController extends Controller
    
     public function showCandidatureAction($id)
     {
-    	$em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
     
-    	$entity = $em->getRepository('CollectifAdminBundle:Candidature')->find($id);
-    	
-    	$electionPour = $em->getRepository('CollectifAdminBundle:Election')->getVotes($entity->getMembre()->getId(), true);
-    	$electionContre = $em->getRepository('CollectifAdminBundle:Election')->getVotes($entity->getMembre()->getId(), false);
+        $entity = $em->getRepository('CollectifAdminBundle:Candidature')->find($id);
+        
+        $electionPour = $em->getRepository('CollectifAdminBundle:Election')->getVotes($entity->getMembre()->getId(), true);
+        $electionContre = $em->getRepository('CollectifAdminBundle:Election')->getVotes($entity->getMembre()->getId(), false);
 
     	$user = $this->container->get('security.context')->getToken()->getUser();
     	$post = new Post();
@@ -57,83 +57,83 @@ class CandidatureController extends Controller
     
     public function createPostAction(Request $request, $id)
     {
-    	$entity  = new Post();
-    	$form = $this->createForm(new PostType(), $entity);
-    	$form->bind($request);
+        $entity  = new Post();
+        $form = $this->createForm(new PostType(), $entity);
+        $form->bind($request);
     
-    	$em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
     
-    	$user = $this->container->get('security.context')->getToken()->getUser();
-    	$candidature = $em->getRepository('CollectifAdminBundle:Candidature')->find($id);
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $candidature = $em->getRepository('CollectifAdminBundle:Candidature')->find($id);
     
-    	$entity->setMembre($user);
-    	$entity->setCandidature($candidature);
+        $entity->setMembre($user);
+        $entity->setCandidature($candidature);
     
-    	$em->persist($entity);
-    	$em->flush();
+        $em->persist($entity);
+        $em->flush();
     
-    	$post = new Post();
+        $post = new Post();
     
-    	$entity->setMembre($user);
-    	$entity->setCandidature($candidature);
+        $entity->setMembre($user);
+        $entity->setCandidature($candidature);
     
-    	$form = $this->createForm(new PostType(), $post);
+        $form = $this->createForm(new PostType(), $post);
     
-    	return $this->redirect($this->generateUrl('reseau_sousforum_candidature_show', array('id' => $candidature->getId())));
+        return $this->redirect($this->generateUrl('reseau_sousforum_candidature_show', array('id' => $candidature->getId())));
     }
     
     public function deletePostAction($id)
     {
-    	$em = $this->getDoctrine()->getManager();
-    	$post = $em->find('CollectifAdminBundle:Post', $id);
+        $em = $this->getDoctrine()->getManager();
+        $post = $em->find('CollectifAdminBundle:Post', $id);
     
-    	if (!$post)
-    	{
-    		throw $this->createNotFoundException('Topic [id='.$id.'] inexistant.');
-    	}
+        if (!$post)
+        {
+            throw $this->createNotFoundException('Topic [id='.$id.'] inexistant.');
+        }
     
-    	$msg = $post->getCandidature();
+        $msg = $post->getCandidature();
     
-    	$em->remove($post);
-    	$em->flush();
+        $em->remove($post);
+        $em->flush();
     
-    	return $this->redirect($this->generateUrl('reseau_sousforum_candidature_show', array('id' => $msg->getId())));
+        return $this->redirect($this->generateUrl('reseau_sousforum_candidature_show', array('id' => $msg->getId())));
     }
     
     public function editPostAction($id = null)
     {
-    	$message='';
-    	$em = $this->getDoctrine()->getManager();
-    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Post');
+        $message='';
+        $em = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Post');
     
-    	if (isset($id))
-    	{
-    		$outil = $repository->find($id);
-    	}
-    	else
-    	{
-    		$outil = new Post();
-    	}
+        if (isset($id))
+        {
+            $outil = $repository->find($id);
+        }
+        else
+        {
+            $outil = new Post();
+        }
     
-    	$form = $this->container->get('form.factory')->create(new PostType(), $outil);
+        $form = $this->container->get('form.factory')->create(new PostType(), $outil);
     
-    	$request = $this->container->get('request');
+        $request = $this->container->get('request');
     
-    	if ($request->getMethod() == 'POST')
-    	{
-    		$form->bindRequest($request);
+        if ($request->getMethod() == 'POST')
+        {
+            $form->bindRequest($request);
 
-    		$em->persist($outil);
-    		$em->flush();
+            $em->persist($outil);
+            $em->flush();
     
-    		return $this->redirect($this->generateUrl('reseau_sousforum_candidature_show', array('id' => $outil->getCandidature()->getId())));
-    		}
+            return $this->redirect($this->generateUrl('reseau_sousforum_candidature_show', array('id' => $outil->getCandidature()->getId())));
+            }
     
-    		return $this->render('CollectifAdminBundle:Post:edit.html.twig', array(
-    				'entity' => $outil,
-    				'sfId'   => $outil->getCandidature()->getId(),
-    				'form'   => $form->createView(),
-    		));
-    	}
+            return $this->render('CollectifAdminBundle:Post:edit.html.twig', array(
+                    'entity' => $outil,
+                    'sfId'   => $outil->getCandidature()->getId(),
+                    'form'   => $form->createView(),
+            ));
+        }
     
 }
