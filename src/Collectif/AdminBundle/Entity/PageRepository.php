@@ -64,6 +64,21 @@ class PageRepository extends EntityRepository
 	    return $qb->getQuery()->getResult();
 		
 	}
+
+	public function getHierarchieFront($parent=null) {
+		
+		$qb = $this->createQueryBuilder('p');
+		
+		if($parent == null) {
+			$qb->where('p.parent IS NULL AND p.actif = 1')->orderBy('p.ordre', 'ASC');
+		} else {
+			$qb->where('p.parent = :parent AND p.actif = 1')
+			->setParameter('parent', $parent)->orderBy('p.ordre', 'ASC');
+		}
+	
+	    return $qb->getQuery()->getResult();
+		
+	}
 	
 	public function getDefaultPage()
 	{

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="fr-FR">
+<head profile="http://gmpg.org/xfn/11">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>An Error Occurred: {{ status_text }}</title>
+	
+	<link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/bootstrap.css') }}" />
+	<link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/custom.css') }}" />
+	<link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/login.css') }}" />
+	<link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/datepicker.css') }}" />
+	
+	<style type="text/css">
+		.container {
+		  width: 900px;
+		  text-align: center;
+		}
+
+		
+	</style>
+	
+	
+  </head>
+
+  <body>
+  
+  	<div class="container">
+  		<img src="/bundles/collectiffront/images/logo.png" />		
+		<h1>Une erreur s'est produite…</h1>
+		{#<h2>Le serveur à retourné une erreur "{{ status_code }} {{ status_text }}".</h2>#}
+ 
+	    <div>
+	      <h2>La page demandée n'existe plus ou à été déplacée.</h2>
+	      <br/><br/>
+	      Vous serez redirigé vers la page d'accueil du site dans 10 secondes.<br/>
+	      Si la redirection ne fonctionne pas, cliquez <a href="/">ici</a>
+	    </div>
+
+	</div>
+
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap-datepicker.js') }}"></script>
+	
+	<script>		
+	$(document).ready(function(){
+	    var delay = 10000;
+	    setTimeout(function(){ window.location = "{{ path('collectif_front_homepage') }}";}, delay); 
+	  });
+		
+	</script>
+	
+	</body>
+</html>

@@ -35,7 +35,7 @@ class PublicationForm extends AbstractType
 	    			'input'  => 'datetime',
 	    			'required'  => true))
 	    			
-            ->add('actif', 'checkbox', array('label' => 'Actif'))
+            ->add('actif', 'checkbox', array('label' => 'Actif', 'required' => false))
 
 			->add('membre','entity', array(
 	            'class' => 'Collectif\UserBundle\Entity\User',

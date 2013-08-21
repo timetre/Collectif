@@ -23,6 +23,7 @@
 	        {% endfor %}
 
 	        <div class="slidingSpaces">
+	        	<a href="/"><img src="/bundles/collectiffront/images/logo.png" /></a>
 				<form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin">
 					<h2 class="form-signin-heading">Identification</h2>
 			        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
@@ -39,7 +40,7 @@
 			    </form>
 			    
 			   	<div>
-	        		<h2 class="center-title">Pas encore membre ? <a href="#section2" class="goSlide">Faites un tour</a></h2>
+	        		<h2 class="center-title">Pas encore membre ? <a href="#section2" class="goSlide">Rejoignez le réseau Confluence</a></h2>
 	        	</div>
 	        </div>
 		</div>
@@ -59,12 +60,12 @@
     <div id="this-carousel-id" class="carousel slide">
 	  <div class="carousel-inner">
 	    <div class="item active">
-	      <img src="{{ asset('/bundles/collectifadmin/images/example/bootstrap-mdo-sfmoma-02.jpg') }}" alt="">
+	      <img src="{{ asset('/slider/slide01.jpeg') }}" alt="">
 	      <div class="carousel-caption">
 	        <p>Caption text here</p>
 	      </div>
 	    </div>
-	    <div class="item">
+	   {# <div class="item">
 	      <img src="{{ asset('/bundles/collectifadmin/images/example/bootstrap-mdo-sfmoma-01.jpg') }}" alt="">
 	      <div class="carousel-caption">
 	        <p>Caption text here</p>
@@ -75,13 +76,13 @@
 	      <div class="carousel-caption">
 	        <p>Caption text here</p>
 	      </div>
-	    </div>
+	    </div>#}
 	  </div>
     	<a class="carousel-control left" href="#this-carousel-id" data-slide="prev">&lsaquo;</a>
     	<a class="carousel-control right" href="#this-carousel-id" data-slide="next">&rsaquo;</a>
 	
 	<div>
-    	<h2 class="center-title">Convaincu ? <a target="_blank" href="{{ path('collectif_membre_register') }}">Enregistrez vous</a></h2>
+    	<h2 class="center-title"><a target="_blank" href="{{ path('collectif_membre_register') }}">Adhérez en ligne</a></h2><p style="text-align:center;">(10€ par an)</p>
     </div>
 
     </div>

@@ -74,7 +74,7 @@ class MessageController extends Controller
     	$post->setMembre($user);
     	$form = $this->createForm(new PostType(), $post);
 	
-    	return $this->render('CollectifAdminBundle:Message:show.html.twig', array(
+    	return $this->render('CollectifAdminBundle:message:show.html.twig', array(
     		'entity'      => $entity,
     		'form'	=> $form->createView()
     	));
@@ -144,7 +144,7 @@ class MessageController extends Controller
     		}
     	}
     
-    	return $this->render('CollectifAdminBundle:Message:edit.html.twig', array(
+    	return $this->render('CollectifAdminBundle:message:edit.html.twig', array(
     			'entity' => $outil,
     			'sfId'   => $outil->getSousForum()->getId(),
     			'form'   => $form->createView(),

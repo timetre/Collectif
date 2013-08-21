@@ -26,7 +26,11 @@
 
 {% for m in membres %}
 	<tr>
-<td><a class="btn" href="{{ path('collectif_membre_edit', { 'id': m.id }) }}"><i class="icon-edit"></i></a></td>
+<td>
+	{% if m.webmaster == false %}
+		<a class="btn" href="{{ path('collectif_membre_edit', { 'id': m.id }) }}"><i class="icon-edit"></i></a>
+	{% endif %}
+</td>
 <td>{{ m.nom }}</td>
 <td>{{ m.prenom }}</td>
 <td>
@@ -37,13 +41,19 @@
 {% endif %}
 </td>
 <td>{{ m.publications | length }}</td>
-<td>{% if m.enabled %}
+<td>{% if m.enabled and m.webmaster == false %}
 		<span class="label label-success">actif</span>
-	{% else %}
+	{% elseif m.webmaster == false %}
 		<span class="label label-warning">inactif</span>
-	{% endif %}	
+	{% else %}	
+		<span class="label label-info">Super Admin</span>
+	{% endif %}
 </td>
-<td><a onclick="if(!confirm('Voulez-vous vraiment supprimer ce membre ?')) { return false };" class="btn btn-danger" href="{{ path('collectif_membre_delete', { 'id': m.id }) }}"><i class="icon-trash icon-white"></i></a></td>
+<td>
+	{% if m.webmaster == false %}
+		<a onclick="if(!confirm('Voulez-vous vraiment supprimer ce membre ?')) { return false };" class="btn btn-danger" href="{{ path('collectif_membre_delete', { 'id': m.id }) }}"><i class="icon-trash icon-white"></i></a>
+	{% endif %}
+</td>
 
 </tr>
 

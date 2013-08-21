@@ -12,9 +12,7 @@
 	<style type="text/css">
 		.container {
 		  width: 600px;
-		}
-		.maModale {
-			margin-left: 24%;
+		  text-align: center;
 		}
 	</style>
 	
@@ -23,28 +21,20 @@
 
   <body>
   
-  	<div class="container">		
-		Bien enregistré !! 
-		Lisez ceci : 
+  <div class="container">
+  		<img src="/bundles/collectiffront/images/logo.png" />		
+		<h1>Inscription enregistrée</h1>
+		<br/><br/>
+	    <p style="text-align: justify;">Vous recevrez un courriel de validation pour votre adhésion au Collectif Confluence après versement de la cotisation de 10 euros à l'ordre du Collectif Confluence par chèque (ou par virement, contacter contact@collectif-confluence.fr) à envoyer à Collectif Confluence, Résidence Le-Val-Croix-Rousse, 10 rue Janin, 69004 Lyon.</p>
 		
-		
-		BLA BLA BLA
-		
-		
-		Vous serez redirigé dans 5 secondes.
+		<br/><br/>
+	    <h2><a href="/">Revenir à l'accueil</a></h2>
 	</div>
 
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap-datepicker.js') }}"></script>
 	
-	<script>		
-	$(document).ready(function(){
-	    var delay = 5000;
-	    setTimeout(function(){ window.location = "{{ path('collectif_front_homepage') }}";}, delay); 
-	  });
-		
-	</script>
 	
 	</body>
 </html>

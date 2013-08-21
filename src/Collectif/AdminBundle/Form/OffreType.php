@@ -26,18 +26,18 @@ class OffreType extends AbstractType
          $builder->add('entreprise', 'text', array(
          		'label' => 'Société/Université'
          ));
-         $builder->add('ville', 'text', array(
+         /*$builder->add('ville', 'text', array(
          		'label' => 'Ville',
          		'required' => false
-         ));
+         ));*/
          $builder->add('contrat', 'text', array(
          		'label' => 'Type de contrat',
          		'required' => false
          ));
-         $builder->add('salaire', 'text', array(
+         /*$builder->add('salaire', 'text', array(
          		'label' => 'Salaire',
          		'required' => false
-         ));
+         ));*/
          $builder->add('duree', 'text', array(
          		'label' => 'Durée',
          		'required' => false

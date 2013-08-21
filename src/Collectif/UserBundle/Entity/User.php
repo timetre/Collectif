@@ -58,6 +58,13 @@ class User extends BaseUser
     private $membreBureau;
 
     /**
+     * @var boolean $webmaster
+     *
+     * @ORM\Column(name="webmaster", type="boolean", nullable=true)
+     */
+    private $webmaster;
+
+    /**
      * @var string $fonctionBureau
      *
      * @ORM\Column(name="fonctionBureau", type="string", length=255, nullable=true)
@@ -236,6 +243,11 @@ class User extends BaseUser
      * @ORM\Column(name="sitePersonnel", type="text", nullable=true)
      */
     private $sitePersonnel;
+
+    /**
+     * @ORM\Column(name="ordreBureau", type="integer", nullable=true)
+     */
+    private $ordreBureau;
     
     /**
      * @var string $pageStructure
@@ -243,12 +255,14 @@ class User extends BaseUser
      * @ORM\Column(name="pageStructure", type="text", nullable=true)
      */
     private $pageStructure;
+
     
     public function __construct()
     {
     	parent::__construct();
         $this->dateCreation = new \Datetime();
         $this->addRole("ROLE_ADMIN");
+        $this->webmaster = false;
     }
 
     /**
@@ -273,7 +287,7 @@ class User extends BaseUser
     
     protected function getUploadRootDir()
     {
-    	return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    	return __DIR__.'/../../../../www/'.$this->getUploadDir();
     }
     
     protected function getUploadDir()
@@ -328,17 +342,23 @@ class User extends BaseUser
     }
     
     private function putHttp($field) {
+        $hasHttp = false;
+
     	if(null !== $field) {
     		$begin = substr($field, 0, 7);
-    		if (strpos($begin,'http://') === false) {
-    			$field = "http://" . $field;
-    		} else {
-				$begin = substr($field, 0, 7);
-				if (strpos($begin,'http://') === false) {
-					$field = "http://" . $field;
-				}
-			}
+            
+            if (strpos($begin,'http://') === false) {
+                $hasHttp = true;
+            }
+
+            $begin = substr($field, 0, 8);
+            if (strpos($begin,'https://') === false) {
+                $hasHttp = true;
+            }
     	}
+
+        if($hasHttp == false)
+            $field = "http://" . $field;
     	return $field;
     }
     
@@ -584,7 +604,12 @@ class User extends BaseUser
      */
     public function getPublications()
     {
-        return $this->publications;
+        $results = array();
+        foreach($this->publications as $publication) {
+            if($publication->getActif())
+                $results[] = $publication;
+        }
+        return $results;
     }
     
     public function getFullName()
@@ -1203,5 +1228,51 @@ class User extends BaseUser
     public function getLongitude()
     {
         return $this->longitude;
+    }
+
+    /**
+     * Set ordreBureau
+     *
+     * @param integer $ordreBureau
+     * @return User
+     */
+    public function setOrdreBureau($ordreBureau)
+    {
+        $this->ordreBureau = $ordreBureau;
+    
+        return $this;
+    }
+
+    /**
+     * Get ordreBureau
+     *
+     * @return integer 
+     */
+    public function getOrdreBureau()
+    {
+        return $this->ordreBureau;
+    }
+
+    /**
+     * Set webmaster
+     *
+     * @param boolean $webmaster
+     * @return User
+     */
+    public function setWebmaster($webmaster)
+    {
+        $this->webmaster = $webmaster;
+    
+        return $this;
+    }
+
+    /**
+     * Get webmaster
+     *
+     * @return boolean 
+     */
+    public function getWebmaster()
+    {
+        return $this->webmaster;
     }
 }

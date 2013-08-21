@@ -24,9 +24,9 @@ class FirstStepForm extends AbstractType
         
         $builder->add('pageStructure', 'text', array('label' => 'Page de la structure', 'required' => false));
 		
-        $builder->add('lieu', 'text', array('label' => 'Lieu', 'required' => false));
+        $builder->add('lieu', 'text', array('label' => "Lieu (usage réservé à l'administration, ne sera pas mis en ligne)", 'required' => false));
 		
-        $builder->add('statut', 'text', array('label' => 'Statut', 'required' => false));
+        $builder->add('statut', 'text', array('label' => 'Statut (doctorant / docteur / postdoc / maître de conférence / etc.) ', 'required' => false));
         
 		$builder->add('sujetRecherche', 'text', array('label' => 'Sujet de recherche', 'required' => false));
 		

@@ -35,7 +35,7 @@ class CandidatureController extends Controller
     	$vote = $em->getRepository('CollectifAdminBundle:Election')->dejaVote($user->getId(), $entity->getId());
     	
     	
-    	$cvList = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:MonCv')->getCvFR($user->getId());
+    	$cvList = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:MonCv')->getCvFR($entity->getMembre());
     	if(sizeof($cvList) > 0) {
     		$monCvId = $cvList[0]->getId();
     	}

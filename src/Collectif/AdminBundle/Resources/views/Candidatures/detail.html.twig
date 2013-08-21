@@ -77,9 +77,9 @@
 	
 	<div class="tab-pane" id="tabPres">
 		{% if entity.membre.path != null %}
-			<img class="img-polaroid" src="{{ image('upload/Membres/' ~ entity.membre.path).resize(null, 350) }}" style="height: 200px !important;" />
+			<img class="img-polaroid" src="/upload/Membres/ {{ entity.membre.path }}" style="height: 350px !important;" />
 		{% endif %}
-		
+
 		{{ entity.membre.contenuPage | raw }}
 	</div>
 	

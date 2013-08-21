@@ -22,6 +22,8 @@ class MembreFormAdd extends AbstractType
 		$builder->add('nom', 'text', array('label' => 'Nom'));
         $builder->add('prenom', 'text', array('label' => 'Prénom'));
 		
+        $builder->add('ordreBureau', 'text', array('label' => 'Ordre du bureau', 'required' => false));	
+
 		$builder->add('membreBureau', 'checkbox', array('required' => false, 'label' => 'Membre du bureau ?'));
 		
 		$builder->add('fonctionBureau', 'text', array('required' => false, 'label' => 'Fonction au sein du bureau'));

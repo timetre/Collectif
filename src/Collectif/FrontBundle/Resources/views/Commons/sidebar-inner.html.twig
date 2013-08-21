@@ -11,8 +11,8 @@
 								<p><a href="{{ path('collectif_front_publication', { 'alias': a.alias }) }}"><span>{{ a.datePublication|date('d/m/Y') }}</span> {{ a.titre }}</a>{{ a.resume | raw  }}</p>
 							{% endif %}
 						</li>
+						<hr/>
 					{% endfor %}
-					<hr>
 					[<a href="{{ path('collectif_front_articles') }}">Archives</a>]<br><br>
 				</ul>
 			</div>

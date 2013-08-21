@@ -28,9 +28,9 @@
 <td><a class="btn" href="{{ path('collectif_page_homepage', { 'parent': p.id }) }}"><i class="icon-zoom-in"></i></a></td>
 <td>{{ p.ordre }}</td>
 <td>{% if p.actif %}
-		<i class="icon-ok"></i>
+		<span class="label label-success">actif</span>
 	{% else %}
-		<i class="icon-remove"></i>
+		<span class="label label-warning">inactif</span>
 	{% endif %}	
 </td>
 <td><a onclick="if(!confirm('Voulez-vous vraiment supprimer cette page ?')) { return false };" class="btn btn-danger" href="{{ path('collectif_page_delete', { 'id': p.id, 'parent': parent }) }}"><i class="icon-trash icon-white"></i></a></td>
@@ -52,6 +52,7 @@
     <select name="type">
 		<option value="CONTENU">Contenu</option>
 		<option value="LIEN">Lien de redirection</option>
+		<option value="RSS">Flux RSS</option>
 		<option value="CONTACT">Contact</option>
 		<option value="BUREAU">Bureau</option>
 		<option value="PARTENAIRES">Partenaires</option>

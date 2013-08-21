@@ -52,6 +52,7 @@ class Categorie
 	
 	/**
      * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Article", cascade={"persist"}, mappedBy="categorie")
+     * @ORM\OrderBy({"datePublication" = "DESC"})
      */
     private $articles;
 
@@ -193,6 +194,11 @@ class Categorie
      */
     public function getArticles()
     {
-        return $this->articles;
+        $results = array();
+        foreach($this->articles as $article) {
+            if($article->getActif())
+                $results[] = $article;
+        }
+        return $results;
     }
 }

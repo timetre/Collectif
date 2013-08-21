@@ -70,7 +70,15 @@ class HomeController extends Controller
     				'page' 			=> $page,
     				'partenaires'   => $partenaires
     		));
-    	}
+    	} else if($page->getTypePage() == "RSS") {
+            $reader = $this->get('eko_feed.feed.reader');
+            $feeds = $reader->load($page->getLienRedirectionInterne())->get();
+
+           return $this->render('CollectifFrontBundle:Page:inner-rss.html.twig', array(
+                    'page'          => $page,
+                    'feeds'         => $feeds
+            ));
+        }
 		
 		
     		return $this->render('CollectifFrontBundle:Default:inner-page.html.twig', array(
@@ -91,7 +99,8 @@ class HomeController extends Controller
     	
     	foreach ($users as $user) {
     		foreach($user->getPublications() as $pub) {
-    			$publications[] = $pub;
+                if($pub->getActif())
+    			 $publications[] = $pub;
     		}
     	}
     	
@@ -127,7 +136,8 @@ class HomeController extends Controller
     
     public function listArticlesAction() {
     	
-		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Article');
+		//$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Article');
+        $repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:SuperClassArticle');
     	$articles = $repository->getArticles(true);
     	
     	return $this->render('CollectifFrontBundle:Articles:view.html.twig', array(
@@ -156,7 +166,8 @@ class HomeController extends Controller
 	public function menuTopAction() {       
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Page');
 		
-		$pages = $repository->getHierarchie();
+		$pages = $repository->getHierarchieFront();
+
 		
 		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Parameters');
     	$parametres = $repository->getParameters();
@@ -284,13 +295,16 @@ class HomeController extends Controller
     		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Parameters');
     		$parametres = $repository->getParameters();
     		$to = $parametres->getContactInfos();
+
+            $messageBody = "<div>".$message."</div>";
     		
     		$send = \Swift_Message::newInstance()
     			->setSubject($sujet)
     			->setFrom($mail)
     			->setTo($to)
-    			->setBody($this->renderView('CollectifFrontBundle:Mail:contact.html.twig', array('message' => $message)))
+                ->setBody($messageBody, 'text/html')
     		;
+            //->setBody($this->renderView('CollectifFrontBundle:Mail:contact.html.twig', array('message' => $message)), 'text/html')
     		$this->get('mailer')->send($send);
     		
     	

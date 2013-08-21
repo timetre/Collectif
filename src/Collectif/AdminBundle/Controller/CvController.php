@@ -251,6 +251,7 @@ public function editContactAction()
     
     	if ($request->getMethod() == 'POST')
     	{
+            $user->setDateCreation(new \Datetime());
     		$form->bindRequest($request);
     
     		if ($form->isValid())
