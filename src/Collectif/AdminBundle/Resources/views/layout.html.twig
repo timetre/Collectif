@@ -8,7 +8,6 @@
 	<link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/custom.css') }}" />
 	<link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/datepicker.css') }}" />
 	
-	
 </head>
 	<body>
 
@@ -75,12 +74,11 @@
 	            	{% else %}
 	              		<li><a href="{{ path('collectif_stat_list') }}">Mes statistiques</a></li>
 	           	 	{% endif %}
-	           	 	
-	           	 	
 	          	</ul>
 			  </li>
 			  
 			  {% render url('reseau_forum_nav') %}
+			  <li class="pull-right"><a href="#bug" data-toggle="modal" class="btn-danger pull-right">bug</a></li>
 			  
 			{#  
 			{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
@@ -212,6 +210,53 @@
 			
 		</div>
 	</div>
+	
+<!-- Modal -->
+<div id="bug" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<form action="{{ path('collectif_bug_tracker') }}" method="post" class="form-horizontal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Bug tracker</h3>
+  </div>
+  <div class="modal-body">
+    <p>Vous avez trouvé un bug ?</p>
+	<p>Merci de décrire le plus précisément possible comment il est apparu, ce qu'il s'est passé, ainsi que la procédure à suivre afin de le reproduire.</p>
+	<div class="control-group">
+		<label class="control-label" for="inputEmail">Email</label>
+		<div class="controls">
+		  <input type="text" id="inputEmail" placeholder="Email" name="inputEmail" value="{{ app.user.email }}" readonly="true">
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label" for="inputBrowser">Navigateur utilisé</label>
+		<div class="controls">
+		  <input type="text" id="inputBrowser" name="inputBrowser" placeholder="Navigateur">
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label" for="inputPage">Page où se situe le bug</label>
+		<div class="controls">
+		  <input type="text" id="inputPage" name="inputPage" placeholder="Page">
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label" for="inputDesc">Description précise</label>
+		<div class="controls">
+		  <textarea rows="3" id="inputDesc" name="inputDesc" placeholder="Description"></textarea>
+		</div>
+	</div>
+	
+	
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <input type="submit" class="btn btn-success right" value="Envoyer" />
+  </div>
+</form>
+</div>
 		
 	<!-- <script src="http://code.jquery.com/jquery-latest.js"></script>-->
 	{# <script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/jquery-1.6.1.min.js') }}"></script> #}
@@ -226,10 +271,7 @@
 	<script type="text/javascript">
 		CKFinder.setupCKEditor( null, '/bundles/ckfinder/' ) ;
 	</script>
-	
-	{#
-	{{ tinymce_init() }}
-	#}
+
 	<script>		
 		$(function() {
 	    	$( ".datePicker" ).datepicker({

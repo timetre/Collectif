@@ -30,21 +30,24 @@ abstract class SuperClassArticle implements RoutedItemInterface
     /**
      * @var string $titre
      *
-     * @ORM\Column(name="titre", type="string", length=255)
+     * @ORM\Column(name="titre", type="string", length=255, nullable=false)
+	 * @Assert\NotBlank()
      */
     private $titre;
     
     /**
      * @var string $resume
      *
-     * @ORM\Column(name="resume", type="text")
+     * @ORM\Column(name="resume", type="text", nullable=false)
+	 * @Assert\NotBlank()
      */
     private $resume;
     
     /**
      * @var string $contenu
      *
-     * @ORM\Column(name="contenu", type="text")
+     * @ORM\Column(name="contenu", type="text", nullable=false)
+	 * @Assert\NotBlank()
      */
     private $contenu;
     
@@ -65,7 +68,7 @@ abstract class SuperClassArticle implements RoutedItemInterface
     /**
      * @var \DateTime $datePublication
      *
-     * @ORM\Column(name="datePublication", type="datetime")
+     * @ORM\Column(name="datePublication", type="datetime", nullable=false)
      */
     private $datePublication;
     

@@ -57,12 +57,16 @@ class MonCv
     private $path;
     
     /**
+<<<<<<< HEAD
+     * @Assert\File(maxSize="60000000")
+=======
      * @Assert\File(
      *     maxSize = "6000000",
      *     mimeTypes = {"application/pdf", "application/x-pdf"},
      *     mimeTypesMessage = "Votre CV ne correspond pas au format autorisé (PDF)",
      *     maxSizeMessage = "Votre CV ne doit pas dépasser les 6 mo"
      * )
+>>>>>>> a2fdeb973091ad3a22b48266b6b984ee772168b4
      */
     public $file;
     
@@ -147,7 +151,8 @@ class MonCv
     {
     	// the absolute directory path where uploaded
     	// documents should be saved
-    	return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    	//return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    	return __DIR__.'/../../../../www/'.$this->getUploadDir();
     }
     
     protected function getUploadDir()
