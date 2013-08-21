@@ -10,7 +10,7 @@
 <p>{{ message }}</p>
 {% endif %}
 {% form_theme form 'CollectifAdminBundle:Form:fields.html.twig' %}
-<form action="" method="post" {{ form_enctype(form) }} class="form-horizontal">
+<form action="" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
     {{ form_widget(form) }}
 	
 	<a class="btn btn-warning" href="{{ path('collectif_cv_list') }}">Retour</a>

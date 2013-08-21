@@ -35,25 +35,26 @@
 			<p><strong>Sujet de recherche : </strong>{{ entity.membre.sujetRecherche }}</p>
 			
 			<h3 style="margin-top: 20px;">Activité numérique</h3>
-			{% if entity.membre.twitter != null %}
+			
+			{% if entity.membre.twitter != null and entity.membre.twitter != "http://" and entity.membre.twitter != "https://" %}
 			<a href="{{ entity.membre.twitter }}" target="_blank" style="text-decoration: none; margin-right: 5px;height:30px;">
 				<img src="{{ asset('bundles/collectiffront/images/social_icons/Twitter-logo.png') }}" alt="twitter" height="30px" />
 			</a>
 			{% endif %}
 			
-			{% if entity.membre.facebook != null %}
+			{% if entity.membre.facebook != null and entity.membre.facebook != "http://" and entity.membre.facebook != "https://" %}
 			<a href="{{ entity.membre.facebook }}" target="_blank" style="text-decoration: none; margin-right: 5px;height:30px;">
 				<img src="{{ asset('bundles/collectiffront/images/social_icons/Facebook-logo.png') }}" alt="twitter" height="30px" />
 			</a>
 			{% endif %}
 			
-			{% if entity.membre.activiteNumerique != null %}
+			{% if entity.membre.activiteNumerique != null and entity.membre.activiteNumerique != "http://" and entity.membre.activiteNumerique != "https://" %}
 			<a href="{{ entity.membre.activiteNumerique }}" target="_blank" style="text-decoration: none; margin-right: 5px;height:30px;">
 				<img src="{{ asset('bundles/collectiffront/images/social_icons/Hypothese.png') }}" alt="twitter" height="30px" />
 			</a>
 			{% endif %}
 			
-			{% if entity.membre.sitePersonnel != null %}
+			{% if entity.membre.sitePersonnel != null and entity.membre.sitePersonnel != "http://" and entity.membre.sitePersonnel != "https://" %}
 			<a href="{{ entity.membre.sitePersonnel }}" target="_blank" style="text-decoration: none; margin-right: 5px;height:30px;">
 				<img src="{{ asset('bundles/collectiffront/images/social_icons/site.png') }}" alt="twitter" height="30px" />
 			</a>
@@ -80,7 +81,11 @@
 			<img class="img-polaroid" src="/upload/Membres/ {{ entity.membre.path }}" style="height: 350px !important;" />
 		{% endif %}
 
-		{{ entity.membre.contenuPage | raw }}
+		{% if entity.membre.contenuPage != null %}
+			{{ entity.membre.contenuPage | raw }}
+		{% else %}
+			Le membre ne s'est pas présenté
+		{% endif %}
 	</div>
 	
 	<div class="tab-pane" id="tabCv">

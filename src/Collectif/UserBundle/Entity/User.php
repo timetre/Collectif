@@ -25,14 +25,15 @@ class User extends BaseUser
     /**
      * @var string $nom
      * @Assert\NotBlank()
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      */
     private $nom;
 
     /**
      * @var string $prenom
      *
-     * @ORM\Column(name="prenom", type="string", length=255)
+     * @ORM\Column(name="prenom", type="string", length=255, nullable=false)
+	 * @Assert\NotBlank()
      */
     private $prenom;
     
@@ -357,7 +358,7 @@ class User extends BaseUser
             }
     	}
 
-        if($hasHttp == false)
+        if($hasHttp == false && null !== $field)
             $field = "http://" . $field;
     	return $field;
     }

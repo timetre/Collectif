@@ -132,7 +132,7 @@ collectif_publication_edit_own:
     defaults: { _controller: "CollectifAdminBundle:Publication:editOwn" }
    
 collectif_publication_delete_own:
-    pattern:  /reseau/admin/publications/delete/own/{id}
+    pattern:  /reseau/publications/delete/own/{id}
     defaults: { _controller: "CollectifAdminBundle:Publication:deleteOwn" }
 
 collectif_parameters_homepage:

@@ -25,14 +25,16 @@ class Interet
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle", type="string", length=255)
+     * @ORM\Column(name="libelle", type="string", length=255, nullable=false)
+	 * @Assert\NotBlank()
      */
     private $libelle;
     
     /**
      * @var integer
      *
-     * @ORM\Column(name="ordre", type="integer")
+     * @ORM\Column(name="ordre", type="integer", nullable=false)
+	 * @Assert\NotBlank()
      */
     private $ordre;
     
