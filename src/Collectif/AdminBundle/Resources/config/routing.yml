@@ -6,6 +6,10 @@ collectif_back_homepage:
     pattern:  /reseau/
     defaults: { _controller: "CollectifAdminBundle:Admin:index" }
 
+collectif_bug_tracker:
+    pattern:  /reseau/bugtracker/sendmail
+    defaults: { _controller: "CollectifAdminBundle:Admin:mailBug" }
+
 collectif_membre_homepage:
     pattern:  /reseau/admin/membres
     defaults: { _controller: "CollectifAdminBundle:Membre:list" }
