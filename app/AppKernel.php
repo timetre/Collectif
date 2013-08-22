@@ -28,6 +28,7 @@ class AppKernel extends Kernel
 			new APY\DataGridBundle\APYDataGridBundle(),
         	new Eko\FeedBundle\EkoFeedBundle(),
             new Collectif\StatisticsBundle\CollectifStatisticsBundle(),
+			new Oneup\UploaderBundle\OneupUploaderBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

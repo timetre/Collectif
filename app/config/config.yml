@@ -78,3 +78,7 @@ eko_feed:
             link:        'http://collectif-confuence.fr'
             encoding:    'utf-8'
             author:      'Collectif Confluence' # Only required for Atom feeds
+
+oneup_uploader:
+    mappings:
+        gallery: ~
