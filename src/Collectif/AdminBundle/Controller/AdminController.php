@@ -60,4 +60,14 @@ class AdminController extends Controller
     		'users' => $users
         ));
     }
+	
+	public function activiteListAction($userId)
+    {
+    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifUserBundle:User');
+    	$user = $repository->find($userId);
+    	
+    	return $this->render('CollectifAdminBundle:Admin:activiteList.html.twig', array(
+    		'user' => $user
+        ));
+    }
 }

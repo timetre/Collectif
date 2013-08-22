@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 use Collectif\AdminBundle\Form\MonCvForm;
 use Collectif\UserBundle\Entity\User;
+use Collectif\LoggerBundle\Entity\Logger;
 use Collectif\AdminBundle\Entity\MonCv;
 
 class MesCvController extends Controller
@@ -62,13 +63,15 @@ class MesCvController extends Controller
     
     			$em->flush();
     
-    			if (isset($id))
+    			if (isset($monCvId))
     			{
     				$message='CV modifié avec succès !';
+					$this->logAction("Modification du CV");
     			}
     			else
     			{
     				$message='CV ajouté avec succès !';
+					$this->logAction("Ajout du CV");
     			}
     
     			return new RedirectResponse($this->container->get('router')->generate('collectif_mescv_list'));
@@ -98,5 +101,16 @@ class MesCvController extends Controller
     	 
     	return new RedirectResponse($this->container->get('router')->generate('collectif_mescv_list'));
     }
+	
+	private function logAction($message = "") {
+		$logger = new Logger();
+		$user = $this->container->get('security.context')->getToken()->getUser();
+		$logger->setDescription($message);
+		$logger->setMembre($user);
+		
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($logger);
+		$em->flush();
+	}
         
 }

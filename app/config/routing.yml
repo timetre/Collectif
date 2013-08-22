@@ -1,3 +1,7 @@
+collectif_logger:
+    resource: "@CollectifLoggerBundle/Resources/config/routing.yml"
+    prefix:   /
+
 collectif_statistics:
     resource: "@CollectifStatisticsBundle/Resources/config/routing.yml"
     prefix:   /
