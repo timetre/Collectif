@@ -1,0 +1,7 @@
+CollectifGalleryBundle_album:
+    resource: "@CollectifGalleryBundle/Resources/config/routing/album.yml"
+    prefix:   /reseau/admin/album
+
+CollectifGalleryBundle_photo:
+    resource: "@CollectifGalleryBundle/Resources/config/routing/photo.yml"
+    prefix:   /reseau/admin/photo

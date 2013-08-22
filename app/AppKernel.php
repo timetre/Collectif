@@ -25,9 +25,10 @@ class AppKernel extends Kernel
 			new Collectif\UserBundle\CollectifUserBundle(),
 			new Gregwar\ImageBundle\GregwarImageBundle(),
         	new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
-			new APY\DataGridBundle\APYDataGridBundle(),
         	new Eko\FeedBundle\EkoFeedBundle(),
             new Collectif\StatisticsBundle\CollectifStatisticsBundle(),
+            new Collectif\GalleryBundle\CollectifGalleryBundle(),
+            new Oneup\UploaderBundle\OneupUploaderBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

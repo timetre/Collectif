@@ -1,0 +1,29 @@
+album:
+    pattern:  /
+    defaults: { _controller: "CollectifGalleryBundle:Album:index" }
+
+album_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CollectifGalleryBundle:Album:show" }
+
+album_new:
+    pattern:  /new
+    defaults: { _controller: "CollectifGalleryBundle:Album:new" }
+
+album_create:
+    pattern:  /create
+    defaults: { _controller: "CollectifGalleryBundle:Album:create" }
+    requirements: { _method: post }
+
+album_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CollectifGalleryBundle:Album:edit" }
+
+album_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CollectifGalleryBundle:Album:update" }
+    requirements: { _method: post|put }
+
+album_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CollectifGalleryBundle:Album:delete" }

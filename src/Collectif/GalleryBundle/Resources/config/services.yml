@@ -1,0 +1,7 @@
+parameters:
+#    collectif_gallery.example.class: Collectif\GalleryBundle\Example
+
+services:
+#    collectif_gallery.example:
+#        class: %collectif_gallery.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

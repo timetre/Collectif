@@ -1,0 +1,30 @@
+photo:
+    pattern:  /
+    defaults: { _controller: "CollectifGalleryBundle:Photo:index" }
+
+photo_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CollectifGalleryBundle:Photo:show" }
+
+photo_new:
+    pattern:  /new
+    defaults: { _controller: "CollectifGalleryBundle:Photo:new" }
+
+photo_create:
+    pattern:  /create
+    defaults: { _controller: "CollectifGalleryBundle:Photo:create" }
+    requirements: { _method: post }
+
+photo_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CollectifGalleryBundle:Photo:edit" }
+
+photo_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CollectifGalleryBundle:Photo:update" }
+    requirements: { _method: post|put }
+
+photo_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CollectifGalleryBundle:Photo:delete" }
+    requirements: { _method: post|delete }

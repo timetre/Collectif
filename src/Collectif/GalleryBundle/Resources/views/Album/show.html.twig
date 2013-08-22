@@ -1,0 +1,18 @@
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+
+    <a href="{{ path('album') }}" class="btn btn-warning pull-right"><i class="icon-arrow-left icon-white"></i> Retour</a>
+
+    <h1>Album : {{ entity.titre }}</h1>
+    <hr/>
+    <p>
+        {{ entity.description | raw }}
+    </p>
+    <hr/>
+
+    <h2>{{ entity.photos | length }} Photos</h2>
+            
+{% endblock %}

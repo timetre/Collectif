@@ -1,0 +1,35 @@
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+
+    <h1>Liste des albums photo</h1>
+
+    <div class="header-buttons">
+        <a class="btn btn-success right" href="{{ path('album_new') }}"><i class="icon-plus-sign icon-white"></i> Créer un album</a>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Editer</th>
+                <th>Titre</th>
+                <th>Photos</th>
+                <th>Actif</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a class="btn" href="{{ path('album_edit', { 'id': entity.id }) }}"><i class="icon-edit"></i></a></td>
+                <td>{{ entity.titre }}</td>
+                <td><a href="{{ path('album_show', { 'id': entity.id }) }}" class="btn">Photos</a></td>
+                <td>{{ entity.actif }}</td>
+                <td><a onclick="if(!confirm('Voulez-vous vraiment supprimer cet album ?')) { return false };" class="btn btn-danger" href="{{ path('album_delete', { 'id': entity.id }) }}"><i class="icon-trash icon-white"></i></a></td>               
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
