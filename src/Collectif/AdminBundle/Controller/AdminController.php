@@ -50,4 +50,14 @@ class AdminController extends Controller
     		return $this->render('CollectifAdminBundle:Bug:index.html.twig');
     	}
     }
+	
+	public function activiteAction()
+    {
+    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifUserBundle:User');
+    	$users = $repository->getUsersLastLoggedIn();
+    	
+    	return $this->render('CollectifAdminBundle:Admin:activite.html.twig', array(
+    		'users' => $users
+        ));
+    }
 }
