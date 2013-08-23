@@ -82,9 +82,10 @@ class AdminController extends Controller
     }
 	
 	private function testAlbums($path) {
-	
+		//http://symfony.com/fr/doc/current/components/finder.html
 		$finder = new Finder();
 		$finder->files()->in($path);
+		$finder->sortByName();
 		$results = array();
 
 		foreach ($finder as $file) {
