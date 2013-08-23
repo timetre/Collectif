@@ -263,9 +263,10 @@
   </div>
 </form>
 </div>
-		
-	<!-- <script src="http://code.jquery.com/jquery-latest.js"></script>-->
-	{# <script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/jquery-1.6.1.min.js') }}"></script> #}
+
+
+
+	{# <script src="http://code.jquery.com/jquery-latest.js"></script> #}
 	<script type="text/javascript" src="{{ asset('/resources/js/jquery-2.0.3.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap-datepicker.js') }}"></script>
@@ -274,11 +275,10 @@
 	
 	<script type="text/javascript" src="/bundles/ckfinder/ckeditor/ckeditor.js"></script>
 	<script type="text/javascript" src="/bundles/ckfinder/ckfinder.js"></script>
+
 	<script type="text/javascript">
 		CKFinder.setupCKEditor( null, '/bundles/ckfinder/' ) ;
-	</script>
-
-	<script>		
+		
 		$(function() {
 	    	$( ".datePicker" ).datepicker({
 				format: 'dd/mm/yyyy',
@@ -287,7 +287,12 @@
 		});
 		
 		$('a.mediaBig').media({width:800, height:600});
+		
+		function BrowseServer() {
+			CKFinder.popup( { basePath : '/bundles/ckfinder/images/Albums/'} ) ;
+		}
 	</script>
+
 
 	</body>
 </html>
