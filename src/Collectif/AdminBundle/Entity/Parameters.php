@@ -48,6 +48,13 @@ class Parameters
      * @ORM\Column(name="mailSite", type="string", length=255)
      */
     private $mailSite;
+	
+	/**
+     * @var string $mailDebugger
+     *
+     * @ORM\Column(name="mailDebugger", type="string", length=255, nullable=true)
+     */
+    private $mailDebugger;
 
     /**
      * @var string $telephoneSite
@@ -90,6 +97,13 @@ class Parameters
      * @ORM\Column(name="contactInfos", type="string", length=255)
      */
     private $contactInfos;
+	
+	/**
+     * @var boolean $debugger
+     *
+     * @ORM\Column(name="debugger", type="boolean", nullable=true)
+     */
+    private $debugger;
 
 
     /**
@@ -376,5 +390,51 @@ class Parameters
     public function getContactInfos()
     {
         return $this->contactInfos;
+    }
+
+    /**
+     * Set debugger
+     *
+     * @param boolean $debugger
+     * @return Parameters
+     */
+    public function setDebugger($debugger)
+    {
+        $this->debugger = $debugger;
+    
+        return $this;
+    }
+
+    /**
+     * Get debugger
+     *
+     * @return boolean 
+     */
+    public function getDebugger()
+    {
+        return $this->debugger;
+    }
+
+    /**
+     * Set mailDebugger
+     *
+     * @param string $mailDebugger
+     * @return Parameters
+     */
+    public function setMailDebugger($mailDebugger)
+    {
+        $this->mailDebugger = $mailDebugger;
+    
+        return $this;
+    }
+
+    /**
+     * Get mailDebugger
+     *
+     * @return string 
+     */
+    public function getMailDebugger()
+    {
+        return $this->mailDebugger;
     }
 }

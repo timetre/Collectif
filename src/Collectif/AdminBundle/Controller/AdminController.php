@@ -30,6 +30,16 @@ class AdminController extends Controller
         ));
     }
 	
+	public function bugAction()
+    {
+    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Parameters');
+    	$parametres = $repository->getParameters();
+    	
+    	return $this->render('CollectifAdminBundle:Admin:bug.html.twig', array(
+    		'debugger' => $parametres->getDebugger()
+        ));
+    }
+	
 	public function mailBugAction()
     {
     	$request = $this->container->get('request');
@@ -41,9 +51,10 @@ class AdminController extends Controller
     		$page = $request->request->get('inputPage');
     		$desc = $request->request->get('inputDesc');
 
-    		/*$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Parameters');
-    		$parametres = $repository->getParameters();*/
-    		$to = "webmaster@collectif-confluence.fr";
+    		$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Parameters');
+    		$parametres = $repository->getParameters();
+    		//$to = "webmaster@collectif-confluence.fr";
+			$to = $parametres->getMailDebugger();
 
             $messageBody = "<div>Navigateur : ".$navigateur."</div>";
 			$messageBody .= "<div>Page : ".$page."</div>";

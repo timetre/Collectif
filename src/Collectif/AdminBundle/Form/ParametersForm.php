@@ -13,12 +13,14 @@ class ParametersForm extends AbstractType
 		$builder->add('proprietaireSite', 'text', array('label' => 'Propriétair du site'));
 		$builder->add('adresseSite', 'text', array('label' => 'Adresse'));
 		$builder->add('mailSite', 'text', array('label' => 'Email principal'));
+		$builder->add('mailDebugger', 'text', array('label' => 'Email Débugger'));
 		$builder->add('telephoneSite', 'text', array('label' => 'Tél.'));
 		$builder->add('faxSite', 'text', array('label' => 'Fax'));
 		//$builder->add('logoSite');
 		$builder->add('lienFacebook', 'text', array('label' => 'Facebook'));
 		$builder->add('lienTwitter', 'text', array('label' => 'Twitter'));
 		$builder->add('contactInfos', 'text', array('label' => 'Adresse mail de contact'));
+		$builder->add('debugger', 'checkbox', array('required' => false, 'label' => 'Activer le "Bug tracker"'));
     }
 	
 	public function getName()
