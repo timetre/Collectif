@@ -25,12 +25,16 @@
 	<input type="button" value="Browse Server" onclick="BrowseServer();" />
 </p>
 
+{% for p in photos %}
+	<img src="/ckfinder/userfiles/images/Albums/2/{{ p }}" style="height:100px !important;" />
+{% endfor %}
+
 </div>
 
 <div class="span4">
 	<div class="block img-rounded" style="padding:5px;border:1px solid #C9C9C9;">
 		<p style="text-align:center;"><strong>Derniers articles publiés</strong></p>
-		<hr width="70%" style="margin:0 0 5px 0;" />
+		<center><hr width="70%" style="margin:0 0 5px 0;" /></center>
 		<ul class="unstyled">
 			{% for article in articles %}
 				{% if article.isArticle() %}

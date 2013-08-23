@@ -6,8 +6,7 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Filesystem\Exception\IOException;
+use Symfony\Component\Finder\Finder;
 
 class AdminController extends Controller
 {
@@ -19,11 +18,15 @@ class AdminController extends Controller
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:SuperClassArticle');
     	$articles = $repository->getArticles(true, 6);
 		
-		$this->testAlbums();
+		$path = $path = __DIR__ . '/../../../../www/ckfinder/userfiles/images/Albums/2';
+		
+		$photos = $this->testAlbums($path);
     	
     	return $this->render('CollectifAdminBundle:Admin:index.html.twig', array(
     		'disabled' => $disabled,
-			'articles' => $articles
+			'articles' => $articles,
+			'path'		=> $path,
+			'photos'	=> $photos
         ));
     }
 	
@@ -78,13 +81,21 @@ class AdminController extends Controller
         ));
     }
 	
-	private function testAlbums() {
-		$fs = new Filesystem();
+	private function testAlbums($path) {
+	
+		$finder = new Finder();
+		$finder->files()->in($path);
+		$results = array();
 
-		try {
-			$fs->mkdir('ckfinder/userfiles/images/Albums/2');
-		} catch (IOException $e) {
-			echo "An error occured while creating your directory";
+		foreach ($finder as $file) {
+			// affiche le chemin absolu
+			//print "1." . $file->getRealpath()."<br/>";
+			// affiche le chemin relatif du fichier
+			//print "3." . $file->getRelativePathname()."<br/>";
+			
+			$results[] = $file->getRelativePathname();
 		}
+		
+		return $results;
 	}
 }
