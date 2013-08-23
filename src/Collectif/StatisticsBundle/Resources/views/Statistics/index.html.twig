@@ -1,0 +1,17 @@
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+
+<h1>Mes statistiques de visite</h1>
+
+<h3>Synthèse</h3>
+<p>Nombre de visites totales : <span class="text-info"><strong>{{ stat }}</strong></span></p>
+<p>Nombre de visites aujourd'hui : <span class="text-info"><strong>{{ jour }}</strong></span></p>
+<p>Nombre de visites cette semaine : <span class="text-info"><strong>{{ semaine }}</strong></span></p>
+<p>Nombre de visites ce mois : <span class="text-info"><strong>{{ mois }}</strong></span></p>
+<p>Nombre de visites cette année : <span class="text-info"><strong>{{ annee }}</strong></span></p>
+<p>Visiteurs actifs sur ma page : <span class="text-info"><strong>{{ active }}</strong></span></p>
+
+{% endblock %}

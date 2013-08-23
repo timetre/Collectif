@@ -20,7 +20,7 @@ class StatisticsController extends Controller
     	$statsActif = $repository->getStatisticsActive($user);
     	
    	
-        return $this->render('CollectifAdminBundle:Statistics:index.html.twig', 
+        return $this->render('CollectifStatisticsBundle:Statistics:index.html.twig', 
         		array(
         			'stat' => $stats,
         			'jour' => $statsJour,
