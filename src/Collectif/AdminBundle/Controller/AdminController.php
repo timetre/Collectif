@@ -6,6 +6,9 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOException;
+
 class AdminController extends Controller
 {
     public function indexAction()
@@ -13,10 +16,14 @@ class AdminController extends Controller
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifUserBundle:User');
     	$disabled = $repository->getDisabledUsersSize();
     	
-    	$alertUsers;
+    	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:SuperClassArticle');
+    	$articles = $repository->getArticles(true, 6);
+		
+		$this->testAlbums();
     	
     	return $this->render('CollectifAdminBundle:Admin:index.html.twig', array(
-    		'disabled' => $disabled
+    		'disabled' => $disabled,
+			'articles' => $articles
         ));
     }
 	
@@ -70,4 +77,14 @@ class AdminController extends Controller
     		'user' => $user
         ));
     }
+	
+	private function testAlbums() {
+		$fs = new Filesystem();
+
+		try {
+			$fs->mkdir('ckfinder/userfiles/images/Albums/2');
+		} catch (IOException $e) {
+			echo "An error occured while creating your directory";
+		}
+	}
 }

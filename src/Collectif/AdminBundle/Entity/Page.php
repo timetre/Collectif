@@ -118,7 +118,7 @@ class Page
 	
 	
 	/**
-     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Page", cascade={"persist"}, mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Page", cascade={"remove"}, mappedBy="parent")
      */
     private $enfants;
 	
