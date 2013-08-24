@@ -1,0 +1,7 @@
+parameters:
+#    collectif_logger.example.class: Collectif\LoggerBundle\Example
+
+services:
+#    collectif_logger.example:
+#        class: %collectif_logger.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

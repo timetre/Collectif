@@ -82,4 +82,14 @@ class UserRepository extends EntityRepository
 	
 		return $qb->getQuery()->getSingleResult();
 	}
+	
+	public function getUsersLastLoggedIn()
+	{	
+		$qb = $this->createQueryBuilder('u');
+		$qb->orderBy('u.lastLogin', 'DESC');
+	
+		return $qb->getQuery()->getResult();
+	}
+	
+	
 }

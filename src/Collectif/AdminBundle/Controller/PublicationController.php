@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Collectif\AdminBundle\Entity\Publication;
+use Collectif\LoggerBundle\Entity\Logger;
 use Collectif\AdminBundle\Form\PublicationForm;
 use Collectif\AdminBundle\Form\PublicationOwnForm;
 use Collectif\UserBundle\Entity\User;
@@ -26,7 +27,6 @@ class PublicationController extends Controller
     		));
     		
     	} else {
-    		//$repository = $em->getRepository('CollectifAdminBundle:Publication');
     		$repository = $em->getRepository('CollectifUserBundle:User');
     		$user = new User();
     		$user = $repository->find($id);
@@ -154,16 +154,17 @@ class PublicationController extends Controller
             {
                 
                 $em->persist($publication);
-                
                 $em->flush();
-                
-                if (isset($id)) 
+
+                if (isset($pubId)) 
                 {
                      $message='Publication modifi� avec succ�s !';
+					 $this->logAction("Edition de la publication n° " . $pubId);
                 }
                 else 
                 {
                     $message='Publication ajout�e avec succ�s !';
+					$this->logAction("Création d'une publication");
                 }
                 
                 return new RedirectResponse($this->container->get('router')->generate('collectif_publication_list_own', array('id' => $user->getId())));
@@ -205,10 +206,21 @@ class PublicationController extends Controller
     	 
     	$em->remove($publication);
     	$em->flush();
+		
+		$this->logAction("Suppression d'une publication");
     	 
     	$user = $this->container->get('security.context')->getToken()->getUser();
     	return new RedirectResponse($this->container->get('router')->generate('collectif_publication_list_own', array('id' => $user->getId())));
     }
-
-    
+	
+	private function logAction($message = "") {
+		$logger = new Logger();
+		$user = $this->container->get('security.context')->getToken()->getUser();
+		$logger->setDescription($message);
+		$logger->setMembre($user);
+		
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($logger);
+		$em->flush();
+	}
 }

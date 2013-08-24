@@ -1,0 +1,30 @@
+{% extends 'CollectifAdminBundle::layout.html.twig' %}
+
+{% block title %}Collectif CONFLUENCE{% endblock %}
+
+{% block content %}
+
+<h3>Dernier utilisateurs connectés</h3>
+
+<table class="table table-hover">
+	<tr>
+		<th>Nom</th>
+		<th>Prénom</th>
+		<th>Mail</th>
+		<th>Modifications</th>
+		<th>Dernière connexion</th>
+	</tr>
+{% for user in users %}
+	<tr>
+		<td><a href="{{ path('collectif_back_activite_list', { 'userId': user.id }) }}">{{ user.nom }}</a></td>
+		<td>{{ user.prenom }}</td>
+		<td>{{ user.email }}</td>
+		<td>{{ user.loggers | length }}</td>
+		<td>{% if user.lastLogin != null %}
+				{{ user.lastLogin|date('d/m/Y H:i:s') }}
+			{% endif %}
+		</td>
+	</tr>
+{% endfor %}
+</table>
+{% endblock %}

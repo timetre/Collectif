@@ -28,7 +28,7 @@ class AppKernel extends Kernel
         	new Eko\FeedBundle\EkoFeedBundle(),
             new Collectif\StatisticsBundle\CollectifStatisticsBundle(),
             new Collectif\GalleryBundle\CollectifGalleryBundle(),
-            new Oneup\UploaderBundle\OneupUploaderBundle(),
+            new Collectif\LoggerBundle\CollectifLoggerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -15,6 +15,7 @@ use Collectif\AdminBundle\Form\MembrePageForm;
 use Collectif\AdminBundle\Form\MembreRegisterForm;
 use Collectif\AdminBundle\Controller\MembreController;
 use Collectif\AdminBundle\Entity\Candidature;
+use Collectif\LoggerBundle\Entity\Logger;
 
 class MembreController extends Controller {
     
@@ -211,6 +212,8 @@ class MembreController extends Controller {
     			$em->persist($membre);
     
     			$em->flush();
+				
+				$this->logAction("Modification de la présentation");
     
     			if (isset($id))
     			{
@@ -268,11 +271,19 @@ class MembreController extends Controller {
     		$em->remove($membre);
     		$em->flush();
     	}
-    	
-    	
-    	
-    	
+
     	 return new RedirectResponse($this->container->get('router')->generate('collectif_membre_homepage'));
     }
+	
+	private function logAction($message = "") {
+		$logger = new Logger();
+		$user = $this->container->get('security.context')->getToken()->getUser();
+		$logger->setDescription($message);
+		$logger->setMembre($user);
+		
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($logger);
+		$em->flush();
+	}
     
 }

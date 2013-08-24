@@ -2,6 +2,10 @@ collectif_gallery:
     resource: "@CollectifGalleryBundle/Resources/config/routing.yml"
     prefix:   /
 
+collectif_logger:
+    resource: "@CollectifLoggerBundle/Resources/config/routing.yml"
+    prefix:   /
+
 collectif_statistics:
     resource: "@CollectifStatisticsBundle/Resources/config/routing.yml"
     prefix:   /
@@ -33,6 +37,10 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /change-password
+
+oneup_uploader:
+    resource: .
+    type: uploader
 
 # Internal routing configuration to handle ESI
 #_internal:

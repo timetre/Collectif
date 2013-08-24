@@ -174,6 +174,12 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\MonCv", cascade={"remove"}, mappedBy="membre")
      */
     private $mesCvs;
+	
+	/**
+     * @ORM\OneToMany(targetEntity="Collectif\LoggerBundle\Entity\Logger", cascade={"remove"}, mappedBy="membre")
+	 * @ORM\OrderBy({"date" = "DESC"})
+     */
+    private $loggers;
     
     /**
      * @var string $path
@@ -1275,5 +1281,38 @@ class User extends BaseUser
     public function getWebmaster()
     {
         return $this->webmaster;
+    }
+
+    /**
+     * Add loggers
+     *
+     * @param \Collectif\LoggerBundle\Entity\Logger $loggers
+     * @return User
+     */
+    public function addLogger(\Collectif\LoggerBundle\Entity\Logger $loggers)
+    {
+        $this->loggers[] = $loggers;
+    
+        return $this;
+    }
+
+    /**
+     * Remove loggers
+     *
+     * @param \Collectif\LoggerBundle\Entity\Logger $loggers
+     */
+    public function removeLogger(\Collectif\LoggerBundle\Entity\Logger $loggers)
+    {
+        $this->loggers->removeElement($loggers);
+    }
+
+    /**
+     * Get loggers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLoggers()
+    {
+        return $this->loggers;
     }
 }

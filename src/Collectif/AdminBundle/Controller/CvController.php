@@ -18,6 +18,7 @@ use Collectif\AdminBundle\Entity\Experience;
 use Collectif\AdminBundle\Entity\Competence;
 use Collectif\AdminBundle\Entity\Interet;
 use Collectif\AdminBundle\Entity\Formation;
+use Collectif\LoggerBundle\Entity\Logger;
 
 class CvController extends Controller
 {
@@ -205,7 +206,7 @@ class CvController extends Controller
     	));
     }
     
-public function editContactAction()
+	public function editContactAction()
     {
     	$this->container->get('request')->getSession()->set('tabNum', 2);
     	$message='';
@@ -226,6 +227,8 @@ public function editContactAction()
     			$em->persist($user);
     
     			$em->flush();
+				
+				$this->logAction("Modification des activités numériques");
     
     			return new RedirectResponse($this->container->get('router')->generate('collectif_cv_list'));
     		}
@@ -260,6 +263,8 @@ public function editContactAction()
     			$em->persist($user);
     
     			$em->flush();
+				
+				$this->logAction("Modification des infos du compte");
     
     			return new RedirectResponse($this->container->get('router')->generate('collectif_cv_list'));
     		}
@@ -309,13 +314,15 @@ public function editContactAction()
     
     			$em->flush();
     
-    			if (isset($id))
+    			if (isset($interetId))
     			{
     				$message='Interêt modifiée avec succès !';
+					$this->logAction("Modification de l'objet de recherche n° " . $interetId);
     			}
     			else
     			{
     				$message='Interêt ajoutée avec succès !';
+					$this->logAction("Ajout d'un objet de recherche");
     			}
     
     			return new RedirectResponse($this->container->get('router')->generate('collectif_cv_list'));
@@ -392,9 +399,22 @@ public function editContactAction()
     	 
     	$em->remove($interet);
     	$em->flush();
+		
+		$this->logAction("Suppression d'un objet de recherche");
     	 
     	 
     	return new RedirectResponse($this->container->get('router')->generate('collectif_cv_list'));
     }
+	
+	private function logAction($message = "") {
+		$logger = new Logger();
+		$user = $this->container->get('security.context')->getToken()->getUser();
+		$logger->setDescription($message);
+		$logger->setMembre($user);
+		
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($logger);
+		$em->flush();
+	}
     
 }

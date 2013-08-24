@@ -7,7 +7,6 @@
 	<link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/bootstrap.css') }}" />
 	<link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/custom.css') }}" />
 	<link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/datepicker.css') }}" />
-	<link rel="stylesheet" type="text/css" href="/uploadify/uploadify.css" />
 	
 </head>
 	<body>
@@ -108,6 +107,12 @@
 		              	<li class="active"><a href="{{ path('collectif_back_homepage') }}">Accueil</a></li>
 		              {% else %}
 		              	<li><a href="{{ path('collectif_back_homepage') }}">Accueil</a></li>
+		              {% endif %}
+					  
+					  {% if app.request.attributes.get('_route') == 'collectif_back_activite' and app.user.webmaster == 1 %}
+		              	<li class="active"><a href="{{ path('collectif_back_activite') }}">Activité</a></li>
+		              {% elseif app.user.webmaster == 1 %}
+		              	<li><a href="{{ path('collectif_back_activite') }}">Activité</a></li>
 		              {% endif %}
 		              
 		              {#
@@ -271,7 +276,7 @@
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap-datepicker.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/jquery.media.js') }}"></script> 
-	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/jquery.metadata.js') }}"></script> 
+	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/jquery.metadata.js') }}"></script>
 	
 	<script type="text/javascript" src="/bundles/ckfinder/ckeditor/ckeditor.js"></script>
 	<script type="text/javascript" src="/bundles/ckfinder/ckfinder.js"></script>
