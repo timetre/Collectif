@@ -21,7 +21,7 @@ collectif_bug_tracker:
 collectif_membre_homepage:
     pattern:  /reseau/admin/membres
     defaults: { _controller: "CollectifAdminBundle:Membre:list" }
-    
+
 collectif_membre_detail:
     pattern:  /reseau/admin/membres/detail/{id}
     defaults: { _controller: "CollectifAdminBundle:Membre:detail" }
@@ -29,7 +29,7 @@ collectif_membre_detail:
 collectif_membre_create:
     pattern:  /reseau/admin/membres/create
     defaults: { _controller: "CollectifAdminBundle:Membre:edit" }
-    
+
 collectif_membre_create_admin:
     pattern:  /reseau/admin/membres/create/admin
     defaults: { _controller: "CollectifAdminBundle:Membre:editAdmin" }
@@ -45,15 +45,15 @@ collectif_membre_edit_page:
 collectif_membre_delete:
     pattern:  /reseau/admin/membres/delete/{id}
     defaults: { _controller: "CollectifAdminBundle:Membre:delete" }
-    
+
 collectif_membre_register:
     pattern:  /registration/step1/
     defaults: { _controller: "CollectifAdminBundle:Registration:firstStep" }
-    
+
 collectif_membre_register_step2:
     pattern:  /registration/step2/{userId}
     defaults: { _controller: "CollectifAdminBundle:Registration:secondStep" }
-    
+
 collectif_membre_register_step3:
     pattern:  /registration/step3/{userId}
     defaults: { _controller: "CollectifAdminBundle:Registration:thirdStep" }
@@ -61,11 +61,11 @@ collectif_membre_register_step3:
 collectif_membre_register_step4:
     pattern:  /registration/step4/{userId}
     defaults: { _controller: "CollectifAdminBundle:Registration:fourthStep" }
-    
+
 collectif_domaine_homepage:
     pattern:  /reseau/admin/domaines
     defaults: { _controller: "CollectifAdminBundle:Domaine:list" }
-    
+
 collectif_domaine_detail:
     pattern:  /reseau/admin/domaines/detail/{id}
     defaults: { _controller: "CollectifAdminBundle:Domaine:detail" }
@@ -86,7 +86,7 @@ collectif_domaine_delete:
 collectif_page_homepage:
     pattern:  /reseau/admin/pages/home/{parent}
     defaults: { _controller: "CollectifAdminBundle:Page:list" }
-    
+
 collectif_page_detail:
     pattern:  /reseau/admin/pages/detail/{id}
     defaults: { _controller: "CollectifAdminBundle:Page:detail" }
@@ -94,7 +94,7 @@ collectif_page_detail:
 collectif_page_create:
     pattern:  /reseau/admin/pages/create/{parent}/{type}
     defaults: { _controller: "CollectifAdminBundle:Page:edit" }
-    
+
 collectif_page_before_create:
     pattern:  /reseau/admin/pages/create_before
     defaults: { _controller: "CollectifAdminBundle:Page:before" }
@@ -110,7 +110,7 @@ collectif_page_delete:
 collectif_publication_homepage:
     pattern:  /reseau/admin/publications
     defaults: { _controller: "CollectifAdminBundle:Publication:list" }
-    
+
 collectif_publication_detail:
     pattern:  /reseau/admin/publications/detail/{id}
     defaults: { _controller: "CollectifAdminBundle:Publication:detail" }
@@ -118,7 +118,7 @@ collectif_publication_detail:
 collectif_publication_create:
     pattern:  /reseau/admin/publications/create
     defaults: { _controller: "CollectifAdminBundle:Publication:edit" }
-    
+
 collectif_publication_edit:
     pattern:  /reseau/admin/publications/edit/{id}
     defaults: { _controller: "CollectifAdminBundle:Publication:edit" }
@@ -126,7 +126,7 @@ collectif_publication_edit:
 collectif_publication_delete:
     pattern:  /reseau/admin/publications/delete/{id}
     defaults: { _controller: "CollectifAdminBundle:Publication:delete" }
-    
+
 collectif_publication_list_own:
     pattern:  /reseau/publications/own/{id}
     defaults: { _controller: "CollectifAdminBundle:Publication:list" }
@@ -134,11 +134,11 @@ collectif_publication_list_own:
 collectif_publication_create_own:
     pattern:  /reseau/publications/create/own
     defaults: { _controller: "CollectifAdminBundle:Publication:editOwn" }
-    
+
 collectif_publication_edit_own:
     pattern:  /reseau/publications/edit/own/{pubId}
     defaults: { _controller: "CollectifAdminBundle:Publication:editOwn" }
-   
+
 collectif_publication_delete_own:
     pattern:  /reseau/publications/delete/own/{id}
     defaults: { _controller: "CollectifAdminBundle:Publication:deleteOwn" }
@@ -194,23 +194,23 @@ collectif_partenaires_edit:
 collectif_partenaires_delete:
     pattern:  /reseau/admin/partenaires/delete/{id}
     defaults: { _controller: "CollectifAdminBundle:Partenaire:delete" }
-    
+
 CollectifAdminBundle_reseau_forum:
     resource: "@CollectifAdminBundle/Resources/config/routing/forum.yml"
     prefix:   /reseau/forum
-    
+
 CollectifAdminBundle_reseau_sousforum:
     resource: "@CollectifAdminBundle/Resources/config/routing/sousforum.yml"
     prefix:   /reseau/sousforum
-    
+
 CollectifAdminBundle_reseau_post:
     resource: "@CollectifAdminBundle/Resources/config/routing/post.yml"
     prefix:   /reseau/post
-    
+
 CollectifAdminBundle_reseau_cv:
     resource: "@CollectifAdminBundle/Resources/config/routing/cv.yml"
     prefix:   /reseau/cv
-    
+
 CollectifAdminBundle_reseau_mescv:
     resource: "@CollectifAdminBundle/Resources/config/routing/mescv.yml"
     prefix:   /reseau/mescv

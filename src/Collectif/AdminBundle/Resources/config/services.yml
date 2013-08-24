@@ -5,3 +5,5 @@ services:
 #    collectif_membre.example:
 #        class: %collectif_membre.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+    collectif_logger.log:
+        class: Collectif\LoggerBundle\Services\LoggerService

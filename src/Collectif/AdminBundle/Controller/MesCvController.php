@@ -65,13 +65,15 @@ class MesCvController extends Controller
     
     			if (isset($monCvId))
     			{
-    				$message='CV modifié avec succès !';
-					$this->logAction("Modification du CV");
+                    $loggerService = $this->container->get('collectif_logger.log');
+                    $user = $this->container->get('security.context')->getToken()->getUser();
+                    $loggerService->logAction($em, $user, "Modification du CV");
     			}
     			else
     			{
-    				$message='CV ajouté avec succès !';
-					$this->logAction("Ajout du CV");
+                    $loggerService = $this->container->get('collectif_logger.log');
+                    $user = $this->container->get('security.context')->getToken()->getUser();
+                    $loggerService->logAction($em, $user, "Ajout du CV");
     			}
     
     			return new RedirectResponse($this->container->get('router')->generate('collectif_mescv_list'));
