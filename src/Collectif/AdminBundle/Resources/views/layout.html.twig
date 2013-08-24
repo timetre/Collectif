@@ -24,24 +24,24 @@
           <div class="nav-collapse collapse dropdown">
           	
           	<p class="navbar-text pull-right">
-              <a href="{{ path('collectif_membre_edit_page', { 'id': app.user.id }) }}" class="navbar-link">{{ app.user.username }}</a> - <a class="navbar-link" href="{{ path('fos_user_security_logout') }}"> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+              <a href="{{ path('collectif_membre_edit_page', { 'id': app.user.id }) }}" class="navbar-link">{{ app.user.username }}</a> - <a class="navbar-link" href="{{ path('fos_user_security_logout') }}"><i class="icon-off icon-white"></i></a>
             </p>
           
             <ul class="nav" role="menu" aria-labelledby="dLabel">
             
-            	{#
+            	
             	{% if app.request.attributes.get('_route') == 'collectif_back_homepage' %}
 	            	<li class="active"><a href="{{ path('collectif_back_homepage') }}">Accueil</a></li>
 	            {% else %}
 	              	<li><a href="{{ path('collectif_back_homepage') }}">Accueil</a></li>
 	            {% endif %}
-              #}
-			  
-			  {% if app.request.attributes.get('_route') == 'fos_user_profile_show' or app.request.attributes.get('_route') == 'collectif_membre_edit_page' or app.request.attributes.get('_route') == 'collectif_publication_list_own' %}
-	            <li class="dropdown active">
-	          {% else %}
-	         	<li class="dropdown">
-	          {% endif %}
+
+				{% if app.request.attributes.get('_route') == 'fos_user_profile_show' or app.request.attributes.get('_route') == 'collectif_membre_edit_page' or app.request.attributes.get('_route') == 'collectif_publication_list_own' %}
+					<li class="dropdown active">
+				{% else %}
+					<li class="dropdown">
+				{% endif %}
+				
 			  	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Ma page<b class="caret"></b></a>
 			  	<ul class="dropdown-menu">
 			  	
@@ -78,7 +78,8 @@
 			  </li>
 			  
 			  {% render url('reseau_forum_nav') %}
-			  <li class="pull-right"><a href="#bug" data-toggle="modal" class="btn-danger pull-right">bug</a></li>
+			  
+			  {% render url('reseau_bug_nav') %}
 			  
 			{#  
 			{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
@@ -269,9 +270,10 @@
   </div>
 </form>
 </div>
-		
-	<!-- <script src="http://code.jquery.com/jquery-latest.js"></script>-->
-	{# <script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/jquery-1.6.1.min.js') }}"></script> #}
+
+
+
+	{# <script src="http://code.jquery.com/jquery-latest.js"></script> #}
 	<script type="text/javascript" src="{{ asset('/resources/js/jquery-2.0.3.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bundles/collectifadmin/js/bootstrap-datepicker.js') }}"></script>
@@ -280,11 +282,10 @@
 	
 	<script type="text/javascript" src="/bundles/ckfinder/ckeditor/ckeditor.js"></script>
 	<script type="text/javascript" src="/bundles/ckfinder/ckfinder.js"></script>
+
 	<script type="text/javascript">
 		CKFinder.setupCKEditor( null, '/bundles/ckfinder/' ) ;
-	</script>
-
-	<script>		
+		
 		$(function() {
 	    	$( ".datePicker" ).datepicker({
 				format: 'dd/mm/yyyy',
@@ -293,7 +294,12 @@
 		});
 		
 		$('a.mediaBig').media({width:800, height:600});
+		
+		function BrowseServer() {
+			CKFinder.popup( { basePath : '/bundles/ckfinder/images/Albums/2'} ) ;
+		}
 	</script>
+
 
 	</body>
 </html>

@@ -222,3 +222,7 @@ CollectifAdminBundle_reseau_election:
 CollectifAdminBundle_reseau_ws:
     resource: "@CollectifAdminBundle/Resources/config/routing/ws.yml"
     prefix:   /ws
+
+reseau_bug_nav:
+    pattern:  /bug/nav/
+    defaults: { _controller: "CollectifAdminBundle:Admin:bug" }

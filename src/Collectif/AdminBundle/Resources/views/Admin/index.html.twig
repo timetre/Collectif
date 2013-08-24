@@ -4,6 +4,8 @@
 
 {% block content %}
 
+<div class="span7">	
+
 <h2>Réseau CONFLUENCE</h2>
 
 {% if disabled|length > 0 %}
@@ -16,5 +18,32 @@
 <p>
 	En construction...
 </p>
+
+<p>
+	Selected File URL<br />
+	<input type="button" value="Browse Server" onclick="BrowseServer();" />
+</p>
+
+{% for p in photos %}
+	<img src="/ckfinder/userfiles/images/Albums/2/{{ p }}" style="height:100px !important;" />
+{% endfor %}
+
+</div>
+
+<div class="span4">
+	<div class="block img-rounded" style="padding:5px;border:1px solid #C9C9C9;">
+		<p style="text-align:center;"><strong>Derniers articles publiés</strong></p>
+		<center><hr width="70%" style="margin:0 0 5px 0;" /></center>
+		<ul class="unstyled">
+			{% for article in articles %}
+				{% if article.isArticle() %}
+					<li><span>{{ article.datePublication|date('d/m/Y') }}</span> - <a href="{{ path('collectif_front_article', { 'alias': article.alias }) }}" target="_blank">{{ article.titre }}</a></li>
+				{% else %}
+					<li><span>{{ article.datePublication|date('d/m/Y') }}</span> - <a href="{{ path('collectif_front_publication', { 'alias': article.alias }) }}" target="_blank">{{ article.titre }}</a></li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
+</div>
 
 {% endblock %}

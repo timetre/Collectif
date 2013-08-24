@@ -124,7 +124,7 @@ class User extends BaseUser
     private $dateModification;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Collectif\AdminBundle\Entity\Domaine", inversedBy="users")
+     * @ORM\ManyToOne(targetEntity="Collectif\AdminBundle\Entity\Domaine", inversedBy="users", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */    
     private $domaine;

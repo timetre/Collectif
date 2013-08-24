@@ -49,6 +49,21 @@ class StatisticRepository extends EntityRepository
 		->getSingleScalarResult();
 	}
 	
+	public function getStatisticsWeek($user)
+	{
+		$date = new \Datetime();
+		$semaine = date_format($date, "W");
+		$annee = date_format($date, "Y");
+		return $this->createQueryBuilder('s')
+		->select('COUNT(s.ip)')
+		->where('s.membre = :user AND s.annee = :annee AND s.semaine = :semaine')
+		->setParameter('user', $user)
+		->setParameter('semaine', $semaine)
+		->setParameter('annee', $annee)
+		->getQuery()
+		->getSingleScalarResult();
+	}
+	
 	public function getStatisticsMonth($user)
 	{
 		$date = new \Datetime();
@@ -72,21 +87,6 @@ class StatisticRepository extends EntityRepository
 		->select('COUNT(s.ip)')
 		->where('s.membre = :user AND s.annee = :annee')
 		->setParameter('user', $user)
-		->setParameter('annee', $annee)
-		->getQuery()
-		->getSingleScalarResult();
-	}
-	
-	public function getStatisticsWeek($user)
-	{
-		$date = new \Datetime();
-		$semaine = date_format($date, "W");
-		$annee = date_format($date, "Y");
-		return $this->createQueryBuilder('s')
-		->select('COUNT(s.ip)')
-		->where('s.membre = :user AND s.annee = :annee AND s.semaine = :semaine')
-		->setParameter('user', $user)
-		->setParameter('semaine', $semaine)
 		->setParameter('annee', $annee)
 		->getQuery()
 		->getSingleScalarResult();

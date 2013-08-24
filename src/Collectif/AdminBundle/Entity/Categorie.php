@@ -51,7 +51,7 @@ class Categorie
     private $dateModification;
 	
 	/**
-     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Article", cascade={"persist"}, mappedBy="categorie")
+     * @ORM\OneToMany(targetEntity="Collectif\AdminBundle\Entity\Article", cascade={"remove"}, mappedBy="categorie")
      * @ORM\OrderBy({"datePublication" = "DESC"})
      */
     private $articles;
