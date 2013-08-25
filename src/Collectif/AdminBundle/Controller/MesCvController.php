@@ -104,15 +104,4 @@ class MesCvController extends Controller
     	return new RedirectResponse($this->container->get('router')->generate('collectif_mescv_list'));
     }
 	
-	private function logAction($message = "") {
-		$logger = new Logger();
-		$user = $this->container->get('security.context')->getToken()->getUser();
-		$logger->setDescription($message);
-		$logger->setMembre($user);
-		
-		$em = $this->getDoctrine()->getManager();
-		$em->persist($logger);
-		$em->flush();
-	}
-        
 }

@@ -159,12 +159,16 @@ class PublicationController extends Controller
                 if (isset($pubId)) 
                 {
                      $message='Publication modifi� avec succ�s !';
-					 $this->logAction("Edition de la publication n° " . $pubId);
+                     $loggerService = $this->container->get('collectif_logger.log');
+                     $user = $this->container->get('security.context')->getToken()->getUser();
+                     $loggerService->logAction($em, $user, "Edition de la publication n° " . $pubId);
                 }
                 else 
                 {
                     $message='Publication ajout�e avec succ�s !';
-					$this->logAction("Création d'une publication");
+                    $loggerService = $this->container->get('collectif_logger.log');
+                    $user = $this->container->get('security.context')->getToken()->getUser();
+                    $loggerService->logAction($em, $user, "Création d'une publication");
                 }
                 
                 return new RedirectResponse($this->container->get('router')->generate('collectif_publication_list_own', array('id' => $user->getId())));
@@ -207,20 +211,11 @@ class PublicationController extends Controller
     	$em->remove($publication);
     	$em->flush();
 		
-		$this->logAction("Suppression d'une publication");
+        $loggerService = $this->container->get('collectif_logger.log');
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $loggerService->logAction($em, $user, "Suppression d'une publication");
     	 
     	$user = $this->container->get('security.context')->getToken()->getUser();
     	return new RedirectResponse($this->container->get('router')->generate('collectif_publication_list_own', array('id' => $user->getId())));
     }
-	
-	private function logAction($message = "") {
-		$logger = new Logger();
-		$user = $this->container->get('security.context')->getToken()->getUser();
-		$logger->setDescription($message);
-		$logger->setMembre($user);
-		
-		$em = $this->getDoctrine()->getManager();
-		$em->persist($logger);
-		$em->flush();
-	}
 }

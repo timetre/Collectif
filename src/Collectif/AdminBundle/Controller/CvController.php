@@ -227,8 +227,10 @@ class CvController extends Controller
     			$em->persist($user);
     
     			$em->flush();
-				
-				$this->logAction("Modification des activités numériques");
+
+                $loggerService = $this->container->get('collectif_logger.log');
+                $user = $this->container->get('security.context')->getToken()->getUser();
+                $loggerService->logAction($em, $user, "Modification des activités numériques");
     
     			return new RedirectResponse($this->container->get('router')->generate('collectif_cv_list'));
     		}
@@ -263,8 +265,10 @@ class CvController extends Controller
     			$em->persist($user);
     
     			$em->flush();
-				
-				$this->logAction("Modification des infos du compte");
+
+                $loggerService = $this->container->get('collectif_logger.log');
+                $user = $this->container->get('security.context')->getToken()->getUser();
+                $loggerService->logAction($em, $user, "Modification des infos du compte");
     
     			return new RedirectResponse($this->container->get('router')->generate('collectif_cv_list'));
     		}
@@ -317,12 +321,16 @@ class CvController extends Controller
     			if (isset($interetId))
     			{
     				$message='Interêt modifiée avec succès !';
-					$this->logAction("Modification de l'objet de recherche n° " . $interetId);
+                    $loggerService = $this->container->get('collectif_logger.log');
+                    $user = $this->container->get('security.context')->getToken()->getUser();
+                    $loggerService->logAction($em, $user, "Modification de l'objet de recherche n° " . $interetId);
     			}
     			else
     			{
     				$message='Interêt ajoutée avec succès !';
-					$this->logAction("Ajout d'un objet de recherche");
+                    $loggerService = $this->container->get('collectif_logger.log');
+                    $user = $this->container->get('security.context')->getToken()->getUser();
+                    $loggerService->logAction($em, $user, "Ajout d'un objet de recherche");
     			}
     
     			return new RedirectResponse($this->container->get('router')->generate('collectif_cv_list'));
@@ -400,21 +408,11 @@ class CvController extends Controller
     	$em->remove($interet);
     	$em->flush();
 		
-		$this->logAction("Suppression d'un objet de recherche");
+		$loggerService = $this->container->get('collectif_logger.log');
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $loggerService->logAction($em, $user, "Suppression d'un objet de recherche");
     	 
     	 
     	return new RedirectResponse($this->container->get('router')->generate('collectif_cv_list'));
-    }
-	
-	private function logAction($message = "") {
-		$logger = new Logger();
-		$user = $this->container->get('security.context')->getToken()->getUser();
-		$logger->setDescription($message);
-		$logger->setMembre($user);
-		
-		$em = $this->getDoctrine()->getManager();
-		$em->persist($logger);
-		$em->flush();
-	}
-    
+    }    
 }

@@ -212,8 +212,10 @@ class MembreController extends Controller {
     			$em->persist($membre);
     
     			$em->flush();
-				
-				$this->logAction("Modification de la présentation");
+
+                $loggerService = $this->container->get('collectif_logger.log');
+                $user = $this->container->get('security.context')->getToken()->getUser();
+                $loggerService->logAction($em, $user, "Modification de la présentation");
     
     			if (isset($id))
     			{
@@ -274,16 +276,5 @@ class MembreController extends Controller {
 
     	 return new RedirectResponse($this->container->get('router')->generate('collectif_membre_homepage'));
     }
-	
-	private function logAction($message = "") {
-		$logger = new Logger();
-		$user = $this->container->get('security.context')->getToken()->getUser();
-		$logger->setDescription($message);
-		$logger->setMembre($user);
-		
-		$em = $this->getDoctrine()->getManager();
-		$em->persist($logger);
-		$em->flush();
-	}
     
 }
