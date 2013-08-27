@@ -42,6 +42,8 @@ jQuery(function($){
 	
 	// Promo slider setup, inserted on when promo is in use to save bandwidth
 	
+	$('#promos').show();
+	
 	$('#promos').cycle({ 
 		fx:     'fade', 
 		speed:  2000, 
