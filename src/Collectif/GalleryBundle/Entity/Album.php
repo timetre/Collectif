@@ -239,4 +239,14 @@ class Album
         return $this->photos;
     }
 
+    public function getUploadRootDir()
+    {
+        return __DIR__.'/../../../../'.$this->getUploadDir();
+    }
+
+    public function getUploadDir()
+    {
+        return 'www/ckfinder/userfiles/images/Albums/'.$this->id;
+    }
+
 }

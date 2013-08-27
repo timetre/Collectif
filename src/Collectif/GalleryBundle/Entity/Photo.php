@@ -31,6 +31,13 @@ class Photo
     private $titre;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="path", type="string", length=255)
+     */
+    private $path;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="dateCreation", type="datetime")
@@ -127,5 +134,28 @@ class Photo
     public function getAlbum()
     {
         return $this->album;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Photo
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
     }
 }

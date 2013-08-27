@@ -11,8 +11,30 @@
     <p>
         {{ entity.description | raw }}
     </p>
-    <hr/>
 
-    <h2>{{ entity.photos | length }} Photos</h2>
+	<hr/>
+
+	<p>
+		Cliquer pour sélectionner des photos &nbsp; <input type="button" value="Browse Server" onclick="BrowseServer();" /><br/>
+		<em>Merci de télécharger les photos dans le dossier suivant : <strong>/images/Albums/{{ entity.id }}</strong></em>
+
+		<form method="post" action="{{ path('album_save_photos', { 'id': entity.id }) }}">
+			<input type="submit" name="submit" class="btn btn-success pull-right" value="Sauvegarder" />
+		</form>
+	</p>
+
+	<h2>{{ entity.photos | length }} Photos</h2>
+
+	<hr/>
+
+	{% for p in entity.photos %}
+		<div style="float:left; margin-right: 7px;text-align:center;">
+			<img src="/ckfinder/userfiles/images/Albums/{{ entity.id }}/{{ p.path }}" style="height:100px !important;" class="img-polaroid" /><br/>
+			<a onclick="if(!confirm('Voulez-vous vraiment supprimer cette photo ?')) { return false };" 
+							href="{{ path('album_delete_photo', { 'id': p.id }) }}"><i class="icon-trash"></i> Supprimer</a>
+		</div>
+	{% endfor %}
+
+    
             
 {% endblock %}

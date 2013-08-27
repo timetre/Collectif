@@ -12,4 +12,23 @@ use Doctrine\ORM\EntityRepository;
  */
 class PhotoRepository extends EntityRepository
 {
+	public function isAlreadyInAlbum($albumId, $filename)
+	{
+		$params = array(
+			'album' => $albumId,
+			'filename' => $filename
+		);
+		
+		//return $this->getEntityManager()->createQuery('SELECT c FROM CollectifAdminBundle:Candidature c JOIN c.membre m WHERE c.pending = '.$pending.' AND m.enabled = false ORDER BY c.id DESC')->getResult();
+		$qb = $this->createQueryBuilder('p');
+		$qb->where('p.album = :album AND p.path = :filename')
+		->setParameters($params);
+
+      	$results = $qb->getQuery()->getResult();
+
+      	if(count($results) > 0)
+      		return true;
+      	else
+      		return false;
+	}
 }

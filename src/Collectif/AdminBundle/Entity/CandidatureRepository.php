@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class CandidatureRepository extends EntityRepository
 {
-public function getPending($pending)
+	public function getPending($pending)
 	{
 		$params = array(
 			'pending', $pending

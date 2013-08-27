@@ -15,6 +15,15 @@ album_create:
     defaults: { _controller: "CollectifGalleryBundle:Album:create" }
     requirements: { _method: post }
 
+album_save_photos:
+    pattern:  /{id}/save/photos
+    defaults: { _controller: "CollectifGalleryBundle:Album:savePhotos" }
+    requirements: { _method: post }
+
+album_delete_photo:
+    pattern:  /{id}/delete/photo
+    defaults: { _controller: "CollectifGalleryBundle:Album:deletePhoto" }
+
 album_edit:
     pattern:  /{id}/edit
     defaults: { _controller: "CollectifGalleryBundle:Album:edit" }

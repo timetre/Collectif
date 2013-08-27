@@ -18,15 +18,11 @@ class AdminController extends Controller
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:SuperClassArticle');
     	$articles = $repository->getArticles(true, 6);
 		
-		$path = $path = __DIR__ . '/../../../../www/ckfinder/userfiles/images/Albums/2';
 		
-		$photos = $this->testAlbums($path);
     	
     	return $this->render('CollectifAdminBundle:Admin:index.html.twig', array(
     		'disabled' => $disabled,
-			'articles' => $articles,
-			'path'		=> $path,
-			'photos'	=> $photos
+			'articles' => $articles
         ));
     }
 	
@@ -91,23 +87,4 @@ class AdminController extends Controller
     		'user' => $user
         ));
     }
-	
-	private function testAlbums($path) {
-		//http://symfony.com/fr/doc/current/components/finder.html
-		$finder = new Finder();
-		$finder->files()->in($path);
-		$finder->sortByName();
-		$results = array();
-
-		foreach ($finder as $file) {
-			// affiche le chemin absolu
-			//print "1." . $file->getRealpath()."<br/>";
-			// affiche le chemin relatif du fichier
-			//print "3." . $file->getRelativePathname()."<br/>";
-			
-			$results[] = $file->getRelativePathname();
-		}
-		
-		return $results;
-	}
 }
