@@ -88,7 +88,7 @@ class Domaine
      *)
      *
      */
-    public $file;
+    protected $file;
     
     /**
      * @ORM\OneToMany(targetEntity="Collectif\UserBundle\Entity\User", cascade={"persist"}, mappedBy="domaine")
@@ -397,5 +397,28 @@ class Domaine
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * Set file
+     *
+     * @param string $file
+     * @return Brand
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+    
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return string 
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 }

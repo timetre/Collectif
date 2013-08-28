@@ -64,7 +64,7 @@ class MonCv
      *     maxSizeMessage = "Votre CV ne doit pas dépasser les 6 mo"
      * )
      */
-    public $file;
+    protected $file;
     
     
     public function __construct()
@@ -281,5 +281,28 @@ class MonCv
     public function getDateCreation()
     {
         return $this->dateCreation;
+    }
+
+    /**
+     * Set file
+     *
+     * @param string $file
+     * @return Brand
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+    
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return string 
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 }

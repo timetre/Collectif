@@ -64,7 +64,7 @@ class Post
     private $visionneuse;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Collectif\UserBundle\Entity\User", cascade={"persist"}, inversedBy="publications")
+     * @ORM\ManyToOne(targetEntity="Collectif\UserBundle\Entity\User", cascade={"persist"}, inversedBy="posts")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank()
      */

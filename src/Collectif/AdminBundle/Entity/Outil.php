@@ -80,7 +80,7 @@ class Outil
      *)
      *
      */
-    public $file;
+    protected $file;
     
     
     public function __construct()
@@ -328,5 +328,28 @@ class Outil
     public function getPath()
     {
     	return $this->path;
+    }
+
+    /**
+     * Set file
+     *
+     * @param string $file
+     * @return Brand
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+    
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return string 
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 }
