@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class OffreRepository extends EntityRepository
 {
+	public function getOffres($limit=null)
+	{
+	    $qb = $this->createQueryBuilder('o');
+
+	    $qb->orderBy('o.dateCreation', 'DESC')
+		   ->setMaxResults( $limit );
+	
+	    return $qb->getQuery()->getResult();
+	}
 }
