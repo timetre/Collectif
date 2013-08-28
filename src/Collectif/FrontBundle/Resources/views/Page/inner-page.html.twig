@@ -26,16 +26,8 @@
 {% if page.album != null %}
 	<div id="gallery">
 		{% for p in page.album.photos %}
-			{#<div style="float:left; margin-right: 7px;text-align:center;">
-				<a href="/ckfinder/userfiles/images/Albums/{{ page.album.id }}/{{ p.path }}" class="fancybox">
-                    <img src="/ckfinder/userfiles/images/Albums/{{ page.album.id }}/{{ p.path }}" style="height:100px !important;" alt="">
-                </a>
-			</div>
-			<a class="fancybox" href="/ckfinder/userfiles/images/Albums/{{ page.album.id }}/{{ p.path }}" data-fancybox-group="gallery" >
-				<img src="/ckfinder/userfiles/images/Albums/{{ page.album.id }}/{{ p.path }}" alt=""  style="height:100px !important;" />
-			</a>#}
 			<a rel="example_group" href="/ckfinder/userfiles/images/Albums/{{ page.album.id }}/{{ p.path }}">
-				<img alt="" src="/ckfinder/userfiles/images/Albums/{{ page.album.id }}/{{ p.path }}" style="height:100px !important;" />
+				<img alt="" src="/ckfinder/userfiles/images/Albums/{{ page.album.id }}/{{ p.path }}" style="height:100px !important; margin-right: 15px; padding: 3px; border: 1px solid lightgray;" />
 			</a>
 		{% endfor %}
 	</div>

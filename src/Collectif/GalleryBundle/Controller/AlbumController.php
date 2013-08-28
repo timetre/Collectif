@@ -232,16 +232,21 @@ class AlbumController extends Controller
             $filename = $this->clear_str($file->getRelativePathname());
 
             if(!$repository->isAlreadyInAlbum($entity->getId(), $filename)) {
-                $photo->setTitre($filename);
+                $newFileName = sha1(uniqid(mt_rand(), true));
+                $extension = substr($filename, strrpos($filename, "."));
+
+                $newFileName = $newFileName.$extension;
+
+                $toRename = $url.'/'.$file->getRelativePathname();
+
+                if($toRename !== $newFileName) 
+                    $fs->rename($toRename, $url.'/'.$newFileName);
+
+                $photo->setTitre($newFileName);
                 $photo->setAlbum($entity);
-                $photo->setPath($filename);
+                $photo->setPath($newFileName);
 
-                $toRename = strtolower($url.'/'.$file->getRelativePathname());
-                $renamed = strtolower($url.'/'.$filename);
-
-                if($toRename != $renamed)
-                    $fs->rename($toRename, $renamed);
-
+                //die;
                 $em->persist($photo);
                 $em->flush();
             }
