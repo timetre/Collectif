@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="fr-FR">
+<head profile="http://gmpg.org/xfn/11">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Collectif Confluence : Mot de passe oublié</title>
+    
+    <link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/custom.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/login.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/bundles/collectifadmin/css/datepicker.css') }}" />
+    
+    <style type="text/css">
+        .container {
+          width: 960px;
+          text-align: center;
+        }
+    </style>
+    
+    
+  </head>
+
+  <body>
+
+{% block body %}      
+        <div class="container">
+            <a href="/"><img src="/bundles/collectiffront/images/logo.png" /></a>
+			{% block fos_user_content %}{% endblock fos_user_content %}
+            <a href="{{ path('collectif_back_homepage') }}">Retour page de login</a><br/>
+		</div>
+
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+		{{ block('foot_script') }}
+{% endblock body %}
+
+</body>
+</html>

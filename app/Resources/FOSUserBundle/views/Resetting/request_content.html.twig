@@ -1,0 +1,19 @@
+<div class="row" style="margin-top:30px;">
+		<div class="span4 offset4 well">
+			<legend>Mot de passe oublié</legend>
+			
+			<p class="space-bottom20">Pour renouveller votre mot de passe, saisissez votre adresse email dans le champ ci-dessous.</p>
+			
+ 			{% if invalid_username is defined %}
+          	<div class="alert alert-error">
+                <a class="close" data-dismiss="alert" href="#">×</a>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}
+            </div>
+            {% endif  %}
+		<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+			
+			<input type="text" id="username" class="span4" name="username" placeholder="Email" required="required" />
+            
+            <input type="submit" class="btn btn-info btn-block" id="_submit" name="_submit" value="{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}" />
+		</form>    
+	</div>
+</div>

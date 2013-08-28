@@ -46,9 +46,8 @@ security:
             logout:
                 path:        /reseau/logout
                 target:      /reseau/login
-
     access_control:
         - { path: ^/reseau/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/reseau/admin, role: ROLE_SUPER_ADMIN }
         - { path: ^/reseau, role: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
-        
