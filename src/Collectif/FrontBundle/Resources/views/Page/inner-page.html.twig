@@ -23,4 +23,12 @@
 	</ul>
 </div>
 
+{% if page.album != null %}
+	{% for p in page.album.photos %}
+		<div style="float:left; margin-right: 7px;text-align:center;">
+			<img src="/ckfinder/userfiles/images/Albums/{{ page.album.id }}/{{ p.path }}" style="height:100px !important;" />
+		</div>
+	{% endfor %}
+{% endif %}
+
 {% endblock %}

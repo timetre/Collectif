@@ -36,6 +36,13 @@ class PageForm extends AbstractType
 	            'required' => false,
 				'label'    => 'Articles du groupe'
             ));
+		$builder->add('album','entity', array(
+	            'class' => 'Collectif\GalleryBundle\Entity\Album',
+	            'property' => 'titre',
+	            'multiple' => false,
+	            'required' => false,
+				'label'    => 'Album photos'
+            ));
     }
 	
 	public function getName()

@@ -69,7 +69,8 @@ class Album
     public function __construct()
     {
         $this->dateCreation = new \Datetime();        
-        $this->dateModification = new \Datetime();  
+        $this->dateModification = new \Datetime(); 
+        $this->actif = true;
     }
 
     /**
