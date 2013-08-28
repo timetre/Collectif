@@ -2,7 +2,7 @@
 
 // FONT REPLACEMENT
 // Replace all tags with cufon equivalant
-Cufon.replace('h1,h2,h3,h4,h5,h6,#commentform label');
+//Cufon.replace('h1,h2,h3,h4,h5,h6,#commentform label');
 //
 
 // JQUERY
@@ -62,13 +62,13 @@ jQuery(function($){
 	
 	$('a.mediaSmall').media({width:580, height: 600});
 
-	/*$("a.group").fancybox({
-		'transitionIn'	:	'elastic',
-		'transitionOut'	:	'elastic',
-		'speedIn'		:	600, 
-		'speedOut'		:	200, 
-		'overlayShow'	:	false
-	});*/
-	$('a.fancybox').fancybox();
+	$("a[rel=example_group]").fancybox({
+		'transitionIn'		: 'none',
+		'transitionOut'		: 'none',
+		'titlePosition' 	: 'none',
+		'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
+			return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+		}
+	});
 
 });// end jquery
