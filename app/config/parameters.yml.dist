@@ -6,10 +6,14 @@ parameters:
     database_user:     root
     database_password: root
 
-    mailer_transport:  mail
-    mailer_host:       127.0.0.1
-    mailer_user:       ~
-    mailer_password:   ~
+    mailer_transport:  smtp
+    mailer_host:       smtp.collectif-confluence.fr
+    mailer_user:       webmaster@collectif-confluence.fr
+    mailer_password:   secret0000
+    mailer_port:       587
+    mailer_delivery:   webmaster@collectif-confluence.fr
+    mailer_auth_mode:  login
+
 
     locale:            fr
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:            ThisTokenIsNowSuperSecret
