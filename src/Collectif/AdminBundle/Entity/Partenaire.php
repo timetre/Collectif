@@ -49,7 +49,7 @@ class Partenaire
      *)
      *
      */
-    public $file;
+    protected $file;
 	
 	/**
      * @var string $lien
@@ -353,5 +353,28 @@ class Partenaire
     public function getAlign()
     {
         return $this->align;
+    }
+
+    /**
+     * Set file
+     *
+     * @param string $file
+     * @return Brand
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+    
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return string 
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 }
