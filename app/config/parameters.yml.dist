@@ -16,4 +16,4 @@ parameters:
 
 
     locale:            fr
-    secret:            ThisTokenIsNowSuperSecret
+    secret:            ThisTokenIsNotSoSecretChangeIt
