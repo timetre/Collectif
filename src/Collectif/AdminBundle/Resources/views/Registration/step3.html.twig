@@ -19,7 +19,7 @@
   		<hr/>
   		<h3>Ma page perso</h3>		
 		{% block content %}
-		    <form action="" {{ form_enctype(form) }} method="POST" class="form-horizontal">
+		    <form action="" {{ form_enctype(form) }} method="POST" class="form-horizontal" novalidate>
 		        {{ form_widget(form) }}
 		        <div>
 		        	<a href="{{ path('collectif_front_homepage') }}" type="button" class="btn btn-warning">Annuler</a>

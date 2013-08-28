@@ -23,4 +23,19 @@
 	</ul>
 </div>
 
+{% if page.album != null %}
+	<div id="gallery">
+		{% for p in page.album.photos %}
+			<div style="float:left; margin-right: 7px;text-align:center;">
+				<a href="/ckfinder/userfiles/images/Albums/{{ page.album.id }}/{{ p.path }}" class="fancybox">
+                    <img src="/ckfinder/userfiles/images/Albums/{{ page.album.id }}/{{ p.path }}" style="height:100px !important;" alt="">
+                </a>
+			</div>
+			<a class="fancybox" href="/ckfinder/userfiles/images/Albums/{{ page.album.id }}/{{ p.path }}" data-fancybox-group="gallery" >
+				<img src="/ckfinder/userfiles/images/Albums/{{ page.album.id }}/{{ p.path }}" alt=""  style="height:100px !important;" />
+			</a>
+		{% endfor %}
+	</div>
+{% endif %}
+
 {% endblock %}

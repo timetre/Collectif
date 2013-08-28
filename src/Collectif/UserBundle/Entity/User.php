@@ -100,7 +100,7 @@ class User extends BaseUser
      *)
      *
      */
-    public $file;
+    protected $file;
 
     /**
      * @var \DateTime $contenuPage
@@ -1314,5 +1314,28 @@ class User extends BaseUser
     public function getLoggers()
     {
         return $this->loggers;
+    }
+
+    /**
+     * Set file
+     *
+     * @param string $file
+     * @return Brand
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+    
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return string 
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 }

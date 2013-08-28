@@ -35,6 +35,16 @@
 			{% endfor %}
 		</ul>
 	</div>
+
+	<div class="block img-rounded" style="margin-top: 20px;padding:5px;border:1px solid #C9C9C9;">
+		<p style="text-align:center;"><strong>Offres d'emplois, stages, bourses</strong></p>
+		<center><hr width="70%" style="margin:0 0 5px 0;" /></center>
+		<ul class="unstyled">
+			{% for offre in offres %}
+				<li><span>{{ offre.dateCreation|date('d/m/Y') }}</span> - <a href="{{ path('reseau_sousforum_offre_show', { 'id': offre.id }) }}">{{ offre.titre }}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
 </div>
 
 {% endblock %}

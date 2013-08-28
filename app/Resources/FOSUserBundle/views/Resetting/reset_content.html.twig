@@ -1,0 +1,13 @@
+<div class="row" style="margin-top:30px;">
+		<div class="span4 offset4 well">
+			<legend>Renouvellement du mot de passe</legend>
+			
+			<p class="space-bottom20">Saisissez le nouveau mot de passe et confirmez le grâce aux champs ci-dessous.</p>
+		
+			<form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+				{{ form_widget(form) }}
+	            
+	            <input type="submit" class="btn btn-info btn-block" id="_submit" name="_submit" value="{{ 'resetting.reset.submit'|trans({}, 'FOSUserBundle') }}" />
+			</form>    
+	</div>
+</div>

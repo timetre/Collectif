@@ -127,6 +127,12 @@ class Page
      * @ORM\JoinColumn(nullable=true)
      */    
     private $categorie;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Collectif\GalleryBundle\Entity\Album", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */    
+    private $album;
     
     /**
      * @var string $typePage
@@ -579,5 +585,28 @@ class Page
     public function getTypePage()
     {
         return $this->typePage;
+    }
+
+    /**
+     * Set album
+     *
+     * @param \Collectif\GalleryBundle\Entity\Album $album
+     * @return Page
+     */
+    public function setAlbum(\Collectif\GalleryBundle\Entity\Album $album = null)
+    {
+        $this->album = $album;
+    
+        return $this;
+    }
+
+    /**
+     * Get album
+     *
+     * @return \Collectif\GalleryBundle\Entity\Album 
+     */
+    public function getAlbum()
+    {
+        return $this->album;
     }
 }

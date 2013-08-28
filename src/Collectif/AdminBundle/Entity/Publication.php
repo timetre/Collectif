@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Publication extends SuperClassArticle
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Collectif\UserBundle\Entity\User", cascade={"persist"}, inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity="Collectif\UserBundle\Entity\User", cascade={"persist"}, inversedBy="publications")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank()
      */

@@ -16,13 +16,17 @@ class AdminController extends Controller
     	$disabled = $repository->getDisabledUsersSize();
     	
     	$repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:SuperClassArticle');
-    	$articles = $repository->getArticles(true, 6);
+        $articles = $repository->getArticles(true, 6);
+
+        $repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Offre');
+        $offres = $repository->getOffres(6);
 		
 		
     	
     	return $this->render('CollectifAdminBundle:Admin:index.html.twig', array(
     		'disabled' => $disabled,
-			'articles' => $articles
+			'articles' => $articles,
+            'offres'   => $offres
         ));
     }
 	

@@ -11,7 +11,7 @@ class AlbumType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('actif', 'checkbox', array('required' => false, 'label' => 'Actif'))
+            //->add('actif', 'checkbox', array('required' => false, 'label' => 'Actif'))
             ->add('titre', 'text', array('required' => false, 'label' => 'Titre'))
             ->add('description', 'textarea', array(
                 'label' => 'Description',
