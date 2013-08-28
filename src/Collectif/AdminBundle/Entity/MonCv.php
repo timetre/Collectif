@@ -57,6 +57,7 @@ class MonCv
     private $path;
     
     /**
+     * @Assert\NotBlank()
      * @Assert\File(
      *     maxSize = "6000000",
      *     mimeTypes = {"application/pdf", "application/x-pdf"},

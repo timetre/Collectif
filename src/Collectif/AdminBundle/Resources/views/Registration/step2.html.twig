@@ -28,7 +28,7 @@
   		<h3>Mon CV (PDF seulement)</h3>	
   		
 		{% block content %}
-		    <form action="" method="post" {{ form_enctype(form) }} class="form-horizontal" >
+		    <form action="" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate >
 		        {{ form_widget(form) }}
 	        		<a href="{{ path('collectif_front_homepage') }}" type="button" class="btn btn-warning">Annuler</a>
 		        	
