@@ -27,5 +27,5 @@ textarea,
 	padding:5px;
 	border:1px solid #C9C9C9;
 	height: 200px;
-	overflow: scroll;
+	overflow-y: scroll;
 }
