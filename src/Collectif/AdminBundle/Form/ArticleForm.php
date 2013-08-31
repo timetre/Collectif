@@ -34,14 +34,21 @@ class ArticleForm extends AbstractType
 				)
 		));
 
-		
 		$builder->add('categorie','entity', array(
 	            'class' => 'Collectif\AdminBundle\Entity\Categorie',
 	            'property' => 'titre',
 	            'multiple' => false,
 	            'required' => true,
 				'label' => 'Catégorie'
-            ));
+        ));
+
+		$builder->add('album','entity', array(
+	            'class' => 'Collectif\GalleryBundle\Entity\Album',
+	            'property' => 'titre',
+	            'multiple' => false,
+	            'required' => false,
+				'label'    => 'Album photos'
+        ));
     }
 	
 	public function getName()

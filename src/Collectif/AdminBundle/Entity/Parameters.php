@@ -105,6 +105,13 @@ class Parameters
      */
     private $debugger;
 
+    /**
+     * @var text $texteAccueil
+     *
+     * @ORM\Column(name="texteAccueil", type="text", nullable=true)
+     */
+    private $texteAccueil;
+
 
     /**
      * Get id
@@ -436,5 +443,28 @@ class Parameters
     public function getMailDebugger()
     {
         return $this->mailDebugger;
+    }
+
+    /**
+     * Set texteAccueil
+     *
+     * @param string $texteAccueil
+     * @return Parameters
+     */
+    public function setTexteAccueil($texteAccueil)
+    {
+        $this->texteAccueil = $texteAccueil;
+
+        return $this;
+    }
+
+    /**
+     * Get texteAccueil
+     *
+     * @return string 
+     */
+    public function getTexteAccueil()
+    {
+        return $this->texteAccueil;
     }
 }

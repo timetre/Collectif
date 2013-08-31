@@ -21,6 +21,14 @@ class ParametersForm extends AbstractType
 		$builder->add('lienTwitter', 'text', array('label' => 'Twitter'));
 		$builder->add('contactInfos', 'text', array('label' => 'Adresse mail de contact'));
 		$builder->add('debugger', 'checkbox', array('required' => false, 'label' => 'Activer le "Bug tracker"'));
+
+		$builder->add('texteAccueil', 'textarea', array(
+				'label' => 'Texte accueil',
+				'required'  => false,
+				'attr' => array(
+						'class' => 'ckeditor'
+				)
+		));
     }
 	
 	public function getName()

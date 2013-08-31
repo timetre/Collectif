@@ -110,9 +110,9 @@
 		              	<li><a href="{{ path('collectif_back_homepage') }}">Accueil</a></li>
 		              {% endif %}
 					  
-					  {% if app.request.attributes.get('_route') == 'collectif_back_activite' and app.user.webmaster == 1 %}
+					  {% if app.request.attributes.get('_route') == 'collectif_back_activite' %}
 		              	<li class="active"><a href="{{ path('collectif_back_activite') }}">Activité</a></li>
-		              {% elseif app.user.webmaster == 1 %}
+		              {% else %}
 		              	<li><a href="{{ path('collectif_back_activite') }}">Activité</a></li>
 		              {% endif %}
 		              
