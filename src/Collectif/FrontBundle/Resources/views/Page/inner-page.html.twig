@@ -26,8 +26,8 @@
 {% if page.album != null %}
 	<div id="gallery">
 		{% for p in page.album.photos %}
-			<a rel="example_group" href="/ckfinder/userfiles/images/Albums/{{ page.album.id }}/{{ p.path }}">
-				<img alt="" src="/ckfinder/userfiles/images/Albums/{{ page.album.id }}/{{ p.path }}" style="height:100px !important; margin-right: 15px; padding: 3px; border: 1px solid lightgray;" />
+			<a style="text-decoration: none;" rel="example_group" href="/ckfinder/userfiles/images/Albums/{{ page.album.id }}/{{ p.path }}">
+				<img alt="" src="/ckfinder/userfiles/images/Albums/{{ page.album.id }}/{{ p.path }}" style="height:100px !important; padding: 3px; border: 1px solid lightgray;" />
 			</a>
 		{% endfor %}
 	</div>
