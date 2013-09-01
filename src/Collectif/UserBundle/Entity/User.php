@@ -355,16 +355,21 @@ class User extends BaseUser
         if(null !== $field) {
             $begin = substr($field, 0, 7);
             
-            if (strpos($begin,'http://') === true) {
+            if($begin == 'http://') {
                 $hasHttp = true;
             }
             
             $begin = substr($field, 0, 8);
-            if (strpos($begin,'https://') === true) {
+            if($begin == 'https://') {
                 $hasHttps = true;
-            }
-
+            }            
         }
+
+        if($hasHttp == false && $hasHttps == false && null !== $field)
+            $field = "http://" . $field;
+
+        return $field;
+    }
         
         if($hasHttp == false && $hasHttps == false && null !== $field)
             $field = "http://" . $field;
