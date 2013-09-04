@@ -26,33 +26,35 @@ class CandidatureController extends Controller
         $electionPour = $em->getRepository('CollectifAdminBundle:Election')->getVotes($entity->getMembre()->getId(), true);
         $electionContre = $em->getRepository('CollectifAdminBundle:Election')->getVotes($entity->getMembre()->getId(), false);
 
-    	$user = $this->container->get('security.context')->getToken()->getUser();
-    	$post = new Post();
-    	$post->setCandidature($entity);
-    	$post->setMembre($user);
-    	$form = $this->createForm(new PostType(), $post);
-    	
-    	$vote = $em->getRepository('CollectifAdminBundle:Election')->dejaVote($user->getId(), $entity->getId());
-    	
-    	
-    	$cvList = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:MonCv')->getCvFR($entity->getMembre());
-    	if(sizeof($cvList) > 0) {
-    		$monCvId = $cvList[0]->getId();
-    	}
-    	    	
-    	if (isset($monCvId))
-    	{
-    		$cv = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:MonCv')->find($monCvId);
-    	}
-	
-    	return $this->render('CollectifAdminBundle:Candidatures:detail.html.twig', array(
-    		'entity'      => $entity,
-    		'cv'		=> $cv,
-    		'pour'  => $electionPour,
-    		'contre' => $electionContre,
-    		'form'	=> $form->createView(), 
-    		'dejaVote' => $vote
-    	));
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $post = new Post();
+        $post->setCandidature($entity);
+        $post->setMembre($user);
+        $form = $this->createForm(new PostType(), $post);
+        
+        $vote = $em->getRepository('CollectifAdminBundle:Election')->dejaVote($user->getId(), $entity->getId());
+        
+        
+        $cvList = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:MonCv')->getCvFR($entity->getMembre());
+        if(sizeof($cvList) > 0) {
+            $monCvId = $cvList[0]->getId();
+        }
+                
+        if (isset($monCvId))
+        {
+            $cv = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:MonCv')->find($monCvId);
+        } else {
+            $cv = null; 
+        }
+    
+        return $this->render('CollectifAdminBundle:Candidatures:detail.html.twig', array(
+            'entity'      => $entity,
+            'cv'        => $cv,
+            'pour'  => $electionPour,
+            'contre' => $electionContre,
+            'form'  => $form->createView(), 
+            'dejaVote' => $vote
+        ));
     }
     
     public function createPostAction(Request $request, $id)

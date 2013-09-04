@@ -20,13 +20,15 @@ class AdminController extends Controller
 
         $repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Offre');
         $offres = $repository->getOffres(6);
-		
-		
+
+        $repository = $this->getDoctrine()->getManager()->getRepository('CollectifAdminBundle:Parameters');
+        $parametres = $repository->getParameters();
     	
     	return $this->render('CollectifAdminBundle:Admin:index.html.twig', array(
     		'disabled' => $disabled,
 			'articles' => $articles,
-            'offres'   => $offres
+            'offres'   => $offres,
+            'accueil'  => $parametres->getTexteAccueil()
         ));
     }
 	

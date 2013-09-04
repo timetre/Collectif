@@ -23,6 +23,12 @@ class Article extends SuperClassArticle
     private $categorie;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Collectif\GalleryBundle\Entity\Album", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */    
+    private $album;
+
+    /**
      * Set categorie
      *
      * @param Collectif\AdminBundle\Entity\Categorie $categorie
@@ -43,5 +49,28 @@ class Article extends SuperClassArticle
     public function getCategorie()
     {
         return $this->categorie;
+    }
+
+    /**
+     * Set album
+     *
+     * @param \Collectif\GalleryBundle\Entity\Album $album
+     * @return Page
+     */
+    public function setAlbum(\Collectif\GalleryBundle\Entity\Album $album = null)
+    {
+        $this->album = $album;
+    
+        return $this;
+    }
+
+    /**
+     * Get album
+     *
+     * @return \Collectif\GalleryBundle\Entity\Album 
+     */
+    public function getAlbum()
+    {
+        return $this->album;
     }
 }

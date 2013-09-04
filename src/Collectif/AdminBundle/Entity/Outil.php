@@ -46,6 +46,12 @@ class Outil
      * @ORM\Column(name="dateCreation", type="datetime")
      */
     private $dateCreation;
+
+    /**
+     * @var \DateTime $dateModification
+     * @ORM\Column(name="dateModification", type="datetime")
+     */
+    private $dateModification;
     
     /**
      * @ORM\ManyToOne(targetEntity="SousForum", cascade={"persist"}, inversedBy="outils")
@@ -86,6 +92,7 @@ class Outil
     public function __construct()
     {
     	$this->dateCreation = new \DateTime();
+        $this->dateModification = new \DateTime();
     }
 
 
@@ -351,5 +358,28 @@ class Outil
     public function getFile()
     {
         return $this->file;
+    }
+
+    /**
+     * Set dateModification
+     *
+     * @param \DateTime $dateModification
+     * @return Outil
+     */
+    public function setDateModification($dateModification)
+    {
+        $this->dateModification = $dateModification;
+
+        return $this;
+    }
+
+    /**
+     * Get dateModification
+     *
+     * @return \DateTime 
+     */
+    public function getDateModification()
+    {
+        return $this->dateModification;
     }
 }

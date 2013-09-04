@@ -78,7 +78,7 @@
 	
 	<div class="tab-pane" id="tabPres">
 		{% if entity.membre.path != null %}
-			<img class="img-polaroid" src="/upload/Membres/ {{ entity.membre.path }}" style="height: 350px !important;" />
+			<img class="img-polaroid" src="/upload/Membres/{{ entity.membre.path }}" style="height: 350px !important;" />
 		{% endif %}
 
 		{% if entity.membre.contenuPage != null %}
@@ -89,7 +89,7 @@
 	</div>
 	
 	<div class="tab-pane" id="tabCv">
-		{% if cv.path != null %}
+		{% if cv != null and cv.path != null %}
 			<a class="mediaBig" href="{{ asset('upload/CVTheque/' ~ cv.path)}}" ></a>
 		{% else %}
 			Aucun CV pour le moment !

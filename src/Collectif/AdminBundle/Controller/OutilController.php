@@ -113,6 +113,9 @@ class OutilController extends Controller
     
     		if ($form->isValid())
     		{
+
+                $outil->setDateModification(new \DateTime());
+                
     			$em->persist($outil);
     
     			$em->flush();

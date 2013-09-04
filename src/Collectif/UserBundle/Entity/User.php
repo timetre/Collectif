@@ -356,23 +356,31 @@ class User extends BaseUser
     
     private function putHttp($field) {
         $hasHttp = false;
+        $hasHttps = false;
 
-    	if(null !== $field) {
-    		$begin = substr($field, 0, 7);
+        if(null !== $field) {
+            $begin = substr($field, 0, 7);
             
-            if (strpos($begin,'http://') === false) {
+            if($begin == 'http://') {
                 $hasHttp = true;
             }
-
+            
             $begin = substr($field, 0, 8);
-            if (strpos($begin,'https://') === false) {
-                $hasHttp = true;
-            }
-    	}
+            if($begin == 'https://') {
+                $hasHttps = true;
+            }            
+        }
 
-        if($hasHttp == false && null !== $field)
+        if($hasHttp == false && $hasHttps == false && null !== $field)
             $field = "http://" . $field;
-    	return $field;
+
+        return $field;
+    }
+        
+        if($hasHttp == false && $hasHttps == false && null !== $field)
+            $field = "http://" . $field;
+            
+        return $field;
     }
     
     /**
