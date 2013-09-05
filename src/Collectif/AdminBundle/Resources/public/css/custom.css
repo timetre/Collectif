@@ -29,3 +29,7 @@ textarea,
 	height: 200px;
 	overflow-y: scroll;
 }
+
+.dropdown-menu {
+	margin: 0px 0 0;
+}
