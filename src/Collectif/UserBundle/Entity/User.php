@@ -373,12 +373,6 @@ class User extends BaseUser
 
         if($hasHttp == false && $hasHttps == false && null !== $field)
             $field = "http://" . $field;
-
-        return $field;
-    }
-        
-        if($hasHttp == false && $hasHttps == false && null !== $field)
-            $field = "http://" . $field;
             
         return $field;
     }
