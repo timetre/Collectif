@@ -209,6 +209,10 @@ class SousForumController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            $msg = $entity->getTitre();
+            $url = $this->generateUrl('reseau_sousforum_show', array('id' => $entity->getId()));
+            $this->logActivite($msg, $url);
+
             return $this->redirect($this->generateUrl('reseau_sousforum'));
         }
 
@@ -298,7 +302,10 @@ class SousForumController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            //return $this->redirect($this->generateUrl('reseau_sousforum_edit', array('id' => $id)));
+            $msg = "MAJ - " . $entity->getTitre();
+            $url = $this->generateUrl('reseau_sousforum_show', array('id' => $entity->getId()));
+            $this->logActivite($msg, $url);
+
             return $this->redirect($this->generateUrl('reseau_sousforum'));
         }
 
@@ -338,6 +345,11 @@ class SousForumController extends Controller
         ;
     }
     
-	
+	private function logActivite($message, $url) {
+        $em = $this->getDoctrine()->getManager();
+        $loggerService = $this->container->get('collectif_logger.log');
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $loggerService->logActiviteAction($em, $user, $message, $url);
+    }
     
 }

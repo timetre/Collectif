@@ -33,6 +33,10 @@ class OutilController extends Controller
     
     		$em->persist($entity);
     		$em->flush();
+
+            $message = $entity->getTitre();
+            $url = $this->generateUrl('reseau_sousforum_show', array('id' => $entity->getId()));
+            $this->logActivite($message, $url);
     
     		$outil = new Outil();
     		$outil->setSousForum($sf);
@@ -122,12 +126,15 @@ class OutilController extends Controller
     
     			if (isset($id))
     			{
-    				$message='Outil modifié avec succès !';
+    				$message = "MAJ - " . $outil->getTitre();
     			}
     			else
     			{
-    				$message='Outil ajouté avec succès !';
+    				$message = $outil->getTitre();
     			}
+                
+                $url = $this->generateUrl('reseau_sousforum_show', array('id' => $outil->getId()));
+                $this->logActivite($message, $url);
     
     			return $this->redirect($this->generateUrl('reseau_sousforum_show', array('id' => $outil->getSousForum()->getId())));
     		}
@@ -138,5 +145,12 @@ class OutilController extends Controller
     			'sfId'   => $outil->getSousForum()->getId(),
     			'form'   => $form->createView(),
     	));
+    }
+
+    private function logActivite($message, $url) {
+        $em = $this->getDoctrine()->getManager();
+        $loggerService = $this->container->get('collectif_logger.log');
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $loggerService->logActiviteAction($em, $user, $message, $url);
     }
 }

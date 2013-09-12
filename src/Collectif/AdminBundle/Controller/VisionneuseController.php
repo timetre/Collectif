@@ -39,6 +39,10 @@ class VisionneuseController extends Controller
     
     	$em->persist($entity);
     	$em->flush();
+
+        $msg = $entity->getTitre();
+        $url = $this->generateUrl('reseau_sousforum_visionneuse_show', array('id' => $entity->getId()));
+        $this->logActivite($msg, $url);
     
     	$outil = new Visionneuse();
     	$outil->setSousForum($sf);
@@ -120,6 +124,10 @@ class VisionneuseController extends Controller
     		if ($form->isValid())
     		{
     			$em->persist($visionneuse);
+
+                $msg = "MAJ - " . $visionneuse->getTitre();
+                $url = $this->generateUrl('reseau_sousforum_visionneuse_show', array('id' => $visionneuse->getId()));
+                $this->logActivite($msg, $url);
     
     			$em->flush();
     
@@ -217,10 +225,17 @@ class VisionneuseController extends Controller
     		return $this->redirect($this->generateUrl('reseau_sousforum_visionneuse_show', array('id' => $outil->getVisionneuse()->getId())));
     	}
     
-    		return $this->render('CollectifAdminBundle:Pdf:editPost.html.twig', array(
-    				'entity' => $outil,
-    				'sfId'   => $outil->getVisionneuse()->getId(),
-    				'form'   => $form->createView(),
-    		));
-    	}
+		return $this->render('CollectifAdminBundle:Pdf:editPost.html.twig', array(
+				'entity' => $outil,
+				'sfId'   => $outil->getVisionneuse()->getId(),
+				'form'   => $form->createView(),
+		));
+	}
+
+    private function logActivite($message, $url) {
+        $em = $this->getDoctrine()->getManager();
+        $loggerService = $this->container->get('collectif_logger.log');
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $loggerService->logActiviteAction($em, $user, $message, $url);
+    }
 }

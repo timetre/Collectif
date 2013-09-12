@@ -28,3 +28,8 @@ textarea,
 	border:1px solid #C9C9C9;
 	height: 200px;
 	overflow-y: scroll;
+}
+
+.dropdown-menu {
+	margin: 0px 0 0;
+}

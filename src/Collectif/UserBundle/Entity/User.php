@@ -177,9 +177,15 @@ class User extends BaseUser
 	
 	/**
      * @ORM\OneToMany(targetEntity="Collectif\LoggerBundle\Entity\Logger", cascade={"remove"}, mappedBy="membre")
-	 * @ORM\OrderBy({"date" = "DESC"})
+     * @ORM\OrderBy({"date" = "DESC"})
      */
     private $loggers;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Collectif\LoggerBundle\Entity\ActiviteLogger", cascade={"remove"}, mappedBy="membre")
+     * @ORM\OrderBy({"date" = "DESC"})
+     */
+    private $activiteLoggers;
     
     /**
      * @var string $path
@@ -365,7 +371,6 @@ class User extends BaseUser
             }            
         }
 
-        
         if($hasHttp == false && $hasHttps == false && null !== $field)
             $field = "http://" . $field;
             
@@ -1340,5 +1345,38 @@ class User extends BaseUser
     public function getFile()
     {
         return $this->file;
+    }
+
+    /**
+     * Add activiteLoggers
+     *
+     * @param \Collectif\LoggerBundle\Entity\ActiviteLogger $activiteLoggers
+     * @return User
+     */
+    public function addActiviteLogger(\Collectif\LoggerBundle\Entity\ActiviteLogger $activiteLoggers)
+    {
+        $this->activiteLoggers[] = $activiteLoggers;
+    
+        return $this;
+    }
+
+    /**
+     * Remove activiteLoggers
+     *
+     * @param \Collectif\LoggerBundle\Entity\ActiviteLogger $activiteLoggers
+     */
+    public function removeActiviteLogger(\Collectif\LoggerBundle\Entity\ActiviteLogger $activiteLoggers)
+    {
+        $this->activiteLoggers->removeElement($activiteLoggers);
+    }
+
+    /**
+     * Get activiteLoggers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getActiviteLoggers()
+    {
+        return $this->activiteLoggers;
     }
 }

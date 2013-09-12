@@ -195,6 +195,10 @@ collectif_partenaires_delete:
     pattern:  /reseau/admin/partenaires/delete/{id}
     defaults: { _controller: "CollectifAdminBundle:Partenaire:delete" }
 
+collectif_back_robots:
+    pattern:  /reseau/generate/sitemap
+    defaults: { _controller: "CollectifAdminBundle:Sitemap:generateSitemap" }
+
 CollectifAdminBundle_reseau_forum:
     resource: "@CollectifAdminBundle/Resources/config/routing/forum.yml"
     prefix:   /reseau/forum

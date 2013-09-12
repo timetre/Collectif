@@ -12,6 +12,18 @@ use Doctrine\ORM\EntityRepository;
  */
 class PublicationRepository extends EntityRepository
 {
+	public function getPublications($actif, $limit=null)
+	{
+	    $qb = $this->createQueryBuilder('a');
+
+	    $qb->where('a.actif = :actif')
+	         ->setParameter('actif', $actif)
+	       ->orderBy('a.datePublication', 'DESC')
+		   ->setMaxResults( $limit );
+	
+	    return $qb->getQuery()->getResult();
+	}
+
 	public function getPublicationsByUser($userId)
 	{
 		$qb = $this->createQueryBuilder('p');

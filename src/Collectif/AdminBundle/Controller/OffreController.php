@@ -33,6 +33,10 @@ class OffreController extends Controller
     
     		$em->persist($entity);
     		$em->flush();
+
+            $message = $entity->getTitre();
+            $url = $this->generateUrl('reseau_sousforum_show', array('id' => $entity->getId()));
+            $this->logActivite($message, $url);
     
     		$offre = new Offre();
     		$offre->setSousForum($sf);
@@ -111,13 +115,16 @@ class OffreController extends Controller
     			$em->flush();
     
     			if (isset($id))
-    			{
-    				$message='Offre modifiée avec succès !';
-    			}
-    			else
-    			{
-    				$message='Offre ajoutée avec succès !';
-    			}
+                {
+                    $message = "MAJ - " . $offre->getTitre();
+                }
+                else
+                {
+                    $message = $offre->getTitre();
+                }
+
+                $url = $this->generateUrl('reseau_sousforum_show', array('id' => $offre->getId()));
+                $this->logActivite($message, $url);
     
     			return $this->redirect($this->generateUrl('reseau_sousforum_show', array('id' => $offre->getSousForum()->getId())));
     		}
@@ -128,5 +135,12 @@ class OffreController extends Controller
     			'sfId'   => $offre->getSousForum()->getId(),
     			'form'   => $form->createView(),
     	));
+    }
+
+    private function logActivite($message, $url) {
+        $em = $this->getDoctrine()->getManager();
+        $loggerService = $this->container->get('collectif_logger.log');
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $loggerService->logActiviteAction($em, $user, $message, $url);
     }
 }
